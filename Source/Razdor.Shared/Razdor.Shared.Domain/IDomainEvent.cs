@@ -1,6 +1,6 @@
-using MediatR;
+using Mediator;
 
-namespace Razdor.Shared.Entities;
+namespace Razdor.Shared.Domain;
 
 public interface IDomainEvent: INotification
 {

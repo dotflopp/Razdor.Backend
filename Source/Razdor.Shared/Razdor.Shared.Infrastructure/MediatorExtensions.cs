@@ -1,14 +1,15 @@
-﻿using MediatR;
+﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Razdor.Shared.Entities;
+using Razdor.Shared.Domain;
 
 namespace Razdor.Shared.Infrastructure;
 
 public static class MediatorExtensions
 {
-    public static async Task DispatchDomainEventsAsync<TEntity>(this IMediator mediator, DbContext context)
-        where TEntity : BaseEntity
+    public static async Task DispatchDomainEventsAsync<TEntity, TId>(this IMediator mediator, DbContext context)
+        where TEntity : BaseEntity<TId>
+        where TId : ISnowflakeId
     {
         var hasEventEntities = context.ChangeTracker
             .Entries<TEntity>()

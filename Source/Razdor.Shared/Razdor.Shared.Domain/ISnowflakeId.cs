@@ -1,4 +1,4 @@
-﻿namespace Razdor.Shared.Entities;
+﻿namespace Razdor.Shared.Domain;
 
 public interface ISnowflakeId
 {

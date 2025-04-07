@@ -1,0 +1,11 @@
+@Razdor.StartApp_HostAddress = http://localhost:5204
+
+GET {{Razdor.StartApp_HostAddress}}/todos/
+Accept: application/json
+
+###
+
+GET {{Razdor.StartApp_HostAddress}}/todos/1
+Accept: application/json
+
+###

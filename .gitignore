@@ -1,0 +1,11 @@
+#Файлы студий
+.idea/
+.vs/
+
+#Файлы сборки
+bin/
+obj/
+
+#БД
+**/Migrations
+razdor.db*

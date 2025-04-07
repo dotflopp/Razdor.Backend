@@ -8,11 +8,9 @@ namespace Razdor.Shared.Infrastructure;
 public static class MediatorExtensions
 {
     public static async Task DispatchDomainEventsAsync<TEntity, TId>(this IMediator mediator, DbContext context)
-        where TEntity : BaseEntity<TId>
-        where TId : ISnowflakeId
     {
         var hasEventEntities = context.ChangeTracker
-            .Entries<TEntity>()
+            .Entries<BaseEntity<ISnowflakeId>>()
             .Where(x => x.Entity.DomainEvents.Count > 0)
             .ToList();
 
@@ -20,7 +18,7 @@ public static class MediatorExtensions
             .SelectMany(x => x.Entity.DomainEvents)
             .ToList();
 
-        foreach (EntityEntry<TEntity> entry in hasEventEntities)
+        foreach (EntityEntry<BaseEntity<ISnowflakeId>> entry in hasEventEntities)
             entry.Entity.ClearDomainEvents();
         
         foreach (var domainEvent in domainEvents)

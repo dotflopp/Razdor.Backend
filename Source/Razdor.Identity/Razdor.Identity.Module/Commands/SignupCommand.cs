@@ -1,0 +1,10 @@
+﻿using Mediator;
+using Razdor.Identity.Module.Commands.ViewModels;
+
+namespace Razdor.Identity.Module.Commands;
+
+public class SignupCommand(
+    string IdentityName,
+    string Email,
+    string Password
+) : ICommand<AuthenticationResult>;

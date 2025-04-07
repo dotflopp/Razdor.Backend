@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Razdor.Shared
+﻿namespace Razdor.Shared.Extensions
 {
     public abstract class Disposable : IDisposable
     {

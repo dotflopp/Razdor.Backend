@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/Razdor.Identity/">
+    <Project Path="Source\Razdor.Identity\Razdor.Identity.Api\Razdor.Identity.Api.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Identity\Razdor.Identity.DataAccess.EF\Razdor.Identity.DataAccess.EF.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Identity\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Identity\Razdor.Identity.Module\Razdor.Identity.Module.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Razdor.Shared/">
+    <Project Path="Source\Razdor.Shared\Razdor.Shared.Domain\Razdor.Shared.Domain.csproj" />
+    <Project Path="Source\Razdor.Shared\Razdor.Shared.Extensions\Razdor.Shared.Extensions.csproj" />
+    <Project Path="Source\Razdor.Shared\Razdor.Shared.Infrastructure\Razdor.Shared.Infrastructure.csproj" />
+    <Project Path="Source\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Services.csproj" />
+  </Folder>
+  <Project Path="Source\Razdor.StartApp\Razdor.StartApp.csproj" Type="Classic C#" />
+</Solution>

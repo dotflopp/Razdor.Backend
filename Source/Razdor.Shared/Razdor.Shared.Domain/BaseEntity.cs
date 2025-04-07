@@ -1,34 +1,32 @@
-﻿namespace Razdor.Shared.Domain;
+﻿using System.Collections.ObjectModel;
 
-public class BaseEntity<T>(
-    T? id
-) where T : ISnowflakeId
+namespace Razdor.Shared.Domain;
+
+public abstract class BaseEntity(
+    ulong id
+) : IEntity
 {
     private List<IDomainEvent>? _domainEvents = null;
 
-    public T? Id { get; protected set; } = id;
+    public ulong Id { get; protected set; } = id;
+    public bool IsTransient => Id == 0;
 
-    public IReadOnlyCollection<IDomainEvent> DomainEvents =>
-        _domainEvents?.AsReadOnly() ?? Array.Empty<IDomainEvent>().AsReadOnly();
+    public IReadOnlyCollection<IDomainEvent> DomainEvents =>    
+        _domainEvents?.AsReadOnly() ?? ReadOnlyCollection<IDomainEvent>.Empty;
 
-    public void AddDomainEvent(IDomainEvent domainEvent)
+    public virtual void AddDomainEvent(IDomainEvent domainEvent)
     {
         _domainEvents ??= new List<IDomainEvent>();
         _domainEvents.Add(domainEvent);
     }
 
-    public void RemoveDomainEvent(IDomainEvent domainEvent)
+    public virtual void RemoveDomainEvent(IDomainEvent domainEvent)
     {
         _domainEvents?.Remove(domainEvent);
     }
 
-    public void ClearDomainEvents()
+    public virtual void ClearDomainEvents()
     {
         _domainEvents?.Clear();
-    }
-
-    public bool IsTransient()
-    {
-        return Id is null;
     }
 }

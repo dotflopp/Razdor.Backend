@@ -1,0 +1,1 @@
+ dotnet ef dbcontext optimize --project Source\Razdor.Identity\Razdor.Identity.DataAccess.EF\Razdor.Identity.DataAccess.EF.csproj --startup-project Source\Razdor.StartApp\Razdor.StartApp.csproj --context Razdro.Identity.DataAccess.IdentityDbContext --output-dir Compiled --namespace Razdor.Identity.DataAccess.Ef.Compiled

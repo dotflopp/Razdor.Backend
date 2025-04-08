@@ -1,11 +1,22 @@
-@Razdor.StartApp_HostAddress = http://localhost:5204
+@Host = http://localhost:5204
 
-GET {{Razdor.StartApp_HostAddress}}/todos/
-Accept: application/json
+GET {{Host}}/auth/login
+Accept: application/json;v=0.1
+
+{
+    "email": "grigoriy21@yandex.ru",
+    "password": "gwertyxyz"
+}
 
 ###
 
-GET {{Razdor.StartApp_HostAddress}}/todos/1
-Accept: application/json
+POST {{Host}}/auth/signup
+Accept: application/json;v=0.1
+
+{
+    "identityName": "grigory",
+    "email": "grigoriy21@yandex.ru",
+    "password": "gwertyxyz"
+}
 
 ###

@@ -7,9 +7,17 @@ namespace Razdor.Identity.Api;
 
 public static class IdentityRouter
 {
-    public static RouteGroupBuilder MapIdentityApiV0(this IEndpointRouteBuilder router)
+    public static IEndpointRouteBuilder MapIdentityApi(this IEndpointRouteBuilder router)
     {
-        var api = router.MapGroup("/auth").HasApiVersion(0.1);
+        return router.MapIdentityApiV0();
+    }
+
+    internal static IEndpointRouteBuilder MapIdentityApiV0(this IEndpointRouteBuilder router)
+    {
+        var api = router.MapGroup("/auth")
+            .WithApiVersionSet("Identity")
+            .HasApiVersion(0.1);
+        
         api.MapPost("/login", AuthAsync<LoginCommand>);
         api.MapPost("/signup", AuthAsync<SignupCommand>);
         return api;

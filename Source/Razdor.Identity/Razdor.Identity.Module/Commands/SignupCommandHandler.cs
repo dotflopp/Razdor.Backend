@@ -11,7 +11,7 @@ public class SignupCommandHandler(
     IPasswordHasher<UserAccount> passwordHasher,   
     IUserRepository userRepository,
     SnowflakeGenerator idGenerator,
-    AuthenticationTokenFactory tokenFactory   
+    AccessTokenFactory tokenFactory   
 ) : ICommandHandler<SignupCommand, AuthenticationResult>
 {
     public async ValueTask<AuthenticationResult> Handle(SignupCommand command, CancellationToken cancellationToken)

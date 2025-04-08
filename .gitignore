@@ -8,4 +8,5 @@ obj/
 
 #БД
 **/Migrations
+**/Compiled
 razdor.db*

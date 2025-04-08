@@ -10,7 +10,7 @@ namespace Razdor.Identity.Module.Commands;
 public class LoginCommandHandler(
     IPasswordHasher<UserAccount> passwordHasher,   
     IUserRepository userRepository,
-    AuthenticationTokenFactory tokenFactory
+    AccessTokenFactory tokenFactory
 ) : ICommandHandler<LoginCommand, AuthenticationResult>
 {
     public async ValueTask<AuthenticationResult> Handle(LoginCommand command, CancellationToken cancellationToken)

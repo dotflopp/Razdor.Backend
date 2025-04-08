@@ -11,9 +11,12 @@
 
     <ItemGroup>
       <PackageReference Include="Asp.Versioning.Http" Version="8.1.0" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.3" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.3" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Razdor.Identity.DataAccess.EF\Razdor.Identity.DataAccess.EF.csproj" />
       <ProjectReference Include="..\Razdor.Identity.Module\Razdor.Identity.Module.csproj" />
     </ItemGroup>
 

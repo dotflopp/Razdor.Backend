@@ -27,9 +27,7 @@ public class UserAccount: BaseEntity
         CredentialsChangeDate = credentialsChangeDate;
     }
     
-    [Required]
     public string IdentityName { get; private set; }    
-    [Required]
     public string Email { get; private set; }
     public string? HashedPassword { get; private set; }
     
@@ -48,7 +46,6 @@ public class UserAccount: BaseEntity
     public static UserAccount RegisterNew(ulong id, string identityName, string email, string? passwordHash)
     {
         ArgumentNullException.ThrowIfNull(identityName);
-        ArgumentNullException.ThrowIfNull(passwordHash);
         
         UserAccount account = new UserAccount(
             id, 

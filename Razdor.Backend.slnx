@@ -26,6 +26,7 @@
     <File Path=".gitignore" />
     <File Path="Dockerfile" />
     <File Path="LICENSE" />
+    <File Path="README.md" />
   </Folder>
   <Project Path="Source\Razdor.StartApp\Razdor.StartApp.csproj" Type="Classic C#" />
 </Solution>

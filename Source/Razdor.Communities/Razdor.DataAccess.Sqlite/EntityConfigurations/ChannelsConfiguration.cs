@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Razdor.Communities.DataAccess.EF.Entities;
+using Razdor.Communities.DataAccess.EF.Entities.Channels;
+using Razdor.Communities.DataAccess.EF.Entities.Channels.Guild;
 using Razdor.Communities.Domain.Channels;
-using Razdor.DataAccess.EntityFramework.Entities;
-using Razdor.DataAccess.EntityFramework.Entities.Channels;
-using Razdor.DataAccess.EntityFramework.Entities.Channels.Guild;
 
-namespace Razdor.DataAccess.EntityFramework.EntityConfigurations;
+namespace Razdor.Communities.DataAccess.EF.EntityConfigurations;
 
 public class ChannelsConfiguration : IEntityTypeConfiguration<BaseChannel>
 {

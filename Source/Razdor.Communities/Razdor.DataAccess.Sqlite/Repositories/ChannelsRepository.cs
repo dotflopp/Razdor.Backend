@@ -1,13 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Razdor.Communities.DataAccess.EF.Entities.Channels.Guild;
 using Razdor.Communities.Domain.Channels.Guild;
 using Razdor.Communities.Domain.Repositories;
 using Razdor.Communities.Domain.Repositories.Models;
-using Razdor.DataAccess.EntityFramework;
-using Razdor.DataAccess.EntityFramework.Entities;
-using Razdor.DataAccess.EntityFramework.Entities.Channels.Guild;
 
-namespace Razdor.DataAccess.EntityFramework.Repositories;
+namespace Razdor.Communities.DataAccess.EF.Repositories;
 
 public class ChannelsRepository : IChannelsRepository
 {

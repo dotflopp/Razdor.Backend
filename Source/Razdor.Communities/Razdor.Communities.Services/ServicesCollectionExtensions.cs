@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Razdor.Communities.DataAccess.EF;
+using Razdor.Communities.DataAccess.EF.Repositories;
 using Razdor.Communities.Domain.Repositories;
-using Razdor.DataAccess.EntityFramework;
-using Razdor.DataAccess.EntityFramework.Repositories;
 
-namespace Razdor.Services;
+namespace Razdor.Communities.Services;
 
 public static class ServicesCollectionExtensions
 {

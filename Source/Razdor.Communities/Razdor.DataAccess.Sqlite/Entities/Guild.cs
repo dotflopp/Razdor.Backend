@@ -1,8 +1,7 @@
-using System.Text.Json.Serialization;
+using Razdor.Communities.DataAccess.EF.Entities.Channels.Guild;
 using Razdor.Communities.Domain.Guilds;
-using Razdor.DataAccess.EntityFramework.Entities.Channels.Guild;
 
-namespace Razdor.DataAccess.EntityFramework.Entities;
+namespace Razdor.Communities.DataAccess.EF.Entities;
 
 public class Guild : IGuild
 {

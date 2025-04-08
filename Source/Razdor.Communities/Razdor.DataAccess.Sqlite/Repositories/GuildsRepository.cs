@@ -1,12 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Razdor.Communities.DataAccess.EF.Entities;
 using Razdor.Communities.Domain.Guilds;
 using Razdor.Communities.Domain.Repositories;
 using Razdor.Communities.Domain.Repositories.Models;
 using Razdor.Communities.Domain.Users;
-using Razdor.DataAccess.EntityFramework.Entities;
 
-namespace Razdor.DataAccess.EntityFramework.Repositories;
+namespace Razdor.Communities.DataAccess.EF.Repositories;
 
 public class GuildsRepository : IGuildsRepository
 {

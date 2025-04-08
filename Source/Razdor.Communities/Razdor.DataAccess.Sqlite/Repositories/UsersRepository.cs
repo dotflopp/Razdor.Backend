@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Razdor.Communities.Domain.Repositories;
 using Razdor.Communities.Domain.Users;
 
-namespace Razdor.DataAccess.EntityFramework.Repositories;
+namespace Razdor.Communities.DataAccess.EF.Repositories;
 
 public class UsersRepository : IUserRepository
 {

@@ -1,12 +1,12 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Razdor.Identity.DataAccess.EntityConfigurations;
 using Razdor.Identity.Domain;
 using Razdor.Shared.Domain;
 using Razdor.Shared.Domain.Repository;
 using Razdor.Shared.Infrastructure;
-using Razdro.Identity.DataAccess.EntityConfigurations;
 
-namespace Razdro.Identity.DataAccess;
+namespace Razdor.Identity.DataAccess;
 
 public class IdentityDbContext(
     IMediator mediator,

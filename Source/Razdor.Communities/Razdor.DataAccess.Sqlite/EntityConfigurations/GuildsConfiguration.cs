@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Razdor.DataAccess.EntityFramework.Entities;
+using Razdor.Communities.DataAccess.EF.Entities;
 
-namespace Razdor.DataAccess.EntityFramework.EntityConfigurations;
+namespace Razdor.Communities.DataAccess.EF.EntityConfigurations;
 
 public class GuildsConfiguration : IEntityTypeConfiguration<Guild>
 {

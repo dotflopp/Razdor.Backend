@@ -1,6 +1,6 @@
 using Razdor.Communities.Domain.Users;
 
-namespace Razdor.DataAccess.EntityFramework.Entities;
+namespace Razdor.Communities.DataAccess.EF.Entities;
 
 public class User : IUser
 {

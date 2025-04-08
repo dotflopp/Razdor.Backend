@@ -1,13 +1,10 @@
-﻿using System.Threading.Channels;
+﻿using Microsoft.EntityFrameworkCore;
+using Razdor.Communities.DataAccess.EF.Entities;
+using Razdor.Communities.DataAccess.EF.Entities.Channels;
+using Razdor.Communities.DataAccess.EF.Entities.Channels.Guild;
+using Razdor.Communities.DataAccess.EF.EntityConfigurations;
 
-using Microsoft.EntityFrameworkCore;
-
-using Razdor.DataAccess.EntityFramework.Entities;
-using Razdor.DataAccess.EntityFramework.Entities.Channels;
-using Razdor.DataAccess.EntityFramework.Entities.Channels.Guild;
-using Razdor.DataAccess.EntityFramework.EntityConfigurations;
-
-namespace Razdor.DataAccess.EntityFramework;
+namespace Razdor.Communities.DataAccess.EF;
 
 public class RazdorDataContext : DbContext
 {

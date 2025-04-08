@@ -4,7 +4,7 @@ using Razdor.Identity.Domain;
 using Razdor.Identity.Domain.Repositories;
 using Razdor.Shared.Domain.Repository;
 
-namespace Razdro.Identity.DataAccess;
+namespace Razdor.Identity.DataAccess;
 
 public class UserEfRepository(IdentityDbContext dbContext) : IUserRepository
 {

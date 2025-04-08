@@ -1,7 +1,6 @@
 using Razdor.Communities.Domain.Channels;
-using Razdor.Shared.Domain;
 
-namespace Razdor.DataAccess.EntityFramework.Entities.Channels;
+namespace Razdor.Communities.DataAccess.EF.Entities.Channels;
 
 public abstract class BaseChannel : IChannel
 {

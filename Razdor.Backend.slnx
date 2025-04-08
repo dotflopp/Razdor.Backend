@@ -22,5 +22,10 @@
     <Project Path="Source\Razdor.Voices\Razdor.Signaling.Routing\Razdor.Signaling.Routing.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Voices\Razdor.Signaling.Services\Razdor.Signaling.Services.csproj" Type="Classic C#" />
   </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="Dockerfile" />
+    <File Path="LICENSE" />
+  </Folder>
   <Project Path="Source\Razdor.StartApp\Razdor.StartApp.csproj" Type="Classic C#" />
 </Solution>

@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsTrimmable>true</IsTrimmable>
-        <RootNamespace>Razdro.Identity.DataAccess</RootNamespace>
+        <RootNamespace>Razdor.Identity.DataAccess</RootNamespace>
         <InterceptorsNamespaces>$(InterceptorsPreviewNamespaces);Microsoft.EntityFrameworkCore.GeneratedInterceptors</InterceptorsNamespaces>
     </PropertyGroup>
     <ItemGroup>

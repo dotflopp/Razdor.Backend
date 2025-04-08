@@ -22,6 +22,6 @@ RUN dotnet publish -c release -o /app --no-restore
 FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build /app ./
-COPY --from=build /Razdor.Backend/Source/Razdor.StartApp/razdor.db ./
+COPY --from=build /Razdor.Backend/Source/Razdor.StartApp/**.db ./
 
 ENTRYPOINT ["dotnet", "Razdor.StartApp.dll"]

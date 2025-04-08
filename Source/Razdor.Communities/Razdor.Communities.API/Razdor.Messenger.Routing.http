@@ -1,0 +1,10 @@
+@HostAddress = http://26.201.58.143:5154
+
+POST {{HostAddress}}/guilds/0/channels/0/join
+Accept: application/json
+Referer: http://26.201.58.143:5173/
+
+
+###
+
+

@@ -1,4 +1,4 @@
-    <Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
@@ -24,8 +24,12 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Api\Razdor.Communities.Api.csproj" />
+      <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Services\Razdor.Communities.Services.csproj" />
       <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Api\Razdor.Identity.Api.csproj" />
       <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj" />
+      <ProjectReference Include="..\Razdor.Voices\Razdor.Signaling.Routing\Razdor.Signaling.Routing.csproj" />
+      <ProjectReference Include="..\Razdor.Voices\Razdor.Signaling.Services\Razdor.Signaling.Services.csproj" />
     </ItemGroup>
 
 </Project>

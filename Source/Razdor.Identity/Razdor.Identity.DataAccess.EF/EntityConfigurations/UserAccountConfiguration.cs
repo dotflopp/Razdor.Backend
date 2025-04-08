@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Razdor.Identity.Domain;
 
-namespace Razdro.Identity.DataAccess;
+namespace Razdro.Identity.DataAccess.EntityConfigurations;
 
 public class UserAccountConfiguration : IEntityTypeConfiguration<UserAccount>
 {

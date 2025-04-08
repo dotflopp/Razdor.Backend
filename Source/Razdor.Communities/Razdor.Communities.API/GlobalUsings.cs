@@ -1,0 +1,1 @@
+global using StringSyntaxAttribute = System.Diagnostics.CodeAnalysis.StringSyntaxAttribute;

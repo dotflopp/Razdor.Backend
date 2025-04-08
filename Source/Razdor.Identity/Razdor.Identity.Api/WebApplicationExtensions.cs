@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Razdor.Identity.DataAccess.Ef.Compiled;
 using Razdor.Identity.Domain;
 using Razdor.Identity.Domain.Repositories;
 using Razdor.Shared.Features;
@@ -20,9 +19,13 @@ public static class WebApplicationExtensions
             )
         );
         
+        builder.Services.ConfigureHttpJsonOptions(options =>
+        {
+            options.SerializerOptions.TypeInfoResolverChain.Insert(0, IdentityJsonSerializerContext.Default);
+        });
+        
         builder.Services.AddDbContext<IdentityDbContext>(options =>
         {
-            options.UseModel(IdentityDbContextModel.Instance);
             options.UseSqlite(builder.Configuration.GetConnectionString("LocalIdentity"));
         });
         builder.Services.AddSingleton<AccessTokenFactory>(

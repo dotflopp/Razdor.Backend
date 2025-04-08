@@ -4,6 +4,7 @@ using Razdor.Identity.Domain;
 using Razdor.Shared.Domain;
 using Razdor.Shared.Domain.Repository;
 using Razdor.Shared.Infrastructure;
+using Razdro.Identity.DataAccess.EntityConfigurations;
 
 namespace Razdro.Identity.DataAccess;
 

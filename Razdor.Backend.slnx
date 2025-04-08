@@ -1,4 +1,10 @@
 <Solution>
+  <Folder Name="/Razdor.Communities/">
+    <Project Path="Source\Razdor.Communities\Razdor.Communities.Api\Razdor.Communities.Api.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Communities\Razdor.Communities.Domain\Razdor.Communities.Domain.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Communities\Razdor.Communities.Services\Razdor.Communities.Services.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Communities\Razdor.DataAccess.Sqlite\Razdor.Communities.DataAccess.EF.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/Razdor.Identity/">
     <Project Path="Source\Razdor.Identity\Razdor.Identity.Api\Razdor.Identity.Api.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Identity\Razdor.Identity.DataAccess.EF\Razdor.Identity.DataAccess.EF.csproj" Type="Classic C#" />
@@ -10,6 +16,11 @@
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Extensions\Razdor.Shared.Extensions.csproj" />
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Infrastructure\Razdor.Shared.Infrastructure.csproj" />
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Services.csproj" />
+  </Folder>
+  <Folder Name="/Razdor.Voices/">
+    <Project Path="Source\Razdor.Voices\Razdor.Signaling.Internal\Razdor.Signaling.Internal.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Voices\Razdor.Signaling.Routing\Razdor.Signaling.Routing.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Voices\Razdor.Signaling.Services\Razdor.Signaling.Services.csproj" Type="Classic C#" />
   </Folder>
   <Project Path="Source\Razdor.StartApp\Razdor.StartApp.csproj" Type="Classic C#" />
 </Solution>

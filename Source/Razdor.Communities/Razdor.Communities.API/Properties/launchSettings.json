@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Razdor.Guilds.Routing": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:56525;http://localhost:56526"
+    }
+  }
+}

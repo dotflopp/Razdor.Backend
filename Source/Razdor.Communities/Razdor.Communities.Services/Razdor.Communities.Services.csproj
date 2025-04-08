@@ -12,7 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Razdor.DataAccess.Sqlite\Razdor.Communities.DataAccess.EF.csproj" />
+      <ProjectReference Include="..\Razdor.Communities.DataAccess.EF\Razdor.Communities.DataAccess.EF.csproj" />
     </ItemGroup>
 
 </Project>

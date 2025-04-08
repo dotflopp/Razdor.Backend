@@ -8,8 +8,8 @@ RUN dotnet restore
 RUN dotnet tool install --global dotnet-ef
 ENV PATH="$PATH:/root/.dotnet/tools"
 
-RUN dotnet ef migrations add --project ./Source/Razdor.Communities/Razdor.DataAccess.Sqlite/Razdor.Communities.DataAccess.EF.csproj --startup-project ./Source/Razdor.StartApp/Razdor.StartApp.csproj --context Razdor.Communities.DataAccess.EF.RazdorDataContext --configuration Debug Initial --output-dir Migrations
-RUN dotnet ef database update --project ./Source/Razdor.Communities/Razdor.DataAccess.Sqlite/Razdor.Communities.DataAccess.EF.csproj --startup-project ./Source/Razdor.StartApp/Razdor.StartApp.csproj --context Razdor.Communities.DataAccess.EF.RazdorDataContext --configuration Debug 
+RUN dotnet ef migrations add --project ./Source/Razdor.Communities/Razdor.Communities.DataAccess.EF/Razdor.Communities.DataAccess.EF.csproj --startup-project ./Source/Razdor.StartApp/Razdor.StartApp.csproj --context Razdor.Communities.DataAccess.EF.RazdorDataContext --configuration Debug Initial --output-dir Migrations
+RUN dotnet ef database update --project ./Source/Razdor.Communities/Razdor.Communities.DataAccess.EF/Razdor.Communities.DataAccess.EF.csproj --startup-project ./Source/Razdor.StartApp/Razdor.StartApp.csproj --context Razdor.Communities.DataAccess.EF.RazdorDataContext --configuration Debug 
 
 RUN dotnet ef migrations add --project ./Source/Razdor.Identity/Razdor.Identity.DataAccess.EF/Razdor.Identity.DataAccess.EF.csproj --startup-project ./Source/Razdor.StartApp/Razdor.StartApp.csproj --context Razdor.Identity.DataAccess.IdentityDbContext --configuration Debug Initial --output-dir Migrations
 RUN dotnet ef database update --project ./Source/Razdor.Identity/Razdor.Identity.DataAccess.EF/Razdor.Identity.DataAccess.EF.csproj --startup-project ./Source/Razdor.StartApp/Razdor.StartApp.csproj --context Razdor.Identity.DataAccess.IdentityDbContext  --configuration Debug 

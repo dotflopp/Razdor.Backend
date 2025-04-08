@@ -45,7 +45,7 @@ public class UserAccount: BaseEntity
         CredentialsChangeDate = DateTimeOffset.UtcNow;
     }
 
-    public static UserAccount? RegisterNew(ulong id, string identityName, string email, string? passwordHash)
+    public static UserAccount RegisterNew(ulong id, string identityName, string email, string? passwordHash)
     {
         ArgumentNullException.ThrowIfNull(identityName);
         ArgumentNullException.ThrowIfNull(passwordHash);

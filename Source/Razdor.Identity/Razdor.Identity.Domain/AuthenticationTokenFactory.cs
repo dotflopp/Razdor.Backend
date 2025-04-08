@@ -24,14 +24,13 @@ public class AuthenticationTokenFactory(
         string nowBase64 = Convert.ToBase64String(
             BitConverter.GetBytes(now)
         );
-        
-        string data = string.Join(".", userIdBase64, nowBase64);
-        
-        using HMACSHA256 hasher = new HMACSHA256(options.Key);
-        byte[] signature = hasher.ComputeHash(Encoding.UTF8.GetBytes(data));
-        
-        string signatureBase64 = Convert.ToBase64String(signature);
-        
-        return string.Join(data, signatureBase64); 
+
+        using (HMACSHA256 hasher = new HMACSHA256(options.Key))
+        {
+            string data = string.Join(".", userIdBase64, nowBase64);
+            byte[] signature = hasher.ComputeHash(Encoding.UTF8.GetBytes(data));
+            string signatureBase64 = Convert.ToBase64String(signature);
+            return string.Join(data, signatureBase64); 
+        }
     }
 }

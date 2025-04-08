@@ -3,7 +3,7 @@ using Razdor.Identity.Module.Commands.ViewModels;
 
 namespace Razdor.Identity.Module.Commands;
 
-public class SignupCommand(
+public record SignupCommand(
     string IdentityName,
     string Email,
     string Password

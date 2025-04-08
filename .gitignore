@@ -9,4 +9,4 @@ obj/
 #БД
 **/Migrations
 **/Compiled
-razdor.db*
+Source/Razdor.StartApp/**.db

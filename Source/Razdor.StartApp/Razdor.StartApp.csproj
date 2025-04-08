@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Api\Razdor.Communities.API.csproj" />
+      <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Api\Razdor.Communities.Api.csproj" />
       <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Services\Razdor.Communities.Services.csproj" />
       <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Api\Razdor.Identity.Api.csproj" />
       <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj" />

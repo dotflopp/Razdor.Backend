@@ -1,6 +1,6 @@
 <Solution>
   <Folder Name="/Razdor.Communities/">
-    <Project Path="Source\Razdor.Communities\Razdor.Communities.Api\Razdor.Communities.API.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Communities\Razdor.Communities.Api\Razdor.Communities.Api.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Communities\Razdor.Communities.DataAccess.EF\Razdor.Communities.DataAccess.EF.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Communities\Razdor.Communities.Domain\Razdor.Communities.Domain.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Communities\Razdor.Communities.Services\Razdor.Communities.Services.csproj" Type="Classic C#" />

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Razdor.Identity.Domain;
+
+using Razdor.Identity.Domain.Users;
 
 namespace Razdor.Identity.DataAccess.EntityConfigurations;
 

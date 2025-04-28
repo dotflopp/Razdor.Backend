@@ -1,7 +1,11 @@
-﻿using Mediator;
+﻿using System.Diagnostics.CodeAnalysis;
+
+using Mediator;
+
 using Microsoft.EntityFrameworkCore;
+
 using Razdor.Identity.DataAccess.EntityConfigurations;
-using Razdor.Identity.Domain;
+using Razdor.Identity.Domain.Users;
 using Razdor.Shared.Domain;
 using Razdor.Shared.Domain.Repository;
 using Razdor.Shared.Infrastructure;
@@ -15,6 +19,7 @@ public class IdentityDbContext(
 {
     public DbSet<UserAccount> UserAccounts { get; private set; }
     
+    /// <inheritdoc/>
     public async Task<int> SaveEntitiesAsync(CancellationToken cancellationToken = default)
     {
         int writtenCount = await base.SaveChangesAsync(cancellationToken);
@@ -28,5 +33,4 @@ public class IdentityDbContext(
         modelBuilder.ApplyConfiguration(new UserAccountConfiguration());
         base.OnModelCreating(modelBuilder);
     }
-    
 }

@@ -11,6 +11,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Services.csproj" />
+      <ProjectReference Include="..\Razdor.Identity.DataAccess.EF\Razdor.Identity.DataAccess.EF.csproj" />
       <ProjectReference Include="..\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj" />
     </ItemGroup>
 
@@ -20,7 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Exceptions\" />
+      <Folder Include="Auth\" />
     </ItemGroup>
 
 </Project>

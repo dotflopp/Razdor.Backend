@@ -9,3 +9,5 @@ public interface IEntity
     void RemoveDomainEvent(IDomainEvent domainEvent);
     void ClearDomainEvents();
 }
+
+

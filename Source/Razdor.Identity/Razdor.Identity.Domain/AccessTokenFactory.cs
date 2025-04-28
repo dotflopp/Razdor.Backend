@@ -1,6 +1,8 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
+using Razdor.Identity.Domain.Users;
+
 namespace Razdor.Identity.Domain;
 
 public record AccessTokenFactoryOptions(
@@ -15,6 +17,9 @@ public class AccessTokenFactory(
     {
         if (user.IsTransient)
             throw new ArgumentException($"Cannot create token for transient user {user.Id}");
+
+            
+        
         
         ulong now = (ulong)(DateTime.UtcNow - options.StartTime).TotalMilliseconds;
         

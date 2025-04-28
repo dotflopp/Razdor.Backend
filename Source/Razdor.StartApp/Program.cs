@@ -1,8 +1,8 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Razdor.Communities.Api;
-using Razdor.Communities.Services;
 using Razdor.Identity.Api;
+using Razdor.Identity.Infrastructure;
 using Razdor.Shared.Features;
 using Razdor.Signaling.Routing;
 using Razdor.Signaling.Services;
@@ -62,10 +62,15 @@ builder.Services.AddSingleton(
 );
 
 // Identity services
-builder.AddIdentityServices();
+builder.Services.AddIdentityServices(
+    new IdentityModuleOptions(
+        DateTimeOffset.Parse(builder.Configuration.GetValue<string>("StartDate")),
+        builder.Configuration.GetValue<byte[]>("AccessTokenSecurityKey"),
+        builder.Configuration.GetConnectionString("IdentityConnectionString")
+    )    
+);
 
-// Community Services
-builder.Services.AddKernelServices();
+// SignalingServices
 builder.Services.AddSignalingServices(
     builder.Configuration.GetValue<string>(
         "ASPNETCORE_URLS"

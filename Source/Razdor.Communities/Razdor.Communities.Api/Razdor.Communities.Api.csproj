@@ -4,8 +4,9 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <IsTrimmable>true</IsTrimmable>
+        <EnableRequestDelegateGenerator>true</EnableRequestDelegateGenerator>
         <OutputType>Library</OutputType>
-        <RootNamespace>Razdor.Communities.API</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

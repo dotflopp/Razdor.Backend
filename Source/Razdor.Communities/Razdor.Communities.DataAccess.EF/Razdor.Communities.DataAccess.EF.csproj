@@ -5,8 +5,8 @@
         <LangVersion>preview</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <IsTrimmable>true</IsTrimmable>
         <OutputType>Library</OutputType>
-        <RootNamespace>Razdor.Communities.DataAccess</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

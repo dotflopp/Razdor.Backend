@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Razdor.Identity.Domain;
-using Razdor.Identity.Domain.Repositories;
+
+using Razdor.Identity.Domain.Users;
 using Razdor.Shared.Domain.Repository;
 
 namespace Razdor.Identity.DataAccess;

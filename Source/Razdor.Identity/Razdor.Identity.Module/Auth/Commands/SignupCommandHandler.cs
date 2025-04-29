@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 using Razdor.Identity.Domain;
 using Razdor.Identity.Domain.Users;
+using Razdor.Identity.Module.Auth.Commands.ViewModels;
 using Razdor.Identity.Module.Commands.ViewModels;
 using Razdor.Shared.Features;
 
@@ -27,8 +28,10 @@ public class SignupCommandHandler(
         user = UserAccount.RegisterNew(
             id: idGenerator.Next(),
             identityName: command.IdentityName,
+            nickname: null,
+            avatar: null,
             email: command.Email,
-            passwordHash: null
+            hashedPassword: null
         );
         
         user.ChangePassword(
@@ -38,7 +41,7 @@ public class SignupCommandHandler(
         userRepository.Add(user);
         await userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
             
-        return new AccessTokenViewModel(
+        return new AccessToken(
             tokenFactory.CreateNew(user)
         );
     }

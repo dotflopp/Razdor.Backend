@@ -1,8 +1,5 @@
-﻿using System.Collections.Immutable;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
-
+﻿using System.ComponentModel.DataAnnotations;
+using Razdor.Identity.Domain.Users.Events;
 using Razdor.Shared.Domain;
 
 namespace Razdor.Identity.Domain.Users;
@@ -17,7 +14,7 @@ public class UserAccount: BaseEntity
         string identityName, 
         string email, 
         string? nickname,
-        string avatar,
+        string? avatar,
         string? hashedPassword, 
         DateTimeOffset credentialsChangeDate
     ) : base(id) 
@@ -52,7 +49,7 @@ public class UserAccount: BaseEntity
         string identityName,
         string email,
         string? nickname,
-        string avatar,
+        string? avatar,
         string? hashedPassword,
         TimeProvider? timeProvider = null
     ){

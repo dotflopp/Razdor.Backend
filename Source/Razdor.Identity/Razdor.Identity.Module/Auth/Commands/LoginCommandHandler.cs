@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 using Razdor.Identity.Domain;
 using Razdor.Identity.Domain.Users;
+using Razdor.Identity.Module.Auth.Commands.ViewModels;
 using Razdor.Identity.Module.Commands.ViewModels;
 using Razdor.Shared.Extensions;
 

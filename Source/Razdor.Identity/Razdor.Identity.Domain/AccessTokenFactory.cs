@@ -19,8 +19,6 @@ public class AccessTokenFactory(
             throw new ArgumentException($"Cannot create token for transient user {user.Id}");
 
             
-        
-        
         ulong now = (ulong)(DateTime.UtcNow - options.StartTime).TotalMilliseconds;
         
         string userIdBase64 = Convert.ToBase64String(

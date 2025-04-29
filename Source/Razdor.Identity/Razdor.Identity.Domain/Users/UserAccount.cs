@@ -38,10 +38,22 @@ public class UserAccount: BaseEntity
     [Required]
     public DateTimeOffset CredentialsChangeDate { get; private set; }
 
-    public void ChangePassword(string newHashedPassword)
+
+    /// <summary>
+    /// Установит новый пароль пользователю
+    /// </summary>
+    /// <param name="newHashedPassword"></param>
+    /// <param name="time"></param>
+    public void ChangePassword(string newHashedPassword, TimeProvider? time = null)
     {
+        string oldPassword = HashedPassword
         HashedPassword = newHashedPassword;
-        CredentialsChangeDate = DateTimeOffset.UtcNow;
+        CredentialsChangeDate = time?.GetUtcNow() ?? DateTimeOffset.UtcNow;
+
+        if (!DomainEvents.Any(x => x is UserAccountCreated)) 
+        {
+            AddDomainEvent(new UserPasswordChanged(this, ))
+        }
     }
 
     public static UserAccount RegisterNew(
@@ -50,15 +62,15 @@ public class UserAccount: BaseEntity
         string email,
         string? nickname,
         string? avatar,
-        string? hashedPassword,
-        TimeProvider? timeProvider = null
+        string? hashedPassword, 
+        TimeProvider? time = null
     ){
 
         ArgumentNullException.ThrowIfNull(identityName);
         ArgumentNullException.ThrowIfNull(email);
         ArgumentNullException.ThrowIfNull(avatar);
 
-        DateTimeOffset credentialsChangeDate = timeProvider?.GetUtcNow() ?? DateTimeOffset.UtcNow;
+        DateTimeOffset credentialsChangeDate = time?.GetUtcNow() ?? DateTimeOffset.UtcNow;
 
         UserAccount account = new UserAccount(
             id, 

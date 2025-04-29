@@ -14,7 +14,8 @@ public class SignupCommandHandler(
     IPasswordHasher<UserAccount> passwordHasher,   
     IUserRepository userRepository,
     SnowflakeGenerator idGenerator,
-    AccessTokenFactory tokenFactory   
+    AccessTokenFactory tokenFactory,
+    TimeProvider timeProvider
 ) : ICommandHandler<SignupCommand, AuthenticationResult>
 {
     public async ValueTask<AuthenticationResult> Handle(SignupCommand command, CancellationToken cancellationToken)
@@ -31,11 +32,13 @@ public class SignupCommandHandler(
             nickname: null,
             avatar: null,
             email: command.Email,
-            hashedPassword: null
+            hashedPassword: null,
+            time: timeProvider
         );
         
         user.ChangePassword(
-            passwordHasher.HashPassword(user, command.Password)
+            passwordHasher.HashPassword(user, command.Password),
+            time:TimeProvider
         );
         
         userRepository.Add(user);

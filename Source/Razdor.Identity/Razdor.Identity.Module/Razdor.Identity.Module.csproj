@@ -10,7 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Services.csproj" />
+      <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Module.csproj" />
       <ProjectReference Include="..\Razdor.Identity.DataAccess.EF\Razdor.Identity.DataAccess.EF.csproj" />
       <ProjectReference Include="..\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj" />
     </ItemGroup>
@@ -18,10 +18,6 @@
     <ItemGroup>
       <PackageReference Include="Mediator.Abstractions" Version="3.0.0-preview.27" />
       <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="10.0.0-preview.2.25164.1" />
-    </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Auth\" />
     </ItemGroup>
 
 </Project>

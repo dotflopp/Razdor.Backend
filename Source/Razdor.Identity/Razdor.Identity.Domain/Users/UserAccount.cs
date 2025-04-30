@@ -46,13 +46,13 @@ public class UserAccount: BaseEntity
     /// <param name="time"></param>
     public void ChangePassword(string newHashedPassword, TimeProvider? time = null)
     {
-        string oldPassword = HashedPassword
+        string? oldPassword = HashedPassword;
         HashedPassword = newHashedPassword;
         CredentialsChangeDate = time?.GetUtcNow() ?? DateTimeOffset.UtcNow;
 
-        if (!DomainEvents.Any(x => x is UserAccountCreated)) 
+        if (!DomainEvents.Any(x => x is UserAccountCreated))
         {
-            AddDomainEvent(new UserPasswordChanged(this, ))
+            AddDomainEvent(new UserPasswordChanged(this, oldPassword));
         }
     }
 

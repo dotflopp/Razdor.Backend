@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Mediator;
 
-namespace Razdor.Identity.Module.Contracts
-{
-    public interface IIdentityQuery
-    {
-    }
-}
+namespace Razdor.Identity.Module.Contracts;
+
+public interface IIdentityQuery<out TResult>: IQuery<TResult>
+{ }

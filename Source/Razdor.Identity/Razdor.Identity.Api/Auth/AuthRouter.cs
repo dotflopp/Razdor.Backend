@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc;
 using Mediator;
-using Razdor.Identity.Module.Commands;
+using Razdor.Identity.Module.Auth.Commands;
 using Razdor.Identity.Module.Contracts;
 
 namespace Razdor.Identity.Api.Auth;
@@ -24,7 +24,7 @@ public static class AuthRouter
     private static async Task<IResult> AuthAsync<T>(
         [FromServices] IIdentityModule module,
         [FromBody] T authCommand
-    ) where T : ICommand<AuthenticationResult>
+    ) where T : IIdentityCommand<AuthenticationResult>
     {
         AuthenticationResult result = await module.ExecuteCommandAsync(authCommand);
         if (result.TrySuccess(out var token, out var error))

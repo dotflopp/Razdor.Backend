@@ -1,6 +1,6 @@
 ﻿using Razdor.Identity.Module.Contracts;
 
-namespace Razdor.Identity.Module.Commands;
+namespace Razdor.Identity.Module.Auth.Commands;
 
 public record SignupCommand(
     string IdentityName,

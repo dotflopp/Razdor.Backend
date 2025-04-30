@@ -1,6 +1,6 @@
 ﻿using Razdor.Shared.Extensions;
 
-namespace Razdor.Identity.Module.Commands;
+namespace Razdor.Identity.Module.Auth.Commands.ViewModels;
 
 public abstract class AuthenticationError(
     ulong code,

@@ -1,20 +1,16 @@
 ﻿using Mediator;
-
 using Microsoft.AspNetCore.Identity;
-
-using Razdor.Identity.Domain;
 using Razdor.Identity.Domain.Users;
+using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Identity.Module.Auth.Commands.ViewModels;
-using Razdor.Identity.Module.Commands.ViewModels;
-using Razdor.Shared.Features;
 
-namespace Razdor.Identity.Module.Commands;
+namespace Razdor.Identity.Module.Auth.Commands;
 
 public class SignupCommandHandler(
     IPasswordHasher<UserAccount> passwordHasher,   
     IUserRepository userRepository,
     SnowflakeGenerator idGenerator,
-    AccessTokenFactory tokenFactory,
+    AccessTokenSource tokenSource,
     TimeProvider timeProvider
 ) : ICommandHandler<SignupCommand, AuthenticationResult>
 {
@@ -38,14 +34,19 @@ public class SignupCommandHandler(
         
         user.ChangePassword(
             passwordHasher.HashPassword(user, command.Password),
-            time:TimeProvider
+            time: timeProvider
         );
         
         userRepository.Add(user);
         await userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-            
-        return new AccessToken(
-            tokenFactory.CreateNew(user)
+
+        string accessToken = tokenSource.CreateNew(
+            new AccessTokenClaims(
+                user.Id,
+                timeProvider.GetUtcNow()
+            )
         );
+        
+        return new AccessToken(accessToken);
     }
 }

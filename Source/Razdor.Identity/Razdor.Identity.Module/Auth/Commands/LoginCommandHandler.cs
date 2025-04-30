@@ -1,19 +1,16 @@
 ﻿using Mediator;
-
 using Microsoft.AspNetCore.Identity;
-
-using Razdor.Identity.Domain;
 using Razdor.Identity.Domain.Users;
+using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Identity.Module.Auth.Commands.ViewModels;
-using Razdor.Identity.Module.Commands.ViewModels;
-using Razdor.Shared.Extensions;
 
-namespace Razdor.Identity.Module.Commands;
+namespace Razdor.Identity.Module.Auth.Commands;
 
 public class LoginCommandHandler(
     IPasswordHasher<UserAccount> passwordHasher,   
     IUserRepository userRepository,
-    AccessTokenFactory tokenFactory
+    AccessTokenSource tokenSource,
+    TimeProvider timeProvider
 ) : ICommandHandler<LoginCommand, AuthenticationResult>
 {
     public async ValueTask<AuthenticationResult> Handle(LoginCommand command, CancellationToken cancellationToken)
@@ -44,8 +41,13 @@ public class LoginCommandHandler(
             await userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }
         
-        return new AccessTokenViewModel(
-            tokenFactory.CreateNew(user)
+        string accessToken = tokenSource.CreateNew(
+            new AccessTokenClaims(
+                user.Id,
+                timeProvider.GetUtcNow()
+            )
         );
+        
+        return new AccessToken(accessToken);
     }
 }

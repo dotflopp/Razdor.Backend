@@ -1,5 +1,5 @@
-﻿namespace Razdor.Identity.Module.Commands.ViewModels;
+﻿namespace Razdor.Identity.Module.Auth.Commands.ViewModels;
 
-public record AccessTokenViewModel(
+public record AccessToken(
     string Token
 );

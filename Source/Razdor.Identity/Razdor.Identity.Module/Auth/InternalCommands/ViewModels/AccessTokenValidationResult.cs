@@ -1,0 +1,1 @@
+﻿global using AccessTokenValidationResult = Razdor.Shared.Extensions.ValueResult<Razdor.Identity.Module.Auth.Commands.ViewModels.AccessToken, Razdor.Identity.Module.Auth.InternalCommands.ViewModels.AccessTokenValidationError>;

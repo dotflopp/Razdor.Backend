@@ -1,6 +1,6 @@
 ﻿namespace Razdor.Identity.Module.Users.ViewModels;
 
-public class AccountViewModel
+public class SelfUserViewModel
 {
     
 }

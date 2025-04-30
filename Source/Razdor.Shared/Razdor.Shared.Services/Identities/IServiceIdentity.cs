@@ -1,6 +1,7 @@
-﻿namespace Razdor.Shared.Features;
+﻿namespace Razdor.Shared.Module.Identities;
 
 public interface IServiceIdentity
 {
-    UserIdentity User { get; }
+    bool IsAuthenticated { get; }
+    UserIdentity? User { get; }
 }

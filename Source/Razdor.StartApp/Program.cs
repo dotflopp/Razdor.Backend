@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Routing.Constraints;
 using Razdor.Communities.Api;
 using Razdor.Identity.Api;
 using Razdor.Identity.Infrastructure;
-using Razdor.Shared.Features;
+using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Signaling.Routing;
 using Razdor.Signaling.Services;
 using Razdor.StartApp.Constraints;
@@ -64,9 +64,9 @@ builder.Services.AddSingleton(
 // Identity services
 builder.Services.AddIdentityServices(
     new IdentityModuleOptions(
-        DateTimeOffset.Parse(builder.Configuration.GetValue<string>("StartDate")),
-        builder.Configuration.GetValue<byte[]>("AccessTokenSecurityKey"),
-        builder.Configuration.GetConnectionString("IdentityConnectionString")
+        new DateTime(2025, 1, 1),
+        Convert.FromBase64String("K3UA5ta52VOeTguHAgYaw+5IV4KLUlflzx3sYjy8WpnLPsmR8oYsIHewP4U7cE/JBNRR9gNdGhaflBlJcGXA6lEu8ZdL1+x9muyI1nfuivA="),
+        builder.Configuration.GetConnectionString("IdentityConnectionString") ?? throw new NullReferenceException()
     )    
 );
 

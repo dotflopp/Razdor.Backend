@@ -1,8 +1,5 @@
-﻿using Mediator;
-using Microsoft.AspNetCore.Mvc;
-using Razdor.Identity.Api.Auth;
-using Razdor.Identity.Module.Commands;
-using Razdor.Identity.Module.Commands.ViewModels;
+﻿using Razdor.Identity.Api.Auth;
+using Razdor.Identity.Api.Users;
 
 namespace Razdor.Identity.Api;
 

@@ -7,7 +7,7 @@ using Razdor.Identity.Module.Auth.Commands.ViewModels;
 namespace Razdor.Identity.Module.Auth.Commands;
 
 public class LoginCommandHandler(
-    IPasswordHasher<UserAccount> passwordHasher,   
+    IPasswordHasher<UserAccount> passwordHasher,
     IUserRepository userRepository,
     AccessTokenSource tokenSource,
     TimeProvider timeProvider
@@ -15,39 +15,35 @@ public class LoginCommandHandler(
 {
     public async ValueTask<AuthenticationResult> Handle(LoginCommand command, CancellationToken cancellationToken)
     {
-        UserAccount? user = await userRepository.FindByEmailAsync(command.Email);
-        
-        PasswordVerificationResult verification = PasswordVerificationResult.Failed;
+        var user = await userRepository.FindByEmailAsync(command.Email);
+
+        var verification = PasswordVerificationResult.Failed;
 
         if (user is { HashedPassword: not null })
-        {
             verification = passwordHasher.VerifyHashedPassword(
-                user, 
-                user.HashedPassword, 
+                user,
+                user.HashedPassword,
                 command.Password
             );
-        }
 
         if (user == null || verification == PasswordVerificationResult.Failed)
-        {
             return AuthenticationError.InvalidPasswordOrEmailError;
-        }
 
         if (verification == PasswordVerificationResult.SuccessRehashNeeded)
         {
-            string newHash = passwordHasher.HashPassword(user, command.Password);
+            var newHash = passwordHasher.HashPassword(user, command.Password);
             user.ChangePassword(newHash);
-            
+
             await userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }
-        
-        string accessToken = tokenSource.CreateNew(
-            new AccessTokenClaims(
+
+        var accessToken = tokenSource.CreateNew(
+            new TokenClaims(
                 user.Id,
                 timeProvider.GetUtcNow()
             )
         );
-        
+
         return new AccessToken(accessToken);
     }
 }

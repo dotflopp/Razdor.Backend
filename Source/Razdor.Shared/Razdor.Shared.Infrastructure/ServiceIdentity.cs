@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace Razdor.Shared.Infrastructure;
 
-namespace Razdor.Shared.Infrastructure
+internal class ServiceIdentity
 {
-    internal class ServiceIdentity
-    {
-    }
 }

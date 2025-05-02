@@ -5,7 +5,7 @@ namespace Razdor.Signaling.Services.Signaling;
 
 public class Room : IRoom
 {
-    private string _server;
+    private readonly string _server;
 
     public Room(ulong channelId, string server)
     {
@@ -13,14 +13,15 @@ public class Room : IRoom
         ChannelId = channelId;
         _server = server;
     }
-    
-    public ulong ChannelId { get; }
+
     private IDictionary<string, UserIdentity?> Sessions { get; }
-    
+
+    public ulong ChannelId { get; }
+
     public Task<IRoomSession> CreateUserSessionIfNotExistsAsync()
     {
-        string newSessionId = $"{ChannelId}-{Guid.NewGuid()}";
-        
+        var newSessionId = $"{ChannelId}-{Guid.NewGuid()}";
+
         return Task.FromResult<IRoomSession>(new RoomSession(
             _server,
             newSessionId
@@ -43,15 +44,15 @@ public class Room : IRoom
 
     public Task<UserIdentity?> FindUserAsync(string sessionId)
     {
-        if (!Sessions.TryGetValue(sessionId, out UserIdentity? userIdentity))
+        if (!Sessions.TryGetValue(sessionId, out var userIdentity))
             return Task.FromResult<UserIdentity?>(null);
-        
+
         return Task.FromResult(userIdentity);
     }
 
     public async Task ConnectUserAsync(string sessionId, UserIdentity user)
     {
-        Sessions[sessionId] = user;   
+        Sessions[sessionId] = user;
     }
 
     public Task DisconnectUserAsync(string sessionId)

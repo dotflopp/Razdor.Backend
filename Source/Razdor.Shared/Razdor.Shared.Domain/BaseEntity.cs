@@ -6,12 +6,12 @@ public abstract class BaseEntity(
     ulong id
 ) : IEntity
 {
-    private List<IDomainEvent>? _domainEvents = null;
+    private List<IDomainEvent>? _domainEvents;
 
     public ulong Id { get; protected set; } = id;
     public bool IsTransient => Id == 0;
 
-    public IReadOnlyCollection<IDomainEvent> DomainEvents =>    
+    public IReadOnlyCollection<IDomainEvent> DomainEvents =>
         _domainEvents?.AsReadOnly() ?? ReadOnlyCollection<IDomainEvent>.Empty;
 
     public virtual void AddDomainEvent(IDomainEvent domainEvent)

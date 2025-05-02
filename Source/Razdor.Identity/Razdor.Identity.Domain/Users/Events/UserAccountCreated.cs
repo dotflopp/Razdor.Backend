@@ -1,6 +1,4 @@
-﻿using Mediator;
-
-using Razdor.Shared.Domain;
+﻿using Razdor.Shared.Domain;
 
 namespace Razdor.Identity.Domain.Users.Events;
 

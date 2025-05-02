@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Razdor.Identity.Api\Razdor.Identity.Api.csproj" />
-    <ProjectReference Include="..\Razdor.Identity.DataAccess.EF\Razdor.Identity.DataAccess.EF.csproj" />
-    <ProjectReference Include="..\Razdor.Identity.Module\Razdor.Identity.Module.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Razdor.Identity.Api\Razdor.Identity.Api.csproj"/>
+        <ProjectReference Include="..\Razdor.Identity.DataAccess.EF\Razdor.Identity.DataAccess.EF.csproj"/>
+        <ProjectReference Include="..\Razdor.Identity.Module\Razdor.Identity.Module.csproj"/>
+    </ItemGroup>
 
 </Project>

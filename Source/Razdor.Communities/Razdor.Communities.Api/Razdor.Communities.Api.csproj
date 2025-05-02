@@ -10,17 +10,17 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Asp.Versioning.Http" Version="8.1.0" />
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0-rc.1.24452.1" />
+        <PackageReference Include="Asp.Versioning.Http" Version="8.1.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0-rc.1.24452.1"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <ProjectReference Include="..\..\Razdor.Voices\Razdor.Signaling.Internal\Razdor.Signaling.Internal.csproj" />
-      <ProjectReference Include="..\Razdor.Communities.Domain\Razdor.Communities.Domain.csproj" />
+        <ProjectReference Include="..\..\Razdor.Voices\Razdor.Signaling.Internal\Razdor.Signaling.Internal.csproj"/>
+        <ProjectReference Include="..\Razdor.Communities.Domain\Razdor.Communities.Domain.csproj"/>
     </ItemGroup>
-    
+
     <ItemGroup>
-      <None Remove="Properties\launchSettings.json" />
+        <None Remove="Properties\launchSettings.json"/>
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,8 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Razdor.Communities.Api;
-using Razdor.Identity.Api;
+using Razdor.Identity.Api.AuthenticationScheme;
+using Razdor.Identity.Api.Routes;
 using Razdor.Identity.Infrastructure;
 using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Signaling.Routing;
@@ -20,7 +21,7 @@ builder.Services.AddApiVersioning(options =>
 });
 
 // CORS
-builder.Services.AddCors(builder => 
+builder.Services.AddCors(builder =>
 {
     builder.AddDefaultPolicy(policy =>
     {
@@ -31,9 +32,14 @@ builder.Services.AddCors(builder =>
     });
 });
 
+builder.Services.AddAuthentication()
+    .AddScheme<AccessTokenAuthenticationOptions, AccessTokenAuthenticationHandler>(
+        "AccessTokenAuthentication",
+        options => { }
+    );
+
 // Swagger UI configuration
-builder.Services.Configure<RouteOptions>(
-    options => options.SetParameterPolicy<RegexInlineRouteConstraint>("regex")
+builder.Services.Configure<RouteOptions>(options => options.SetParameterPolicy<RegexInlineRouteConstraint>("regex")
 );
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -58,16 +64,17 @@ builder.Services.Configure<RouteOptions>(options =>
 
 // Snowflake Generator
 builder.Services.AddSingleton(
-    new SnowflakeGenerator(0, new DateTime(2025, 1, 1))    
+    new SnowflakeGenerator(0, new DateTime(2025, 1, 1))
 );
 
 // Identity services
 builder.Services.AddIdentityServices(
     new IdentityModuleOptions(
         new DateTime(2025, 1, 1),
-        Convert.FromBase64String("K3UA5ta52VOeTguHAgYaw+5IV4KLUlflzx3sYjy8WpnLPsmR8oYsIHewP4U7cE/JBNRR9gNdGhaflBlJcGXA6lEu8ZdL1+x9muyI1nfuivA="),
+        Convert.FromBase64String(
+            "K3UA5ta52VOeTguHAgYaw+5IV4KLUlflzx3sYjy8WpnLPsmR8oYsIHewP4U7cE/JBNRR9gNdGhaflBlJcGXA6lEu8ZdL1+x9muyI1nfuivA="),
         builder.Configuration.GetConnectionString("IdentityConnectionString") ?? throw new NullReferenceException()
-    )    
+    )
 );
 
 // SignalingServices
@@ -82,14 +89,14 @@ var app = builder.Build();
 
 // Map OpenApi and Swagger UI
 app.UseSwagger();
-app.UseSwaggerUI(); 
+app.UseSwaggerUI();
 
 // Identity
 app.MapIdentityApi();
 
 app.MapSignalingHub();
 //Роуты приложения
-app.MapRazdorApi();
+app.MapCommunitiesApi();
 
 
 app.Run();

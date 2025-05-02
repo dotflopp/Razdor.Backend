@@ -1,14 +1,14 @@
 ﻿using Razdor.Signaling.Routing.Signaling;
 
-namespace Razdor.Signaling.Routing
+namespace Razdor.Signaling.Routing;
+
+public static class EndpointRouterExtensions
 {
-    public static class EndpointRouterExtensions
+    public static HubEndpointConventionBuilder MapSignalingHub(
+        this IEndpointRouteBuilder routeBuilder,
+        string pattern = "/signaling"
+    )
     {
-        public static HubEndpointConventionBuilder MapSignalingHub(
-            this IEndpointRouteBuilder routeBuilder,
-            string pattern = "/signaling"
-        ){
-             return routeBuilder.MapHub<SignalingHub>(pattern);
-        }
+        return routeBuilder.MapHub<SignalingHub>(pattern);
     }
 }

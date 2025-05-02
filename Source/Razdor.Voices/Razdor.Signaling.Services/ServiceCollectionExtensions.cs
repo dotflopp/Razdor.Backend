@@ -9,8 +9,8 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddSignalingServices(
         this IServiceCollection services,
         string address
-    ) {
-        
+    )
+    {
         services.AddSingleton<ISignalingServiceProvider, SignalingOneServiceProvider>();
 
         services.AddSingleton<ISignalingInternalService>(

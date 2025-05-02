@@ -9,11 +9,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Mediator.Abstractions" Version="3.0.0-preview.27" />
+        <PackageReference Include="Mediator.Abstractions" Version="3.0.0-preview.27"/>
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Contracts\" />
+        <Folder Include="Contracts\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Razdor.Shared.Domain\Razdor.Shared.Domain.csproj"/>
     </ItemGroup>
 
 </Project>

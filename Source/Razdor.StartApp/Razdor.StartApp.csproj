@@ -10,27 +10,27 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Mediator.SourceGenerator" Version="3.0.0-preview.27">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
-      <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.1.0" />
-      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.1.0" />
-      <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.0" />
+        <PackageReference Include="Mediator.SourceGenerator" Version="3.0.0-preview.27">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.3">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.1.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.1.0"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Api\Razdor.Communities.Api.csproj" />
-      <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Services\Razdor.Communities.Services.csproj" />
-      <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Api\Razdor.Identity.Api.csproj" />
-      <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj" />
-      <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Infrastructure\Razdor.Identity.Infrastructure.csproj" />
-      <ProjectReference Include="..\Razdor.Voices\Razdor.Signaling.Routing\Razdor.Signaling.Routing.csproj" />
-      <ProjectReference Include="..\Razdor.Voices\Razdor.Signaling.Services\Razdor.Signaling.Services.csproj" />
+        <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Api\Razdor.Communities.Api.csproj"/>
+        <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Services\Razdor.Communities.Services.csproj"/>
+        <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Api\Razdor.Identity.Api.csproj"/>
+        <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj"/>
+        <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Infrastructure\Razdor.Identity.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Razdor.Voices\Razdor.Signaling.Routing\Razdor.Signaling.Routing.csproj"/>
+        <ProjectReference Include="..\Razdor.Voices\Razdor.Signaling.Services\Razdor.Signaling.Services.csproj"/>
     </ItemGroup>
 
 </Project>

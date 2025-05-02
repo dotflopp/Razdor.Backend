@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using Razdor.Identity.Module.Auth.Commands;
 using Razdor.Identity.Module.Auth.Commands.ViewModels;
 
@@ -9,6 +8,6 @@ namespace Razdor.Identity.Api;
 [JsonSerializable(typeof(SignupCommand))]
 [JsonSerializable(typeof(AccessToken))]
 [JsonSerializable(typeof(AuthenticationError))]
-public partial class IdentityJsonSerializerContext: JsonSerializerContext
+public partial class IdentityJsonSerializerContext : JsonSerializerContext
 {
 }

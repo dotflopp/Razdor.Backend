@@ -7,7 +7,7 @@ using Razdor.Identity.Module.Auth.Commands.ViewModels;
 namespace Razdor.Identity.Module.Auth.Commands;
 
 public class SignupCommandHandler(
-    IPasswordHasher<UserAccount> passwordHasher,   
+    IPasswordHasher<UserAccount> passwordHasher,
     IUserRepository userRepository,
     SnowflakeGenerator idGenerator,
     AccessTokenSource tokenSource,
@@ -16,37 +16,34 @@ public class SignupCommandHandler(
 {
     public async ValueTask<AuthenticationResult> Handle(SignupCommand command, CancellationToken cancellationToken)
     {
-        UserAccount? user = await userRepository.FindByEmailAsync(command.Email);
-        if (user != null)
-        {
-            return AuthenticationError.UserAlreadyExistsError;
-        }
+        var user = await userRepository.FindByEmailAsync(command.Email);
+        if (user != null) return AuthenticationError.UserAlreadyExistsError;
 
         user = UserAccount.RegisterNew(
-            id: idGenerator.Next(),
-            identityName: command.IdentityName,
+            idGenerator.Next(),
+            command.IdentityName,
             nickname: null,
             avatar: null,
             email: command.Email,
             hashedPassword: null,
             time: timeProvider
         );
-        
+
         user.ChangePassword(
             passwordHasher.HashPassword(user, command.Password),
-            time: timeProvider
+            timeProvider
         );
-        
+
         userRepository.Add(user);
         await userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
-        string accessToken = tokenSource.CreateNew(
-            new AccessTokenClaims(
+        var accessToken = tokenSource.CreateNew(
+            new TokenClaims(
                 user.Id,
                 timeProvider.GetUtcNow()
             )
         );
-        
+
         return new AccessToken(accessToken);
     }
 }

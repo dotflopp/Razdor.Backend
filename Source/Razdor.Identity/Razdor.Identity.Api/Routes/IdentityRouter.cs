@@ -1,7 +1,7 @@
-﻿using Razdor.Identity.Api.Auth;
-using Razdor.Identity.Api.Users;
+﻿using Razdor.Identity.Api.Routes.Auth;
+using Razdor.Identity.Api.Routes.Users;
 
-namespace Razdor.Identity.Api;
+namespace Razdor.Identity.Api.Routes;
 
 public static class IdentityRouter
 {

@@ -1,32 +1,27 @@
-﻿namespace Razdor.Shared.Extensions
+﻿namespace Razdor.Shared.Extensions;
+
+public abstract class Disposable : IDisposable
 {
-    public abstract class Disposable : IDisposable
+    protected bool Disposed { get; private set; }
+
+    public void Dispose()
     {
-        protected bool Disposed { get; private set; }
+        Dispose(true);
+        GC.SuppressFinalize(this);
+    }
 
-        public void ThrowIfDisposed() 
-        {
-            if (Disposed)
-            { 
-                throw new ObjectDisposedException(GetType().Name);
-            }
-        }
+    public void ThrowIfDisposed()
+    {
+        if (Disposed) throw new ObjectDisposedException(GetType().Name);
+    }
 
-        protected virtual void Dispose(bool disposing)
-        {
-            Disposed = true;
-        }
+    protected virtual void Dispose(bool disposing)
+    {
+        Disposed = true;
+    }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        ~Disposable() 
-        {
-            Dispose(false);
-        }
-
+    ~Disposable()
+    {
+        Dispose(false);
     }
 }

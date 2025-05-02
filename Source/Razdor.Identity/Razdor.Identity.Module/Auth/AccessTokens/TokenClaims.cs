@@ -1,6 +1,6 @@
 ﻿namespace Razdor.Identity.Module.Auth.AccessTokens;
 
-public record AccessTokenClaims(
+public record TokenClaims(
     ulong UserId,
     DateTimeOffset CreationTime
 );

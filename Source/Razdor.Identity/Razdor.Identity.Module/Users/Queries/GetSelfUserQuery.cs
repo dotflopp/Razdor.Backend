@@ -1,11 +1,6 @@
-﻿using Mediator;
-
-using Razdor.Identity.Module.Contracts;
+﻿using Razdor.Identity.Module.Contracts;
 using Razdor.Identity.Module.Users.ViewModels;
-using Razdor.Shared.Module.Identities;
 
 namespace Razdor.Identity.Module.Users.Queries;
 
-public record GetMeQuery(
-    IServiceIdentity Identity
-) : IIdentityQuery<SelfUserViewModel>;
+public record GetSelfUserQuery : IIdentityQuery<SelfUserViewModel>;

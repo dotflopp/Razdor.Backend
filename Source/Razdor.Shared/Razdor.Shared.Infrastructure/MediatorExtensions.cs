@@ -1,9 +1,8 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Razdor.Shared.Domain;
 
-namespace Razdor.Shared. Infrastructure;
+namespace Razdor.Shared.Infrastructure;
 
 public static class MediatorExtensions
 {
@@ -19,9 +18,9 @@ public static class MediatorExtensions
             .SelectMany(x => x.Entity.DomainEvents)
             .ToList();
 
-        foreach (EntityEntry<TEntity> entry in hasEventEntities)
+        foreach (var entry in hasEventEntities)
             entry.Entity.ClearDomainEvents();
-        
+
         foreach (var domainEvent in domainEvents)
             await mediator.Publish(domainEvent);
     }

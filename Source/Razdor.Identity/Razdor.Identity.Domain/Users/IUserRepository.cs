@@ -6,4 +6,5 @@ public interface IUserRepository : IUnitOfWorkRepository<UserAccount>
 {
     UserAccount Add(UserAccount user);
     Task<UserAccount?> FindByEmailAsync(string email);
+    Task<UserAccount?> FindByIdAsync(ulong id);
 }

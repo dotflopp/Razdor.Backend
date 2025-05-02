@@ -2,7 +2,6 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
-using Razdor.Identity.Domain.Users;
 
 namespace Razdor.Identity.Module.Auth.AccessTokens;
 
@@ -13,78 +12,78 @@ public record AccessTokenSourceOptions(
 
 public partial class AccessTokenSource
 {
-    private readonly AccessTokenSourceOptions _options;
     private readonly Regex _dataAndSignatureExtractorRegex;
-    
+    private readonly AccessTokenSourceOptions _options;
+
     public AccessTokenSource(AccessTokenSourceOptions options)
     {
         _options = options;
         _dataAndSignatureExtractorRegex = CreateDataAndSignatureExtractRegex();
     }
 
-    public string CreateNew(AccessTokenClaims claims)
+    public string CreateNew(TokenClaims claims)
     {
-        ulong now = (ulong)(claims.CreationTime - _options.StartTime).TotalMilliseconds;
+        var now = (ulong)(claims.CreationTime - _options.StartTime).TotalMilliseconds;
 
-        string userIdBase64 = Base64Url.EncodeToString(
+        var userIdBase64 = Base64Url.EncodeToString(
             Encoding.UTF8.GetBytes(claims.UserId.ToString())
         );
-        string nowBase64 = Base64Url.EncodeToString(
+        var nowBase64 = Base64Url.EncodeToString(
             BitConverter.GetBytes(now)
         );
-        
-        string data = string.Join(".", userIdBase64, nowBase64);
-        
-        using HMACSHA256 hasher = new HMACSHA256(_options.Key);
-        byte[] signature = hasher.ComputeHash(Encoding.UTF8.GetBytes(data));
-        
-        string signatureBase64 = Base64Url.EncodeToString(signature);
+
+        var data = string.Join(".", userIdBase64, nowBase64);
+
+        using var hasher = new HMACSHA256(_options.Key);
+        var signature = hasher.ComputeHash(Encoding.UTF8.GetBytes(data));
+
+        var signatureBase64 = Base64Url.EncodeToString(signature);
         return string.Join(".", data, signatureBase64);
     }
 
-    public bool CheckSignature(string token)
+    public bool Check(string token)
     {
-        Match match = _dataAndSignatureExtractorRegex.Match(token);
+        var match = _dataAndSignatureExtractorRegex.Match(token);
         if (!match.Success)
             return false;
-        
-        string data = match.Groups[1].Value;
-        string originalSignature = match.Groups[2].Value;
-        
-        using HMACSHA256 hasher = new HMACSHA256(_options.Key);
-        byte[] signature = hasher.ComputeHash(Encoding.UTF8.GetBytes(data));
-        string signatureBase64 = Base64Url.EncodeToString(signature);
-        
+
+        var data = match.Groups[1].Value;
+        var originalSignature = match.Groups[2].Value;
+
+        using var hasher = new HMACSHA256(_options.Key);
+        var signature = hasher.ComputeHash(Encoding.UTF8.GetBytes(data));
+        var signatureBase64 = Base64Url.EncodeToString(signature);
+
         return signatureBase64 == originalSignature;
     }
 
     [GeneratedRegex(
-        @"^(.*\..*)\.(.*)$", 
-        RegexOptions.Compiled 
-        | RegexOptions.IgnorePatternWhitespace 
+        @"^(.*\..*)\.(.*)$",
+        RegexOptions.Compiled
+        | RegexOptions.IgnorePatternWhitespace
         | RegexOptions.Singleline
     )]
     private partial Regex CreateDataAndSignatureExtractRegex();
 
-    public AccessTokenClaims Read(string token)
+    public TokenClaims Read(string token)
     {
-        string[] tokenData = token.Split(".");
+        var tokenData = token.Split(".");
         if (tokenData.Length != 3)
             throw new ArgumentException("Invalid token format");
 
-        string userIdBase64 = tokenData[0];
-        string nowBase64 = tokenData[1];
-        
-        string userId = Encoding.UTF8.GetString(
+        var userIdBase64 = tokenData[0];
+        var nowBase64 = tokenData[1];
+
+        var userId = Encoding.UTF8.GetString(
             Base64Url.DecodeFromChars(userIdBase64)
         );
-        ulong realativeCreationTime = BitConverter.ToUInt64(
+        var realativeCreationTime = BitConverter.ToUInt64(
             Base64Url.DecodeFromChars(nowBase64)
         );
-        
+
         DateTimeOffset absoluteCreationTime = _options.StartTime.AddMilliseconds(realativeCreationTime);
 
-        return new AccessTokenClaims(
+        return new TokenClaims(
             Convert.ToUInt64(userId),
             absoluteCreationTime
         );

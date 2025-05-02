@@ -5,4 +5,4 @@ namespace Razdor.Identity.Module.Auth.Commands;
 public record LoginCommand(
     string Email,
     string Password
-): IIdentityCommand<AuthenticationResult>;
+) : IIdentityCommand<AuthenticationResult>;

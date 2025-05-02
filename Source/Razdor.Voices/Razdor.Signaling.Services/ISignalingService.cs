@@ -1,6 +1,5 @@
-﻿namespace Razdor.Signaling.Services
+﻿namespace Razdor.Signaling.Services;
+
+internal interface ISignalingService
 {
-    internal interface ISignalingService
-    {
-    }
 }

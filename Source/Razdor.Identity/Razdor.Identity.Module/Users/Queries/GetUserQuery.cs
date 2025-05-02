@@ -5,6 +5,5 @@ using Razdor.Shared.Module.Identities;
 namespace Razdor.Identity.Module.Users.Queries;
 
 public record GetUserQuery(
-    ulong UserId,
-    IServiceIdentity Identity
+    ulong UserId
 ) : IIdentityQuery<UserPreviewModel>;

@@ -51,7 +51,7 @@ public partial class AccessTokenAuthenticationHandler : AuthenticationHandler<Ac
 
         Context.Items["UserClaims"] = userClaims;
 
-        var claim = new Claim(ClaimTypes.NameIdentifier, userClaims.UserId.ToString());
+        var claim = new Claim(ClaimTypes.NameIdentifier, userClaims.Id.ToString());
         var claimsIdentity = new ClaimsIdentity([claim], nameof(AccessTokenAuthenticationHandler));
         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
         var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);

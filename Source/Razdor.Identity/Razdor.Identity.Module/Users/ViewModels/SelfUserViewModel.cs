@@ -1,5 +1,10 @@
 ﻿namespace Razdor.Identity.Module.Users.ViewModels;
 
-public class SelfUserViewModel
-{
-}
+public record SelfUserViewModel(
+    ulong Id, 
+    string Email, 
+    string IdentityName, 
+    string Nickname,
+    string? Avatar, 
+    DateTimeOffset CredentialsChangeDate
+);

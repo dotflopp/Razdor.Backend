@@ -1,6 +1,6 @@
 ﻿namespace Razdor.Shared.Domain.Exceptions;
 
-public enum ErrorCodes
+public enum ErrorCodes : ulong
 {
     //Auth
     Unauthenticated,
@@ -12,5 +12,9 @@ public enum ErrorCodes
 
     //AccessToken Validation
     InvalidAccessToken,
-    AccessTokenExpired
+    AccessTokenExpired,
+
+    //Not Found errors
+    UserNotFound,
+
 }

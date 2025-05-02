@@ -5,6 +5,7 @@ using Razdor.Identity.Api;
 using Razdor.Identity.DataAccess;
 using Razdor.Identity.Domain.Users;
 using Razdor.Identity.Module.Auth.AccessTokens;
+using Razdor.Identity.Module.Contracts;
 
 namespace Razdor.Identity.Infrastructure;
 
@@ -18,8 +19,9 @@ public static class ServiceCollectionExtensions
             moduleOptions.AccessTokenSecurityKey
         );
 
-        collection.AddSingleton(provider => new AccessTokenSource(accessTokenOptions)
-        );
+        collection.AddTransient<IIdentityModule, IdentityModule>();
+        
+        collection.AddSingleton(_ => new AccessTokenSource(accessTokenOptions));
 
         collection.ConfigureHttpJsonOptions(options =>
         {

@@ -4,6 +4,6 @@ public static class UsersRouter
 {
     internal static IEndpointRouteBuilder MapUsers(this IEndpointRouteBuilder router)
     {
-        throw new NotImplementedException();
+        return router;
     }
 }

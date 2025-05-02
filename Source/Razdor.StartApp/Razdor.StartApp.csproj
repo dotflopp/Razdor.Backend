@@ -29,6 +29,7 @@
         <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Api\Razdor.Identity.Api.csproj"/>
         <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj"/>
         <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Infrastructure\Razdor.Identity.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Razdor.Shared\Razdor.Shared.Api\Razdor.Shared.Api.csproj" />
         <ProjectReference Include="..\Razdor.Voices\Razdor.Signaling.Routing\Razdor.Signaling.Routing.csproj"/>
         <ProjectReference Include="..\Razdor.Voices\Razdor.Signaling.Services\Razdor.Signaling.Services.csproj"/>
     </ItemGroup>

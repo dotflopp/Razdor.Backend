@@ -20,7 +20,13 @@ public static class RazdorExceptionHandlerMiddlewareExtension
         }
         catch (RazdorException exception)
         {
+            //TODO надо верить в то что однажды появятся нормальные статус коды, по идентификатору которых можно будет понять их принадлежность
             context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            if (exception.Code.ToString().EndsWith("NotFound"))
+            {
+                context.Response.StatusCode = StatusCodes.Status404NotFound;
+            }
+            
             await context.Response.WriteAsJsonAsync(new ExceptionViewModel(
                 exception.Code,
                 exception.Message

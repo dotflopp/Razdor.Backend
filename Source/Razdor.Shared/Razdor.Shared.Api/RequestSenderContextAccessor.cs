@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Http;
 using Razdor.Shared.Module.RequestSenderContext;
 
-namespace ClassLibrary1;
+namespace Razdor.Shared.Api;
 
 public class RequestSenderContextAccessor(IHttpContextAccessor httpContextAccessor) : IRequestSenderContext
 {

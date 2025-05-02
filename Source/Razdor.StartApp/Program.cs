@@ -1,11 +1,11 @@
 using Asp.Versioning;
-using ClassLibrary1;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Razdor.Communities.Api;
 using Razdor.Identity.Api.AuthenticationScheme;
 using Razdor.Identity.Api.Routes;
 using Razdor.Identity.Infrastructure;
 using Razdor.Identity.Module.Auth.AccessTokens;
+using Razdor.Shared.Api;
 using Razdor.Shared.Module.RequestSenderContext;
 using Razdor.Signaling.Routing;
 using Razdor.Signaling.Services;
@@ -78,7 +78,8 @@ builder.Services.AddIdentityServices(
     new IdentityModuleOptions(
         new DateTime(2025, 1, 1),
         Convert.FromBase64String(
-            "K3UA5ta52VOeTguHAgYaw+5IV4KLUlflzx3sYjy8WpnLPsmR8oYsIHewP4U7cE/JBNRR9gNdGhaflBlJcGXA6lEu8ZdL1+x9muyI1nfuivA="),
+            "K3UA5ta52VOeTguHAgYaw+5IV4KLUlflzx3sYjy8WpnLPsmR8oYsIHewP4U7cE/JBNRR9gNdGhaflBlJcGXA6lEu8ZdL1+x9muyI1nfuivA="
+        ),
         builder.Configuration.GetConnectionString("LocalIdentity") ?? throw new NullReferenceException()
     )
 );
@@ -92,6 +93,8 @@ builder.Services.AddSignalingServices(
 
 
 var app = builder.Build();
+
+app.UseRazdorExceptionHandlerMiddleware();
 
 // Map OpenApi and Swagger UI
 app.UseSwagger();

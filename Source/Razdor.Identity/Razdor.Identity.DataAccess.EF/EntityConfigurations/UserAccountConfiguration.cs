@@ -17,7 +17,15 @@ public class UserAccountConfiguration : IEntityTypeConfiguration<UserAccount>
         builder.Property(x => x.IdentityName)
             .HasMaxLength(UserAccount.MaxIdentityNameLength)
             .IsRequired();
+        
+        builder.Property(x => x.CredentialsChangeDate)
+            .IsRequired();
 
+        builder.Ignore(x => x.Nickname);
+        builder.Property<string>("_nickname")
+            .HasColumnName(nameof(UserAccount.Nickname))
+            .HasMaxLength(UserAccount.MaxNicnameLength);
+        
         builder.Property(x => x.Email)
             .IsRequired();
 

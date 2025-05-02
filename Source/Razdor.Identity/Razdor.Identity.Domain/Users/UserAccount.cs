@@ -7,6 +7,8 @@ namespace Razdor.Identity.Domain.Users;
 public class UserAccount : BaseEntity
 {
     public const int MaxIdentityNameLength = 50;
+    public const int MaxNicnameLength = MaxIdentityNameLength;
+    
     private readonly string? _nickname;
 
     internal UserAccount(
@@ -35,7 +37,6 @@ public class UserAccount : BaseEntity
     /// <summary>
     ///     Дата и время изменения пароля или логина.
     /// </summary>
-    [Required]
     public DateTimeOffset CredentialsChangeDate { get; private set; }
 
 
@@ -50,7 +51,8 @@ public class UserAccount : BaseEntity
         HashedPassword = newHashedPassword;
         CredentialsChangeDate = time?.GetUtcNow() ?? DateTimeOffset.UtcNow;
 
-        if (!DomainEvents.Any(x => x is UserAccountCreated)) AddDomainEvent(new UserPasswordChanged(this, oldPassword));
+        if (!DomainEvents.Any(x => x is UserAccountCreated)) 
+            AddDomainEvent(new UserPasswordChanged(this, oldPassword));
     }
 
     public static UserAccount RegisterNew(
@@ -65,7 +67,6 @@ public class UserAccount : BaseEntity
     {
         ArgumentNullException.ThrowIfNull(identityName);
         ArgumentNullException.ThrowIfNull(email);
-        ArgumentNullException.ThrowIfNull(avatar);
 
         var credentialsChangeDate = time?.GetUtcNow() ?? DateTimeOffset.UtcNow;
 

@@ -19,7 +19,7 @@ public class IdentityDbContext(
     public async Task<int> SaveEntitiesAsync(CancellationToken cancellationToken = default)
     {
         var writtenCount = await base.SaveChangesAsync(cancellationToken);
-        await mediator.DispatchDomainEventsAsync<BaseEntity>(this);
+        await mediator.DispatchDomainEventsAsync(this);
 
         return writtenCount;
     }

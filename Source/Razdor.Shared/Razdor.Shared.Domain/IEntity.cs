@@ -1,11 +1,6 @@
 ﻿namespace Razdor.Shared.Domain;
 
-public interface IEntity
+public interface IEntity<out TId>
 {
-    ulong Id { get; }
-    bool IsTransient { get; }
-    IReadOnlyCollection<IDomainEvent> DomainEvents { get; }
-    void AddDomainEvent(IDomainEvent domainEvent);
-    void RemoveDomainEvent(IDomainEvent domainEvent);
-    void ClearDomainEvents();
+    TId Id { get; }
 }

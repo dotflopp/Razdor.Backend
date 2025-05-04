@@ -6,8 +6,11 @@ namespace Razdor.Shared.Infrastructure;
 
 public static class MediatorExtensions
 {
+    public static Task DispatchDomainEventsAsync(this IMediator mediator, DbContext dbContext)
+        => mediator.DispatchDomainEventsAsync<IAggregateRoot>(dbContext);
+
     public static async Task DispatchDomainEventsAsync<TEntity>(this IMediator mediator, DbContext context)
-        where TEntity : class, IEntity
+        where TEntity : class, IAggregateRoot
     {
         var hasEventEntities = context.ChangeTracker
             .Entries<TEntity>()

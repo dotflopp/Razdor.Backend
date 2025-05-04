@@ -2,9 +2,9 @@
 
 namespace Razdor.Shared.Domain;
 
-public abstract class BaseEntity(
+public abstract class BaseSnowflakeEntity(
     ulong id
-) : IEntity
+) :  ISnowflakeEntity, IAggregateRoot, IEntity<ulong>
 {
     private List<IDomainEvent>? _domainEvents;
 

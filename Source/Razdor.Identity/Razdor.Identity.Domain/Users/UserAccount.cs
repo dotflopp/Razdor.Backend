@@ -4,10 +4,10 @@ using Razdor.Shared.Domain;
 
 namespace Razdor.Identity.Domain.Users;
 
-public class UserAccount : BaseEntity
+public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>, IAggregateRoot
 {
     public const int MaxIdentityNameLength = 50;
-    public const int MaxNicnameLength = MaxIdentityNameLength;
+    public const int MaxNicknameLength = MaxIdentityNameLength;
     
     private readonly string? _nickname;
 

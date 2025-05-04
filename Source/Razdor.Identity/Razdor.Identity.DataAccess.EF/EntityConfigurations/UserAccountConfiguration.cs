@@ -24,7 +24,7 @@ public class UserAccountConfiguration : IEntityTypeConfiguration<UserAccount>
         builder.Ignore(x => x.Nickname);
         builder.Property<string>("_nickname")
             .HasColumnName(nameof(UserAccount.Nickname))
-            .HasMaxLength(UserAccount.MaxNicnameLength);
+            .HasMaxLength(UserAccount.MaxNicknameLength);
         
         builder.Property(x => x.Email)
             .IsRequired();

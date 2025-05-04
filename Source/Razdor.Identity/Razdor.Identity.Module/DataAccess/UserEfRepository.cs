@@ -4,7 +4,7 @@ using Razdor.Shared.Domain.Repository;
 
 namespace Razdor.Identity.DataAccess;
 
-public class UserEfRepository(IdentityDbSqlContext dbSqlContext) : IUserRepository
+public class UserEfRepository(IIdentityDbContext dbSqlContext) : IUserRepository
 {
     public IUnitOfWork UnitOfWork => dbSqlContext;
 
@@ -14,20 +14,20 @@ public class UserEfRepository(IdentityDbSqlContext dbSqlContext) : IUserReposito
         return entry.Entity;
     }
 
-    public async Task<UserAccount?> FindByEmailAsync(string email)
+    public async Task<UserAccount?> FindByEmailAsync(string email, CancellationToken cancellationToken = default)
     {
         var user = await dbSqlContext.UserAccounts
             .Where(x => x.Email == email)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(cancellationToken);
 
         return user;
     }
 
-    public async Task<UserAccount?> FindByIdAsync(ulong id)
+    public async Task<UserAccount?> FindByIdAsync(ulong id, CancellationToken cancellationToken = default)
     {
         var user = await dbSqlContext.UserAccounts
             .Where(x => x.Id == id)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(cancellationToken);
 
         return user;
     }

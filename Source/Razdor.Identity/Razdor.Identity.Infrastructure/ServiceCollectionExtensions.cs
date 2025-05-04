@@ -29,7 +29,7 @@ public static class ServiceCollectionExtensions
             options.SerializerOptions.TypeInfoResolverChain.Insert(0, IdentityJsonSerializerContext.Default);
         });
 
-        collection.AddDbContext<IdentityDbSqlContext>(options =>
+        collection.AddDbContext<IdentitySqlliteDbContext>(options =>
         {
             options.UseSqlite(moduleOptions.SqlConnectionString);
         });

@@ -8,8 +8,11 @@
 
     <ItemGroup>
         <ProjectReference Include="..\Razdor.Identity.Api\Razdor.Identity.Api.csproj"/>
-        <ProjectReference Include="..\Razdor.Identity.DataAccess.EF\Razdor.Identity.DataAccess.EF.csproj"/>
         <ProjectReference Include="..\Razdor.Identity.Module\Razdor.Identity.Module.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.4" />
     </ItemGroup>
 
 </Project>

@@ -1,12 +1,12 @@
 {
   "profiles": {
-    "Razdor.Communities.DataAccess.EF": {
+    "Razdor.Shared.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:26097;http://localhost:26101"
+      "applicationUrl": "https://localhost:60879;http://localhost:60882"
     }
   }
 }

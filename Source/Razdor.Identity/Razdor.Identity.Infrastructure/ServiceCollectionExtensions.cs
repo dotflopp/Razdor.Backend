@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Razdor.Identity.Api;
 using Razdor.Identity.DataAccess;
 using Razdor.Identity.Domain.Users;
+using Razdor.Identity.Infrastructure.DataAccess.Sql;
 using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Identity.Module.Contracts;
 
@@ -28,7 +29,7 @@ public static class ServiceCollectionExtensions
             options.SerializerOptions.TypeInfoResolverChain.Insert(0, IdentityJsonSerializerContext.Default);
         });
 
-        collection.AddDbContext<IdentityDbContext>(options =>
+        collection.AddDbContext<IdentityDbSqlContext>(options =>
         {
             options.UseSqlite(moduleOptions.SqlConnectionString);
         });

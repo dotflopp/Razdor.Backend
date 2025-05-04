@@ -10,7 +10,7 @@ using Razdor.Shared.Module.RequestSenderContext;
 namespace Razdor.Identity.Module.Users.Queries;
 
 public class GetSelfUserQueryHandler(
-    IdentityDbContext dbContext,
+    IdentityDbSqlContext dbSqlContext,
     IRequestSenderContext sender
 ) : IQueryHandler<GetSelfUserQuery, SelfUserViewModel>
 {
@@ -19,7 +19,7 @@ public class GetSelfUserQueryHandler(
         if (!sender.IsAuthenticated)
             ExceptionsHelper.ThrowUnauthenticatedException();
 
-        UserAccount? user = await dbContext.UserAccounts
+        UserAccount? user = await dbSqlContext.UserAccounts
             .Where(x => x.Id == sender.User.Id)
             .FirstOrDefaultAsync();
         

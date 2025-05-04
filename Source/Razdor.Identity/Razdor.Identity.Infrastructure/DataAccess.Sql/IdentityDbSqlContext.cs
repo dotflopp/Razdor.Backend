@@ -1,16 +1,14 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
-using Razdor.Identity.DataAccess.EntityConfigurations;
 using Razdor.Identity.Domain.Users;
-using Razdor.Shared.Domain;
+using Razdor.Identity.Infrastructure.DataAccess.Sql.EntityConfigurations;
 using Razdor.Shared.Domain.Repository;
-using Razdor.Shared.Infrastructure;
 
-namespace Razdor.Identity.DataAccess;
+namespace Razdor.Identity.Infrastructure.DataAccess.Sql;
 
-public class IdentityDbContext(
+public class IdentityDbSqlContext(
     IMediator mediator,
-    DbContextOptions<IdentityDbContext> options
+    DbContextOptions<IdentityDbSqlContext> options
 ) : DbContext(options), IUnitOfWork
 {
     public DbSet<UserAccount> UserAccounts { get; private set; }

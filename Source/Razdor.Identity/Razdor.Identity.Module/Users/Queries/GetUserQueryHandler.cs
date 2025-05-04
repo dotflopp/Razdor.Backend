@@ -8,12 +8,12 @@ using Razdor.Identity.Module.Users.ViewModels;
 namespace Razdor.Identity.Module.Users.Queries;
 
 public class GetUserQueryHandler(
-    IdentityDbContext dbContext
+    IdentityDbSqlContext dbSqlContext
 ) : IQueryHandler<GetUserQuery, UserPreviewModel>
 {
     public async ValueTask<UserPreviewModel> Handle(GetUserQuery query, CancellationToken cancellationToken)
     {
-        UserAccount? user = await dbContext.UserAccounts
+        UserAccount? user = await dbSqlContext.UserAccounts
             .Where(x => x.Id == query.UserId)
             .FirstOrDefaultAsync();
         

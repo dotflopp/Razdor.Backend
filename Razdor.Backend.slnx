@@ -27,6 +27,7 @@
     <File Path="Dockerfile" />
     <File Path="LICENSE" />
     <File Path="README.md" />
+    <File Path="Scripts\initdb.bat" />
   </Folder>
   <Project Path="Source\Razdor.StartApp\Razdor.StartApp.csproj" />
 </Solution>

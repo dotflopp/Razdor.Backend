@@ -12,6 +12,7 @@
     <ItemGroup>
         <PackageReference Include="Asp.Versioning.Http" Version="8.1.0"/>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4" />
+        <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="9.0.4" />
     </ItemGroup>
 
     <ItemGroup>

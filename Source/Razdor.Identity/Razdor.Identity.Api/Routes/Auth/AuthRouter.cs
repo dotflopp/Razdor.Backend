@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc;
 using Razdor.Identity.Module.Auth.Commands;
+using Razdor.Identity.Module.Auth.Commands.ViewModels;
 using Razdor.Identity.Module.Contracts;
 
 namespace Razdor.Identity.Api.Routes.Auth;
@@ -24,12 +25,9 @@ public static class AuthRouter
     private static async Task<IResult> AuthAsync<T>(
         [FromServices] IIdentityModule module,
         [FromBody] T authCommand
-    ) where T : IIdentityCommand<AuthenticationResult>
+    ) where T : IIdentityCommand<AccessToken>
     {
         var result = await module.ExecuteCommandAsync(authCommand);
-        if (result.TrySuccess(out var token, out var error)) 
-            return Results.Ok(token);
-
-        return Results.BadRequest(error);
+        return Results.Ok(result);
     }
 }

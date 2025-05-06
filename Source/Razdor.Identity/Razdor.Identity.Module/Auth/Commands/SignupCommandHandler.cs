@@ -1,8 +1,10 @@
 ﻿using Mediator;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Razdor.Identity.Domain.Users;
 using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Identity.Module.Auth.Commands.ViewModels;
+using Razdor.Shared.Module.DbExceptions;
 
 namespace Razdor.Identity.Module.Auth.Commands;
 
@@ -12,12 +14,13 @@ public class SignupCommandHandler(
     SnowflakeGenerator idGenerator,
     AccessTokenSource tokenSource,
     TimeProvider timeProvider
-) : ICommandHandler<SignupCommand, AuthenticationResult>
+) : ICommandHandler<SignupCommand, AccessToken>
 {
-    public async ValueTask<AuthenticationResult> Handle(SignupCommand command, CancellationToken cancellationToken)
+    public async ValueTask<AccessToken> Handle(SignupCommand command, CancellationToken cancellationToken)
     {
-        var user = await userRepository.FindByEmailAsync(command.Email);
-        if (user != null) return AuthenticationError.UserAlreadyExistsError;
+        var user = await userRepository.FindByEmailAsync(command.Email, cancellationToken);
+        if (user != null) 
+            throw new UserAlreadyExistsException("User with this email or identityName already exists");
 
         user = UserAccount.RegisterNew(
             idGenerator.Next(),
@@ -35,15 +38,21 @@ public class SignupCommandHandler(
         );
 
         userRepository.Add(user);
-        await userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-
-        var accessToken = tokenSource.CreateNew(
-            new TokenClaims(
-                user.Id,
-                timeProvider.GetUtcNow()
-            )
-        );
-
-        return new AccessToken(accessToken);
+        try
+        {
+            await userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
+            var accessToken = tokenSource.CreateNew(
+                new TokenClaims(
+                    user.Id,
+                    timeProvider.GetUtcNow()
+                )
+            );
+            return new AccessToken(accessToken);
+        }
+        catch (UniqueConstraintException e)
+        {
+            throw new UserAlreadyExistsException("User with this email or identityName already exists", e);
+        }
+        
     }
 }

@@ -10,4 +10,8 @@
     <ItemGroup>
         <ProjectReference Include="..\Razdor.Shared.Services\Razdor.Shared.Module.csproj"/>
     </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Properties\launchSettings.json" />
+    </ItemGroup>
 </Project>

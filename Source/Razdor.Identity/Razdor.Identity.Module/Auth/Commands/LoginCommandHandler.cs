@@ -11,9 +11,9 @@ public class LoginCommandHandler(
     IUserRepository userRepository,
     AccessTokenSource tokenSource,
     TimeProvider timeProvider
-) : ICommandHandler<LoginCommand, AuthenticationResult>
+) : ICommandHandler<LoginCommand, AccessToken>
 {
-    public async ValueTask<AuthenticationResult> Handle(LoginCommand command, CancellationToken cancellationToken)
+    public async ValueTask<AccessToken> Handle(LoginCommand command, CancellationToken cancellationToken)
     {
         var user = await userRepository.FindByEmailAsync(command.Email);
 
@@ -27,7 +27,7 @@ public class LoginCommandHandler(
             );
 
         if (user == null || verification == PasswordVerificationResult.Failed)
-            return AuthenticationError.InvalidPasswordOrEmailError;
+            throw new InvalidPasswordOrEmailException("Invalid password or email");
 
         if (verification == PasswordVerificationResult.SuccessRehashNeeded)
         {

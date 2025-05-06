@@ -20,6 +20,9 @@ public static class RazdorExceptionHandlerMiddlewareExtension
         }
         catch (RazdorException exception)
         {
+            ILogger logger = context.RequestServices.GetRequiredService<ILogger>();
+            logger.LogError(exception.Message);        
+         
             //TODO надо верить в то что однажды появятся нормальные статус коды, по идентификатору которых можно будет понять их принадлежность
             context.Response.StatusCode = StatusCodes.Status400BadRequest;
             if (exception.Code.ToString().EndsWith("NotFound"))

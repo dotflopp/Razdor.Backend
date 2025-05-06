@@ -27,7 +27,8 @@ public static class AuthRouter
     ) where T : IIdentityCommand<AuthenticationResult>
     {
         var result = await module.ExecuteCommandAsync(authCommand);
-        if (result.TrySuccess(out var token, out var error)) return Results.Ok(token);
+        if (result.TrySuccess(out var token, out var error)) 
+            return Results.Ok(token);
 
         return Results.BadRequest(error);
     }

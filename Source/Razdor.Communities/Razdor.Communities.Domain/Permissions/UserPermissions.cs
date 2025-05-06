@@ -3,6 +3,7 @@
 [Flags]
 public enum UserPermissions : ulong
 {
+    None = 0,
     /// <summary>
     /// Дает карт-бланш на свинство
     /// </summary>

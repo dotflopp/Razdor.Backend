@@ -1,5 +1,5 @@
-﻿using Razdor.Communities.Domain.Members;
-using Razdor.Communities.Domain.Roles;
+﻿using Razdor.Communities.Domain.Channels.Permissions;
+using Razdor.Communities.Domain.Members;
 
 namespace Razdor.Communities.Domain.Channels;
 

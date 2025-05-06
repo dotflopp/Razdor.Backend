@@ -1,7 +1,7 @@
 ﻿using Razdor.Communities.Domain.Communities;
 using Razdor.Shared.Domain;
 
-namespace Razdor.Communities.Domain.Roles;
+namespace Razdor.Communities.Domain.Members;
 
 /// <summary>
 /// Без ролей у пользователя нету разрешений

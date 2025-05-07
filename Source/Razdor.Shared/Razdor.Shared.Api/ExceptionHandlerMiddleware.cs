@@ -33,16 +33,16 @@ public class ExceptionHandlerMiddleware
          
         //TODO надо верить в то что однажды появятся нормальные статус коды, по идентификатору которых можно будет понять их принадлежность
         context.Response.StatusCode = StatusCodes.Status400BadRequest;
-        if (exception.Code.ToString().EndsWith("NotFound"))
+        if (exception.ErrorCode.ToString().EndsWith("NotFound"))
         {
             context.Response.StatusCode = StatusCodes.Status404NotFound;
         }
 
         ExceptionViewModel exceptionViewModel = new(
-            exception.Code,
+            exception.ErrorCode,
             exception.Message
         );
-        _logger.LogError($"StatusCode: {context.Response.StatusCode} Exception: {exceptionViewModel}");        
+        _logger.LogInformation($"StatusCode: {context.Response.StatusCode} Exception: {exceptionViewModel}");        
         await context.Response.WriteAsJsonAsync(exceptionViewModel);
     }
 }

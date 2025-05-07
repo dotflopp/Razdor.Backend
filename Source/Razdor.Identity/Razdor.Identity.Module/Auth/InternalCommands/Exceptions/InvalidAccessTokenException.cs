@@ -5,9 +5,9 @@ namespace Razdor.Identity.Module.Auth.InternalCommands.Exceptions;
 public class InvalidAccessTokenException(
     string message,
     Exception? innerException = null
-) : RazdorException(ErrorCodes.InvalidAccessToken, message, innerException);
+) : RazdorException(ErrorCode.InvalidAccessToken, message, innerException);
 
 public class AccessTokenExpiredException(
     string message,
     Exception? innerException = null
-) : RazdorException(ErrorCodes.AccessTokenExpired, message, innerException);
+) : RazdorException(ErrorCode.AccessTokenExpired, message, innerException);

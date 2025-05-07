@@ -3,6 +3,6 @@
 namespace Razdor.Shared.Api.ViewModels;
 
 public record ExceptionViewModel(
-  ErrorCodes Code,
+  ErrorCode Code,
   string Message
 );

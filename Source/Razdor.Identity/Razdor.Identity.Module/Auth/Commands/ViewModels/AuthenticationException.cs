@@ -3,17 +3,17 @@
 namespace Razdor.Identity.Module.Auth.Commands.ViewModels;
 
 public abstract class AuthenticationException(
-    ErrorCodes code,
+    ErrorCode errorCode,
     string message,
     Exception? innerException = null
-) : RazdorException(code, message, innerException);
+) : RazdorException(errorCode, message, innerException);
 
 public class InvalidPasswordOrEmailException(
     string message,
     Exception? innerException = null
-) : AuthenticationException(ErrorCodes.InvalidPasswordOrEmail, message, innerException);
+) : AuthenticationException(ErrorCode.InvalidPasswordOrEmail, message, innerException);
 
 public class UserAlreadyExistsException(
     string message,
     Exception? innerException = null
-) : AuthenticationException(ErrorCodes.UserAlreadyExists, message, innerException);
+) : AuthenticationException(ErrorCode.UserAlreadyExists, message, innerException);

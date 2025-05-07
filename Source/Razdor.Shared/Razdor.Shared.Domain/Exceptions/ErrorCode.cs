@@ -1,6 +1,6 @@
 ﻿namespace Razdor.Shared.Domain.Exceptions;
 
-public enum ErrorCodes : ulong
+public enum ErrorCode : ulong
 {
     //Auth
     Unauthenticated,

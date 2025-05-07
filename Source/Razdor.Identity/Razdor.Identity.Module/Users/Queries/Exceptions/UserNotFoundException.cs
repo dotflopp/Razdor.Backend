@@ -6,4 +6,4 @@ namespace Razdor.Identity.Module.Users.Queries.Exceptions;
 public class UserNotFoundException(
     string? message = null, 
     Exception? innerException = null
-) : ModuleException(ErrorCodes.UserNotFound, message, innerException);
+) : ModuleException(ErrorCode.UserNotFound, message, innerException);

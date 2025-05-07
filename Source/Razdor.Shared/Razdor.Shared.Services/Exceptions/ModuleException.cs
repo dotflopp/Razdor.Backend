@@ -3,7 +3,7 @@
 namespace Razdor.Shared.Module.Exceptions;
 
 public abstract class ModuleException(
-    ErrorCodes code,
+    ErrorCode errorCode,
     string? message = null,
     Exception? innerException = null
-) : RazdorException(code, message, innerException);
+) : RazdorException(errorCode, message, innerException);

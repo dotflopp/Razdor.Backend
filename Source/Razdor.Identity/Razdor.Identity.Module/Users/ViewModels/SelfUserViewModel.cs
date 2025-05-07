@@ -1,4 +1,6 @@
-﻿namespace Razdor.Identity.Module.Users.ViewModels;
+﻿using Razdor.Identity.Domain.Users;
+
+namespace Razdor.Identity.Module.Users.ViewModels;
 
 public record SelfUserViewModel(
     ulong Id, 
@@ -6,5 +8,7 @@ public record SelfUserViewModel(
     string IdentityName, 
     string Nickname,
     string? Avatar, 
-    DateTimeOffset CredentialsChangeDate
+    DateTimeOffset CredentialsChangeDate,
+    UserCommunicationStatus Status,
+    string? Description
 );

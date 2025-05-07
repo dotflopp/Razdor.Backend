@@ -9,6 +9,13 @@ public class UserAccountConfiguration : IEntityTypeConfiguration<UserAccount>
     public void Configure(EntityTypeBuilder<UserAccount> builder)
     {
         builder.ToTable("user-accounts");
+        
+        builder.HasIndex(x => x.Email)
+            .IsUnique();
+
+        builder.HasIndex(x => x.IdentityName)
+            .IsUnique();
+        
         builder.Ignore(x => x.DomainEvents);
 
         builder.Property(x => x.Id)
@@ -29,10 +36,16 @@ public class UserAccountConfiguration : IEntityTypeConfiguration<UserAccount>
         builder.Property(x => x.Email)
             .IsRequired();
 
-        builder.HasIndex(x => x.Email)
-            .IsUnique();
+        builder.Property(x => x.IsOnline)
+            .IsRequired();
+        
+        builder.Property(x => x.Status)
+            .IsRequired();
 
-        builder.HasIndex(x => x.IdentityName)
-            .IsUnique();
+        builder.Property(x => x.Description)
+            .HasMaxLength(UserAccount.MaxDescriptionLength)
+            .IsRequired(false);
+        
+        builder.Ignore(x => x.CurrentStatus);
     }
 }

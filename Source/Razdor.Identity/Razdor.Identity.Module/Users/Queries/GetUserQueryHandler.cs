@@ -24,7 +24,9 @@ public class GetUserQueryHandler(
             user.Id,
             user.IdentityName,
             user.Nickname,
-            user.Avatar
+            user.Avatar,
+            user.CurrentStatus,
+            user.Description
         );
     }
 }

@@ -8,9 +8,10 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
 {
     public const int MaxIdentityNameLength = 50;
     public const int MaxNicknameLength = MaxIdentityNameLength;
+    public const int MaxDescriptionLength = 300;
     
     private readonly string? _nickname;
-
+    
     internal UserAccount(
         ulong id,
         string identityName,
@@ -18,7 +19,10 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
         string? nickname,
         string? avatar,
         string? hashedPassword,
-        DateTimeOffset credentialsChangeDate
+        DateTimeOffset credentialsChangeDate,
+        bool isOnline,
+        UserCommunicationStatus status,
+        string? description
     ) : base(id)
     {
         IdentityName = identityName;
@@ -26,6 +30,9 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
         Email = email;
         HashedPassword = hashedPassword;
         CredentialsChangeDate = credentialsChangeDate;
+        IsOnline = isOnline;
+        Status = status;
+        Description = description;
     }
 
     public string IdentityName { get; }
@@ -33,13 +40,24 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
     public string Nickname => _nickname ?? IdentityName;
     public string? Avatar { get; private set; }
     public string? HashedPassword { get; private set; }
+    public bool IsOnline { get; private set; }
 
     /// <summary>
     ///     Дата и время изменения пароля или логина.
     /// </summary>
     public DateTimeOffset CredentialsChangeDate { get; private set; }
+    
+    public UserCommunicationStatus Status { get; private set; }
+    public UserCommunicationStatus CurrentStatus => 
+        !IsOnline
+            ? UserCommunicationStatus.Offline 
+            : Status == UserCommunicationStatus.Invisible
+                ? UserCommunicationStatus.Online 
+                : Status;
+    
+    public string? Description { get; private set; }
 
-
+    
     /// <summary>
     ///     Установит новый пароль пользователю
     /// </summary>
@@ -77,7 +95,10 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
             nickname,
             avatar,
             hashedPassword,
-            credentialsChangeDate
+            credentialsChangeDate,
+            false,
+            UserCommunicationStatus.Online,
+            null
         );
 
         account.AddDomainEvent(new UserAccountCreated(account));

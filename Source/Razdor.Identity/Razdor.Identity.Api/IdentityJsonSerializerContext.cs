@@ -7,7 +7,6 @@ namespace Razdor.Identity.Api;
 [JsonSerializable(typeof(LoginCommand))]
 [JsonSerializable(typeof(SignupCommand))]
 [JsonSerializable(typeof(AccessToken))]
-[JsonSerializable(typeof(AuthenticationException))]
 public partial class IdentityJsonSerializerContext : JsonSerializerContext
 {
 }

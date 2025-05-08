@@ -26,31 +26,7 @@ public class IdentitySqlliteDbContext(
 
         return writtenCount;
     }
-    
-    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
-    {
-        try 
-        {
-            return await base.SaveChangesAsync(cancellationToken);
-        }
-        catch (DbUpdateException exception) when (exception.InnerException is SqliteException { SqliteErrorCode: 19} sqliteException)
-        {
-            throw new UniqueConstraintException(sqliteException.Message, sqliteException);
-        }
-    }
-
-    public override int SaveChanges()
-    {
-        try
-        {
-            return base.SaveChanges();
-        }
-        catch (DbUpdateException exception) when (exception.InnerException is SqliteException { SqliteErrorCode: 19} sqliteException)
-        {
-            throw new UniqueConstraintException(sqliteException.Message, sqliteException);
-        }
-    }
-    
+        
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new UserAccountConfiguration());

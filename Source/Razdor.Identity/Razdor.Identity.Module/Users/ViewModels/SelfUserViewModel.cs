@@ -9,6 +9,7 @@ public record SelfUserViewModel(
     string Nickname,
     string? Avatar, 
     DateTimeOffset CredentialsChangeDate,
-    UserCommunicationStatus Status,
+    SelectedCommunicationStatus SelectedStatus,
+    DisplayedCommunicationStatus Status,
     string? Description
 );

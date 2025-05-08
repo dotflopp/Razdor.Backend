@@ -1,6 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Razdor.Identity.Domain.Users.Events;
+using Razdor.Identity.Domain.Users.Rules;
 using Razdor.Shared.Domain;
+using Razdor.Shared.Domain.Rules;
 
 namespace Razdor.Identity.Domain.Users;
 
@@ -21,7 +23,7 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
         string? hashedPassword,
         DateTimeOffset credentialsChangeDate,
         bool isOnline,
-        UserCommunicationStatus status,
+        SelectedCommunicationStatus selectedStatus,
         string? description
     ) : base(id)
     {
@@ -31,7 +33,7 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
         HashedPassword = hashedPassword;
         CredentialsChangeDate = credentialsChangeDate;
         IsOnline = isOnline;
-        Status = status;
+        SelectedStatus = selectedStatus;
         Description = description;
     }
 
@@ -47,23 +49,22 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
     /// </summary>
     public DateTimeOffset CredentialsChangeDate { get; private set; }
     
-    public UserCommunicationStatus Status { get; private set; }
-    public UserCommunicationStatus CurrentStatus => 
+    public SelectedCommunicationStatus SelectedStatus { get; private set; }
+
+    public DisplayedCommunicationStatus DisplayedStatus =>
         !IsOnline
-            ? UserCommunicationStatus.Offline 
-            : Status == UserCommunicationStatus.Invisible
-                ? UserCommunicationStatus.Online 
-                : Status;
+            ? DisplayedCommunicationStatus.Offline
+            : (DisplayedCommunicationStatus)SelectedStatus;
     
     public string? Description { get; private set; }
 
     
     /// <summary>
-    ///     Установит новый пароль пользователю
+    /// Установка нового пароля для пользователя
     /// </summary>
     /// <param name="newHashedPassword"></param>
     /// <param name="time"></param>
-    public void ChangePassword(string newHashedPassword, TimeProvider? time = null)
+    public void ChangePasswordHash(string newHashedPassword, TimeProvider? time = null)
     {
         var oldPassword = HashedPassword;
         HashedPassword = newHashedPassword;
@@ -73,19 +74,24 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
             AddDomainEvent(new UserPasswordChanged(this, oldPassword));
     }
 
-    public static UserAccount RegisterNew(
+    public static async Task<UserAccount> RegisterNew(
         ulong id,
         string identityName,
         string email,
         string? nickname,
         string? avatar,
         string? hashedPassword,
+        IUsersCounter counter,
         TimeProvider? time = null
     )
     {
         ArgumentNullException.ThrowIfNull(identityName);
         ArgumentNullException.ThrowIfNull(email);
-
+        await RuleValidationHelper.ThrowIfBrokenAsync(
+          new IdentityNameMustBeUnique(counter, identityName),
+          new EmailMustBeUnique(counter, email)
+        );
+        
         var credentialsChangeDate = time?.GetUtcNow() ?? DateTimeOffset.UtcNow;
 
         var account = new UserAccount(
@@ -97,7 +103,7 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
             hashedPassword,
             credentialsChangeDate,
             false,
-            UserCommunicationStatus.Online,
+            SelectedCommunicationStatus.Online,
             null
         );
 

@@ -4,7 +4,7 @@ namespace Razdor.Shared.Domain.Rules;
 
 public interface IBusinessRule
 {
-    Task<bool> IsBrokenAsync();
+    Task<bool> IsBrokenAsync(CancellationToken cancellationToken = default);
     string Message { get; }
     ErrorCode ErrorCode { get; }
 }

@@ -25,7 +25,7 @@ public class GetUserQueryHandler(
             user.IdentityName,
             user.Nickname,
             user.Avatar,
-            user.CurrentStatus,
+            user.DisplayedStatus,
             user.Description
         );
     }

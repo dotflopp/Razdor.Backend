@@ -39,13 +39,12 @@ public class UserAccountConfiguration : IEntityTypeConfiguration<UserAccount>
         builder.Property(x => x.IsOnline)
             .IsRequired();
         
-        builder.Property(x => x.Status)
+        builder.Property(x => x.SelectedStatus)
             .IsRequired();
+        builder.Ignore(x => x.DisplayedStatus);
 
         builder.Property(x => x.Description)
             .HasMaxLength(UserAccount.MaxDescriptionLength)
             .IsRequired(false);
-        
-        builder.Ignore(x => x.CurrentStatus);
     }
 }

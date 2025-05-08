@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Razdor.Identity.Domain.Users;
 using Razdor.Identity.Module.Auth.AccessTokens;
+using Razdor.Identity.Module.Auth.Commands.Exceptions;
 using Razdor.Identity.Module.Auth.Commands.ViewModels;
 
 namespace Razdor.Identity.Module.Auth.Commands;
@@ -32,7 +33,7 @@ public class LoginCommandHandler(
         if (verification == PasswordVerificationResult.SuccessRehashNeeded)
         {
             var newHash = passwordHasher.HashPassword(user, command.Password);
-            user.ChangePassword(newHash);
+            user.ChangePasswordHash(newHash);
 
             await userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }

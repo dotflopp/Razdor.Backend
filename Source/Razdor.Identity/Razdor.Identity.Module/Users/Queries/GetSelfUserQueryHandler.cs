@@ -33,7 +33,8 @@ public class GetSelfUserQueryHandler(
             user.Nickname,
             user.Avatar,
             user.CredentialsChangeDate,
-            user.Status,
+            user.SelectedStatus,
+            user.DisplayedStatus,
             user.Description
         );
     }

@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Razdor.Identity.Api;
 using Razdor.Identity.DataAccess;
+using Razdor.Identity.Domain;
 using Razdor.Identity.Domain.Users;
 using Razdor.Identity.Infrastructure.DataAccess.Sql;
 using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Identity.Module.Contracts;
+using Razdor.Identity.Module.DataAccess;
 
 namespace Razdor.Identity.Infrastructure;
 
@@ -33,10 +35,10 @@ public static class ServiceCollectionExtensions
         {
             options.UseSqlite(moduleOptions.SqlConnectionString);
         });
-
-        collection.AddSingleton<IPasswordHasher<UserAccount>, PasswordHasher<UserAccount>>();
+        collection.AddTransient<IUsersCounter, UsersEfCounter>();
         collection.AddTransient<IUserRepository, UserEfRepository>();
 
+        collection.AddSingleton<IPasswordHasher<UserAccount>, PasswordHasher<UserAccount>>();
         return collection;
     }
 }

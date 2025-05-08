@@ -1,6 +1,7 @@
 ﻿using Mediator;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Razdor.Identity.Domain;
 using Razdor.Identity.Domain.Users;
 using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Identity.Module.Auth.Commands.ViewModels;
@@ -13,46 +14,38 @@ public class SignupCommandHandler(
     IUserRepository userRepository,
     SnowflakeGenerator idGenerator,
     AccessTokenSource tokenSource,
+    IUsersCounter counter,
     TimeProvider timeProvider
 ) : ICommandHandler<SignupCommand, AccessToken>
 {
     public async ValueTask<AccessToken> Handle(SignupCommand command, CancellationToken cancellationToken)
     {
-        var user = await userRepository.FindByEmailAsync(command.Email, cancellationToken);
-        if (user != null) 
-            throw new UserAlreadyExistsException("User with this email or identityName already exists");
-
-        user = UserAccount.RegisterNew(
+        UserAccount user = await UserAccount.RegisterNew(
             idGenerator.Next(),
             command.IdentityName,
             nickname: null,
             avatar: null,
             email: command.Email,
             hashedPassword: null,
+            counter: counter,
             time: timeProvider
         );
 
-        user.ChangePassword(
+        user.ChangePasswordHash(
             passwordHasher.HashPassword(user, command.Password),
             timeProvider
         );
 
         userRepository.Add(user);
-        try
-        {
-            await userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-            var accessToken = tokenSource.CreateNew(
-                new TokenClaims(
-                    user.Id,
-                    timeProvider.GetUtcNow()
-                )
-            );
-            return new AccessToken(accessToken);
-        }
-        catch (UniqueConstraintException e)
-        {
-            throw new UserAlreadyExistsException("User with this email or identityName already exists", e);
-        }
+        await userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         
+        var accessToken = tokenSource.CreateNew(
+            new TokenClaims(
+                user.Id,
+                timeProvider.GetUtcNow()
+            )
+        );
+        
+        return new AccessToken(accessToken);
     }
 }

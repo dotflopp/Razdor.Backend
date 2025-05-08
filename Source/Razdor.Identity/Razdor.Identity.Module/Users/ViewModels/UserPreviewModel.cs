@@ -7,6 +7,6 @@ public record UserPreviewModel(
     string IdentityName, 
     string Nickname,
     string? Avatar,
-    UserCommunicationStatus Status,
-    string Description
+    DisplayedCommunicationStatus Status,
+    string? Description
 );

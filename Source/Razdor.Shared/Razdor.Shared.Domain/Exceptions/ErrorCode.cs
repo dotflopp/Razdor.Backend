@@ -2,14 +2,14 @@
 
 public enum ErrorCode : ulong
 {
-    //Auth
     Unauthenticated,
     Unauthorized,
 
-    //Authentication
+    //Login and Signup
     InvalidPasswordOrEmail,
-    UserAlreadyExists,
-
+    IdentityNameAlreadyExists,
+    EmailAlreadyExists,
+    
     //AccessToken Validation
     InvalidAccessToken,
     AccessTokenExpired,

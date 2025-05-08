@@ -5,8 +5,8 @@ namespace Razdor.Shared.Domain.Exceptions;
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum ErrorCode : ulong
 {
-    Unauthenticated,
     Unauthorized,
+    Forbidden,
 
     //Login and Signup
     InvalidPasswordOrEmail,
@@ -20,4 +20,5 @@ public enum ErrorCode : ulong
     //Not Found errors
     UserNotFound,
 
+    NonExistentRoute
 }

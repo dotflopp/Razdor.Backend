@@ -49,8 +49,6 @@ public partial class AccessTokenAuthenticationHandler : AuthenticationHandler<Ac
             return AuthenticateResult.Fail(exception);
         }
 
-        Context.Items["UserClaims"] = userClaims;
-
         var claim = new Claim(ClaimTypes.NameIdentifier, userClaims.Id.ToString());
         var claimsIdentity = new ClaimsIdentity([claim], nameof(AccessTokenAuthenticationHandler));
         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);

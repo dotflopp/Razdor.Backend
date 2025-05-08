@@ -21,7 +21,7 @@ public class ExceptionHandlerMiddleware
         try
         {
             await _next(context);
-        }
+        } 
         catch (RazdorException ex)
         {
             await HandleException(context, ex);
@@ -30,7 +30,6 @@ public class ExceptionHandlerMiddleware
 
     private async Task HandleException(HttpContext context, RazdorException exception)
     {
-         
         //TODO надо верить в то что однажды появятся нормальные статус коды, по идентификатору которых можно будет понять их принадлежность
         context.Response.StatusCode = StatusCodes.Status400BadRequest;
         if (exception.ErrorCode.ToString().EndsWith("NotFound"))

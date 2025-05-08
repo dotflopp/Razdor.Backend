@@ -97,18 +97,21 @@ builder.Services.AddSignalingServices(
 
 var app = builder.Build();
 
-app.UseRazdorExceptionHandlerMiddleware();
-
 // Map OpenApi and Swagger UI
 app.UseSwagger();
 app.UseSwaggerUI();
 
+app.UseCustomNotAuthorizedResponse();
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseRazdorExceptionHandlerMiddleware();
+
 // Identity
 app.MapIdentityApi();
-
-app.MapSignalingHub();
-//Роуты приложения
 app.MapCommunitiesApi();
+app.MapSignalingHub();
 
+app.MapNonExistentRouteResponse();
 
 app.Run();

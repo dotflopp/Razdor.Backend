@@ -30,14 +30,22 @@ public static class WebApplicationExtension
         return app;
     }
 
-    public static WebApplication MapNonExistentRouteResponse(this WebApplication app)
+    public static WebApplication UseNonExistentRouteResponse(this WebApplication app)
     {
-        app.Map(@"{**path}", (string? path = null) => Results.NotFound(
-            new ExceptionViewModel(
-                ErrorCode.NonExistentRoute,
-                "Attempt to access not existing route"
-            )
-        ));
+        app.Use(async (HttpContext context, RequestDelegate next) =>
+        {
+            await next(context);
+            
+            if (context.Response.StatusCode != StatusCodes.Status404NotFound)
+                return;
+
+            await context.Response.WriteAsJsonAsync(
+                new ExceptionViewModel(
+                    ErrorCode.NonExistentRoute,
+                    "Attempt to access not existing route"
+                )
+            );
+        });
         return app;
     }
 }

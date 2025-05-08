@@ -1,7 +1,6 @@
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Routing.Constraints;
+using Microsoft.OpenApi.Models;
 using Razdor.Communities.Api;
 using Razdor.Identity.Api.AuthenticationScheme;
 using Razdor.Identity.Api.Routes;
@@ -9,7 +8,6 @@ using Razdor.Identity.Infrastructure;
 using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Shared.Api;
 using Razdor.Shared.Api.Constraints;
-using Razdor.Shared.Domain.Exceptions;
 using Razdor.Shared.Module.RequestSenderContext;
 using Razdor.Signaling.Routing;
 using Razdor.Signaling.Services;
@@ -43,11 +41,33 @@ builder.Services.AddAuthentication()
         options => { }
     );
 
-// Swagger UI configuration
-builder.Services.Configure<RouteOptions>(options => options.SetParameterPolicy<RegexInlineRouteConstraint>("regex")
+builder.Services.Configure<RouteOptions>(
+    options => options.SetParameterPolicy<RegexInlineRouteConstraint>("regex")
 );
+// Swagger UI configuration
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    OpenApiSecurityScheme scheme = new();
+    scheme.Name = "Authorization";
+    scheme.In = ParameterLocation.Header;
+    scheme.Type = SecuritySchemeType.ApiKey;
+    scheme.BearerFormat = "JWT";
+    scheme.Scheme = "oauth2";
+
+    options.AddSecurityDefinition(scheme.Scheme, scheme);
+
+    OpenApiReference reference = new();
+    reference.Type = ReferenceType.SecurityScheme;
+    reference.Id = scheme.Scheme;
+    
+    scheme.Reference = reference;
+    
+    OpenApiSecurityRequirement securityRequirement = new();
+    securityRequirement.Add(scheme, []);
+
+    options.AddSecurityRequirement(securityRequirement);
+});
 
 // Mediator
 builder.Services.AddMediator(options =>
@@ -97,6 +117,8 @@ builder.Services.AddSignalingServices(
 
 var app = builder.Build();
 
+app.UseCors();
+
 // Map OpenApi and Swagger UI
 app.UseSwagger();
 app.UseSwaggerUI();
@@ -105,13 +127,14 @@ app.UseCustomNotAuthorizedResponse();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseRazdorExceptionHandlerMiddleware();
+app.UseStaticFiles();
+app.UseDefaultFiles();
 
-// Identity
+app.UseRazdorExceptionHandlerMiddleware();
 app.MapIdentityApi();
 app.MapCommunitiesApi();
 app.MapSignalingHub();
 
-app.MapNonExistentRouteResponse();
+app.UseNonExistentRouteResponse();
 
 app.Run();

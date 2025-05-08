@@ -13,7 +13,7 @@ public interface ICommunityUser: IUser, ISnowflakeEntity, IEntity<ulong>
     /// <summary>
     /// Переопределенная политика уведомлений для конкретного пользователя
     /// </summary>
-    CommunityNotificationPolicy? NoficationPolicy { get; }
+    CommunityNotificationPolicy? NotificationPolicy { get; }
     
     /// <summary>
     /// Переопределенный для сообщества профиль, если есть
@@ -34,4 +34,9 @@ public interface ICommunityUser: IUser, ISnowflakeEntity, IEntity<ulong>
     /// Наивысший приоритет (наименьшее значение среди приоритета у Roles, 0 если владелец сообщества) пользователя 
     /// </summary>
     ulong HighestPriority { get; }
+    
+    /// <summary>
+    /// Дата последнего присоединения к сообществу
+    /// </summary>
+    DateTimeOffset JoiningDate { get; }
 }

@@ -24,7 +24,8 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
         DateTimeOffset credentialsChangeDate,
         bool isOnline,
         SelectedCommunicationStatus selectedStatus,
-        string? description
+        string? description,
+        DateTimeOffset registrationDate
     ) : base(id)
     {
         IdentityName = identityName;
@@ -35,6 +36,7 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
         IsOnline = isOnline;
         SelectedStatus = selectedStatus;
         Description = description;
+        RegistrationDate = registrationDate;
     }
 
     public string IdentityName { get; }
@@ -58,6 +60,7 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
     
     public string? Description { get; private set; }
 
+    public DateTimeOffset RegistrationDate { get; private set; }
     
     /// <summary>
     /// Установка нового пароля для пользователя
@@ -92,8 +95,9 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
           new EmailMustBeUnique(counter, email)
         );
         
-        var credentialsChangeDate = time?.GetUtcNow() ?? DateTimeOffset.UtcNow;
-
+        DateTimeOffset credentialsChangeDate = time?.GetUtcNow() ?? DateTimeOffset.UtcNow;
+        DateTimeOffset registrationDate = time?.GetUtcNow() ?? DateTimeOffset.UtcNow;
+        
         var account = new UserAccount(
             id,
             identityName,
@@ -104,7 +108,8 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
             credentialsChangeDate,
             false,
             SelectedCommunicationStatus.Online,
-            null
+            null,
+            registrationDate
         );
 
         account.AddDomainEvent(new UserAccountCreated(account));

@@ -1,5 +1,8 @@
-﻿namespace Razdor.Shared.Domain.Exceptions;
+﻿using System.Text.Json.Serialization;
 
+namespace Razdor.Shared.Domain.Exceptions;
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum ErrorCode : ulong
 {
     Unauthenticated,

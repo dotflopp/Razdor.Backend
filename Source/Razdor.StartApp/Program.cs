@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Razdor.Communities.Api;
@@ -7,6 +9,7 @@ using Razdor.Identity.Infrastructure;
 using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Shared.Api;
 using Razdor.Shared.Api.Constraints;
+using Razdor.Shared.Domain.Exceptions;
 using Razdor.Shared.Module.RequestSenderContext;
 using Razdor.Signaling.Routing;
 using Razdor.Signaling.Services;
@@ -23,9 +26,9 @@ builder.Services.AddApiVersioning(options =>
 });
 
 // CORS
-builder.Services.AddCors(builder =>
+builder.Services.AddCors(options =>
 {
-    builder.AddDefaultPolicy(policy =>
+    options.AddDefaultPolicy(policy =>
     {
         policy
             .AllowAnyOrigin()

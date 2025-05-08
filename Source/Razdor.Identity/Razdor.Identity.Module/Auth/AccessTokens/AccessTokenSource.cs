@@ -54,7 +54,7 @@ public partial class AccessTokenSource
         var signature = hasher.ComputeHash(Encoding.UTF8.GetBytes(data));
         var signatureBase64 = Base64Url.EncodeToString(signature);
 
-        return signatureBase64 == originalSignature;
+        return signatureBase64.Equals(originalSignature);
     }
 
     [GeneratedRegex(

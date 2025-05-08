@@ -13,7 +13,7 @@ public class ExtractUserClaimsCommandHandler(
 {
     public async ValueTask<UserClaims> Handle(ExtractUserClaimsCommand command, CancellationToken cancellationToken)
     {
-        if (tokenSource.Check(command.AccessToken))
+        if (!tokenSource.Check(command.AccessToken))
             ValidationExceptionHelper.ThrowInvalidAccessTokenException();
 
         var tokenClaims = ReadToken(command.AccessToken);

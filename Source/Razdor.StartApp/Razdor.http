@@ -1,0 +1,20 @@
+@Host = http://localhost:5204
+@Token = NDYyNzQ1NjY4NDYxNTI3MDQ.xbE-kgIAAAA.NC3m0yGUpVI-0I3tLrTK3ImSVs6D6eRUW7QHHoT0Hjw
+
+POST {{Host}}/auth/signup
+Accept: application/json; charset=utf-8; v=0.1
+Content-Type: application/json
+
+{
+  "identityName": "string1",
+  "email": "string1",
+  "password": "string"
+}
+
+###
+GET {{Host}}/users/@me
+Accept: application/json;v=0.1
+Content-Type: application/json
+Authorization: Bearer {{Token}}
+
+###

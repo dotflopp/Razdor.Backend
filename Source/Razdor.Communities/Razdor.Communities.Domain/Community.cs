@@ -2,7 +2,7 @@
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Shared.Domain;
 
-namespace Razdor.Communities.Domain.Communities;
+namespace Razdor.Communities.Domain;
 
 public class Community : INamed, ISnowflakeEntity, IEntity<ulong>
 {

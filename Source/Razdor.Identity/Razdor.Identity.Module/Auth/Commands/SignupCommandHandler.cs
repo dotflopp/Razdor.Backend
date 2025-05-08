@@ -5,7 +5,6 @@ using Razdor.Identity.Domain;
 using Razdor.Identity.Domain.Users;
 using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Identity.Module.Auth.Commands.ViewModels;
-using Razdor.Shared.Module.DbExceptions;
 
 namespace Razdor.Identity.Module.Auth.Commands;
 

@@ -2,12 +2,11 @@
 using Mediator;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Razdor.Identity.DataAccess;
 using Razdor.Identity.Domain.Users;
 using Razdor.Identity.Infrastructure.DataAccess.Sql.EntityConfigurations;
+using Razdor.Identity.Module.DataAccess;
 using Razdor.Shared.Domain.Repository;
 using Razdor.Shared.Infrastructure;
-using Razdor.Shared.Module.DbExceptions;
 
 namespace Razdor.Identity.Infrastructure.DataAccess.Sql;
 

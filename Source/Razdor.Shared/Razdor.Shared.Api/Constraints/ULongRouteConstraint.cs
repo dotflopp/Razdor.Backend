@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Razdor.StartApp.Constraints;
+namespace Razdor.Shared.Api.Constraints;
 
 public class ULongRouteConstraint : IRouteConstraint
 {

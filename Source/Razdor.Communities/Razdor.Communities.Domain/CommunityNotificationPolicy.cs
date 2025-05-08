@@ -1,4 +1,4 @@
-﻿namespace Razdor.Communities.Domain.Communities;
+﻿namespace Razdor.Communities.Domain;
 
 public enum CommunityNotificationPolicy
 {

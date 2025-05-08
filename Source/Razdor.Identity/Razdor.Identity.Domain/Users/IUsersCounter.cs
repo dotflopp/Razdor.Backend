@@ -1,4 +1,4 @@
-﻿namespace Razdor.Identity.Domain;
+﻿namespace Razdor.Identity.Domain.Users;
 
 public interface IUsersCounter
 {

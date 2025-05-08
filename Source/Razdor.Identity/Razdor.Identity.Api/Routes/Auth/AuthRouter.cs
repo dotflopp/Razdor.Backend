@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Razdor.Identity.Module.Auth.Commands;
 using Razdor.Identity.Module.Auth.Commands.ViewModels;
 using Razdor.Identity.Module.Contracts;
+using Razdor.Shared.Api.ViewModels;
 
 namespace Razdor.Identity.Api.Routes.Auth;
 
@@ -16,9 +17,13 @@ public static class AuthRouter
         var api = router.MapGroup(groupPrefix)
             .WithTags("Auth");
 
-        api.MapPost("/login", AuthAsync<LoginCommand>);
-        api.MapPost("/signup", AuthAsync<SignupCommand>);
-
+        api.MapPost("/login", AuthAsync<LoginCommand>)
+            .Produces<AccessToken>(200)
+            .Produces<ExceptionViewModel>(400);
+        api.MapPost("/signup", AuthAsync<SignupCommand>)
+            .Produces<AccessToken>(200)
+            .Produces<ExceptionViewModel>(400);
+        
         return api;
     }
 

@@ -1,8 +1,6 @@
-﻿using Razdor.Communities.Domain.Channels.Permissions;
-using Razdor.Communities.Domain.Members;
-using Razdor.Shared.Domain;
+﻿using Razdor.Communities.Domain.Members;
 
-namespace Razdor.Communities.Domain.Channels;
+namespace Razdor.Communities.Domain.Permissions;
 
 public interface IOverwritesPermissions
 {

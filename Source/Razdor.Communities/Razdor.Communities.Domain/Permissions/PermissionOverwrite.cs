@@ -1,7 +1,4 @@
-﻿using System.ComponentModel;
-using Razdor.Communities.Domain.Members;
-
-namespace Razdor.Communities.Domain.Channels.Permissions;
+﻿namespace Razdor.Communities.Domain.Permissions;
 
 public record PermissionOverwrite(
     UserPermissions GrantedPermission,

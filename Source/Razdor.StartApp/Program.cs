@@ -6,10 +6,10 @@ using Razdor.Identity.Api.Routes;
 using Razdor.Identity.Infrastructure;
 using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Shared.Api;
+using Razdor.Shared.Api.Constraints;
 using Razdor.Shared.Module.RequestSenderContext;
 using Razdor.Signaling.Routing;
 using Razdor.Signaling.Services;
-using Razdor.StartApp.Constraints;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 

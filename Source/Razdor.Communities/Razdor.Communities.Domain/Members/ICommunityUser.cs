@@ -1,4 +1,4 @@
-﻿using Razdor.Communities.Domain.Communities;
+﻿using Razdor.Communities.Domain.Permissions;
 using Razdor.Shared.Domain;
 
 namespace Razdor.Communities.Domain.Members;

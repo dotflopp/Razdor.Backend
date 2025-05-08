@@ -1,4 +1,4 @@
-﻿namespace Razdor.Communities.Domain.Permissions;
+﻿namespace Razdor.Communities.Domain;
 
 public interface INamed
 {

@@ -1,7 +1,7 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
-using Razdor.Identity.DataAccess;
 using Razdor.Identity.Domain.Users;
+using Razdor.Identity.Module.DataAccess;
 using Razdor.Identity.Module.Users.Queries.Exceptions;
 using Razdor.Identity.Module.Users.ViewModels;
 

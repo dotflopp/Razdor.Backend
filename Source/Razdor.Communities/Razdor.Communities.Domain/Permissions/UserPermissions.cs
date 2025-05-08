@@ -1,4 +1,4 @@
-﻿namespace Razdor.Communities.Domain.Members;
+﻿namespace Razdor.Communities.Domain.Permissions;
 
 [Flags]
 public enum UserPermissions : ulong

@@ -17,6 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Api\Razdor.Shared.Api.csproj" />
         <ProjectReference Include="..\Razdor.Identity.Module\Razdor.Identity.Module.csproj"/>
     </ItemGroup>
 </Project>

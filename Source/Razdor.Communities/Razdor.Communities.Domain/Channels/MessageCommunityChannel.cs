@@ -1,8 +1,7 @@
-﻿using Razdor.Communities.Domain.Channels;
-using Razdor.Communities.Domain.Channels.Permissions;
-using Razdor.Communities.Domain.Communities;
-using Razdor.Communities.Domain.Members;
+﻿using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
+
+namespace Razdor.Communities.Domain.Channels;
 
 public class MessageCommunityChannel : 
     ChildChannel,

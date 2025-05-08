@@ -2,7 +2,7 @@
 using Razdor.Identity.Domain.Users;
 using Razdor.Shared.Domain.Repository;
 
-namespace Razdor.Identity.DataAccess;
+namespace Razdor.Identity.Module.DataAccess;
 
 public interface IIdentityDbContext: IUnitOfWork
 {

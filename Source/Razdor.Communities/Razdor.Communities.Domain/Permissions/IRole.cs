@@ -1,8 +1,6 @@
-﻿using Razdor.Communities.Domain.Communities;
-using Razdor.Communities.Domain.Permissions;
-using Razdor.Shared.Domain;
+﻿using Razdor.Shared.Domain;
 
-namespace Razdor.Communities.Domain.Members;
+namespace Razdor.Communities.Domain.Permissions;
 
 /// <summary>
 /// Без ролей у пользователя нету разрешений
@@ -11,7 +9,7 @@ namespace Razdor.Communities.Domain.Members;
 /// </summary>
 public interface IRole: INamed, ISnowflakeEntity, IEntity<ulong>
 {
-    Community Community { get; }
+    Community CommunityId { get; }
     UserPermissions Permissions { get; }
     /// <summary>
     /// Указывает на то что роль можно упоминать

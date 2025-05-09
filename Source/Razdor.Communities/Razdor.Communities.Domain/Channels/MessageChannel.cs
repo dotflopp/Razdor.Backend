@@ -5,11 +5,11 @@ using Razdor.Communities.Domain.Permissions;
 
 namespace Razdor.Communities.Domain.Channels;
 
-public class VoiceCommunityChannel: CommunityChannel, ICommunityChannel, IOverwritesOwner
+public class MessageChannel : CommunityChannel, IChildChannel, IOverwritesOwner
 {
-   private List<Overwrite>? _overwrites;
+    private List<Overwrite>? _overwrites;
     
-    public VoiceCommunityChannel(
+    public MessageChannel(
         ulong id, 
         string name, 
         ulong communityId, 

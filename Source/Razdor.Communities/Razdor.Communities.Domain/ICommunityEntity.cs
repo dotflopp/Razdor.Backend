@@ -4,5 +4,5 @@ namespace Razdor.Communities.Domain;
 
 public interface ICommunityEntity<out T> : IEntity<T>
 {
-    Community Community { get; }
+    ulong CommunityId { get; }
 }

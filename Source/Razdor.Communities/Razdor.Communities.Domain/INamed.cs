@@ -3,5 +3,4 @@
 public interface INamed
 {
     string Name { get; }
-    void Rename(string newName);
 }

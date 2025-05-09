@@ -104,5 +104,5 @@ public enum UserPermissions : ulong
     /// <summary>
     /// Позволяет отправлять сообщения в ответвление
     /// </summary>
-    SendMessagesInFork = 0x10000,
+    SendMessageInFork = 0x10000,
 }

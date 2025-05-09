@@ -1,24 +1,34 @@
 ﻿using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
+using Razdor.Shared.Domain;
 
 namespace Razdor.Communities.Domain.Channels;
 
-public class ForkChannel: ChildChannel
+public class ForkChannel: CommunityChannel, IChildChannel, ISnowflakeEntity, IEntity<ulong>
 {
-    public ForkChannel(
+    internal ForkChannel(
         ulong id, 
-        uint position, 
         string name, 
-        Community community, 
-        IReadOnlyDictionary<ulong, PermissionOverwrite> rolesPermission, 
-        IReadOnlyDictionary<ulong, PermissionOverwrite> usersPermission, 
-        CommunityChannel? parent, 
-        bool isSyncing
-    ) : base(id, position, name, community, rolesPermission, usersPermission, parent, isSyncing)
+        ulong communityId, 
+        uint position,
+        ICommunityChannel parent,
+        List<Overwrite> overwrites
+    ) : base(id, name, communityId, position)
     {
-        
+        Parent = parent;
     }
 
-    public override IReadOnlyDictionary<ulong, PermissionOverwrite> RolesPermission { get; }
-    public override IReadOnlyDictionary<ulong, PermissionOverwrite> UsersPermission { get; }
+    public override IReadOnlyList<Overwrite> Overwrites => Parent.Overwrites;
+    public ICommunityChannel Parent { get; }
+    public bool IsSyncing => true;
+
+    public override UserPermissions CalculateUserPermissions(ICommunityUser user)
+    { 
+        UserPermissions permissions = base.CalculateUserPermissions(user);
+        
+        if (permissions.HasFlag(UserPermissions.SendMessageInFork))
+            permissions |= UserPermissions.SendMessage;
+        
+        return permissions;
+    }
 }

@@ -7,6 +7,7 @@ namespace Razdor.Communities.Domain.Channels;
 public abstract class SyncedOverwritesChannel : CommunityChannel, IChildChannel, ICommunityChannel, IOverwritesOwner, IOverwritesPermission
 {
     private List<Overwrite>? _overwrites;
+    private UserPermissions _availablePermissions;
     
     internal SyncedOverwritesChannel(
         ulong id, 
@@ -15,11 +16,13 @@ public abstract class SyncedOverwritesChannel : CommunityChannel, IChildChannel,
         uint position,
         ChannelType type,
         ICommunityChannel? parent,
-        List<Overwrite>? overwrites
+        List<Overwrite>? overwrites,
+        UserPermissions availablePermissions
     ) : base(id, name, communityId, position, type)
     {
         Parent = parent;
         _overwrites = overwrites;
+        _availablePermissions = availablePermissions;
     }
     
     public ICommunityChannel? Parent { get; }
@@ -35,12 +38,21 @@ public abstract class SyncedOverwritesChannel : CommunityChannel, IChildChannel,
     public void SetRolePermission(ulong roleId, OverwritePermissions permission)
     {
         InitOverwritesIfNull();
+        permission = new(
+            permission.Allow & _availablePermissions,
+            permission.Deny & _availablePermissions
+        );
         ChannelHelper.SetRolePermissions(_overwrites, roleId, permission);
     }
 
     public void SetUserPermission(ulong userId, OverwritePermissions permission)
     {
         InitOverwritesIfNull();
+        permission = new(
+            permission.Allow & _availablePermissions,
+            permission.Deny & _availablePermissions
+        );
+        
         ChannelHelper.SetUserPermissions(_overwrites, userId, permission);
     }
 

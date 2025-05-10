@@ -8,6 +8,10 @@ public class CategoryChannel: CommunityChannel, ICommunityChannel, IOverwritesOw
 {
     private List<Overwrite>? _overwrites;
     
+    public const UserPermissions AvailablePermissions = 
+        MessageChannel.AvailablePermissions 
+        | VoiceChannel.AvailablePermissions;
+    
     internal CategoryChannel(
         ulong id, 
         string name, 
@@ -18,7 +22,7 @@ public class CategoryChannel: CommunityChannel, ICommunityChannel, IOverwritesOw
     {
         _overwrites = overwrites;
     }
-
+    
     public override IReadOnlyList<Overwrite> Overwrites => 
         _overwrites?.AsReadOnly() ?? ReadOnlyCollection<Overwrite>.Empty;
 
@@ -27,6 +31,11 @@ public class CategoryChannel: CommunityChannel, ICommunityChannel, IOverwritesOw
         if (_overwrites == null)
             _overwrites = new List<Overwrite>();
         
+        permission = new(
+            permission.Allow & AvailablePermissions,
+            permission.Deny & AvailablePermissions
+        );
+        
         ChannelHelper.SetRolePermissions(_overwrites, roleId, permission);
     }
     
@@ -34,6 +43,11 @@ public class CategoryChannel: CommunityChannel, ICommunityChannel, IOverwritesOw
     {
         if (_overwrites == null)
             _overwrites = new List<Overwrite>();
+        
+        permission = new(
+            permission.Allow & AvailablePermissions,
+            permission.Deny & AvailablePermissions
+        );
 
         ChannelHelper.SetUserPermissions(_overwrites, userId, permission); ;
     }

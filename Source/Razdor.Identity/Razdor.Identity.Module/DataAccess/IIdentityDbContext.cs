@@ -6,5 +6,5 @@ namespace Razdor.Identity.Module.DataAccess;
 
 public interface IIdentityDbContext: IUnitOfWork
 {
-    public DbSet<UserAccount> UserAccounts { get; }
+    DbSet<UserAccount> UserAccounts { get; }
 }

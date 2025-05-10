@@ -5,8 +5,3 @@
 #Файлы сборки
 bin/
 obj/
-
-#БД
-**/Migrations
-**/Compiled
-Source/Razdor.StartApp/**.db

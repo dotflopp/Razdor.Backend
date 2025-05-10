@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>Razdor.Identity.Migrations</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Mediator.Abstractions" Version="3.0.0-preview.64" />
+      <PackageReference Include="Mediator.SourceGenerator" Version="3.0.0-preview.64">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Razdor.Identity.Infrastructure\Razdor.Identity.Infrastructure.csproj" />
+      <ProjectReference Include="..\..\Razdor.ServiceDefaults\Razdor.ServiceDefaults.csproj" />
+    </ItemGroup>
+
+</Project>

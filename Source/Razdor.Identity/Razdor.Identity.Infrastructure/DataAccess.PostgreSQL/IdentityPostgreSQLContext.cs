@@ -1,18 +1,17 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Mediator;
-using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Razdor.Identity.Domain.Users;
-using Razdor.Identity.Infrastructure.DataAccess.Sql.EntityConfigurations;
+using Razdor.Identity.Infrastructure.DataAccess.PostgreSQL.EntityConfigurations;
 using Razdor.Identity.Module.DataAccess;
 using Razdor.Shared.Domain.Repository;
 using Razdor.Shared.Infrastructure;
 
 namespace Razdor.Identity.Infrastructure.DataAccess.Sql;
 
-public class IdentitySqlliteDbContext(
+public class IdentityPostgreSQLContext(
     IMediator mediator,
-    DbContextOptions<IdentitySqlliteDbContext> options
+    DbContextOptions<IdentityPostgreSQLContext> options
 ) : DbContext(options), IIdentityDbContext, IUnitOfWork
 {
     public DbSet<UserAccount> UserAccounts { get; private set; }

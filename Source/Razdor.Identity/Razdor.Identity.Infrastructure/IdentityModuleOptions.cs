@@ -3,5 +3,5 @@
 public record IdentityModuleOptions(
     DateTime AccessTokenStartDate,
     byte[] AccessTokenSecurityKey,
-    string SqlConnectionString
+    string? ConnectionString
 );

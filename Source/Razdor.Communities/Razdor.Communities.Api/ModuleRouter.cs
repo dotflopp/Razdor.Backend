@@ -1,6 +1,6 @@
 namespace Razdor.Communities.Api;
 
-public static class EndpointRouterExtensions
+public static class ModuleRouter
 {
     public static IEndpointRouteBuilder MapCommunitiesApi(
         this IEndpointRouteBuilder builder,

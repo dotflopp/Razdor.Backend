@@ -30,9 +30,9 @@ public static class ServiceCollectionExtensions
             options.SerializerOptions.TypeInfoResolverChain.Insert(0, IdentityJsonSerializerContext.Default);
         });
 
-        collection.AddDbContext<IIdentityDbContext, IdentitySqlliteDbContext>(options =>
+        collection.AddDbContext<IIdentityDbContext, IdentityPostgreSQLContext>(options =>
         {
-            options.UseSqlite(moduleOptions.SqlConnectionString);
+            options.UseNpgsql(moduleOptions.ConnectionString);
         });
         collection.AddTransient<IUsersCounter, UsersEfCounter>();
         collection.AddTransient<IUserRepository, UserEfRepository>();

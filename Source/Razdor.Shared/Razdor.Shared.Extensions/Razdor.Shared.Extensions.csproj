@@ -8,8 +8,4 @@
         <IsTrimmable>true</IsTrimmable>
     </PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="Microsoft.NET.ILLink.Tasks" Version="9.0.4" />
-    </ItemGroup>
-
 </Project>

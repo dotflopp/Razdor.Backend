@@ -14,6 +14,8 @@ using Razdor.Signaling.Services;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
+builder.AddServiceDefaults();
+
 // Api Versioning
 builder.Services.AddApiVersioning(options =>
 {
@@ -103,7 +105,7 @@ builder.Services.AddIdentityServices(
         Convert.FromBase64String(
             "K3UA5ta52VOeTguHAgYaw+5IV4KLUlflzx3sYjy8WpnLPsmR8oYsIHewP4U7cE/JBNRR9gNdGhaflBlJcGXA6lEu8ZdL1+x9muyI1nfuivA="
         ),
-        builder.Configuration.GetConnectionString("LocalIdentity") ?? throw new NullReferenceException()
+        builder.Configuration.GetConnectionString("identitydb")
     )
 );
 

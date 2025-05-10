@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Razdor.Identity.Domain.Users;
 
-namespace Razdor.Identity.Infrastructure.DataAccess.Sql.EntityConfigurations;
+namespace Razdor.Identity.Infrastructure.DataAccess.PostgreSQL.EntityConfigurations;
 
 public class UserAccountConfiguration : IEntityTypeConfiguration<UserAccount>
 {

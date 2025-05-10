@@ -7,6 +7,15 @@ namespace Razdor.Communities.Domain.Channels;
 
 public class VoiceChannel: SyncedOverwritesChannel, IChildChannel, ICommunityChannel, IOverwritesOwner
 {
+    public const UserPermissions AvailablePermissions =
+        UserPermissions.ManageChannel
+        | UserPermissions.ViewChannel
+        | UserPermissions.Connect
+        | UserPermissions.Speak
+        | UserPermissions.MuteMembers
+        | UserPermissions.DeafenMembers
+        | UserPermissions.MoveMembers;
+    
     internal VoiceChannel(
         ulong id, 
         string name, 
@@ -14,7 +23,7 @@ public class VoiceChannel: SyncedOverwritesChannel, IChildChannel, ICommunityCha
         uint position, 
         ICommunityChannel? parent, 
         List<Overwrite>? overwrites
-    ) : base(id, name, communityId, position,ChannelType.Voice, parent, overwrites)
+    ) : base(id, name, communityId, position,ChannelType.Voice, parent, overwrites, AvailablePermissions)
     { }
 
 }

@@ -9,13 +9,12 @@ namespace Razdor.Communities.Domain.Permissions;
 /// </summary>
 public interface IRole: INamed, ISnowflakeEntity, IEntity<ulong>
 {
-    Community CommunityId { get; }
+    ulong CommunityId { get; }
     UserPermissions Permissions { get; }
     /// <summary>
     /// Указывает на то что роль можно упоминать
     /// </summary>
     bool IsMentioned { get; }
-
     /// <summary>
     /// Чем ниже число тем важнее роль, люди с более высоким приоритетом могут управлять людьми с более низким
     /// От 1, 0 зарезервирован для создателя сообщества

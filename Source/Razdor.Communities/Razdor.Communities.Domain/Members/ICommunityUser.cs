@@ -5,6 +5,8 @@ namespace Razdor.Communities.Domain.Members;
 
 public interface ICommunityUser: IUser, ISnowflakeEntity, IEntity<ulong>
 {
+    VoiceState VoiceState { get; }
+    
     /// <summary>
     /// Указывает на то что пользователь является владельцем сообщества
     /// </summary>
@@ -26,12 +28,12 @@ public interface ICommunityUser: IUser, ISnowflakeEntity, IEntity<ulong>
     IReadOnlyCollection<IRole> Roles { get; }
     
     /// <summary>
-    /// Права пользователя в сообществе на основе всех ролей
+    /// Права пользователя в сообществе на основе всех ролей, у Owner всегда право UserPermissions.Administrator
     /// </summary>
     UserPermissions CommunityPermissions { get; }
     
     /// <summary>
-    /// Наивысший приоритет (наименьшее значение среди приоритета у Roles, 0 если владелец сообщества) пользователя 
+    /// Наивысший приоритет (наименьшее значение приоритета у Roles, 0 для владелеца сообщества) пользователя 
     /// </summary>
     ulong HighestPriority { get; }
     

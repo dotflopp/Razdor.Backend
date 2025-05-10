@@ -7,6 +7,19 @@ namespace Razdor.Communities.Domain.Channels;
 
 public class MessageChannel : SyncedOverwritesChannel, IChildChannel, ICommunityChannel, IOverwritesOwner
 {
+    public const UserPermissions AvailablePermissions =
+        UserPermissions.ManageChannel
+        | UserPermissions.ViewChannel
+        | UserPermissions.SendMessage
+        | UserPermissions.ManageMessages
+        | UserPermissions.AttachFiles
+        | UserPermissions.AttachEmbed
+        | UserPermissions.UseEmoji
+        | UserPermissions.MentionEveryone
+        | UserPermissions.ManageFork
+        | UserPermissions.CreateFork
+        | UserPermissions.SendMessageInFork;
+    
     public MessageChannel(
         ulong id, 
         string name, 
@@ -14,7 +27,7 @@ public class MessageChannel : SyncedOverwritesChannel, IChildChannel, ICommunity
         uint position, 
         ICommunityChannel? parent, 
         List<Overwrite>? overwrites
-    ) : base(id, name, communityId, position, ChannelType.Message, parent, overwrites)
+    ) : base(id, name, communityId, position, ChannelType.Message, parent, overwrites, AvailablePermissions)
     {
     }
 }

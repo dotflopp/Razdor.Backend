@@ -6,7 +6,7 @@ namespace Razdor.Communities.Domain;
 
 public class Community : INamed, ISnowflakeEntity, IEntity<ulong>
 {
-    public Community(ulong id, ulong ownerId, string name, string? avatar, string description, CommunityNotificationPolicy defaultNotificationPolicy, IReadOnlyCollection<IUser> bannedUsers, IReadOnlyCollection<IRole> roles)
+    public Community(ulong id, ulong ownerId, string name, string? avatar, string description, CommunityNotificationPolicy defaultNotificationPolicy, IReadOnlyCollection<IUser> bans, IReadOnlyCollection<IRole> roles)
     {
         Id = id;
         OwnerId = ownerId;
@@ -14,7 +14,7 @@ public class Community : INamed, ISnowflakeEntity, IEntity<ulong>
         Avatar = avatar;
         Description = description;
         DefaultNotificationPolicy = defaultNotificationPolicy;
-        BannedUsers = bannedUsers;
+        Bans = bans;
         Roles = roles;
     }
 
@@ -25,7 +25,7 @@ public class Community : INamed, ISnowflakeEntity, IEntity<ulong>
     public string Description { get; }
 
     public CommunityNotificationPolicy DefaultNotificationPolicy { get; }
-    public IReadOnlyCollection<IUser> BannedUsers { get; }
+    public IReadOnlyCollection<IUser> Bans { get; }
     public IReadOnlyCollection<IRole> Roles { get; }
     
     public void Rename(string newName)

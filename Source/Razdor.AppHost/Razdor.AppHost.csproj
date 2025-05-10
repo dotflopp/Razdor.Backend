@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Razdor.Identity.MigrationService\Razdor.Identity.MigrationService.csproj" />
+    <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.MigrationService\Razdor.Identity.MigrationService.csproj" />
     <ProjectReference Include="..\Razdor.StartApp\Razdor.StartApp.csproj" />
   </ItemGroup>
 

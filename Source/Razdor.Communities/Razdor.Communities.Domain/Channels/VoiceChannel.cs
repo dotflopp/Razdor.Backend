@@ -5,16 +5,16 @@ using Razdor.Communities.Domain.Permissions;
 
 namespace Razdor.Communities.Domain.Channels;
 
-public class MessageChannel : SyncedOverwritesChannel, IChildChannel, ICommunityChannel, IOverwritesOwner
+public class VoiceChannel: SyncedOverwritesChannel, IChildChannel, ICommunityChannel, IOverwritesOwner
 {
-    public MessageChannel(
+    internal VoiceChannel(
         ulong id, 
         string name, 
         ulong communityId, 
         uint position, 
         ICommunityChannel? parent, 
         List<Overwrite>? overwrites
-    ) : base(id, name, communityId, position, ChannelType.Message, parent, overwrites)
-    {
-    }
+    ) : base(id, name, communityId, position,ChannelType.Voice, parent, overwrites)
+    { }
+
 }

@@ -10,8 +10,18 @@ public interface ICommunityChannel:
     ICommunityEntity<ulong>, 
     IOverwritesPermission
 {
+    ChannelType Type { get; }
+
     /// <summary>
     /// Позиция канала в категории
     /// </summary>
     uint Position { get; }
+}
+
+public enum ChannelType
+{
+    Category,
+    Message,
+    Voice,
+    Fork,
 }

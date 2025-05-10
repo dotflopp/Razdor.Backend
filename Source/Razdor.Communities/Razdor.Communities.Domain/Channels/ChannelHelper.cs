@@ -35,8 +35,11 @@ public static class ChannelHelper
         ulong entityId
     ){
         int overwrite = overwrites.FindIndex(x => x.TargetId == entityId);
-        if (overwrite >= 0)
-            overwrites.RemoveAt(overwrite);    
+        
+        if (overwrite < 0)
+            return;
+        
+        overwrites.RemoveAt(overwrite);    
     }
     
     public static UserPermissions CalculateUserPermissions(this IOverwritesPermission channel, ICommunityUser user)

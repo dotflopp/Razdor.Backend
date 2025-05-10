@@ -13,7 +13,7 @@ public class ForkChannel: CommunityChannel, IChildChannel, ISnowflakeEntity, IEn
         uint position,
         ICommunityChannel parent,
         List<Overwrite> overwrites
-    ) : base(id, name, communityId, position)
+    ) : base(id, name, communityId, position, ChannelType.Fork)
     {
         Parent = parent;
     }

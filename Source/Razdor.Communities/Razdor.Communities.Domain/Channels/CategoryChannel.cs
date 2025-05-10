@@ -8,12 +8,13 @@ public class CategoryChannel: CommunityChannel, ICommunityChannel, IOverwritesOw
 {
     private List<Overwrite>? _overwrites;
     
-    public CategoryChannel(
+    internal CategoryChannel(
         ulong id, 
         string name, 
         ulong communityId, 
-        uint position, List<Overwrite> overwrites
-    ) : base(id, name, communityId, position)
+        uint position, 
+        List<Overwrite> overwrites
+    ) : base(id, name, communityId, position, ChannelType.Category)
     {
         _overwrites = overwrites;
     }

@@ -1,41 +1,36 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
-using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
 
 namespace Razdor.Communities.Domain.Channels;
 
-public class VoiceCommunityChannel: CommunityChannel, ICommunityChannel, IOverwritesOwner
+public abstract class SyncedOverwritesChannel : CommunityChannel, IChildChannel, ICommunityChannel, IOverwritesOwner, IOverwritesPermission
 {
-   private List<Overwrite>? _overwrites;
+    private List<Overwrite>? _overwrites;
     
-    public VoiceCommunityChannel(
+    internal SyncedOverwritesChannel(
         ulong id, 
         string name, 
         ulong communityId, 
         uint position,
-        List<Overwrite> overwrites,
-        ICommunityChannel? parent
-    ) : base(id, name, communityId, position)
+        ChannelType type,
+        ICommunityChannel? parent,
+        List<Overwrite>? overwrites
+    ) : base(id, name, communityId, position, type)
     {
-        _overwrites = overwrites;
         Parent = parent;
+        _overwrites = overwrites;
     }
-
-    public override IReadOnlyList<Overwrite> Overwrites 
-        => IsSyncing ? Parent.Overwrites : _overwrites?.AsReadOnly() ?? ReadOnlyCollection<Overwrite>.Empty;
+    
     public ICommunityChannel? Parent { get; }
     
     [MemberNotNullWhen(true, nameof(Parent), nameof(_overwrites))]
     public bool IsSyncing => _overwrites == null && Parent != null;
-
-    [MemberNotNull(nameof(_overwrites))]
-    private void InitOverwritesIfNull()
-    {
-        _overwrites ??= (Parent != null)
-            ? Parent.Overwrites.ToList() 
-            : new List<Overwrite>();
-    }
+    
+    public override IReadOnlyList<Overwrite> Overwrites => IsSyncing 
+        ? Parent.Overwrites 
+        : _overwrites?.AsReadOnly() ?? ReadOnlyCollection<Overwrite>.Empty;
+    
 
     public void SetRolePermission(ulong roleId, OverwritePermissions permission)
     {
@@ -57,21 +52,22 @@ public class VoiceCommunityChannel: CommunityChannel, ICommunityChannel, IOverwr
 
     private void RemoveEntityPermissions(ulong entityId)
     {
+        List<Overwrite>? overwrites = _overwrites; 
+        
         if (IsSyncing)
-        {
-            List<Overwrite> overwrites = Parent.Overwrites.ToList();
-            ChannelHelper.RemoveEntityPermissions(_overwrites, entityId);
-
-            if (overwrites.Count == Parent.Overwrites.Count)
-                return;
-            
-            _overwrites = overwrites;
-            return;
-        }
+            overwrites = Parent.Overwrites.ToList();
         
-        if (_overwrites == null)
+        if (overwrites == null)
             return;
         
-        ChannelHelper.RemoveEntityPermissions(_overwrites, entityId);  
+        ChannelHelper.RemoveEntityPermissions(overwrites, entityId);
+    }
+    
+    [MemberNotNull(nameof(_overwrites))]
+    private void InitOverwritesIfNull()
+    {
+        _overwrites ??= (Parent != null)
+            ? Parent.Overwrites.ToList() 
+            : new List<Overwrite>();
     }
 }

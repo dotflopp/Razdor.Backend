@@ -42,9 +42,9 @@ public static class ChannelHelper
         overwrites.RemoveAt(overwrite);    
     }
     
-    public static UserPermissions CalculateUserPermissions(this IOverwritesPermission channel, ICommunityUser user)
+    public static UserPermissions GetUserPermissions(this IOverwritesPermission channel, ICommunityUser user)
     {
-        UserPermissions result = user.CommunityPermissions;
+        UserPermissions result = user.GetCommunityPermissions();
         HashSet<ulong> targetIds = new(user.Roles.Count() + 1);
         
         targetIds.Add(user.Id);

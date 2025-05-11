@@ -27,9 +27,9 @@ public abstract class CommunityChannel : BaseSnowflakeEntity, ICommunityChannel,
     
     public abstract IReadOnlyList<Overwrite> Overwrites { get; }
 
-    public virtual UserPermissions CalculateUserPermissions(ICommunityUser user)
+    public virtual UserPermissions GetUserPermissions(ICommunityUser user)
     {
-        return ChannelHelper.CalculateUserPermissions(this, user);
+        return ChannelHelper.GetUserPermissions(this, user);
     }
 
 }

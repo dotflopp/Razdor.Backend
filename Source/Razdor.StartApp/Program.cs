@@ -2,6 +2,7 @@ using Asp.Versioning;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.OpenApi.Models;
 using Razdor.Communities.Api;
+using Razdor.Communities.Infrastructure;
 using Razdor.Identity.Api.AuthenticationScheme;
 using Razdor.Identity.Api.Routes;
 using Razdor.Identity.Infrastructure;
@@ -9,6 +10,7 @@ using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.ServiceDefaults;
 using Razdor.Shared.Api;
 using Razdor.Shared.Api.Constraints;
+using Razdor.Shared.Module;
 using Razdor.Shared.Module.RequestSenderContext;
 using Razdor.Signaling.Routing;
 using Razdor.Signaling.Services;
@@ -110,13 +112,22 @@ builder.Services.AddIdentityServices(
     )
 );
 
+string? communityDb = builder.Configuration.GetConnectionString("communitydb");
+ArgumentNullException.ThrowIfNull(communityDb);
+
+builder.Services.AddCommunityServices(
+    new CommunitiesOptions(
+        communityDb,
+        "communitydb"
+    )    
+);
+
 // SignalingServices
 builder.Services.AddSignalingServices(
     builder.Configuration.GetValue<string>(
         "ASPNETCORE_URLS"
     ) + "/signaling"
 );
-
 
 var app = builder.Build();
 

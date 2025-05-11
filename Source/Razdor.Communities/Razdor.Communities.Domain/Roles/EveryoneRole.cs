@@ -2,7 +2,7 @@
 
 namespace Razdor.Communities.Domain.Roles;
 
-public class EveryoneRole : IRole
+public class EveryoneRole : Role
 {
     /// <summary>
     /// Права которые выдаются при создании роли Everyone
@@ -20,19 +20,7 @@ public class EveryoneRole : IRole
         | UserPermissions.Connect
         | UserPermissions.Speak;
 
-public EveryoneRole(ulong communityId, UserPermissions permissions, bool isMentioned, uint priority, string name)
-    {
-        CommunityId = communityId;
-        Permissions = permissions;
-        IsMentioned = isMentioned;
-        Priority = priority;
-        Name = name;
-    }
-
-    public ulong Id => CommunityId;
-    public string Name { get; }
-    public ulong CommunityId { get; }
-    public UserPermissions Permissions { get; }
-    public bool IsMentioned { get; }
-    public uint Priority { get; }
+    public EveryoneRole(ulong communityId, UserPermissions permissions, uint priority)
+        : base(communityId, "Everyone", communityId, permissions, true, priority)
+    { }
 }

@@ -17,6 +17,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\Razdor.Voices\Razdor.Signaling.Internal\Razdor.Signaling.Internal.csproj"/>
         <ProjectReference Include="..\Razdor.Communities.Domain\Razdor.Communities.Domain.csproj"/>
+        <ProjectReference Include="..\Razdor.Communities.Module\Razdor.Communities.Module.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Razdor.Identity.Api;
 using Razdor.Identity.Domain;
 using Razdor.Identity.Domain.Users;
-using Razdor.Identity.Infrastructure.DataAccess.PostgreSQL;
+using Razdor.Identity.Infrastructure.DataAccess;
 using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Identity.Module.Contracts;
 using Razdor.Identity.Module.DataAccess;

@@ -12,8 +12,7 @@ public class ForkChannel: CommunityChannel, IChildChannel, ISnowflakeEntity, IEn
         string name, 
         ulong communityId, 
         uint position,
-        ICommunityChannel parent,
-        List<Overwrite> overwrites
+        ICommunityChannel parent
     ) : base(id, name, communityId, position, ChannelType.Fork)
     {
         Parent = parent;
@@ -23,9 +22,9 @@ public class ForkChannel: CommunityChannel, IChildChannel, ISnowflakeEntity, IEn
     public ICommunityChannel Parent { get; }
     public bool IsSyncing => true;
 
-    public override UserPermissions CalculateUserPermissions(ICommunityUser user)
+    public override UserPermissions GetUserPermissions(ICommunityUser user)
     { 
-        UserPermissions permissions = base.CalculateUserPermissions(user);
+        UserPermissions permissions = base.GetUserPermissions(user);
         
         if (permissions.HasFlag(UserPermissions.SendMessageInFork))
             permissions |= UserPermissions.SendMessage;

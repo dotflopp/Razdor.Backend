@@ -1,10 +1,8 @@
-﻿using Mediator;
-using Microsoft.EntityFrameworkCore;
-using Razdor.Identity.Domain.Users;
-using Razdor.Identity.Infrastructure.DataAccess.PostgreSQL.EntityConfigurations;
+﻿using Microsoft.EntityFrameworkCore;
+using Razdor.Identity.Infrastructure.DataAccess.EntityConfigurations;
 using Razdor.Identity.Module.DataAccess;
 
-namespace Razdor.Identity.Infrastructure.DataAccess.PostgreSQL;
+namespace Razdor.Identity.Infrastructure.DataAccess;
 
 public class IdentityPostgreSqlContext(
     DbContextOptions<IdentityPostgreSqlContext> options

@@ -5,33 +5,35 @@ using Razdor.Shared.Domain;
 
 namespace Razdor.Communities.Domain;
 
-public class Community : INamed, ISnowflakeEntity, IEntity<ulong>
+public class Community : BaseSnowflakeEntity, INamed, ISnowflakeEntity, IEntity<ulong>
 {
-    public Community(ulong id, ulong ownerId, string name, string? avatar, string description, CommunityNotificationPolicy defaultNotificationPolicy, IReadOnlyCollection<IUser> bans, IReadOnlyCollection<IRole> roles)
+    public const int NameMaxLength = 100;
+    public const int DescriptionMaxLength = 400;
+    
+    private readonly List<Role> _roles;
+    
+    public Community(
+        ulong id, 
+        ulong ownerId, 
+        string name, 
+        string? avatar, 
+        string? description, 
+        CommunityNotificationPolicy defaultNotificationPolicy, 
+        List<Role> roles
+    ) : base(id)
     {
-        Id = id;
         OwnerId = ownerId;
         Name = name;
         Avatar = avatar;
         Description = description;
         DefaultNotificationPolicy = defaultNotificationPolicy;
-        Bans = bans;
-        Roles = roles;
+        _roles = roles;
     }
-
-    public ulong Id { get; }
     public ulong OwnerId { get; }
     public string Name { get; }
     public string? Avatar { get; }
-    public string Description { get; }
+    public string? Description { get; }
 
     public CommunityNotificationPolicy DefaultNotificationPolicy { get; }
-    public IReadOnlyCollection<IUser> Bans { get; }
-    public IReadOnlyCollection<IRole> Roles { get; }
-    
-    public void Rename(string newName)
-    {
-        throw new NotImplementedException();
-    }
-
+    public IReadOnlyCollection<Role> Roles => _roles.AsReadOnly();
 }

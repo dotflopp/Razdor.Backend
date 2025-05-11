@@ -6,5 +6,5 @@ public interface IOverwritesPermission
 {
     IReadOnlyList<Overwrite> Overwrites { get; }
     
-    UserPermissions CalculateUserPermissions(ICommunityUser user);
+    UserPermissions GetUserPermissions(ICommunityUser user);
 }

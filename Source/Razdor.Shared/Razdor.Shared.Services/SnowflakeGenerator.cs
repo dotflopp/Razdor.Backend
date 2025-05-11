@@ -1,4 +1,4 @@
-﻿namespace Razdor.Identity.Module.Auth.AccessTokens;
+﻿namespace Razdor.Shared.Module;
 
 /// <summary>
 ///     UNIX MILLISECONDS sizeof(ulong) - WorkerIdSize - IncrementSize | worker ID WorkerIdSize | incremented IncrementSize

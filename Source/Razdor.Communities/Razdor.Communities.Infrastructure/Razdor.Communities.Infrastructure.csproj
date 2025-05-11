@@ -10,4 +10,8 @@
       <ProjectReference Include="..\Razdor.Communities.Module\Razdor.Communities.Module.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MongoDB.EntityFrameworkCore" Version="9.0.0" />
+    </ItemGroup>
+
 </Project>

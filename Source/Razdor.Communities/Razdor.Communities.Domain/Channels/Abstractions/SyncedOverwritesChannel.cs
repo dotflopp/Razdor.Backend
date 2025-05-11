@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel.Design;
 using System.Diagnostics.CodeAnalysis;
 using Razdor.Communities.Domain.Permissions;
 
@@ -7,7 +8,7 @@ namespace Razdor.Communities.Domain.Channels.Abstractions;
 public abstract class SyncedOverwritesChannel : CommunityChannel, IChildChannel, ICommunityChannel, IOverwritesOwner, IOverwritesPermission
 {
     private List<Overwrite>? _overwrites;
-    private UserPermissions _availablePermissions;
+    private readonly UserPermissions _availablePermissions;
     
     internal SyncedOverwritesChannel(
         ulong id, 
@@ -35,7 +36,7 @@ public abstract class SyncedOverwritesChannel : CommunityChannel, IChildChannel,
         : _overwrites?.AsReadOnly() ?? ReadOnlyCollection<Overwrite>.Empty;
     
 
-    public void SetRolePermission(ulong roleId, OverwritePermissions permission)
+    public virtual void SetRolePermission(ulong roleId, OverwritePermissions permission)
     {
         InitOverwritesIfNull();
         permission = new(
@@ -45,7 +46,7 @@ public abstract class SyncedOverwritesChannel : CommunityChannel, IChildChannel,
         ChannelHelper.SetRolePermissions(_overwrites, roleId, permission);
     }
 
-    public void SetUserPermission(ulong userId, OverwritePermissions permission)
+    public virtual void SetUserPermission(ulong userId, OverwritePermissions permission)
     {
         InitOverwritesIfNull();
         permission = new(
@@ -56,10 +57,10 @@ public abstract class SyncedOverwritesChannel : CommunityChannel, IChildChannel,
         ChannelHelper.SetUserPermissions(_overwrites, userId, permission);
     }
 
-    public void RemoveUserPermission(ulong userId)
+    public virtual void RemoveUserPermission(ulong userId)
         => RemoveEntityPermissions(userId);
 
-    public void RemoveRolePermission(ulong roleId)
+    public virtual void RemoveRolePermission(ulong roleId)
         => RemoveEntityPermissions(roleId);
 
     private void RemoveEntityPermissions(ulong entityId)

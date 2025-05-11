@@ -6,4 +6,7 @@ public record VoiceState(
     bool IsMuted,
     bool IsSelfDeafened,
     bool IsSelfMuted
-);
+)
+{
+    public static VoiceState Default { get; } = new VoiceState(null, false, false, false, false);
+}

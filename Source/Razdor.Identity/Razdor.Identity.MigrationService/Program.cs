@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Razdor.Identity.Infrastructure.DataAccess.PostgreSQL;
+using Razdor.Identity.Infrastructure.DataAccess;
 using Razdor.Identity.Migrations;
 using Razdor.Identity.Module.DataAccess;
 using Razdor.ServiceDefaults;

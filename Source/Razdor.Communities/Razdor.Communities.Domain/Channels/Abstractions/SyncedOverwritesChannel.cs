@@ -2,7 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using Razdor.Communities.Domain.Permissions;
 
-namespace Razdor.Communities.Domain.Channels;
+namespace Razdor.Communities.Domain.Channels.Abstractions;
 
 public abstract class SyncedOverwritesChannel : CommunityChannel, IChildChannel, ICommunityChannel, IOverwritesOwner, IOverwritesPermission
 {

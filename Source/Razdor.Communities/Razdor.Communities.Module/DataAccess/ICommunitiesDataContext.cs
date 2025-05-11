@@ -1,12 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Razdor.Communities.Domain;
 using Razdor.Communities.Domain.Channels;
+using Razdor.Communities.Domain.Channels.Abstractions;
 using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Roles;
 
-namespace Razdor.Communities.Services;
+namespace Razdor.Communities.Services.DataAccess;
 
-public interface ICommunitiesDbContext
+public interface ICommunitiesDataContext
 {
     DbSet<CommunityChannel> Channels { get; }
     DbSet<VoiceChannel> Voices { get; }

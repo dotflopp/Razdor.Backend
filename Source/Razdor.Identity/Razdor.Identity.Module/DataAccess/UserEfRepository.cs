@@ -1,12 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Mediator;
+using Microsoft.EntityFrameworkCore;
 using Razdor.Identity.Domain.Users;
 using Razdor.Shared.Domain.Repository;
+using Razdor.Shared.Module.DataAccess;
 
 namespace Razdor.Identity.Module.DataAccess;
 
-public class UserEfRepository(IIdentityDbContext context) : IUserRepository
+public class UserEfRepository(IdentityDbContext context, IMediator mediator) : IUserRepository
 {
-    public IUnitOfWork UnitOfWork => context;
+    public IUnitOfWork UnitOfWork { get; } = new UnitOfWork(context, mediator);
 
     public UserAccount Add(UserAccount user)
     {

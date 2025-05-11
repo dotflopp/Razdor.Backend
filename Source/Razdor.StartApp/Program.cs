@@ -6,6 +6,7 @@ using Razdor.Identity.Api.AuthenticationScheme;
 using Razdor.Identity.Api.Routes;
 using Razdor.Identity.Infrastructure;
 using Razdor.Identity.Module.Auth.AccessTokens;
+using Razdor.ServiceDefaults;
 using Razdor.Shared.Api;
 using Razdor.Shared.Api.Constraints;
 using Razdor.Shared.Module.RequestSenderContext;

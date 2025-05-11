@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Razdor.Identity.Api;
 using Razdor.Identity.Domain;
 using Razdor.Identity.Domain.Users;
-using Razdor.Identity.Infrastructure.DataAccess.Sql;
+using Razdor.Identity.Infrastructure.DataAccess.PostgreSQL;
 using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Identity.Module.Contracts;
 using Razdor.Identity.Module.DataAccess;
@@ -30,7 +30,7 @@ public static class ServiceCollectionExtensions
             options.SerializerOptions.TypeInfoResolverChain.Insert(0, IdentityJsonSerializerContext.Default);
         });
 
-        collection.AddDbContext<IIdentityDbContext, IdentityPostgreSQLContext>(options =>
+        collection.AddDbContext<IdentityDbContext, IdentityPostgreSqlContext>(options =>
         {
             options.UseNpgsql(moduleOptions.ConnectionString);
         });

@@ -4,7 +4,7 @@ using Razdor.Identity.Domain.Users;
 
 namespace Razdor.Identity.Module.DataAccess;
 
-public class UsersEfCounter(IIdentityDbContext context): IUsersCounter
+public class UsersEfCounter(IdentityDbContext context): IUsersCounter
 {
     public Task<int> CountUserWithEmailAsync(string email)
     {

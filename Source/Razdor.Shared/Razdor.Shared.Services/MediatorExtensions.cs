@@ -1,8 +1,9 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Razdor.Shared.Domain;
+using Razdor.Shared.Module.DataAccess;
 
-namespace Razdor.Shared.Infrastructure;
+namespace Razdor.Shared.Module;
 
 public static class MediatorExtensions
 {

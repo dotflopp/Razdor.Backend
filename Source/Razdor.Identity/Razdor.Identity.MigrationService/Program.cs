@@ -5,31 +5,28 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Razdor.Identity.Infrastructure.DataAccess.Sql;
+using Razdor.Identity.Infrastructure.DataAccess.PostgreSQL;
 using Razdor.Identity.Migrations;
 using Razdor.Identity.Module.DataAccess;
+using Razdor.ServiceDefaults;
 
 var builder = Host.CreateApplicationBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.Services.AddMediator(options =>
-    options.ServiceLifetime = ServiceLifetime.Transient
-);
-
 builder.Services
     .AddOpenTelemetry()
     .WithTracing(tracing => 
-        tracing.AddSource(Worker<IdentityPostgreSQLContext>.ActivitySourceName)
+        tracing.AddSource(Worker<IdentityDbContext>.ActivitySourceName)
     );
 
-builder.Services.AddDbContext<IIdentityDbContext, IdentityPostgreSQLContext>(options =>
+builder.Services.AddDbContext<IdentityDbContext, IdentityPostgreSqlContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("identitydb"));
 });
 
 
-builder.Services.AddHostedService<Worker<IdentityPostgreSQLContext>>();
+builder.Services.AddHostedService<Worker<IdentityPostgreSqlContext>>();
 
 var host = builder.Build();
 host.Run();

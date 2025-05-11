@@ -1,8 +1,8 @@
 ﻿using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
-using Razdor.Shared.Domain;
+using Razdor.Communities.Domain.Roles;
 
-namespace Razdor.Communities.Domain.Channels;
+namespace Razdor.Communities.Domain.Channels.Abstractions;
 
 public static class ChannelHelper
 {

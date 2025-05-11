@@ -10,7 +10,7 @@ using Razdor.Shared.Module.RequestSenderContext;
 namespace Razdor.Identity.Module.Users.Queries;
 
 public class GetSelfUserQueryHandler(
-    IIdentityDbContext dbSqlContext,
+    IdentityDbContext dbSqlContext,
     IRequestSenderContext sender
 ) : IQueryHandler<GetSelfUserQuery, SelfUserViewModel>
 {

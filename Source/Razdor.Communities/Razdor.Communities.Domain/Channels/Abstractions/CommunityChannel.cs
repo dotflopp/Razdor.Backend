@@ -2,7 +2,7 @@ using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Shared.Domain;
 
-namespace Razdor.Communities.Domain.Channels;
+namespace Razdor.Communities.Domain.Channels.Abstractions;
 
 public abstract class CommunityChannel : BaseSnowflakeEntity, ICommunityChannel, ISnowflakeEntity, IEntity<ulong>
 {

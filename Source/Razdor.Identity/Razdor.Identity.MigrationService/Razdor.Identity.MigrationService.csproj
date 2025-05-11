@@ -9,11 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Mediator.Abstractions" Version="3.0.0-preview.64" />
-      <PackageReference Include="Mediator.SourceGenerator" Version="3.0.0-preview.64">
-        <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      </PackageReference>
       <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.4" />
     </ItemGroup>
 

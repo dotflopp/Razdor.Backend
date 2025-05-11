@@ -1,7 +1,4 @@
-﻿using Razdor.Communities.Domain.Members;
-using Razdor.Communities.Domain.Permissions;
-
-namespace Razdor.Communities.Domain.Channels;
+﻿namespace Razdor.Communities.Domain.Channels.Abstractions;
 
 public interface IChildChannel: ICommunityChannel
 {

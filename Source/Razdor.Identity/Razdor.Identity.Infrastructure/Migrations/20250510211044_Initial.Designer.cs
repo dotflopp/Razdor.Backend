@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using Razdor.Identity.Infrastructure.DataAccess.Sql;
+using Razdor.Identity.Infrastructure.DataAccess.PostgreSQL;
 
 #nullable disable
 
 namespace Razdor.Identity.Infrastructure.Migrations
 {
-    [DbContext(typeof(IdentityPostgreSQLContext))]
+    [DbContext(typeof(IdentityPostgreSqlContext))]
     [Migration("20250510211044_Initial")]
     partial class Initial
     {

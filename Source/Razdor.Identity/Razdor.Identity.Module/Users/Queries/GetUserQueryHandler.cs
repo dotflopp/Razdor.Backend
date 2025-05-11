@@ -8,7 +8,7 @@ using Razdor.Identity.Module.Users.ViewModels;
 namespace Razdor.Identity.Module.Users.Queries;
 
 public class GetUserQueryHandler(
-    IIdentityDbContext dbSqlContext
+    IdentityDbContext dbSqlContext
 ) : IQueryHandler<GetUserQuery, UserPreviewModel>
 {
     public async ValueTask<UserPreviewModel> Handle(GetUserQuery query, CancellationToken cancellationToken)

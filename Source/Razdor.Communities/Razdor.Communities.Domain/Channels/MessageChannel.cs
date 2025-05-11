@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using Razdor.Communities.Domain.Channels.Abstractions;
 using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
 

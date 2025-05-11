@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Hosting;
 using Projects;
 
 var builder = DistributedApplication.CreateBuilder(args);
@@ -6,14 +7,12 @@ var postgres = builder.AddPostgres("postgres")
     .WithDataVolume()
     .WithPgAdmin();
 
-var identityDb = postgres.AddDatabase("identitydb");
-
 var mongo = builder.AddMongoDB("mongo")
-    .WithMongoExpress()
-    .WithDataVolume();
+    .WithDataVolume()
+    .WithMongoExpress();
 
+var identityDb = postgres.AddDatabase("identitydb");
 var communityDb = mongo.AddDatabase("communitydb");
-
 
 var identityMigrations = builder.AddProject<Razdor_Identity_MigrationService>("identity-migrations")
     .WithReference(identityDb)

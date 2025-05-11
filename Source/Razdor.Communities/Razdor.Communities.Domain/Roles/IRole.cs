@@ -1,6 +1,7 @@
-﻿using Razdor.Shared.Domain;
+﻿using Razdor.Communities.Domain.Permissions;
+using Razdor.Shared.Domain;
 
-namespace Razdor.Communities.Domain.Permissions;
+namespace Razdor.Communities.Domain.Roles;
 
 /// <summary>
 /// Без ролей у пользователя нету разрешений

@@ -1,4 +1,5 @@
-﻿using Razdor.Communities.Domain.Members;
+﻿using Razdor.Communities.Domain.Channels.Abstractions;
+using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Shared.Domain;
 

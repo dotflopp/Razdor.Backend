@@ -6,7 +6,7 @@ using Razdor.Communities.Domain.Permissions;
 
 namespace Razdor.Communities.Domain.Channels;
 
-public class MessageChannel : SyncedOverwritesChannel, IChildChannel, ICommunityChannel, IOverwritesOwner
+public class TextChannel : OverwritesPermissionChannel, IOverwritesOwner
 {
     public const UserPermissions AvailablePermissions =
         UserPermissions.ManageChannel
@@ -21,14 +21,19 @@ public class MessageChannel : SyncedOverwritesChannel, IChildChannel, ICommunity
         | UserPermissions.CreateFork
         | UserPermissions.SendMessageInFork;
     
-    public MessageChannel(
+    
+    /// <summary>
+    /// EF constructor
+    /// </summary>
+    private TextChannel(): this(0, null!, 0, 0, 0, null) { }
+
+    internal TextChannel(
         ulong id, 
         string name, 
         ulong communityId, 
         uint position, 
-        ICommunityChannel? parent, 
+        ulong parentId, 
         List<Overwrite>? overwrites
-    ) : base(id, name, communityId, position, ChannelType.Message, parent, overwrites, AvailablePermissions)
-    {
-    }
+    ) : base(id, name, communityId, position, ChannelType.TextChannel, parentId, overwrites, AvailablePermissions)
+    { }
 }

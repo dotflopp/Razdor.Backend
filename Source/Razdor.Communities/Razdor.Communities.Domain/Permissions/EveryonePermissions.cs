@@ -2,7 +2,11 @@
 
 namespace Razdor.Communities.Domain.Roles;
 
-public class EveryoneRole : Role
+/// <summary>
+/// Всегда имеет такой же ID как у Сообщества
+/// Идет по умолчанию как роль каждого пользователя в сообществе
+/// </summary>
+public class EveryonePermissions(UserPermissions permissions, uint priority)
 {
     /// <summary>
     /// Права которые выдаются при создании роли Everyone
@@ -20,7 +24,8 @@ public class EveryoneRole : Role
         | UserPermissions.Connect
         | UserPermissions.Speak;
 
-    public EveryoneRole(ulong communityId, UserPermissions permissions, uint priority)
-        : base(communityId, "Everyone", communityId, permissions, true, priority)
-    { }
+    public UserPermissions Permissions { get; private set; } = permissions;
+    public uint Priority { get; private set; } = priority;
+
+    public static EveryonePermissions Default { get; } = new(InitialPermissions, 1);
 }

@@ -1,34 +1,38 @@
-﻿using Razdor.Communities.Domain.Channels.Abstractions;
+﻿using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using Razdor.Communities.Domain.Channels.Abstractions;
 using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Shared.Domain;
 
 namespace Razdor.Communities.Domain.Channels;
 
-public class ForkChannel: CommunityChannel, IChildChannel, ISnowflakeEntity, IEntity<ulong>
+public class ForkChannel: CommunityChannel, IEntity<ulong>
 {
+    /// <summary>
+    /// EF constructor
+    /// </summary>
+    private ForkChannel(): this(0, null!, 0, 0, 0) { }
+
     internal ForkChannel(
-        ulong id, 
-        string name, 
-        ulong communityId, 
+        ulong id,
+        string name,
+        ulong communityId,
         uint position,
-        ICommunityChannel parent
-    ) : base(id, name, communityId, position, ChannelType.Fork)
+        ulong parentId
+    ) : base(id, name, communityId, parentId, position, ChannelType.ForkChannel)
+    { }
+    public override bool IsSyncing => true;
+    public override IReadOnlyList<Overwrite> Overwrites => ReadOnlyCollection<Overwrite>.Empty;
+
+    public override UserPermissions GetOverwrites(CommunityMember member, UserPermissions inheritedPermissions)
     {
-        Parent = parent;
-    }
-
-    public override IReadOnlyList<Overwrite> Overwrites => Parent.Overwrites;
-    public ICommunityChannel Parent { get; }
-    public bool IsSyncing => true;
-
-    public override UserPermissions GetUserPermissions(ICommunityUser user)
-    { 
-        UserPermissions permissions = base.GetUserPermissions(user);
+        UserPermissions result = base.GetOverwrites(member, inheritedPermissions);
         
-        if (permissions.HasFlag(UserPermissions.SendMessageInFork))
-            permissions |= UserPermissions.SendMessage;
+        if (result.HasFlag(UserPermissions.SendMessageInFork))
+            return result | UserPermissions.SendMessage;
         
-        return permissions;
+        return result;
     }
 }
+

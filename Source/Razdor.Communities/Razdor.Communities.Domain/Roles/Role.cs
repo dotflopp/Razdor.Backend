@@ -10,11 +10,11 @@ public class Role(
     UserPermissions permissions, 
     bool isMentioned, 
     uint priority
-) : BaseSnowflakeEntity(id), IRole
+) : BaseSnowflakeEntity(id)
 {
-    public string Name { get; } = name;
-    public ulong CommunityId { get; } = communityId;
-    public UserPermissions Permissions { get; } = permissions;
-    public bool IsMentioned { get; } = isMentioned;
-    public uint Priority { get; } = priority;
+    public string Name { get; private set; } = name;
+    public ulong CommunityId { get; private set; } = communityId;
+    public UserPermissions Permissions { get; private set; } = permissions;
+    public bool IsMentioned { get; private set; } = isMentioned;
+    public uint Priority { get; private set; } = priority;
 }

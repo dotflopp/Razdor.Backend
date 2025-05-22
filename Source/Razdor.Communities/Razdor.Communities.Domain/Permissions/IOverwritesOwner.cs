@@ -5,8 +5,8 @@ namespace Razdor.Communities.Domain.Permissions;
 
 public interface IOverwritesOwner : IOverwritesPermission
 {
-    void SetRolePermission(ulong roleId, OverwritePermissions permission);
-    void SetUserPermission(ulong userId, OverwritePermissions permission);
-    void RemoveUserPermission(ulong userId);
-    void RemoveRolePermission(ulong roleId);
+    void SetRolePermission(ulong roleId, OverwritePermissions permission, List<Overwrite>? inherited);
+    void SetUserPermission(ulong userId, OverwritePermissions permission, List<Overwrite>? inherited);
+    void RemoveUserPermission(ulong userId, List<Overwrite>? inherited);
+    void RemoveRolePermission(ulong roleId, List<Overwrite>? inherited);
 }

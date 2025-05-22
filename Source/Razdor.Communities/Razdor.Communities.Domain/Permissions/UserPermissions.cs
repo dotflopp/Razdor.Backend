@@ -105,4 +105,8 @@ public enum UserPermissions : ulong
     /// Позволяет отправлять сообщения в ответвление
     /// </summary>
     SendMessageInFork = 0x10000,
+    /// <summary>
+    /// Для ленивого вычисления прав создателя сообщества
+    /// </summary>
+    All = ulong.MaxValue
 }

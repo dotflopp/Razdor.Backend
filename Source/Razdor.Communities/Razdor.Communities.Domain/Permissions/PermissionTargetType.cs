@@ -1,6 +1,6 @@
 ﻿namespace Razdor.Communities.Domain.Permissions;
 
-public enum PermissionTarget
+public enum PermissionTargetType
 {
     User,
     Role

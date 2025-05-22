@@ -5,18 +5,24 @@ using Razdor.Communities.Domain.Permissions;
 
 namespace Razdor.Communities.Domain.Channels;
 
-public class CategoryChannel: SyncedOverwritesChannel, ICommunityChannel, IOverwritesOwner, IOverwritesPermission
+public class CategoryChannel: OverwritesPermissionChannel
 {
     public const UserPermissions AvailablePermissions = 
-        MessageChannel.AvailablePermissions 
+        TextChannel.AvailablePermissions 
         | VoiceChannel.AvailablePermissions;
+    
+    /// <summary>
+    /// EF constructor
+    /// </summary>
+    private CategoryChannel(): this(0, null!, 0, 0, 0, null) { }
     
     internal CategoryChannel(
         ulong id, 
         string name, 
         ulong communityId, 
         uint position, 
+        ulong parentId, 
         List<Overwrite>? overwrites
-    ) : base(id, name, communityId, position,ChannelType.Voice, null, overwrites, AvailablePermissions)
+    ) : base(id, name, communityId, position, ChannelType.CategoryChannel, parentId, overwrites, AvailablePermissions)
     { }
 }

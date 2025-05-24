@@ -6,7 +6,7 @@ namespace Razdor.Shared.Domain.Exceptions;
 public enum ErrorCode : ulong
 {
     Unauthorized,
-    Forbidden,
+    AccessForbidden,
 
     //Login and Signup
     InvalidPasswordOrEmail,
@@ -20,5 +20,5 @@ public enum ErrorCode : ulong
     //Not Found errors
     UserNotFound,
 
-    NonExistentRoute
+    NonExistentRoute,
 }

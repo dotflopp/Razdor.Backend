@@ -76,7 +76,7 @@ builder.Services.AddSwaggerGen(options =>
 
 // Mediator
 builder.Services.AddMediator(options =>
-    options.ServiceLifetime = ServiceLifetime.Transient
+    options.ServiceLifetime = ServiceLifetime.Scoped
 );
 
 // SignalR
@@ -102,13 +102,16 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddSingleton<IRequestSenderContext, RequestSenderContextAccessor>();
 
 // Identity services
+string? identityDb = builder.Configuration.GetConnectionString("identitydb");
+ArgumentNullException.ThrowIfNull(identityDb);
+
 builder.Services.AddIdentityServices(
     new IdentityModuleOptions(
         new DateTime(2025, 1, 1),
         Convert.FromBase64String(
             "K3UA5ta52VOeTguHAgYaw+5IV4KLUlflzx3sYjy8WpnLPsmR8oYsIHewP4U7cE/JBNRR9gNdGhaflBlJcGXA6lEu8ZdL1+x9muyI1nfuivA="
         ),
-        builder.Configuration.GetConnectionString("identitydb")
+        identityDb        
     )
 );
 

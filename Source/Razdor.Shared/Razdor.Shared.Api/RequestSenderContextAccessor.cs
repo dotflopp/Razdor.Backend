@@ -7,7 +7,7 @@ public class RequestSenderContextAccessor(IHttpContextAccessor httpContextAccess
 {
     private UserClaims? _user;
 
-    public UserClaims? User
+    public UserClaims User
     {
         get
         {
@@ -15,6 +15,10 @@ public class RequestSenderContextAccessor(IHttpContextAccessor httpContextAccess
                 return _user;
 
             _user = ExtractUserClaims();
+
+            if (_user == null)
+                throw new InvalidOperationException("There may be no authorization check, or an middleware that adds claims is not registered.");
+                
             return _user;
         }
     }

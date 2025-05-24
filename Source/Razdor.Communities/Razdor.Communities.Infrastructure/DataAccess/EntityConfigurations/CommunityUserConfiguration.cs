@@ -8,32 +8,27 @@ using Razdor.Communities.Infrastructure.DataAccess.EntityConfigurations.Channels
 
 namespace Razdor.Communities.Infrastructure.DataAccess.EntityConfigurations;
 
-public record UserRole(
-    ulong RoleId,
-    ulong UserId,
-    CommunityUser User,
-    Role Role
-);
-
-public class CommunityUserConfiguration: IEntityTypeConfiguration<CommunityUser>
+public class CommunityUserConfiguration: IEntityTypeConfiguration<CommunityMember>
 {
-    public void Configure(EntityTypeBuilder<CommunityUser> builder)
+    public void Configure(EntityTypeBuilder<CommunityMember> builder)
     {
         builder.ToCollection(CollectionNames.CommunityUsers);
         
-        builder.HasKey(x => x.Id);
-        builder.HasIndex(x => x.CommunityId);
+        builder.Ignore(x => x.DomainEvents);
 
-        builder.Ignore(x => x.Roles);
-        builder.Property<List<Role>>("_roles")
-            .HasElementName(nameof(CommunityUser.Roles));
-        
-        builder.HasMany<Role>("_roles")
-            .WithMany()
-            .UsingEntity<UserRole>(
-                left => left.HasOne(x => x.Role).WithMany().HasForeignKey(x => x.RoleId),
-                right => right.HasOne(x=>x.User).WithMany().HasForeignKey(x => x.UserId),
-                join => join.HasKey(x => new {x.UserId, x.RoleId} )
-            );
+        builder.HasKey(x => new { UserId = x.Id, x.CommunityId });
+
+        builder.Ignore(x => x.DomainEvents);
+        builder.Ignore(x => x.IsTransient);
+
+        builder.Ignore(x => x.RoleIds);
+        builder.Property<List<ulong>>("_roleIds")
+            .HasElementName(nameof(CommunityMember.RoleIds));
+
+        builder.OwnsOne(x => x.CommunityProfile);
+        builder.OwnsOne(x => x.VoiceState, ownedBuilder =>
+        {
+            ownedBuilder.HasIndex(x => x.ChannelId);
+        });
     }
 }

@@ -6,17 +6,10 @@ namespace Razdor.Identity.Module.DataAccess;
 
 public class UsersEfCounter(IdentityDbContext context): IUsersCounter
 {
-    public Task<int> CountUserWithEmailAsync(string email)
+    public Task<int> CountUserWithIdentityNameOrEmail(string identityName, string email)
     {
         return context.UserAccounts
-            .Where(x => x.Email == email)
-            .CountAsync();
-    }
-
-    public Task<int> CountUserWithIdentityName(string identityName)
-    {
-        return context.UserAccounts
-            .Where(x => x.IdentityName == identityName)
+            .Where(x => x.IdentityName == identityName || x.Email == email)
             .CountAsync();
     }
 }

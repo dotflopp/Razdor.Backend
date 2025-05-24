@@ -2,13 +2,13 @@
 
 namespace Razdor.Shared.Domain;
 
-public abstract class BaseAggregateRootEntity<TId>(
-    TId id
-) : IAggregateRoot, IEntity<TId>
+public abstract class BaseSnowflakeEntity(
+    ulong id
+) : IAggregateRoot, IEntity<ulong>
 {
     private List<IDomainEvent>? _domainEvents;
-    public TId Id { get; protected set; } = id;
-    public bool IsTransient => Id is null;
+    public ulong Id { get; protected set; } = id;
+    public bool IsTransient => Id == 0;
 
     public IReadOnlyCollection<IDomainEvent> DomainEvents =>
         _domainEvents?.AsReadOnly() ?? ReadOnlyCollection<IDomainEvent>.Empty;

@@ -2,6 +2,5 @@
 
 public interface IUsersCounter
 {
-    Task<int> CountUserWithEmailAsync(string email);
-    Task<int> CountUserWithIdentityName(string identityName);
+    Task<int> CountUserWithIdentityNameOrEmail(string identityName, string email);
 }

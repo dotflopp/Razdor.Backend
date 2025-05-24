@@ -21,6 +21,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Communities\Commands\Rules\" />
       <Folder Include="Communities\Commands\ViewModels\" />
     </ItemGroup>
 

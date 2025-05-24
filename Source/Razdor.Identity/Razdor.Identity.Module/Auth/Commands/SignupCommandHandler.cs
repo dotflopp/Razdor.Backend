@@ -3,8 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Razdor.Identity.Domain;
 using Razdor.Identity.Domain.Users;
+using Razdor.Identity.Domain.Users.Rules;
 using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Identity.Module.Auth.Commands.ViewModels;
+using Razdor.Shared.Domain.Rules;
 using Razdor.Shared.Module;
 
 namespace Razdor.Identity.Module.Auth.Commands;
@@ -20,7 +22,7 @@ public class SignupCommandHandler(
 {
     public async ValueTask<AccessToken> Handle(SignupCommand command, CancellationToken cancellationToken)
     {
-        UserAccount user = await UserAccount.RegisterNew(
+        UserAccount user = UserAccount.RegisterNew(
             idGenerator.Next(),
             command.IdentityName,
             nickname: null,
@@ -29,6 +31,10 @@ public class SignupCommandHandler(
             hashedPassword: null,
             counter: counter,
             time: timeProvider
+        );
+        
+        await RuleValidationHelper.ThrowIfBrokenAsync(
+            new IdentityNameAndEmailMustBeUnique(counter, user.IdentityName, user.Email)
         );
 
         user.ChangePasswordHash(

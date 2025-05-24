@@ -5,7 +5,7 @@ namespace Razdor.Shared.Domain.Rules;
 
 public static class RuleValidationHelper
 {
-    public static async Task ThrowIfBrokenAsync(params IEnumerable<IBusinessRule> rules)
+    public static async Task ThrowIfBrokenAsync(params IEnumerable<IBusinessRuleAsyncValidator> rules)
     {
         foreach (var rule in rules)
         {
@@ -15,7 +15,15 @@ public static class RuleValidationHelper
             }
         }
     }
-
-    public static Task ThrowIfBrokenAsync<TId>(this IEntity<TId> entity, params IEnumerable<IBusinessRule> rules)
-        => ThrowIfBrokenAsync(rules);
+    
+    public static void ThrowIfBroken(params IEnumerable<IBusinessRuleValidator> rules)
+    {
+        foreach (var rule in rules)
+        {
+            if (rule.IsBroken())
+            {
+                throw new BusinesRuleValidationException(rule);            
+            }
+        }
+    }
 }

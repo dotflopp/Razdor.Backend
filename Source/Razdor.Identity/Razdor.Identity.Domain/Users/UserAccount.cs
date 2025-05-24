@@ -6,7 +6,7 @@ using Razdor.Shared.Domain.Rules;
 
 namespace Razdor.Identity.Domain.Users;
 
-public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>, IAggregateRoot
+public class UserAccount : BaseSnowflakeEntity, IEntity<ulong>, IAggregateRoot
 {
     public const int MaxIdentityNameLength = 50;
     public const int MaxNicknameLength = MaxIdentityNameLength;
@@ -77,7 +77,7 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
             AddDomainEvent(new UserPasswordChanged(this, oldPassword));
     }
 
-    public static async Task<UserAccount> RegisterNew(
+    public static UserAccount RegisterNew(
         ulong id,
         string identityName,
         string email,
@@ -90,10 +90,6 @@ public class UserAccount : BaseSnowflakeEntity, ISnowflakeEntity, IEntity<ulong>
     {
         ArgumentNullException.ThrowIfNull(identityName);
         ArgumentNullException.ThrowIfNull(email);
-        await RuleValidationHelper.ThrowIfBrokenAsync(
-          new IdentityNameMustBeUnique(counter, identityName),
-          new EmailMustBeUnique(counter, email)
-        );
         
         DateTimeOffset credentialsChangeDate = time?.GetUtcNow() ?? DateTimeOffset.UtcNow;
         DateTimeOffset registrationDate = time?.GetUtcNow() ?? DateTimeOffset.UtcNow;

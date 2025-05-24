@@ -4,7 +4,8 @@ using Razdor.Shared.Domain.Repository;
 
 namespace Razdor.Shared.Module.DataAccess;
 
-public class UnitOfWork(DbContext context, IMediator mediator) : IUnitOfWork
+public class UnitOfWork<T>(T context, IMediator mediator) : IUnitOfWork
+    where T : DbContext
 {
     /// <inheritdoc />
     public async Task<int> SaveEntitiesAsync(CancellationToken cancellationToken = default)

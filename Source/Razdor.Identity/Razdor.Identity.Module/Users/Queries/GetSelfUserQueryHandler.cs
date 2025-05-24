@@ -16,9 +16,6 @@ public class GetSelfUserQueryHandler(
 {
     public async ValueTask<SelfUserViewModel> Handle(GetSelfUserQuery query, CancellationToken cancellationToken)
     {
-        if (!sender.IsAuthenticated)
-            ExceptionsHelper.ThrowUnauthenticatedException();
-
         UserAccount? user = await dbSqlContext.UserAccounts
             .Where(x => x.Id == sender.User.Id)
             .FirstOrDefaultAsync(cancellationToken: cancellationToken);

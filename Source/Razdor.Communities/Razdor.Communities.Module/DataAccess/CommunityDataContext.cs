@@ -16,10 +16,9 @@ public abstract class CommunityDataContext(DbContextOptions options): DbContext(
     public DbSet<CommunityChannel> Channels { get; protected set; }
     public DbSet<VoiceChannel> Voices { get; protected set; }
     public DbSet<CategoryChannel> Categories { get; protected set; }
-    public DbSet<MessageChannel> Messages { get; protected set; }
+    public DbSet<TextChannel> Messages { get; protected set; }
     public DbSet<ForkChannel> Forks { get; protected set; }
 
-    public DbSet<Role> Roles { get; protected set; }
-    public DbSet<CommunityUser> CommunityUsers { get; protected set; }
+    public DbSet<CommunityMember> CommunityUsers { get; protected set; }
     public DbSet<Community> Communities { get; protected set; }
 }

@@ -3,14 +3,14 @@ using Razdor.Shared.Domain.Rules;
 
 namespace Razdor.Identity.Domain.Users.Rules;
 
-public class IdentityNameMustBeUnique(IUsersCounter counter, string name) : IBusinessRule
+public class IdentityNameAndEmailMustBeUnique(IUsersCounter counter, string name, string email) : IBusinessRuleAsyncValidator
 {
-    public string Message { get; } = "This identity name already exists";
+    public string Message { get; } = "Identity name and email must be unique";
     public ErrorCode ErrorCode { get; } = ErrorCode.IdentityNameAlreadyExists;
     
     public async Task<bool> IsBrokenAsync(CancellationToken cancellationToken)
     {
-        int count = await counter.CountUserWithIdentityName(name);
+        int count = await counter.CountUserWithIdentityNameOrEmail(name, email);
         return count > 0;
     }
 }

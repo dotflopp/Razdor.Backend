@@ -6,9 +6,9 @@ using Razdor.Shared.Module.DataAccess;
 
 namespace Razdor.Identity.Module.DataAccess;
 
-public class UserEfRepository(IdentityDbContext context, IMediator mediator) : IUserRepository
+public class UserEfRepository(IdentityDbContext context, UnitOfWork<IdentityDbContext> unitOfWork) : IUserRepository
 {
-    public IUnitOfWork UnitOfWork { get; } = new UnitOfWork(context, mediator);
+    public IUnitOfWork UnitOfWork => unitOfWork;
 
     public UserAccount Add(UserAccount user)
     {

@@ -52,7 +52,7 @@ public class SnowflakeGenerator
             var nowMs = GetNowMs();
             var current = _determinant;
 
-            if (current.TimeMs < nowMs)
+            if (current.TimeMs < nowMs) 
             {
                 newValue.TimeMs = nowMs;
                 newValue.Increment = 0;

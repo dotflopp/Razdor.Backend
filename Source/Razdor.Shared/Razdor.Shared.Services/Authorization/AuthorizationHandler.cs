@@ -4,7 +4,7 @@ using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.Shared.Module.Authorization;
 
-public sealed class RequireAuthorizationDecorator<TMessage, TResponse>(
+public sealed class AuthorizationHandler<TMessage, TResponse>(
     IRequestSenderContext senderContext
 ) : IPipelineBehavior<TMessage, TResponse> where TMessage : IAuthorizationRequiredMessage
 {

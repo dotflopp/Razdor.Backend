@@ -5,7 +5,7 @@ using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.Communities.Services.Authorization;
 
-public class RequireCommunityPermissionsDecorator<TMessage, TResponse>(
+public class CommunityPermissionsHandler<TMessage, TResponse>(
     IRequestSenderContext sender,
     IUserPermissionsAccessor permissionsAccessor    
 ) : IPipelineBehavior<TMessage, TResponse> where TMessage : IPermissionsRequiredMessage

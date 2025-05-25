@@ -1,4 +1,5 @@
 using Asp.Versioning;
+using Mediator;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.OpenApi.Models;
 using Razdor.Communities.Api;
@@ -11,6 +12,7 @@ using Razdor.ServiceDefaults;
 using Razdor.Shared.Api;
 using Razdor.Shared.Api.Constraints;
 using Razdor.Shared.Module;
+using Razdor.Shared.Module.Authorization;
 using Razdor.Shared.Module.RequestSenderContext;
 using Razdor.Signaling.Routing;
 using Razdor.Signaling.Services;
@@ -75,9 +77,11 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 // Mediator
-builder.Services.AddMediator(options =>
-    options.ServiceLifetime = ServiceLifetime.Scoped
-);
+builder.Services.AddMediator((MediatorOptions options) =>
+{
+    options.ServiceLifetime = ServiceLifetime.Scoped;
+    options.PipelineBehaviors = [typeof(AuthorizationHandler<,>)];
+});
 
 // SignalR
 builder.Services.AddSignalR();

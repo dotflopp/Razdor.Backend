@@ -2,7 +2,7 @@
 
 namespace Razdor.Shared.Module.RequestSenderContext;
 
-public interface IRequestSenderContext
+public interface IRequestSenderContextAccessor
 {
     UserClaims User { get; }
 

@@ -3,7 +3,7 @@ using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.Shared.Api;
 
-public class RequestSenderContextAccessor(IHttpContextAccessor httpContextAccessor) : IRequestSenderContext
+public class RequestSenderContextAccessorAccessor(IHttpContextAccessor httpContextAccessor) : IRequestSenderContextAccessor
 {
     private UserClaims? _user;
 

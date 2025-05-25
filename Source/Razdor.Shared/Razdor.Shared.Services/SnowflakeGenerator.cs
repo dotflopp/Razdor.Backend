@@ -1,4 +1,6 @@
-﻿namespace Razdor.Shared.Module;
+﻿using Razdor.Shared.Domain;
+
+namespace Razdor.Shared.Module;
 
 /// <summary>
 ///     UNIX MILLISECONDS sizeof(ulong) - WorkerIdSize - IncrementSize | worker ID WorkerIdSize | incremented IncrementSize

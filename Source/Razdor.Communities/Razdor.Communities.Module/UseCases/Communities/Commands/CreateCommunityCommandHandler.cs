@@ -16,7 +16,7 @@ public class CreateCommunityCommandHandler(
     UnitOfWork<CommunityDataContext> unitOfWork,
     ICommunitiesRepository communities,
     ICommunityMembersRepository communityMembers,
-    IRequestSenderContext sender,
+    IRequestSenderContextAccessor senderContext,
     SnowflakeGenerator snowflakeGenerator,
     TimeProvider timeProvider
 ): ICommandHandler<CreateCommunityCommand, CommunityViewModel>
@@ -25,14 +25,14 @@ public class CreateCommunityCommandHandler(
     {
         Community community = Community.CreateNew(
             snowflakeGenerator.Next(),
-            sender.User.Id,
+            senderContext.User.Id,
             command.Name,
             null,
             null
         );
          
         CommunityMember member = CommunityMember.CreateNew(
-            sender.User.Id,
+            senderContext.User.Id,
             community.Id,
             timeProvider
         );

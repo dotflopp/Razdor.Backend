@@ -8,17 +8,21 @@ public enum ErrorCode : ulong
     Unauthorized,
     AccessForbidden,
 
-    //Login and Signup
+    //Identitiy
     InvalidPasswordOrEmail,
-    IdentityNameAlreadyExists,
-    EmailAlreadyExists,
+    IdentityNameOrEmailAlreadyExists,
+    UserNotFound,
     
     //AccessToken Validation
     InvalidAccessToken,
     AccessTokenExpired,
 
-    //Not Found errors
-    UserNotFound,
-
+    //Communities
+    CommunityMemberNotFound,
+    CommunityNotFound,
+    InviteNotFound,
+    ReJoiningToCommunity,
+    
+    //Routing
     NonExistentRoute,
 }

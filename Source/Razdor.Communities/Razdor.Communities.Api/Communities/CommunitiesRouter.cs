@@ -15,6 +15,7 @@ public static class CommunitiesRouter
         [StringSyntax("Route")]  string prefix = "/communities"
     ){
          RouteGroupBuilder api = builder.MapGroup(prefix).RequireAuthorization();
+         
          api.MapGet("/@my", GetSelfUserCommunitiesAsync);
          api.MapPost("/", CreateCommunityAsync);
          

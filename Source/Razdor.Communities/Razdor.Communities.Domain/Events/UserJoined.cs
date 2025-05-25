@@ -1,6 +1,8 @@
-﻿namespace Razdor.Communities.Domain.Event;
+﻿using Razdor.Shared.Domain;
 
-public class UserJoined
-{
-    
-}
+namespace Razdor.Communities.Domain.Event;
+
+public record UserJoined(
+    ulong CommunityId,
+    ulong UserId
+) : IDomainEvent;

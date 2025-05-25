@@ -11,17 +11,17 @@ namespace Razdor.Identity.Module.Users.Queries;
 
 public class GetSelfUserQueryHandler(
     IdentityDbContext dbSqlContext,
-    IRequestSenderContext sender
+    IRequestSenderContextAccessor senderContext
 ) : IQueryHandler<GetSelfUserQuery, SelfUserViewModel>
 {
     public async ValueTask<SelfUserViewModel> Handle(GetSelfUserQuery query, CancellationToken cancellationToken)
     {
         UserAccount? user = await dbSqlContext.UserAccounts
-            .Where(x => x.Id == sender.User.Id)
+            .Where(x => x.Id == senderContext.User.Id)
             .FirstOrDefaultAsync(cancellationToken: cancellationToken);
         
         if (user is null)
-            throw new UserNotFoundException($"The user with the ID {sender.User.Id} was not found");
+            throw new UserNotFoundException($"The user with the ID {senderContext.User.Id} was not found");
 
         return new SelfUserViewModel(
             user.Id,

@@ -24,9 +24,4 @@
         <None Remove="Properties\launchSettings.json"/>
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Communities\Roles\" />
-      <Folder Include="Communities\Users\" />
-    </ItemGroup>
-
 </Project>

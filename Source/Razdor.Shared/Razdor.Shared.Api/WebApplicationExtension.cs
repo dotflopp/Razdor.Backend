@@ -1,5 +1,6 @@
 ﻿using Razdor.Shared.Api.ViewModels;
 using Razdor.Shared.Domain.Exceptions;
+using Razdor.Shared.Extensions;
 
 namespace Razdor.Shared.Api;
 
@@ -23,7 +24,8 @@ public static class WebApplicationExtension
                 new ExceptionViewModel(
                     ErrorCode.Unauthorized,
                     "The user is unauthorized."
-                )
+                ),
+                SharedJsonSerializerContext.Default.GetRequiredTypeInfo<ExceptionViewModel>()
             );
         });
         
@@ -43,7 +45,8 @@ public static class WebApplicationExtension
                 new ExceptionViewModel(
                     ErrorCode.NonExistentRoute,
                     "Attempt to access not existing route"
-                )
+                ),
+                SharedJsonSerializerContext.Default.GetRequiredTypeInfo<ExceptionViewModel>()
             );
         });
         return app;

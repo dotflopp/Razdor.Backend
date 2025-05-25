@@ -6,7 +6,7 @@ namespace Razdor.Identity.Domain.Users.Rules;
 public class IdentityNameAndEmailMustBeUnique(IUsersCounter counter, string name, string email) : IBusinessRuleAsyncValidator
 {
     public string Message { get; } = "Identity name and email must be unique";
-    public ErrorCode ErrorCode { get; } = ErrorCode.IdentityNameAlreadyExists;
+    public ErrorCode ErrorCode { get; } = ErrorCode.IdentityNameOrEmailAlreadyExists;
     
     public async Task<bool> IsBrokenAsync(CancellationToken cancellationToken)
     {

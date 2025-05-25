@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
+using Razdor.Communities.Domain.Event;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Domain.Roles;
 using Razdor.Shared.Domain;
@@ -58,7 +59,7 @@ public class CommunityMember : BaseSnowflakeEntity, IEntity<ulong>
 
     public static CommunityMember CreateNew(ulong userId, ulong communityId, TimeProvider? time = null)
     {
-        return new CommunityMember(
+        CommunityMember member = new(
             userId,
             communityId,
             VoiceState.Default,
@@ -67,5 +68,8 @@ public class CommunityMember : BaseSnowflakeEntity, IEntity<ulong>
             [communityId],
             time?.GetUtcNow() ?? DateTimeOffset.UtcNow
         );
+        
+        member.AddDomainEvent(new UserJoined(communityId, userId));
+        return member;
     }
 }

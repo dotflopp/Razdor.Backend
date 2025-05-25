@@ -44,6 +44,7 @@ public class CommunityMongoDataContext(DbContextOptions options) : CommunityData
             .ApplyConfiguration<VoiceChannel>(new ChannelConfigurations())
             .ApplyConfiguration<CategoryChannel>(new ChannelConfigurations())
             .ApplyConfiguration(new CommunityConfiguration())
-            .ApplyConfiguration(new CommunityUserConfiguration());
+            .ApplyConfiguration(new CommunityUserConfiguration())
+            .ApplyConfiguration(new InvitesConfiguration());
     }
 }

@@ -20,9 +20,4 @@
       <ProjectReference Include="..\Razdor.Communities.Domain\Razdor.Communities.Domain.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Communities\Commands\Rules\" />
-      <Folder Include="Communities\Commands\ViewModels\" />
-    </ItemGroup>
-
 </Project>

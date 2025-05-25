@@ -1,5 +1,7 @@
-﻿using Razdor.Shared.Api.ViewModels;
+﻿using System.Text.Json.Serialization.Metadata;
+using Razdor.Shared.Api.ViewModels;
 using Razdor.Shared.Domain.Exceptions;
+using Razdor.Shared.Extensions;
 
 namespace Razdor.Shared.Api;
 
@@ -33,15 +35,19 @@ public class ExceptionHandlerMiddleware
         //TODO надо верить в то что однажды появятся нормальные статус коды, по идентификатору которых можно будет понять их принадлежность
         context.Response.StatusCode = StatusCodes.Status400BadRequest;
         if (exception.ErrorCode.ToString().EndsWith("NotFound"))
-        {
             context.Response.StatusCode = StatusCodes.Status404NotFound;
-        }
+        else if (exception.ErrorCode == ErrorCode.AccessForbidden)
+            context.Response.StatusCode = StatusCodes.Status403Forbidden;
 
         ExceptionViewModel exceptionViewModel = new(
             exception.ErrorCode,
             exception.Message
         );
-        _logger.LogInformation($"StatusCode: {context.Response.StatusCode} Exception: {exceptionViewModel}");        
-        await context.Response.WriteAsJsonAsync(exceptionViewModel);
+        
+        _logger.LogInformation($"StatusCode: {context.Response.StatusCode} Exception: {exceptionViewModel}");
+        await context.Response.WriteAsJsonAsync(
+            exceptionViewModel,
+            SharedJsonSerializerContext.Default.GetRequiredTypeInfo<ExceptionViewModel>()
+        );
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Razdor.Communities.Domain.Members;
 using Razdor.Shared.Domain.Repository;
 using Razdor.Shared.Module.DataAccess;
@@ -16,5 +17,18 @@ public class CommunityMembersRepository(
     {
         EntityEntry<CommunityMember> entry = _context.Add(communityMember);
         return entry.Entity;
+    }
+
+    public async Task<CommunityMember?> FindAsync(ulong userId, ulong communityId, CancellationToken cancellationToken = default)
+    {
+        return await _context.CommunityUsers.FirstOrDefaultAsync(
+            x => x.Id == userId && x.CommunityId == communityId, 
+            cancellationToken
+        );
+    }
+
+    public async Task<bool> ContainsAsync(ulong communityId, ulong userId)
+    {
+        return await _context.CommunityUsers.AnyAsync(x => x.Id == userId && x.CommunityId == communityId);
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.OpenApi.Models;
 using Razdor.Communities.Api;
 using Razdor.Communities.Infrastructure;
+using Razdor.Communities.Services.Authorization;
 using Razdor.Identity.Api.AuthenticationScheme;
 using Razdor.Identity.Api.Routes;
 using Razdor.Identity.Infrastructure;
@@ -80,8 +81,14 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddMediator((MediatorOptions options) =>
 {
     options.ServiceLifetime = ServiceLifetime.Scoped;
-    options.PipelineBehaviors = [typeof(AuthorizationHandler<,>)];
+    options.PipelineBehaviors = [
+        typeof(AuthorizationHandler<,>),
+        typeof(CommunityPermissionsHandler<,>)
+    ];
 });
+
+//Cache
+builder.Services.AddHybridCache();
 
 // SignalR
 builder.Services.AddSignalR();
@@ -103,7 +110,7 @@ builder.Services.AddSingleton(
 
 //UserContext Accessor
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddSingleton<IRequestSenderContext, RequestSenderContextAccessor>();
+builder.Services.AddSingleton<IRequestSenderContextAccessor, RequestSenderContextAccessorAccessor>();
 
 // Identity services
 string? identityDb = builder.Configuration.GetConnectionString("identitydb");

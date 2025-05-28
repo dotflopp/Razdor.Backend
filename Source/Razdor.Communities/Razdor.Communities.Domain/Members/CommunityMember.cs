@@ -36,8 +36,10 @@ public class CommunityMember : BaseAggregateRoot
         NotificationPolicy = notificationPolicy;
         JoiningDate = joiningDate;
     }
+
     public ulong UserId { get; private set; }
     public ulong CommunityId { get; private set; }
+    
     public VoiceState VoiceState { get; private set; }
 
     /// <summary>

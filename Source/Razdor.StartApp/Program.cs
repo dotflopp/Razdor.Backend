@@ -110,7 +110,7 @@ builder.Services.AddSingleton(
 
 //UserContext Accessor
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddSingleton<IRequestSenderContextAccessor, RequestSenderContextAccessorAccessor>();
+builder.Services.AddScoped<IRequestSenderContextAccessor, RequestSenderContextAccessor>();
 
 // Identity services
 string? identityDb = builder.Configuration.GetConnectionString("identitydb");

@@ -1,0 +1,60 @@
+services:
+  razdor-app:
+    build: .
+    image: razdor-app
+    command: /app/Razdor.StartApp.dll
+    environment:
+      - ConnectionStrings:communitydb=mongodb://admin:admin@host.docker.internal:27017/communitydb?authSource=admin&authMechanism=SCRAM-SHA-256
+      - ConnectionStrings:identitydb=Host=host.docker.internal;port=5432;database=identitydb;username=test;password=test
+    ports:
+      - "8080:8080"
+    networks:
+      - razdor-network
+    depends_on:
+      - mongodb
+      - postgres
+      - razdor-migrations
+        
+  razdor-migrations:
+    build: .
+    image: razdor-app
+    command: /identity-migrations/Razdor.Identity.MigrationService.dll
+    environment:
+      - ConnectionStrings:identitydb=Host=host.docker.internal;port=5432;database=identitydb;username=test;password=test
+    networks:
+      - razdor-network
+    depends_on:
+      - postgres
+    
+  mongodb:
+    image: mongo:8.0
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin     
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - razdor-network
+  
+  postgres:
+    image: postgres:17.2
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=identitydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - razdor-network
+
+volumes:
+  postgres_data:
+  mongo_data:
+
+networks:
+  razdor-network:
+    driver: bridge

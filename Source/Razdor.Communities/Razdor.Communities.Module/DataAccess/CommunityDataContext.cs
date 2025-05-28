@@ -20,7 +20,7 @@ public abstract class CommunityDataContext(DbContextOptions options): DbContext(
     public DbSet<TextChannel> Messages { get; protected set; }
     public DbSet<ForkChannel> Forks { get; protected set; }
     
-    public DbSet<CommunityMember> CommunityUsers { get; protected set; }
+    public DbSet<CommunityMember> CommunityMembers { get; protected set; }
     public DbSet<Community> Communities { get; protected set; }
     public DbSet<Invite> Invites { get; protected set; }
 }

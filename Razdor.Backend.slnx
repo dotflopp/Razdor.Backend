@@ -29,6 +29,7 @@
     <File Path="LICENSE" />
     <File Path="README.md" />
     <File Path="Scripts\initdb.bat" />
+    <File Path="compose.yaml" />
   </Folder>
   <Project Path="Source\Razdor.AppHost\Razdor.AppHost.csproj" />
   <Project Path="Source\Razdor.ServiceDefaults\Razdor.ServiceDefaults.csproj" />

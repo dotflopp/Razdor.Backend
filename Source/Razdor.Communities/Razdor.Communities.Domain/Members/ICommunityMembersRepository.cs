@@ -6,5 +6,5 @@ public interface ICommunityMembersRepository: IUnitOfWorkRepository<CommunityMem
 {
     CommunityMember Add(CommunityMember communityMember);
     Task<CommunityMember?> FindAsync(ulong communityId, ulong userId, CancellationToken cancellationToken = default);
-    Task<bool> ContainsAsync(ulong communityId, ulong userId);
+    Task<bool> ContainsAsync(ulong communityId, ulong userId, CancellationToken cancellationToken = default);
 }

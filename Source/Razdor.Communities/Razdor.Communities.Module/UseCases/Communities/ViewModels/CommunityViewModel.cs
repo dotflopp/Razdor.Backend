@@ -1,15 +1,19 @@
-﻿using Razdor.Communities.Domain;
+﻿using System.Text.Json.Serialization;
+using Razdor.Communities.Domain;
+using Razdor.Shared.Module;
 
 namespace Razdor.Communities.Services.Communities.ViewModels;
 
 public record CommunityViewModel(
+    [property:JsonConverter(typeof(ULongToStringConverter))]
     ulong Id,
+    [property:JsonConverter(typeof(ULongToStringConverter))]
     ulong OwnerId,
     string Name,
     string? Avatar,
     string? Description,
     CommunityNotificationPolicy DefaultNotificationPolicy,
-    List<RoleViewModel> Role
+    List<RoleViewModel> Roles
 )
 {
     public static CommunityViewModel From(Community community)

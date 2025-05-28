@@ -1,6 +1,7 @@
 ﻿using System.Net.NetworkInformation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using MongoDB.Bson;
 using MongoDB.EntityFrameworkCore.Extensions;
 using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Roles;
@@ -8,27 +9,25 @@ using Razdor.Communities.Infrastructure.DataAccess.EntityConfigurations.Channels
 
 namespace Razdor.Communities.Infrastructure.DataAccess.EntityConfigurations;
 
-public class CommunityUserConfiguration: IEntityTypeConfiguration<CommunityMember>
+public class CommunityMemberConfiguration: IEntityTypeConfiguration<CommunityMember>
 {
     public void Configure(EntityTypeBuilder<CommunityMember> builder)
     {
+        string[] compositeKey = [nameof(CommunityMember.CommunityId), nameof(CommunityMember.UserId)]; 
+        
         builder.ToCollection(CollectionNames.CommunityUsers);
         
-        builder.Ignore(x => x.DomainEvents);
-
-        builder.HasKey(x => new { UserId = x.Id, x.CommunityId });
-
-        builder.Ignore(x => x.DomainEvents);
-        builder.Ignore(x => x.IsTransient);
-
+        builder.HasKey(compositeKey);
+        
         builder.Ignore(x => x.RoleIds);
-        builder.Property<List<ulong>>("_roleIds")
+        builder.Property<List<ulong>?>("_roleIds")
             .HasElementName(nameof(CommunityMember.RoleIds));
-
-        builder.OwnsOne(x => x.CommunityProfile);
-        builder.OwnsOne(x => x.VoiceState, ownedBuilder =>
+        
+        builder.OwnsOne(x => x.VoiceState, ownsBuilder =>
         {
-            ownedBuilder.HasIndex(x => x.ChannelId);
+            ownsBuilder.WithOwner().HasForeignKey(compositeKey);
+            ownsBuilder.HasKey(compositeKey);
+            ownsBuilder.HasIndex(x => x.ChannelId);
         });
     }
 }

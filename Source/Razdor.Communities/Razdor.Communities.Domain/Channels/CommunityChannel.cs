@@ -62,7 +62,7 @@ public abstract class CommunityChannel(
         
         foreach (var overwrite in Overwrites)
         {
-            if (overwrite.TargetId == member.Id && overwrite.TargetTypeType == PermissionTargetType.User)
+            if (overwrite.TargetId == member.UserId && overwrite.TargetTypeType == PermissionTargetType.User)
             {
                 yield return overwrite;
                 continue;

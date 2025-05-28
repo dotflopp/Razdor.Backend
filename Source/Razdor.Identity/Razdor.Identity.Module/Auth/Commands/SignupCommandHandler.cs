@@ -11,7 +11,7 @@ using Razdor.Shared.Module;
 
 namespace Razdor.Identity.Module.Auth.Commands;
 
-public class SignupCommandHandler(
+public sealed class SignupCommandHandler(
     IPasswordHasher<UserAccount> passwordHasher,
     IUserRepository userRepository,
     SnowflakeGenerator idGenerator,

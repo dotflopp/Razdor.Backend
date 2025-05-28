@@ -7,7 +7,7 @@ using Razdor.Identity.Module.Users.ViewModels;
 
 namespace Razdor.Identity.Module.Users.Queries;
 
-public class GetUserQueryHandler(
+public sealed class GetUserQueryHandler(
     IdentityDbContext dbSqlContext
 ) : IQueryHandler<GetUserQuery, UserPreviewModel>
 {

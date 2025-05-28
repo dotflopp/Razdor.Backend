@@ -5,7 +5,7 @@ namespace Razdor.Shared.Module;
 /// <summary>
 ///     UNIX MILLISECONDS sizeof(ulong) - WorkerIdSize - IncrementSize | worker ID WorkerIdSize | incremented IncrementSize
 /// </summary>
-public class SnowflakeGenerator
+public sealed class SnowflakeGenerator
 {
     private const int WorkerIdSizeBits = 4;
     private const int IncrementSizeBits = 18;

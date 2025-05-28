@@ -4,4 +4,4 @@ using Razdor.Shared.Module.Authorization;
 
 namespace Razdor.Identity.Module.Users.Queries;
 
-public record GetSelfUserQuery : IIdentityQuery<SelfUserViewModel>, IAuthorizationRequiredMessage;
+public sealed record GetSelfUserQuery : IIdentityQuery<SelfUserViewModel>, IAuthorizationRequiredMessage;

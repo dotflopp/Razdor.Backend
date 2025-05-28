@@ -7,7 +7,7 @@ using Razdor.Identity.Module.Auth.Commands.ViewModels;
 
 namespace Razdor.Identity.Module.Auth.Commands;
 
-public class LoginCommandHandler(
+public sealed class LoginCommandHandler(
     IPasswordHasher<UserAccount> passwordHasher,
     IUserRepository userRepository,
     AccessTokenSource tokenSource,

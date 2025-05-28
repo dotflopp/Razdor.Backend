@@ -4,7 +4,7 @@ using Razdor.Shared.Module.Exceptions;
 
 namespace Razdor.Communities.Services.Exceptions;
 
-public class CommunityMemberNotFoundException(
+public sealed class CommunityMemberNotFoundException(
     string? message = null,
     Exception? innerException = null
 ) : ModuleException(ErrorCode.CommunityMemberNotFound, message, innerException)

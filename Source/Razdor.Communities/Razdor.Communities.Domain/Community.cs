@@ -13,16 +13,15 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
     public const int NameMaxLength = 100;
     public const int DescriptionMaxLength = 400;
 
-    private readonly List<Role>? _roles;
+    private List<Role>? _roles;
 
     /// <summary>
     /// EF constructor
     /// </summary>
-    private Community() : this(0, 0, null, null, null, CommunityNotificationPolicy.Nothing, null)
-    {
-    }
+    private Community() : this(0, 0, null!, null, null, CommunityNotificationPolicy.Nothing, null!, null)
+    { }
 
-    public Community(
+    internal Community(
         ulong id,
         ulong ownerId,
         string name,
@@ -30,7 +29,7 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
         string? description,
         CommunityNotificationPolicy defaultNotificationPolicy,
         EveryonePermissions everyone,
-        List<Role>? roles = null
+        List<Role>? roles
     ) : base(id)
     {
         OwnerId = ownerId;
@@ -82,7 +81,7 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
     /// </summary>
     public UserPermissions GetPermissions(CommunityMember member)
     {
-        if (member.Id == OwnerId)
+        if (member.UserId == OwnerId)
             return UserPermissions.All;
 
         return GetPermissions(member.RoleIds);
@@ -93,7 +92,7 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
     /// </summary>
     public ulong GetHighestPriority(CommunityMember member)
     {
-        if (member.Id == OwnerId)
+        if (member.UserId == OwnerId)
             return 0;
 
         return GetHighestPriority(member.RoleIds);

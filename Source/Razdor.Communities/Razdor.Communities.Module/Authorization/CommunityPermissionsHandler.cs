@@ -1,5 +1,6 @@
 ﻿using System.Reflection.Metadata.Ecma335;
 using Mediator;
+using Microsoft.Extensions.Logging;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Services.Exceptions;
 using Razdor.Shared.Module.Exceptions;
@@ -7,9 +8,10 @@ using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.Communities.Services.Authorization;
 
-public class CommunityPermissionsHandler<TMessage, TResponse>(
+public sealed class CommunityPermissionsHandler<TMessage, TResponse>(
     IRequestSenderContextAccessor senderContext,
-    ICommunityPermissionsAccessor communityPermissions
+    ICommunityPermissionsAccessor communityPermissions,
+    ILogger<CommunityPermissionsHandler<TMessage, TResponse>> logger
 ) : IPipelineBehavior<TMessage, TResponse> where TMessage : IRequiredCommunityPermissionsMessage
 {
     public async ValueTask<TResponse> Handle(
@@ -31,6 +33,7 @@ public class CommunityPermissionsHandler<TMessage, TResponse>(
         }
         catch (Exception exception)
         {
+            logger.LogError(exception, "Access community permissions error.");
             throw new AccessForbiddenException("Unknown exception", exception);
         }
         

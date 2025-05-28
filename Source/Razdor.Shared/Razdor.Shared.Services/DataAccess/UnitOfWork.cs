@@ -4,7 +4,7 @@ using Razdor.Shared.Domain.Repository;
 
 namespace Razdor.Shared.Module.DataAccess;
 
-public class UnitOfWork<T>(T context, IMediator mediator) : IUnitOfWork
+public sealed class UnitOfWork<T>(T context, IMediator mediator) : IUnitOfWork
     where T : DbContext
 {
     /// <inheritdoc />

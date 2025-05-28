@@ -5,6 +5,6 @@ using Razdor.Shared.Module.Authorization;
 
 namespace Razdor.Communities.Services.Communities.Commands;
 
-public record CreateCommunityCommand(
+public sealed record CreateCommunityCommand(
     string Name
 ): ICommunitiesCommand<CommunityViewModel>, IAuthorizationRequiredMessage;

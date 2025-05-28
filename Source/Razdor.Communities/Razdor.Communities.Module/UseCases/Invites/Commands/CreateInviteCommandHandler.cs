@@ -12,7 +12,7 @@ using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.Communities.Services.Communities.Commands;
 
-public class CreateInviteCommandHandler(
+public sealed class CreateInviteCommandHandler(
     TimeProvider timeProvider,
     IRequestSenderContextAccessor senderContext,
     ICommunitiesRepository communities,

@@ -1,4 +1,5 @@
 using Razdor.Communities.Api.Communities;
+using Razdor.Communities.Api.Invites;
 
 namespace Razdor.Communities.Api;
 
@@ -9,9 +10,13 @@ public static class ModuleRouter
         string pattern = "/"
     )
     {
-        builder.MapCommunities();
-        return builder
+        IEndpointRouteBuilder api = builder
             .NewVersionedApi("communities")
             .HasApiVersion(0.1);
+        
+        api.MapInvites();
+        api.MapCommunities();
+        
+        return builder;
     }
 }

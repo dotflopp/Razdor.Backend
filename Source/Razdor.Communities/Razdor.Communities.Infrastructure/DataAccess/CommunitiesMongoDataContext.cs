@@ -9,6 +9,7 @@ using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Roles;
 using Razdor.Communities.Infrastructure.DataAccess.EntityConfigurations;
 using Razdor.Communities.Infrastructure.DataAccess.EntityConfigurations.Channels;
+using Razdor.Communities.Infrastructure.DataAccess.TypeConverters;
 using Razdor.Communities.Services;
 using Razdor.Communities.Services.DataAccess;
 
@@ -26,10 +27,8 @@ public class CommunityMongoDataContext(DbContextOptions options) : CommunityData
     {
         base.ConfigureConventions(configurationBuilder);
         
-        configurationBuilder.Properties(typeof(DateTimeOffset), builder =>
-        {
-            builder.HaveConversion<DatetimeOffsetConverter>();
-        });
+        configurationBuilder.Properties<DateTimeOffset>()
+            .HaveConversion<DatetimeOffsetConverter>();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -44,7 +43,7 @@ public class CommunityMongoDataContext(DbContextOptions options) : CommunityData
             .ApplyConfiguration<VoiceChannel>(new ChannelConfigurations())
             .ApplyConfiguration<CategoryChannel>(new ChannelConfigurations())
             .ApplyConfiguration(new CommunityConfiguration())
-            .ApplyConfiguration(new CommunityUserConfiguration())
+            .ApplyConfiguration(new CommunityMemberConfiguration())
             .ApplyConfiguration(new InvitesConfiguration());
     }
 }

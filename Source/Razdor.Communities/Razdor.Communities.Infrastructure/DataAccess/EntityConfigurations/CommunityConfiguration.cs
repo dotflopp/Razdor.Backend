@@ -23,23 +23,25 @@ public class CommunityConfiguration : IEntityTypeConfiguration<Community>
 
         builder.Ignore(x => x.Roles);
         builder.OwnsMany<Role>("_roles",
-            ownedBuilder => {
-                ownedBuilder.HasKey(x => x.Id);
-                ownedBuilder.WithOwner().HasForeignKey(x => x.CommunityId);
-                ownedBuilder.HasElementName(nameof(Community.Roles));
+            ownsBuilder => {
+                ownsBuilder.HasKey(x => x.Id);
+                ownsBuilder.WithOwner().HasForeignKey(x => x.CommunityId);
+                ownsBuilder.HasElementName(nameof(Community.Roles));
             }
         );
+
+        builder.OwnsOne(x => x.Everyone, ownsBuild =>
+        {
+            ownsBuild.WithOwner().HasForeignKey(nameof(Community.Id));
+            ownsBuild.HasKey(nameof(Community.Id));
+        });
         
         builder.HasIndex(x => x.OwnerId);
         
         builder.Property(x => x.Name)
             .HasMaxLength(Community.NameMaxLength);
-
-        builder.Property(x => x.Avatar);
         
         builder.Property(x => x.Description)
             .HasMaxLength(Community.DescriptionMaxLength);
-
-        builder.Property(x => x.DefaultNotificationPolicy);
     }
 }

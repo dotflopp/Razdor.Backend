@@ -28,7 +28,7 @@ public class CachedCommunityPermissionsAccessor(
  
     private async ValueTask<UserPermissions> CalculatePermissionsAsync(ulong userId, ulong communityId, CancellationToken cancellationToken)
     {
-        CommunityMember? member = await members.FindAsync(userId, communityId, cancellationToken);
+        CommunityMember? member = await members.FindAsync(communityId, userId, cancellationToken);
         
         if (member == null)
             CommunityMemberNotFoundException.Throw(userId, communityId);

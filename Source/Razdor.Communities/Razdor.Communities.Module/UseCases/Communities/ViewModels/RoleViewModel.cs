@@ -1,9 +1,12 @@
-﻿using Razdor.Communities.Domain.Permissions;
+﻿using System.Text.Json.Serialization;
+using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Domain.Roles;
+using Razdor.Shared.Module;
 
 namespace Razdor.Communities.Services.Communities.ViewModels;
 
 public record RoleViewModel(
+    [property:JsonConverter(typeof(ULongToStringConverter))]
     ulong Id,
     uint Priority,
     string Name,

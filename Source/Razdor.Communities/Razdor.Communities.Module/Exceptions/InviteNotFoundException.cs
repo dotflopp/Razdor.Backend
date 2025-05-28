@@ -3,7 +3,7 @@ using Razdor.Shared.Domain.Exceptions;
 
 namespace Razdor.Communities.Services.Exceptions;
 
-public class InviteNotFoundException(
+public sealed class InviteNotFoundException(
     string? message = null, 
     Exception? innerException = null
 ) : RazdorException(ErrorCode.InviteNotFound, message, innerException)

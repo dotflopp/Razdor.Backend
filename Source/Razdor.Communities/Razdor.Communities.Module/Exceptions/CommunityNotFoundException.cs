@@ -3,7 +3,7 @@ using Razdor.Shared.Domain.Exceptions;
 
 namespace Razdor.Communities.Services.Exceptions;
 
-public class CommunityNotFoundException(
+public sealed class CommunityNotFoundException(
     string? message = null, 
     Exception? innerException = null
 ) : RazdorException(ErrorCode.CommunityNotFound, message, innerException)

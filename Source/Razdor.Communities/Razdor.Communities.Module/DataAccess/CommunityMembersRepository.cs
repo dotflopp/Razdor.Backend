@@ -19,16 +19,16 @@ public class CommunityMembersRepository(
         return entry.Entity;
     }
 
-    public async Task<CommunityMember?> FindAsync(ulong userId, ulong communityId, CancellationToken cancellationToken = default)
+    public async Task<CommunityMember?> FindAsync(ulong communityId, ulong userId, CancellationToken cancellationToken = default)
     {
-        return await _context.CommunityUsers.FirstOrDefaultAsync(
-            x => x.Id == userId && x.CommunityId == communityId, 
+        return await _context.CommunityUsers.FindAsync(
+            communityId, userId,
             cancellationToken
         );
     }
 
     public async Task<bool> ContainsAsync(ulong communityId, ulong userId)
     {
-        return await _context.CommunityUsers.AnyAsync(x => x.Id == userId && x.CommunityId == communityId);
+        return await _context.CommunityUsers.AnyAsync(x => x.UserId == userId  && x.CommunityId == communityId);
     }
 }

@@ -9,26 +9,15 @@ namespace Razdor.Communities.Api.Communities;
 
 public static class InvitesRouter
 {
-    public static IEndpointRouteBuilder MapChannels(this IEndpointRouteBuilder builder)
+    public static IEndpointRouteBuilder MapCommunityInvites(this IEndpointRouteBuilder builder)
     {
         RouteGroupBuilder api = builder.MapGroup("{communityId:ulong}/invites");
-
+        
         api.MapPost("/", CreateInviteAsync);
-        api.MapPost("/{inviteId:alpha}", AcceptInviteAsync);
         
         return builder;
     }
-
-    private static async Task<IResult> AcceptInviteAsync(
-        [FromServices] ICommunityModule module,
-        [FromRoute] string inviteId
-    ){
-        await module.ExecuteCommandAsync(
-            new AcceptInviteCommand(inviteId)
-        );
-
-        return Results.Ok();
-    }
+    
 
     private static async Task<IResult> CreateInviteAsync(
         [FromServices] ICommunityModule module,
@@ -36,8 +25,12 @@ public static class InvitesRouter
         [FromBody] InviteParametersViewModel parameters
     )
     {
+        TimeSpan? lifeTime = null;
+        if (parameters.LifeTime is { } lifeTimeSeconds)
+            lifeTime = TimeSpan.FromSeconds(lifeTimeSeconds);
+        
         InviteViewModel invite = await module.ExecuteCommandAsync(
-            new CreateInviteCommand(communityId, parameters.LifeTime)
+            new CreateInviteCommand(communityId, lifeTime)
         );
 
         return Results.Ok(invite);

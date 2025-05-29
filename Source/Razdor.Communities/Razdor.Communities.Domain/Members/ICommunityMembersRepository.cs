@@ -2,7 +2,7 @@
 
 namespace Razdor.Communities.Domain.Members;
 
-public interface ICommunityMembersRepository: IUnitOfWorkRepository<CommunityMember>
+public interface ICommunityMembersRepository : IUnitOfWorkRepository<CommunityMember>
 {
     CommunityMember Add(CommunityMember communityMember);
     Task<CommunityMember?> FindAsync(ulong communityId, ulong userId, CancellationToken cancellationToken = default);

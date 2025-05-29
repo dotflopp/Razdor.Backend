@@ -16,9 +16,9 @@ public sealed class LoginCommandHandler(
 {
     public async ValueTask<AccessToken> Handle(LoginCommand command, CancellationToken cancellationToken)
     {
-        var user = await userRepository.FindByEmailAsync(command.Email);
+        UserAccount? user = await userRepository.FindByEmailAsync(command.Email);
 
-        var verification = PasswordVerificationResult.Failed;
+        PasswordVerificationResult verification = PasswordVerificationResult.Failed;
 
         if (user is { HashedPassword: not null })
             verification = passwordHasher.VerifyHashedPassword(
@@ -32,13 +32,13 @@ public sealed class LoginCommandHandler(
 
         if (verification == PasswordVerificationResult.SuccessRehashNeeded)
         {
-            var newHash = passwordHasher.HashPassword(user, command.Password);
+            string newHash = passwordHasher.HashPassword(user, command.Password);
             user.ChangePasswordHash(newHash);
 
             await userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         }
 
-        var accessToken = tokenSource.CreateNew(
+        string accessToken = tokenSource.CreateNew(
             new TokenClaims(
                 user.Id,
                 timeProvider.GetUtcNow()

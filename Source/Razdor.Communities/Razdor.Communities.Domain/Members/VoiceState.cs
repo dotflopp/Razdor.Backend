@@ -8,5 +8,5 @@ public record VoiceState(
     bool IsSelfMuted
 )
 {
-    public static VoiceState Default { get; } = new VoiceState(0, false, false, false, false);
+    public static VoiceState Default { get; } = new(0, false, false, false, false);
 }

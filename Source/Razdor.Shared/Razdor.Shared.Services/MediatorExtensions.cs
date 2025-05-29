@@ -1,14 +1,16 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Razdor.Shared.Domain;
-using Razdor.Shared.Module.DataAccess;
 
 namespace Razdor.Shared.Module;
 
 public static class MediatorExtensions
 {
     public static Task DispatchDomainEventsAsync(this IMediator mediator, DbContext dbContext)
-        => mediator.DispatchDomainEventsAsync<IAggregateRoot>(dbContext);
+    {
+        return mediator.DispatchDomainEventsAsync<IAggregateRoot>(dbContext);
+    }
 
     public static async Task DispatchDomainEventsAsync<TEntity>(this IMediator mediator, DbContext context)
         where TEntity : class, IAggregateRoot
@@ -22,10 +24,10 @@ public static class MediatorExtensions
             .SelectMany(x => x.Entity.DomainEvents)
             .ToList();
 
-        foreach (var entry in hasEventEntities)
+        foreach (EntityEntry<TEntity> entry in hasEventEntities)
             entry.Entity.ClearDomainEvents();
 
-        foreach (var domainEvent in domainEvents)
+        foreach (IDomainEvent domainEvent in domainEvents)
             await mediator.Publish(domainEvent);
     }
 }

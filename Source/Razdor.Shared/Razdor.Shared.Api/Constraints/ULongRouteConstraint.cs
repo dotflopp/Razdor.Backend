@@ -14,7 +14,7 @@ public class ULongRouteConstraint : IRouteConstraint
         RouteDirection routeDirection
     )
     {
-        if (!values.TryGetValue(routeKey, out var routeValue))
+        if (!values.TryGetValue(routeKey, out object? routeValue))
             return false;
 
         switch (routeValue)
@@ -24,7 +24,7 @@ public class ULongRouteConstraint : IRouteConstraint
             case ulong:
                 return true;
             default:
-                var valueString = Convert.ToString(routeValue, CultureInfo.InvariantCulture);
+                string? valueString = Convert.ToString(routeValue, CultureInfo.InvariantCulture);
                 return ulong.TryParse(valueString, out _);
         }
     }

@@ -8,7 +8,8 @@ public class CantJoinSameCommunityTwice(
     ICommunityMembersRepository members,
     ulong communityId,
     ulong userId
-): IBusinessRuleAsyncValidator {
+) : IBusinessRuleAsyncValidator
+{
     public string Message => "Can't join the same community twice.";
     public ErrorCode ErrorCode => ErrorCode.ReJoiningToCommunity;
     public Task<bool> IsBrokenAsync(CancellationToken cancellationToken = default)

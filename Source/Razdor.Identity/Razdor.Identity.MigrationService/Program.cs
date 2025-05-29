@@ -1,6 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,13 +9,13 @@ using Razdor.Identity.Migrations;
 using Razdor.Identity.Module.DataAccess;
 using Razdor.ServiceDefaults;
 
-var builder = Host.CreateApplicationBuilder(args);
+HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
 builder.AddServiceDefaults();
 
 builder.Services
     .AddOpenTelemetry()
-    .WithTracing(tracing => 
+    .WithTracing(tracing =>
         tracing.AddSource(Worker<IdentityDbContext>.ActivitySourceName)
     );
 
@@ -28,5 +27,5 @@ builder.Services.AddDbContext<IdentityDbContext, IdentityPostgreSqlContext>(opti
 
 builder.Services.AddHostedService<Worker<IdentityPostgreSqlContext>>();
 
-var host = builder.Build();
+IHost host = builder.Build();
 host.Run();

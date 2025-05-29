@@ -10,7 +10,7 @@ public sealed class UnitOfWork<T>(T context, IMediator mediator) : IUnitOfWork
     /// <inheritdoc />
     public async Task<int> SaveEntitiesAsync(CancellationToken cancellationToken = default)
     {
-        var writtenCount = await context.SaveChangesAsync(cancellationToken);
+        int writtenCount = await context.SaveChangesAsync(cancellationToken);
         await mediator.DispatchDomainEventsAsync(context);
 
         return writtenCount;

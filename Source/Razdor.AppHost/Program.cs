@@ -1,20 +1,19 @@
-using Microsoft.Extensions.Hosting;
 using Projects;
 
-var builder = DistributedApplication.CreateBuilder(args);
+IDistributedApplicationBuilder builder = DistributedApplication.CreateBuilder(args);
 
-var postgres = builder.AddPostgres("postgres")
+IResourceBuilder<PostgresServerResource> postgres = builder.AddPostgres("postgres")
     .WithDataVolume()
     .WithPgAdmin();
 
-var mongo = builder.AddMongoDB("mongo")
+IResourceBuilder<MongoDBServerResource> mongo = builder.AddMongoDB("mongo")
     .WithDataVolume()
     .WithMongoExpress();
 
-var identityDb = postgres.AddDatabase("identitydb");
-var communityDb = mongo.AddDatabase("communitydb");
+IResourceBuilder<PostgresDatabaseResource> identityDb = postgres.AddDatabase("identitydb");
+IResourceBuilder<MongoDBDatabaseResource> communityDb = mongo.AddDatabase("communitydb");
 
-var identityMigrations = builder.AddProject<Razdor_Identity_MigrationService>("identity-migrations")
+IResourceBuilder<ProjectResource> identityMigrations = builder.AddProject<Razdor_Identity_MigrationService>("identity-migrations")
     .WithReference(identityDb)
     .WaitFor(identityDb);
 
@@ -26,5 +25,5 @@ builder.AddProject<Razdor_StartApp>("razdor")
     .WaitFor(communityDb)
     .WithExternalHttpEndpoints();
 
-var app = builder.Build();
+DistributedApplication app = builder.Build();
 app.Run();

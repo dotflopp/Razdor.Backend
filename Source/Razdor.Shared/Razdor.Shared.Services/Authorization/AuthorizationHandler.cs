@@ -12,7 +12,7 @@ public sealed class AuthorizationHandler<TMessage, TResponse>(
     {
         if (!sender.IsAuthenticated)
             throw new UnauthenticatedException("User authorization is required");
-        
+
         return next(message, cancellationToken);
     }
 }

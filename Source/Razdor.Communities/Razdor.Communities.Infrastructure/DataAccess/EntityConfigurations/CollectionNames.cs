@@ -1,4 +1,4 @@
-﻿namespace Razdor.Communities.Infrastructure.DataAccess.EntityConfigurations.Channels;
+﻿namespace Razdor.Communities.Infrastructure.DataAccess.EntityConfigurations;
 
 public static class CollectionNames
 {

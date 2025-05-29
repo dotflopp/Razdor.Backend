@@ -11,12 +11,12 @@
 
     <ItemGroup>
         <PackageReference Include="Asp.Versioning.Http" Version="8.1.0"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.4" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.4"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Api\Razdor.Shared.Api.csproj" />
+        <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Api\Razdor.Shared.Api.csproj"/>
         <ProjectReference Include="..\Razdor.Identity.Module\Razdor.Identity.Module.csproj"/>
     </ItemGroup>
 </Project>

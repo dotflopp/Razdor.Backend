@@ -2,7 +2,7 @@
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Shared.Module;
 
-namespace Razdor.Communities.Api.Communities.Channels.ViewModels;
+namespace Razdor.Communities.Services.Services.Channels.ViewModels;
 
 public record OverwriteViewModel(
     [property:JsonConverter(typeof(JsonStringULongConverter))]
@@ -12,5 +12,7 @@ public record OverwriteViewModel(
 )
 {
     public static OverwriteViewModel From(Overwrite overwrite)
-        => new(overwrite.TargetId, overwrite.TargetType, overwrite.Permissions);
+    {
+        return new OverwriteViewModel(overwrite.TargetId, overwrite.TargetType, overwrite.Permissions);
+    }
 }

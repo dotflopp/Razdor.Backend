@@ -18,18 +18,18 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddCommunityServices(this IServiceCollection services, CommunitiesOptions options)
     {
         services.AddScoped<ICommunityModule, CommunityModule>();
-        
+
         services.AddDbContext<CommunityDataContext, CommunityMongoDataContext>(builder =>
             builder.UseMongoDB(options.ConnectionString, options.DataBaseName)
         );
-        
+
         services.AddScoped<UnitOfWork<CommunityDataContext>>();
         services.AddScoped<ICommunitiesRepository, CommunitiesRepository>();
         services.AddScoped<ICommunityMembersRepository, CommunityMembersRepository>();
         services.AddScoped<ICommunityPermissionsAccessor, CachedCommunityPermissionsAccessor>();
         services.AddScoped<IInvitesRepository, InvitesRepository>();
         services.AddScoped<ICommunityChannelsRepository, CommunityChannelsRepository>();
-        
+
         return services;
     }
 }

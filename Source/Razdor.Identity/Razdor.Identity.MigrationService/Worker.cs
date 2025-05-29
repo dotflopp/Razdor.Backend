@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using OpenTelemetry.Trace;
 
 namespace Razdor.Identity.Migrations;
 
@@ -13,15 +12,15 @@ public class Worker<TContext>(
 {
     public const string ActivitySourceName = "Migrations";
     private static readonly ActivitySource s_activitySource = new(ActivitySourceName);
-    
+
     protected override async Task ExecuteAsync(CancellationToken cancellationToken)
     {
-        using var activity = s_activitySource.StartActivity("Migrating database", ActivityKind.Client);
-    
+        using Activity? activity = s_activitySource.StartActivity("Migrating database", ActivityKind.Client);
+
         try
         {
-            using var scope = serviceProvider.CreateScope();
-            var dbContext = scope.ServiceProvider.GetRequiredService<TContext>();
+            using IServiceScope scope = serviceProvider.CreateScope();
+            TContext dbContext = scope.ServiceProvider.GetRequiredService<TContext>();
 
             await RunMigrationAsync(dbContext, cancellationToken);
             // await SeedDataAsync(dbContext, cancellationToken);

@@ -1,5 +1,4 @@
-﻿using System.Reflection.Metadata.Ecma335;
-using Mediator;
+﻿using Mediator;
 using Microsoft.Extensions.Logging;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Services.Exceptions;
@@ -15,10 +14,11 @@ public sealed class CommunityPermissionsHandler<TMessage, TResponse>(
 ) : IPipelineBehavior<TMessage, TResponse> where TMessage : IRequiredCommunityPermissionsMessage
 {
     public async ValueTask<TResponse> Handle(
-        TMessage message, 
+        TMessage message,
         MessageHandlerDelegate<TMessage, TResponse> next,
         CancellationToken cancellationToken
-    ){
+    )
+    {
         UserPermissions permissions;
         try
         {
@@ -36,10 +36,10 @@ public sealed class CommunityPermissionsHandler<TMessage, TResponse>(
             logger.LogError(exception, "Access community permissions error.");
             throw new AccessForbiddenException("Unknown exception", exception);
         }
-        
+
         if (!permissions.HasFlag(UserPermissions.Administrator) && !permissions.HasFlag(message.RequiredPermissions))
             throw new AccessForbiddenException($"{message.RequiredPermissions} permissions are required to perform the operation.");
-            
+
         return await next(message, cancellationToken);
     }
 }

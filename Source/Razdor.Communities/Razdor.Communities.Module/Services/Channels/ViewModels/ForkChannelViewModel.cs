@@ -1,8 +1,6 @@
-﻿using Razdor.Communities.Api.Communities.Channels.ViewModels;
-using Razdor.Communities.Domain.Channels.Abstractions;
-using Razdor.Communities.Domain.Permissions;
+﻿using Razdor.Communities.Domain.Channels;
 
-namespace Razdor.Communities.Services.Services.Channels.Commands.ViewModels;
+namespace Razdor.Communities.Services.Services.Channels.ViewModels;
 
 public record ForkChannelViewModel(
     ulong Id,

@@ -12,7 +12,7 @@ public enum ErrorCode : ulong
     InvalidPasswordOrEmail,
     IdentityNameOrEmailAlreadyExists,
     UserNotFound,
-    
+
     //AccessToken Validation
     InvalidAccessToken,
     AccessTokenExpired,
@@ -22,7 +22,7 @@ public enum ErrorCode : ulong
     CommunityNotFound,
     InviteNotFound,
     ReJoiningToCommunity,
-    
+
     //Routing
-    NonExistentRoute,
+    NonExistentRoute
 }

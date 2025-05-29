@@ -4,11 +4,11 @@ using Razdor.Shared.Domain;
 namespace Razdor.Communities.Domain.Roles;
 
 public class Role(
-    ulong id, 
-    string name, 
+    ulong id,
+    string name,
     ulong communityId,
-    UserPermissions permissions, 
-    bool isMentioned, 
+    UserPermissions permissions,
+    bool isMentioned,
     uint priority
 ) : BaseSnowflakeEntity(id)
 {

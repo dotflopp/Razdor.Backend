@@ -1,21 +1,22 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Razdor.Communities.Domain;
-using Razdor.Communities.Services.Communities.ViewModels;
 using Razdor.Communities.Services.DataAccess;
+using Razdor.Communities.Services.Services.Communities.ViewModels;
 using Razdor.Shared.Module.RequestSenderContext;
 
-namespace Razdor.Communities.Services.Communities.Queries;
+namespace Razdor.Communities.Services.Services.Communities.Queries;
 
 public sealed class GetSelfUserCommunitiesQueryHandler(
     CommunityDataContext context,
     IRequestSenderContextAccessor sender
-): IQueryHandler<GetSelfUserCommunitiesQuery, IEnumerable<CommunityViewModel>>
+) : IQueryHandler<GetSelfUserCommunitiesQuery, IEnumerable<CommunityViewModel>>
 {
     public async ValueTask<IEnumerable<CommunityViewModel>> Handle(
-        GetSelfUserCommunitiesQuery command, 
+        GetSelfUserCommunitiesQuery command,
         CancellationToken cancellationToken
-    ){
+    )
+    {
         List<ulong> userCommunityIds = await context.CommunityMembers.AsNoTracking()
             .Where(x => x.UserId == sender.User.Id)
             .Select(x => x.CommunityId)

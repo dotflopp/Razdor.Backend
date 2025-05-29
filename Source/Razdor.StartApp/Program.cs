@@ -1,5 +1,4 @@
 using Asp.Versioning;
-using Mediator;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.OpenApi.Models;
 using Razdor.Communities.Api;
@@ -8,7 +7,6 @@ using Razdor.Communities.Services.Authorization;
 using Razdor.Identity.Api.AuthenticationScheme;
 using Razdor.Identity.Api.Routes;
 using Razdor.Identity.Infrastructure;
-using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.ServiceDefaults;
 using Razdor.Shared.Api;
 using Razdor.Shared.Api.Constraints;
@@ -18,7 +16,7 @@ using Razdor.Shared.Module.RequestSenderContext;
 using Razdor.Signaling.Routing;
 using Razdor.Signaling.Services;
 
-var builder = WebApplication.CreateSlimBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateSlimBuilder(args);
 
 builder.AddServiceDefaults();
 
@@ -68,21 +66,22 @@ builder.Services.AddSwaggerGen(options =>
     OpenApiReference reference = new();
     reference.Type = ReferenceType.SecurityScheme;
     reference.Id = scheme.Scheme;
-    
+
     scheme.Reference = reference;
-    
+
     OpenApiSecurityRequirement securityRequirement = new();
     securityRequirement.Add(scheme, []);
-    
+
     options.AddSecurityRequirement(securityRequirement);
     options.SchemaFilter<StringTypesSchemaFilter>();
 });
 
 // Mediator
-builder.Services.AddMediator((MediatorOptions options) =>
+builder.Services.AddMediator(options =>
 {
     options.ServiceLifetime = ServiceLifetime.Scoped;
-    options.PipelineBehaviors = [
+    options.PipelineBehaviors =
+    [
         typeof(AuthorizationHandler<,>),
         typeof(CommunityPermissionsHandler<,>)
     ];
@@ -123,7 +122,7 @@ builder.Services.AddIdentityServices(
         Convert.FromBase64String(
             "K3UA5ta52VOeTguHAgYaw+5IV4KLUlflzx3sYjy8WpnLPsmR8oYsIHewP4U7cE/JBNRR9gNdGhaflBlJcGXA6lEu8ZdL1+x9muyI1nfuivA="
         ),
-        identityDb        
+        identityDb
     )
 );
 
@@ -134,7 +133,7 @@ builder.Services.AddCommunityServices(
     new CommunitiesOptions(
         communityDb,
         "communitydb"
-    )    
+    )
 );
 
 // SignalingServices
@@ -144,7 +143,7 @@ builder.Services.AddSignalingServices(
     ) + "/signaling"
 );
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 app.UseCors();
 

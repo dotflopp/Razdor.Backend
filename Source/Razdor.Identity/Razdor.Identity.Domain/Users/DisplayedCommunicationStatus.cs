@@ -7,5 +7,5 @@ public enum DisplayedCommunicationStatus
 {
     Online,
     Offline,
-    DoNotDisturb,
+    DoNotDisturb
 }

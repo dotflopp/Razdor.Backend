@@ -23,36 +23,36 @@ public partial class AccessTokenSource
 
     public string CreateNew(TokenClaims claims)
     {
-        var now = (ulong)(claims.CreationTime - _options.StartTime).TotalMilliseconds;
+        ulong now = (ulong)(claims.CreationTime - _options.StartTime).TotalMilliseconds;
 
-        var userIdBase64 = Base64Url.EncodeToString(
+        string userIdBase64 = Base64Url.EncodeToString(
             Encoding.UTF8.GetBytes(claims.UserId.ToString())
         );
-        var nowBase64 = Base64Url.EncodeToString(
+        string nowBase64 = Base64Url.EncodeToString(
             BitConverter.GetBytes(now)
         );
 
-        var data = string.Join(".", userIdBase64, nowBase64);
+        string data = string.Join(".", userIdBase64, nowBase64);
 
         using var hasher = new HMACSHA256(_options.Key);
-        var signature = hasher.ComputeHash(Encoding.UTF8.GetBytes(data));
+        byte[] signature = hasher.ComputeHash(Encoding.UTF8.GetBytes(data));
 
-        var signatureBase64 = Base64Url.EncodeToString(signature);
+        string signatureBase64 = Base64Url.EncodeToString(signature);
         return string.Join(".", data, signatureBase64);
     }
 
     public bool Check(string token)
     {
-        var match = _dataAndSignatureExtractorRegex.Match(token);
+        Match match = _dataAndSignatureExtractorRegex.Match(token);
         if (!match.Success)
             return false;
 
-        var data = match.Groups[1].Value;
-        var originalSignature = match.Groups[2].Value;
+        string data = match.Groups[1].Value;
+        string originalSignature = match.Groups[2].Value;
 
         using var hasher = new HMACSHA256(_options.Key);
-        var signature = hasher.ComputeHash(Encoding.UTF8.GetBytes(data));
-        var signatureBase64 = Base64Url.EncodeToString(signature);
+        byte[] signature = hasher.ComputeHash(Encoding.UTF8.GetBytes(data));
+        string signatureBase64 = Base64Url.EncodeToString(signature);
 
         return signatureBase64.Equals(originalSignature);
     }
@@ -67,17 +67,17 @@ public partial class AccessTokenSource
 
     public TokenClaims Read(string token)
     {
-        var tokenData = token.Split(".");
+        string[] tokenData = token.Split(".");
         if (tokenData.Length != 3)
             throw new ArgumentException("Invalid token format");
 
-        var userIdBase64 = tokenData[0];
-        var nowBase64 = tokenData[1];
+        string userIdBase64 = tokenData[0];
+        string nowBase64 = tokenData[1];
 
-        var userId = Encoding.UTF8.GetString(
+        string userId = Encoding.UTF8.GetString(
             Base64Url.DecodeFromChars(userIdBase64)
         );
-        var realativeCreationTime = BitConverter.ToUInt64(
+        ulong realativeCreationTime = BitConverter.ToUInt64(
             Base64Url.DecodeFromChars(nowBase64)
         );
 

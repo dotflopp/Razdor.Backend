@@ -1,14 +1,14 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
-using Razdor.Communities.Domain.Channels.Abstractions;
+using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Services.DataAccess;
-using Razdor.Communities.Services.Services.Channels.Commands;
+using Razdor.Communities.Services.Services.Channels.ViewModels;
 
 namespace Razdor.Communities.Services.Services.Channels.Queries;
 
 public class GetCommunityChannelsQueryHandler(
     CommunityDataContext context
-): IQueryHandler<GetCommunityChannelsQuery, IEnumerable<ChannelViewModel>>
+) : IQueryHandler<GetCommunityChannelsQuery, IEnumerable<ChannelViewModel>>
 {
     public async ValueTask<IEnumerable<ChannelViewModel>> Handle(GetCommunityChannelsQuery query, CancellationToken cancellationToken)
     {

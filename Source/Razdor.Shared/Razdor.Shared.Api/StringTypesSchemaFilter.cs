@@ -6,15 +6,15 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace Razdor.Shared.Api;
 
-public class StringTypesSchemaFilter: ISchemaFilter
+public class StringTypesSchemaFilter : ISchemaFilter
 {
     public void Apply(OpenApiSchema schema, SchemaFilterContext context)
     {
         if (context.MemberInfo?.CustomAttributes is null)
             return;
-        
+
         bool changeTypeToString = context.MemberInfo.CustomAttributes.Any(HasJsonStringConverterTypeInConstructor);
-        
+
         if (changeTypeToString)
             schema.Type = "string";
     }
@@ -33,8 +33,7 @@ public class StringTypesSchemaFilter: ISchemaFilter
     {
         if (arg.Value is not Type type)
             return false;
-        
-        
+
         return type == typeof(JsonStringEnumConverter) || type == typeof(JsonStringULongConverter);
     }
 }

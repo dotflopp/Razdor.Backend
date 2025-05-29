@@ -1,5 +1,5 @@
-﻿namespace Razdor.Communities.Api.Communities.ViewModels;
+﻿namespace Razdor.Communities.Api.Communities.Invites.ViewModels;
 
 public record InviteParametersViewModel(
-    long? LifeTime  // Seconds
+    long? LifeTime // Seconds
 );

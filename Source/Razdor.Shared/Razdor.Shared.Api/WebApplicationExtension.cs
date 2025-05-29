@@ -14,12 +14,12 @@ public static class WebApplicationExtension
 
     public static WebApplication UseCustomNotAuthorizedResponse(this WebApplication app)
     {
-        app.Use(async (HttpContext context, RequestDelegate next) =>
+        app.Use(async (context, next) =>
         {
             await next(context);
             if (context.Response.StatusCode != StatusCodes.Status401Unauthorized)
                 return;
-            
+
             await context.Response.WriteAsJsonAsync(
                 new ExceptionViewModel(
                     ErrorCode.Unauthorized,
@@ -28,16 +28,16 @@ public static class WebApplicationExtension
                 SharedJsonSerializerContext.Default.GetRequiredTypeInfo<ExceptionViewModel>()
             );
         });
-        
+
         return app;
     }
 
     public static WebApplication UseNonExistentRouteResponse(this WebApplication app)
     {
-        app.Use(async (HttpContext context, RequestDelegate next) =>
+        app.Use(async (context, next) =>
         {
             await next(context);
-            
+
             if (context.Response.StatusCode != StatusCodes.Status404NotFound)
                 return;
 

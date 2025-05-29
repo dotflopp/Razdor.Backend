@@ -2,7 +2,7 @@
 using Razdor.Communities.Domain;
 using Razdor.Shared.Module;
 
-namespace Razdor.Communities.Services.Communities.ViewModels;
+namespace Razdor.Communities.Services.Services.Communities.ViewModels;
 
 public record CommunityViewModel(
     [property:JsonConverter(typeof(JsonStringULongConverter))]
@@ -29,4 +29,4 @@ public record CommunityViewModel(
             community.Roles.Select(RoleViewModel.From).ToList()
         );
     }
-};
+}

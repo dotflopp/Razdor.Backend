@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Net;
-using System.Security.Principal;
 using Microsoft.AspNetCore.Mvc;
 using Razdor.Identity.Module.Contracts;
 using Razdor.Identity.Module.Users.Queries;
@@ -14,37 +13,40 @@ public static class UsersRouter
     internal static IEndpointRouteBuilder MapUsers(
         this IEndpointRouteBuilder router,
         [StringSyntax("Route")] string groupPrefix = "/users"
-    ){
+    )
+    {
         RouteGroupBuilder api = router.MapGroup(groupPrefix)
             .WithTags("Users");
 
         api.MapGet("/@me", GetSelfUserAsync)
             .RequireAuthorization()
             .WithSummary("Вернет аутентифицированного пользователя")
-            .Produces<SelfUserViewModel>((int)HttpStatusCode.OK)
+            .Produces<SelfUserViewModel>()
             .Produces((int)HttpStatusCode.Unauthorized)
             .Produces<ExceptionViewModel>((int)HttpStatusCode.NotFound);
 
         api.MapGet("/{userId:ulong}", GetUserAsync)
-            .Produces<UserPreviewModel>((int)HttpStatusCode.OK)
+            .Produces<UserPreviewModel>()
             .Produces((int)HttpStatusCode.NotFound)
             .WithSummary("Вернет пользователя с соответствующим идентификатором");
-        
+
         return router;
     }
 
     private static async Task<IResult> GetUserAsync(
         [FromServices] IIdentityModule identity,
         [FromRoute] ulong userId
-    ){
+    )
+    {
         UserPreviewModel user = await identity.ExecuteQueryAsync(new GetUserQuery(userId));
         return Results.Ok(user);
     }
 
     private static async Task<IResult> GetSelfUserAsync(
         [FromServices] IIdentityModule identity
-    ){
-        SelfUserViewModel user = await identity.ExecuteQueryAsync(new GetSelfUserQuery());   
+    )
+    {
+        SelfUserViewModel user = await identity.ExecuteQueryAsync(new GetSelfUserQuery());
         return Results.Ok(user);
     }
 }

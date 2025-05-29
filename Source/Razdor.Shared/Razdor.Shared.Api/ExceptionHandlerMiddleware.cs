@@ -1,5 +1,4 @@
-﻿using System.Text.Json.Serialization.Metadata;
-using Razdor.Shared.Api.ViewModels;
+﻿using Razdor.Shared.Api.ViewModels;
 using Razdor.Shared.Domain.Exceptions;
 using Razdor.Shared.Extensions;
 
@@ -7,8 +6,8 @@ namespace Razdor.Shared.Api;
 
 public class ExceptionHandlerMiddleware
 {
-    private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionHandlerMiddleware> _logger;
+    private readonly RequestDelegate _next;
     public ExceptionHandlerMiddleware(
         RequestDelegate next,
         ILogger<ExceptionHandlerMiddleware> logger
@@ -23,7 +22,7 @@ public class ExceptionHandlerMiddleware
         try
         {
             await _next(context);
-        } 
+        }
         catch (RazdorException ex)
         {
             await HandleException(context, ex);
@@ -43,7 +42,7 @@ public class ExceptionHandlerMiddleware
             exception.ErrorCode,
             exception.Message
         );
-        
+
         _logger.LogInformation($"StatusCode: {context.Response.StatusCode} Exception: {exceptionViewModel}");
         await context.Response.WriteAsJsonAsync(
             exceptionViewModel,

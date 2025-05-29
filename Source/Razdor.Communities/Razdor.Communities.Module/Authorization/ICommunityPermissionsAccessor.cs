@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.ValueGeneration.Internal;
-using Razdor.Communities.Domain.Permissions;
+﻿using Razdor.Communities.Domain.Permissions;
 
 namespace Razdor.Communities.Services.Authorization;
 

@@ -10,4 +10,4 @@ public class BusinesRuleValidationException(
 )
 {
     public IBusinessRule Rule => rule;
-};
+}

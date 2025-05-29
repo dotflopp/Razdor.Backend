@@ -1,8 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
-using Razdor.Communities.Domain.Channels.Abstractions;
-using Razdor.Communities.Domain.Members;
-using Razdor.Communities.Domain.Permissions;
+﻿using Razdor.Communities.Domain.Permissions;
 
 namespace Razdor.Communities.Domain.Channels;
 
@@ -20,23 +16,26 @@ public class TextChannel : OverwritesPermissionChannel, IOverwritesOwner
         | UserPermissions.ManageFork
         | UserPermissions.CreateFork
         | UserPermissions.SendMessageInFork;
-    
-    
+
+
     /// <summary>
-    /// EF constructor
+    ///     EF constructor
     /// </summary>
-    private TextChannel(): this(0, null!, 0, 0, 0, null) { }
+    private TextChannel() : this(0, null!, 0, 0, 0, null) { }
 
     internal TextChannel(
-        ulong id, 
-        string name, 
-        ulong communityId, 
-        uint position, 
-        ulong parentId, 
+        ulong id,
+        string name,
+        ulong communityId,
+        uint position,
+        ulong parentId,
         List<Overwrite>? overwrites
     ) : base(id, name, communityId, position, ChannelType.TextChannel, parentId, overwrites, AvailablePermissions)
-    { }
+    {
+    }
 
     public static TextChannel CreateNew(ulong id, ulong communityId, ulong parentId, string name)
-        => new (id, name, communityId, 0, parentId, null);
+    {
+        return new TextChannel(id, name, communityId, 0, parentId, null);
+    }
 }

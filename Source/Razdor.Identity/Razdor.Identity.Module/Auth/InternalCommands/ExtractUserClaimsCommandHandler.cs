@@ -16,8 +16,8 @@ public class ExtractUserClaimsCommandHandler(
         if (!tokenSource.Check(command.AccessToken))
             ValidationExceptionHelper.ThrowInvalidAccessTokenException();
 
-        var tokenClaims = ReadToken(command.AccessToken);
-        var user = await users.FindByIdAsync(tokenClaims.UserId);
+        TokenClaims tokenClaims = ReadToken(command.AccessToken);
+        UserAccount? user = await users.FindByIdAsync(tokenClaims.UserId);
 
         if (user == null)
             ValidationExceptionHelper.ThrowInvalidAccessTokenException();

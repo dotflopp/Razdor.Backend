@@ -1,16 +1,7 @@
-﻿using System.ComponentModel;
-using Microsoft.EntityFrameworkCore;
-using MongoDB.Bson.Serialization;
-using MongoDB.Bson.Serialization.Serializers;
-using Razdor.Communities.Domain;
+﻿using Microsoft.EntityFrameworkCore;
 using Razdor.Communities.Domain.Channels;
-using Razdor.Communities.Domain.Channels.Abstractions;
-using Razdor.Communities.Domain.Members;
-using Razdor.Communities.Domain.Roles;
 using Razdor.Communities.Infrastructure.DataAccess.EntityConfigurations;
-using Razdor.Communities.Infrastructure.DataAccess.EntityConfigurations.Channels;
 using Razdor.Communities.Infrastructure.DataAccess.TypeConverters;
-using Razdor.Communities.Services;
 using Razdor.Communities.Services.DataAccess;
 
 namespace Razdor.Communities.Infrastructure.DataAccess;
@@ -26,7 +17,7 @@ public class CommunityMongoDataContext(DbContextOptions options) : CommunityData
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         base.ConfigureConventions(configurationBuilder);
-        
+
         configurationBuilder.Properties<DateTimeOffset>()
             .HaveConversion<DatetimeOffsetConverter>();
     }
@@ -34,7 +25,7 @@ public class CommunityMongoDataContext(DbContextOptions options) : CommunityData
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
-        
+
         modelBuilder
             .ApplyConfiguration<TextChannel>(new ChannelConfigurations())
             .ApplyConfiguration<CommunityChannel>(new ChannelConfigurations())

@@ -9,4 +9,3 @@ public interface IRequestSenderContextAccessor
     [MemberNotNullWhen(true, nameof(User))]
     bool IsAuthenticated { get; }
 }
-

@@ -5,12 +5,11 @@ using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Rules;
 using Razdor.Communities.Services.DataAccess;
 using Razdor.Communities.Services.Exceptions;
-using Razdor.Communities.Services.UseCases.Invites.Commands;
 using Razdor.Shared.Domain.Rules;
 using Razdor.Shared.Module.DataAccess;
 using Razdor.Shared.Module.RequestSenderContext;
 
-namespace Razdor.Communities.Services.Communities.Commands;
+namespace Razdor.Communities.Services.Services.Invites.Commands;
 
 public sealed class AcceptInviteCommandHandler(
     IInvitesRepository invites,
@@ -19,7 +18,7 @@ public sealed class AcceptInviteCommandHandler(
     UnitOfWork<CommunityDataContext> unitOfWork,
     IRequestSenderContextAccessor sender,
     TimeProvider timeProvider
-): ICommandHandler<AcceptInviteCommand>
+) : ICommandHandler<AcceptInviteCommand>
 {
     public async ValueTask<Unit> Handle(AcceptInviteCommand command, CancellationToken cancellationToken)
     {
@@ -32,12 +31,12 @@ public sealed class AcceptInviteCommandHandler(
             throw new InvalidOperationException($"There is an Invite({invite.Id}) without a Community({invite.CommunityId})");
 
         await RuleValidationHelper.ThrowIfBrokenAsync(
-            new CantJoinSameCommunityTwice(members, invite.CommunityId, sender.User.Id)  
+            new CantJoinSameCommunityTwice(members, invite.CommunityId, sender.User.Id)
         );
-        
-        CommunityMember communityMember = CommunityMember.CreateNew(sender.User.Id, invite.CommunityId, timeProvider);
+
+        var communityMember = CommunityMember.CreateNew(sender.User.Id, invite.CommunityId, timeProvider);
         members.Add(communityMember);
-        
+
         await unitOfWork.SaveEntitiesAsync();
         return Unit.Value;
     }

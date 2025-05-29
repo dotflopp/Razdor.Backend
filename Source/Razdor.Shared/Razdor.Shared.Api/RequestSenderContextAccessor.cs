@@ -18,7 +18,7 @@ public class RequestSenderContextAccessor(IHttpContextAccessor httpContextAccess
 
             if (_user == null)
                 throw new InvalidOperationException("There may be no authorization check, or an middleware that adds claims is not registered.");
-                
+
             return _user;
         }
     }
@@ -37,9 +37,9 @@ public class RequestSenderContextAccessor(IHttpContextAccessor httpContextAccess
 
     private UserClaims? ExtractUserClaims()
     {
-        var claims = httpContextAccessor.HttpContext?.User?.Claims ?? [];
+        IEnumerable<Claim> claims = httpContextAccessor.HttpContext?.User?.Claims ?? [];
 
-        var userId = claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
+        string? userId = claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
 
         if (userId == null)
             return null;

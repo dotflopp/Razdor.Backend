@@ -15,7 +15,7 @@ public class SignalingInternalService(string server) : ISignalingInternalService
 
     public Task<IRoom> CreateIfNotExistRoomAsync(ulong channelId)
     {
-        if (_rooms.TryGetValue(channelId, out var room))
+        if (_rooms.TryGetValue(channelId, out Room? room))
             return Task.FromResult<IRoom>(room);
 
         room = new Room(channelId, _server);
@@ -25,7 +25,7 @@ public class SignalingInternalService(string server) : ISignalingInternalService
 
     public Task<IRoom?> FindRoomAsync(ulong channelId)
     {
-        if (_rooms.TryGetValue(channelId, out var room))
+        if (_rooms.TryGetValue(channelId, out Room? room))
             return Task.FromResult<IRoom?>(room);
 
         return Task.FromResult<IRoom?>(null);
@@ -34,9 +34,9 @@ public class SignalingInternalService(string server) : ISignalingInternalService
 
     public async Task<IRoom?> FindRoomBySessionAsync(string sessionId)
     {
-        var channelIdStr = sessionId.Split("-").FirstOrDefault();
+        string? channelIdStr = sessionId.Split("-").FirstOrDefault();
 
-        if (!ulong.TryParse(channelIdStr, out var channelId))
+        if (!ulong.TryParse(channelIdStr, out ulong channelId))
             return null;
 
         return await FindRoomAsync(channelId);

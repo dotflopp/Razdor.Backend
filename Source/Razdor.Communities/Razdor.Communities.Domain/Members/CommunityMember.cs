@@ -1,26 +1,20 @@
 ﻿using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Security.Cryptography;
-using Razdor.Communities.Domain.Event;
-using Razdor.Communities.Domain.Permissions;
-using Razdor.Communities.Domain.Roles;
 using Razdor.Shared.Domain;
 
 namespace Razdor.Communities.Domain.Members;
 
-
 public class CommunityMember : BaseAggregateRoot
 {
-    private List<ulong>? _roleIds;
+    private readonly List<ulong>? _roleIds;
 
     /// <summary>
-    /// EF constructor
+    ///     EF constructor
     /// </summary>
     private CommunityMember() : this(0, 0, null!, null, null, DateTimeOffset.MinValue)
     {
         Console.WriteLine("Ef core constructor");
     }
-    
+
     internal CommunityMember(
         ulong userId,
         ulong communityId,
@@ -28,7 +22,8 @@ public class CommunityMember : BaseAggregateRoot
         CommunityNotificationPolicy? notificationPolicy,
         List<ulong>? roleIds,
         DateTimeOffset joiningDate
-    ){
+    )
+    {
         _roleIds = roleIds;
         UserId = userId;
         CommunityId = communityId;
@@ -39,23 +34,23 @@ public class CommunityMember : BaseAggregateRoot
 
     public ulong UserId { get; private set; }
     public ulong CommunityId { get; private set; }
-    
+
     public VoiceState VoiceState { get; private set; }
 
     /// <summary>
-    /// Переопределенная политика уведомлений для конкретного пользователя
+    ///     Переопределенная политика уведомлений для конкретного пользователя
     /// </summary>
     public CommunityNotificationPolicy? NotificationPolicy { get; private set; }
 
     /// <summary>
-    /// Отсортированная в порядке возрастания коллекция ролей
+    ///     Отсортированная в порядке возрастания коллекция ролей
     /// </summary>
     public IReadOnlyCollection<ulong> RoleIds => _roleIds?.AsReadOnly() ?? ReadOnlyCollection<ulong>.Empty;
     // public List<ulong>? RoleIds 
 
 
     /// <summary>
-    /// Дата последнего присоединения к сообществу
+    ///     Дата последнего присоединения к сообществу
     /// </summary>
     public DateTimeOffset JoiningDate { get; private set; }
 
@@ -69,7 +64,7 @@ public class CommunityMember : BaseAggregateRoot
             [],
             time?.GetUtcNow() ?? DateTimeOffset.UtcNow
         );
-        
+
         // member.AddDomainEvent(new UserJoined(communityId, userId));
         return member;
     }

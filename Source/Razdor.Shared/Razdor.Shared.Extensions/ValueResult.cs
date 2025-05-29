@@ -55,7 +55,7 @@ public readonly struct ValueResult<TValue, TError>
 
     public override string ToString()
     {
-        return TrySuccess(out var value, out var error)
+        return TrySuccess(out TValue? value, out TError? error)
             ? $"Success {{ Value = {value}; }}"
             : $"Error {{ Value = {error}; }}";
     }

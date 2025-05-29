@@ -1,7 +1,5 @@
 ﻿using Mediator;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Razdor.Identity.Domain;
 using Razdor.Identity.Domain.Users;
 using Razdor.Identity.Domain.Users.Rules;
 using Razdor.Identity.Module.Auth.AccessTokens;
@@ -22,17 +20,17 @@ public sealed class SignupCommandHandler(
 {
     public async ValueTask<AccessToken> Handle(SignupCommand command, CancellationToken cancellationToken)
     {
-        UserAccount user = UserAccount.RegisterNew(
+        var user = UserAccount.RegisterNew(
             idGenerator.Next(),
             command.IdentityName,
-            nickname: null,
-            avatar: null,
-            email: command.Email,
-            hashedPassword: null,
-            counter: counter,
-            time: timeProvider
+            nickname:null,
+            avatar:null,
+            email:command.Email,
+            hashedPassword:null,
+            counter:counter,
+            time:timeProvider
         );
-        
+
         await RuleValidationHelper.ThrowIfBrokenAsync(
             new IdentityNameAndEmailMustBeUnique(counter, user.IdentityName, user.Email)
         );
@@ -44,14 +42,14 @@ public sealed class SignupCommandHandler(
 
         userRepository.Add(user);
         await userRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
-        
-        var accessToken = tokenSource.CreateNew(
+
+        string accessToken = tokenSource.CreateNew(
             new TokenClaims(
                 user.Id,
                 timeProvider.GetUtcNow()
             )
         );
-        
+
         return new AccessToken(accessToken);
     }
 }

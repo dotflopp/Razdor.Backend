@@ -8,8 +8,8 @@ namespace Razdor.Communities.Services.DataAccess;
 
 public class CommunitiesRepository(
     CommunityDataContext context,
-    UnitOfWork<CommunityDataContext> unitOfWork 
-): ICommunitiesRepository
+    UnitOfWork<CommunityDataContext> unitOfWork
+) : ICommunitiesRepository
 {
     private readonly CommunityDataContext _context = context;
     public IUnitOfWork UnitOfWork => unitOfWork;

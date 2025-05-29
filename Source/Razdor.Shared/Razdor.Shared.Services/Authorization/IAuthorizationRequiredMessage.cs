@@ -2,4 +2,4 @@
 
 namespace Razdor.Shared.Module.Authorization;
 
-public interface IAuthorizationRequiredMessage: IMessage;
+public interface IAuthorizationRequiredMessage : IMessage;

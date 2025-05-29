@@ -2,10 +2,10 @@
 
 namespace Razdor.Shared.Domain;
 
-public class BaseAggregateRoot: IAggregateRoot
+public class BaseAggregateRoot : IAggregateRoot
 {
     private List<IDomainEvent>? _domainEvents;
-    
+
     public IReadOnlyCollection<IDomainEvent> DomainEvents =>
         _domainEvents?.AsReadOnly() ?? ReadOnlyCollection<IDomainEvent>.Empty;
 

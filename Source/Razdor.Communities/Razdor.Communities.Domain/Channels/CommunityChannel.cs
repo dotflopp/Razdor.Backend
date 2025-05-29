@@ -1,10 +1,9 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Shared.Domain;
 
-namespace Razdor.Communities.Domain.Channels.Abstractions;
+namespace Razdor.Communities.Domain.Channels;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum ChannelType
@@ -34,7 +33,8 @@ public abstract class CommunityChannel(
     public abstract IReadOnlyList<Overwrite> Overwrites { get; }
 
     /// <summary>
-    /// Вернет права пользователя с учетом перезаписанных прав в канале, наследуемые права необходимо передать отдельным параметром
+    ///     Вернет права пользователя с учетом перезаписанных прав в канале, наследуемые права необходимо передать отдельным
+    ///     параметром
     /// </summary>
     /// <param name="member"></param>
     /// <param name="inheritedPermissions">Наследуемые параметры канала</param>
@@ -42,15 +42,15 @@ public abstract class CommunityChannel(
     public virtual UserPermissions GetPermissionsWithOverwrites(CommunityMember member, UserPermissions inheritedPermissions)
     {
         UserPermissions result = inheritedPermissions;
-        
-        List<Overwrite> overwrites = GetIntersectionOverwrites(member).ToList();
-        
-        foreach (var overwrite in overwrites)
+
+        var overwrites = GetIntersectionOverwrites(member).ToList();
+
+        foreach (Overwrite overwrite in overwrites)
             result = overwrite.Permissions.ApplyAllow(result);
 
-        foreach (var overwrite in overwrites)
+        foreach (Overwrite overwrite in overwrites)
             result = overwrite.Permissions.ApplyDeny(result);
-        
+
         return result;
     }
 
@@ -58,24 +58,24 @@ public abstract class CommunityChannel(
     {
         if (Overwrites.Count == 0)
             yield break;
-        
+
         using IEnumerator<ulong> roleIds = member.RoleIds.GetEnumerator();
         roleIds.MoveNext();
-        
-        foreach (var overwrite in Overwrites)
+
+        foreach (Overwrite overwrite in Overwrites)
         {
             if (overwrite.TargetId == member.UserId && overwrite.TargetType == PermissionTargetType.User)
             {
                 yield return overwrite;
                 continue;
             }
-            
+
             while (overwrite.TargetId > roleIds.Current)
                 roleIds.MoveNext();
-            
+
             if (roleIds.Current != overwrite.TargetId || overwrite.TargetType != PermissionTargetType.Role)
                 continue;
-            
+
             yield return overwrite;
         }
     }

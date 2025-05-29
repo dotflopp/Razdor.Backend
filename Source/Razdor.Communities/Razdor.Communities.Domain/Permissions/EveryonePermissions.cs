@@ -1,18 +1,16 @@
-﻿using Razdor.Communities.Domain.Permissions;
-
-namespace Razdor.Communities.Domain.Roles;
+﻿namespace Razdor.Communities.Domain.Permissions;
 
 /// <summary>
-/// Всегда имеет такой же ID как у Сообщества
-/// Идет по умолчанию как роль каждого пользователя в сообществе
+///     Всегда имеет такой же ID как у Сообщества
+///     Идет по умолчанию как роль каждого пользователя в сообществе
 /// </summary>
 public class EveryonePermissions(UserPermissions permissions, uint priority)
 {
     /// <summary>
-    /// Права которые выдаются при создании роли Everyone
+    ///     Права которые выдаются при создании роли Everyone
     /// </summary>
     public const UserPermissions InitialPermissions =
-         UserPermissions.ViewChannel
+        UserPermissions.ViewChannel
         | UserPermissions.SendMessage
         | UserPermissions.AttachFiles
         | UserPermissions.AttachEmbed

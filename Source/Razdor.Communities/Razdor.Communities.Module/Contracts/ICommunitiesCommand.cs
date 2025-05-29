@@ -2,8 +2,8 @@
 
 namespace Razdor.Communities.Services.Contracts;
 
-public interface ICommunitiesCommand: ICommand, ICommunitiesCommand<Unit>
+public interface ICommunitiesCommand : ICommand, ICommunitiesCommand<Unit>
 {
 }
 
-public interface ICommunitiesCommand<out TResult>: ICommand<TResult>;
+public interface ICommunitiesCommand<out TResult> : ICommand<TResult>;

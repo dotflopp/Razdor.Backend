@@ -3,6 +3,7 @@ using System.Text.Encodings.Web;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 using Razdor.Identity.Module.Auth.InternalCommands;
 using Razdor.Identity.Module.Auth.InternalCommands.Exceptions;
@@ -26,16 +27,16 @@ public partial class AccessTokenAuthenticationHandler : AuthenticationHandler<Ac
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
-        if (!Request.Headers.TryGetValue(HeaderNames.Authorization, out var authorization))
+        if (!Request.Headers.TryGetValue(HeaderNames.Authorization, out StringValues authorization))
             return AuthenticateResult.NoResult();
 
-        var headerMatch = _authenticationHeaderRegex.Match(authorization.ToString());
+        Match headerMatch = _authenticationHeaderRegex.Match(authorization.ToString());
 
         if (!headerMatch.Success)
             return AuthenticateResult.Fail("Invalid authorization header");
 
-        var accessToken = headerMatch.Groups[2].Value;
-        var identity = Context.RequestServices.GetRequiredService<IIdentityModule>();
+        string accessToken = headerMatch.Groups[2].Value;
+        IIdentityModule identity = Context.RequestServices.GetRequiredService<IIdentityModule>();
 
         UserClaims userClaims;
         try

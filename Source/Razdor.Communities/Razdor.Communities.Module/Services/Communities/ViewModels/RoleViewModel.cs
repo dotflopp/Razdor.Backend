@@ -3,7 +3,7 @@ using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Domain.Roles;
 using Razdor.Shared.Module;
 
-namespace Razdor.Communities.Services.Communities.ViewModels;
+namespace Razdor.Communities.Services.Services.Communities.ViewModels;
 
 public record RoleViewModel(
     [property:JsonConverter(typeof(JsonStringULongConverter))]
@@ -12,7 +12,8 @@ public record RoleViewModel(
     string Name,
     UserPermissions Permissions,
     bool IsMentioned
-){
+)
+{
     public static RoleViewModel From(Role role)
     {
         return new RoleViewModel(

@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace Razdor.Shared.Module;
 
-public sealed class JsonStringULongConverter: JsonConverter<ulong>
+public sealed class JsonStringULongConverter : JsonConverter<ulong>
 {
     public override ulong Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

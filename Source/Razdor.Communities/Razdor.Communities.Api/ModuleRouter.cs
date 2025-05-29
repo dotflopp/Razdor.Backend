@@ -14,10 +14,10 @@ public static class ModuleRouter
             .NewVersionedApi("communities")
             .HasApiVersion(0.1)
             .MapGroup("/api/");
-        
+
         api.MapInvites();
         api.MapCommunities();
-        
+
         return builder;
     }
 }

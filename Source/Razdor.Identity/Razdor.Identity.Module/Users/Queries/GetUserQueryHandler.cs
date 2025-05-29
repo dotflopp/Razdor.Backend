@@ -15,8 +15,8 @@ public sealed class GetUserQueryHandler(
     {
         UserAccount? user = await dbSqlContext.UserAccounts
             .Where(x => x.Id == query.UserId)
-            .FirstOrDefaultAsync(cancellationToken: cancellationToken);
-        
+            .FirstOrDefaultAsync(cancellationToken:cancellationToken);
+
         if (user is null)
             throw new UserNotFoundException($"The user with the ID {query.UserId} was not found");
 

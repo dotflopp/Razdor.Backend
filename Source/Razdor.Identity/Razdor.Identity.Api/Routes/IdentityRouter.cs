@@ -7,7 +7,7 @@ public static class IdentityRouter
 {
     public static IEndpointRouteBuilder MapIdentityApi(this IEndpointRouteBuilder router)
     {
-        var api = router
+        RouteGroupBuilder api = router
             .NewVersionedApi("identity")
             .HasApiVersion(0.1)
             .MapGroup("/api/");

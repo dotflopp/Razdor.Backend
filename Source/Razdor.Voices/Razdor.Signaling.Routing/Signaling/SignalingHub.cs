@@ -31,7 +31,7 @@ public class SignalingHub : Hub
     public override async Task OnDisconnectedAsync(Exception? exception)
     {
         _logger.LogInformation("Disconnected {0}", exception);
-        var session = _sessionConnections.FirstOrDefault(x => x.Value == Context.ConnectionId);
+        KeyValuePair<string, string> session = _sessionConnections.FirstOrDefault(x => x.Value == Context.ConnectionId);
         if (session.Value == null)
             return;
 
@@ -43,7 +43,7 @@ public class SignalingHub : Hub
     public async Task ConnectAsync(string sessionId, UserIdentity user)
     {
         _logger.LogInformation("Connecting to session {0}", sessionId);
-        var room = await _signalingService.FindRoomBySessionAsync(sessionId);
+        IRoom? room = await _signalingService.FindRoomBySessionAsync(sessionId);
 
         if (room == null)
             throw new Exception($"Room {sessionId} not found");
@@ -57,14 +57,14 @@ public class SignalingHub : Hub
     public async Task DisconnectAsync(string sessionId)
     {
         _logger.LogInformation("Disconnect from session {0}", sessionId);
-        var room = await _signalingService.FindRoomBySessionAsync(sessionId);
+        IRoom? room = await _signalingService.FindRoomBySessionAsync(sessionId);
         if (room == null)
             throw new Exception($"Room {sessionId} not found");
 
         _sessionConnections.Remove(sessionId);
         await room.DisconnectUserAsync(sessionId);
 
-        var user = await room.FindUserAsync(sessionId);
+        UserIdentity? user = await room.FindUserAsync(sessionId);
         if (user != null) await SendToRoomBySessions(room, "UserDisconnected", user, sessionId);
     }
 
@@ -73,7 +73,7 @@ public class SignalingHub : Hub
     {
         _logger.LogInformation("Offer {}", sessionId);
 
-        var room = await _signalingService.FindRoomBySessionAsync(sessionId);
+        IRoom? room = await _signalingService.FindRoomBySessionAsync(sessionId);
 
         if (room == null)
             return;
@@ -86,7 +86,7 @@ public class SignalingHub : Hub
     {
         _logger.LogInformation("Answer {}", sessionId);
 
-        if (!_sessionConnections.TryGetValue(toId, out var connectionId))
+        if (!_sessionConnections.TryGetValue(toId, out string? connectionId))
             return;
 
         await Clients.Client(connectionId).SendAsync("Answer", answer);
@@ -97,7 +97,7 @@ public class SignalingHub : Hub
     {
         _logger.LogInformation("IceCandidate {}", sessionId);
 
-        var room = await _signalingService.FindRoomBySessionAsync(sessionId);
+        IRoom? room = await _signalingService.FindRoomBySessionAsync(sessionId);
 
         if (room == null)
             return;
@@ -110,15 +110,15 @@ public class SignalingHub : Hub
     {
         List<Task> tasks = new();
 
-        foreach (var session in await room.GetSessionsAsync())
+        foreach (string session in await room.GetSessionsAsync())
         {
             if (session == ignoredSession)
                 continue;
 
-            if (!_sessionConnections.TryGetValue(session, out var connection))
+            if (!_sessionConnections.TryGetValue(session, out string? connection))
                 continue;
 
-            var task = Clients.Client(connection).SendAsync(method, arg1);
+            Task task = Clients.Client(connection).SendAsync(method, arg1);
             tasks.Add(task);
         }
 

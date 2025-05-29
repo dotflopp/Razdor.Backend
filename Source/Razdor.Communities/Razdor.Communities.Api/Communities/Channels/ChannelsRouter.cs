@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Razdor.Communities.Api.Communities.Channels.ViewModels;
 using Razdor.Communities.Services.Contracts;
 using Razdor.Communities.Services.Services.Channels.Commands;
 using Razdor.Communities.Services.Services.Channels.Queries;
+using Razdor.Communities.Services.Services.Channels.ViewModels;
 
 namespace Razdor.Communities.Api.Communities.Channels;
 
@@ -19,7 +19,7 @@ public static class ChannelsRouter
         api.MapPost("/", CreateCommunityChannel)
             .Produces<ChannelViewModel>()
             .WithSummary("Создать новый канал в сообществе");
-        
+
         return builder;
     }
 
@@ -27,25 +27,29 @@ public static class ChannelsRouter
         [FromServices] ICommunityModule module,
         [FromRoute] ulong communityId,
         [FromBody] CommunityChannelConfiguration channelConfig
-    ){
-       ChannelViewModel channel = await module.ExecuteCommandAsync(new CreateCommunityChannelCommand(
-            channelConfig.Name,
-            channelConfig.Type,
-            communityId,
-            channelConfig.ParentId
-        ));
+    )
+    {
+        ChannelViewModel channel = await module.ExecuteCommandAsync(
+            new CreateCommunityChannelCommand(
+                channelConfig.Name,
+                channelConfig.Type,
+                communityId,
+                channelConfig.ParentId
+            )
+        );
 
         return Results.Ok(channel);
     }
-    
-    private static async Task<IResult> GetCommunityChannels(       
+
+    private static async Task<IResult> GetCommunityChannels(
         [FromServices] ICommunityModule module,
         [FromRoute] ulong communityId
-    ){
+    )
+    {
         IEnumerable<ChannelViewModel> channels = await module.ExecuteQueryAsync(
             new GetCommunityChannelsQuery(communityId)
         );
-        
+
         return Results.Ok(channels);
     }
 }

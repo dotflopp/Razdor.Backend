@@ -8,12 +8,12 @@ public interface IBusinessRule
     ErrorCode ErrorCode { get; }
 }
 
-public interface IBusinessRuleValidator: IBusinessRule
+public interface IBusinessRuleValidator : IBusinessRule
 {
     bool IsBroken(CancellationToken cancellationToken = default);
 }
 
-public interface IBusinessRuleAsyncValidator: IBusinessRule
+public interface IBusinessRuleAsyncValidator : IBusinessRule
 {
     Task<bool> IsBrokenAsync(CancellationToken cancellationToken = default);
 }

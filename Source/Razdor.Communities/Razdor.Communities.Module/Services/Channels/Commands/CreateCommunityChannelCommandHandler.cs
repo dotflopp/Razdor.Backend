@@ -1,9 +1,7 @@
 ﻿using Mediator;
 using Razdor.Communities.Domain.Channels;
-using Razdor.Communities.Domain.Channels.Abstractions;
-using Razdor.Communities.Services.DataAccess;
+using Razdor.Communities.Services.Services.Channels.ViewModels;
 using Razdor.Shared.Module;
-using Razdor.Shared.Module.DataAccess;
 
 namespace Razdor.Communities.Services.Services.Channels.Commands;
 

@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Channels\Events\" />
+        <Folder Include="Channels\Events\"/>
     </ItemGroup>
 
 </Project>

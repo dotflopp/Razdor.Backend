@@ -20,7 +20,7 @@ public class Room : IRoom
 
     public Task<IRoomSession> CreateUserSessionIfNotExistsAsync()
     {
-        var newSessionId = $"{ChannelId}-{Guid.NewGuid()}";
+        string newSessionId = $"{ChannelId}-{Guid.NewGuid()}";
 
         return Task.FromResult<IRoomSession>(new RoomSession(
             _server,
@@ -44,7 +44,7 @@ public class Room : IRoom
 
     public Task<UserIdentity?> FindUserAsync(string sessionId)
     {
-        if (!Sessions.TryGetValue(sessionId, out var userIdentity))
+        if (!Sessions.TryGetValue(sessionId, out UserIdentity? userIdentity))
             return Task.FromResult<UserIdentity?>(null);
 
         return Task.FromResult(userIdentity);

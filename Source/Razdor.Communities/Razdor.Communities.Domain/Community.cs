@@ -1,6 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using Razdor.Communities.Domain.Event;
-using Razdor.Communities.Domain.Invites;
 using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Domain.Roles;
@@ -13,13 +11,14 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
     public const int NameMaxLength = 100;
     public const int DescriptionMaxLength = 400;
 
-    private List<Role>? _roles;
+    private readonly List<Role>? _roles;
 
     /// <summary>
-    /// EF constructor
+    ///     EF constructor
     /// </summary>
     private Community() : this(0, 0, null!, null, null, CommunityNotificationPolicy.Nothing, null!, null)
-    { }
+    {
+    }
 
     internal Community(
         ulong id,
@@ -41,17 +40,18 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
         _roles = roles;
     }
 
-    public ulong OwnerId { get; private set; }
-    public string Name { get; private set; }
+    public ulong OwnerId { get; }
     public string? Avatar { get; private set; }
     public string? Description { get; private set; }
     public CommunityNotificationPolicy DefaultNotificationPolicy { get; private set; }
-    public EveryonePermissions Everyone { get; private set; }
-    
+    public EveryonePermissions Everyone { get; }
+
     /// <summary>
-    /// Должна быть отсортированая коллекция по ID роли
+    ///     Должна быть отсортированая коллекция по ID роли
     /// </summary>
     public IReadOnlyCollection<Role> Roles => _roles?.AsReadOnly() ?? ReadOnlyCollection<Role>.Empty;
+
+    public string Name { get; }
 
     public static Community CreateNew(ulong id, ulong ownerId, string name, string? avatar, string? description)
     {
@@ -75,9 +75,9 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
             initialRoles
         );
     }
-    
+
     /// <summary>
-    /// Вычисляет приоритет для пользователя сообщества
+    ///     Вычисляет приоритет для пользователя сообщества
     /// </summary>
     public UserPermissions GetPermissions(CommunityMember member)
     {
@@ -86,9 +86,9 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
 
         return GetPermissions(member.RoleIds);
     }
-    
+
     /// <summary>
-    /// Вычисляет наибольший приоритет для пользователя сообщества
+    ///     Вычисляет наибольший приоритет для пользователя сообщества
     /// </summary>
     public ulong GetHighestPriority(CommunityMember member)
     {
@@ -99,7 +99,7 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
     }
 
     /// <summary>
-    /// Вычисляет права пользователя на основе ролей
+    ///     Вычисляет права пользователя на основе ролей
     /// </summary>
     /// <param name="roleIds">!Отсортированная по Id в порядке возрастания коллекция ролей</param>
     private UserPermissions GetPermissions(IEnumerable<ulong> roleIds)
@@ -110,41 +110,41 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
 
         foreach (Role role in GetIntersectionRoles(roleIds))
             permissions |= permissions;
-        
+
         return permissions;
     }
-    
+
     /// <summary>
-    /// Вычисляет приоритет пользователя на основе ролей
+    ///     Вычисляет приоритет пользователя на основе ролей
     /// </summary>
     /// <param name="roleIds">!Отсортированная по Id в порядке возрастания коллекция ролей</param>
     private ulong GetHighestPriority(IEnumerable<ulong> roleIds)
     {
         ulong priority = Everyone.Priority;
-        
+
         foreach (Role role in GetIntersectionRoles(roleIds))
         {
             if (priority > role.Priority)
                 priority = role.Priority;
         }
-        
+
         return priority;
     }
-    
+
     /// <param name="roleIds">!Отсортированная по Id в порядке возрастания коллекция ролей</param>
     private IEnumerable<Role> GetIntersectionRoles(IEnumerable<ulong> roleIds)
     {
         if (Roles.Count <= 0)
             yield break;
-        
+
         using IEnumerator<Role> roles = Roles.GetEnumerator();
-        
+
         foreach (ulong roleId in roleIds)
         {
             while (roleId > roles.Current.Id)
-                if (!roles.MoveNext()) 
+                if (!roles.MoveNext())
                     yield break;
-            
+
             if (roleId == roles.Current.Id)
                 yield return roles.Current;
         }

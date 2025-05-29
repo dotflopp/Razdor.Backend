@@ -6,11 +6,11 @@ namespace Razdor.Identity.Module.Users.ViewModels;
 
 public sealed record SelfUserViewModel(
     [property:JsonConverter(typeof(JsonStringULongConverter))]
-    ulong Id, 
-    string Email, 
-    string IdentityName, 
+    ulong Id,
+    string Email,
+    string IdentityName,
     string Nickname,
-    string? Avatar, 
+    string? Avatar,
     DateTimeOffset CredentialsChangeDate,
     SelectedCommunicationStatus SelectedStatus,
     DisplayedCommunicationStatus Status,

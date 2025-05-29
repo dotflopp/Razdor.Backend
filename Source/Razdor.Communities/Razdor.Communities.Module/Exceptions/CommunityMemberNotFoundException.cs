@@ -14,4 +14,4 @@ public sealed class CommunityMemberNotFoundException(
     {
         throw new CommunityMemberNotFoundException($"The User({memberId}) is not a member of the Community({communityId})");
     }
-};
+}

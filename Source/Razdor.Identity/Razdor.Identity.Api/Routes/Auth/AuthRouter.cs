@@ -14,16 +14,16 @@ public static class AuthRouter
         [StringSyntax("Route")] string groupPrefix = "/auth"
     )
     {
-        var api = router.MapGroup(groupPrefix)
+        RouteGroupBuilder api = router.MapGroup(groupPrefix)
             .WithTags("Auth");
 
         api.MapPost("/login", AuthAsync<LoginCommand>)
-            .Produces<AccessToken>(200)
+            .Produces<AccessToken>()
             .Produces<ExceptionViewModel>(400);
         api.MapPost("/signup", AuthAsync<SignupCommand>)
-            .Produces<AccessToken>(200)
+            .Produces<AccessToken>()
             .Produces<ExceptionViewModel>(400);
-        
+
         return api;
     }
 
@@ -32,7 +32,7 @@ public static class AuthRouter
         [FromBody] T authCommand
     ) where T : IIdentityCommand<AccessToken>
     {
-        var result = await module.ExecuteCommandAsync(authCommand);
+        AccessToken result = await module.ExecuteCommandAsync(authCommand);
         return Results.Ok(result);
     }
 }

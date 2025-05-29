@@ -3,7 +3,8 @@
 public readonly record struct OverwritePermissions(
     UserPermissions Allow,
     UserPermissions Deny
-){
+)
+{
     public static readonly OverwritePermissions Default = new(
         UserPermissions.None,
         UserPermissions.None

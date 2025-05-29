@@ -1,16 +1,13 @@
 ﻿using Mediator;
 using Razdor.Communities.Domain;
 using Razdor.Communities.Domain.Members;
-using Razdor.Communities.Domain.Roles;
-using Razdor.Communities.Services.Communities.ViewModels;
 using Razdor.Communities.Services.DataAccess;
-using Razdor.Shared.Domain.Rules;
+using Razdor.Communities.Services.Services.Communities.ViewModels;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.DataAccess;
-using Razdor.Shared.Module.Exceptions;
 using Razdor.Shared.Module.RequestSenderContext;
 
-namespace Razdor.Communities.Services.Communities.Commands;
+namespace Razdor.Communities.Services.Services.Communities.Commands;
 
 public sealed class CreateCommunityCommandHandler(
     UnitOfWork<CommunityDataContext> unitOfWork,
@@ -19,24 +16,24 @@ public sealed class CreateCommunityCommandHandler(
     IRequestSenderContextAccessor senderContext,
     SnowflakeGenerator snowflakeGenerator,
     TimeProvider timeProvider
-): ICommandHandler<CreateCommunityCommand, CommunityViewModel>
+) : ICommandHandler<CreateCommunityCommand, CommunityViewModel>
 {
     public async ValueTask<CommunityViewModel> Handle(CreateCommunityCommand command, CancellationToken cancellationToken)
     {
-        Community community = Community.CreateNew(
+        var community = Community.CreateNew(
             snowflakeGenerator.Next(),
             senderContext.User.Id,
             command.Name,
             null,
             null
         );
-         
-        CommunityMember member = CommunityMember.CreateNew(
+
+        var member = CommunityMember.CreateNew(
             senderContext.User.Id,
             community.Id,
             timeProvider
         );
-        
+
         communities.Add(community);
         communityMembers.Add(member);
 

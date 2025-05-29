@@ -4,6 +4,6 @@ using Razdor.Shared.Module.Exceptions;
 namespace Razdor.Identity.Module.Users.Queries.Exceptions;
 
 public class UserNotFoundException(
-    string? message = null, 
+    string? message = null,
     Exception? innerException = null
 ) : ModuleException(ErrorCode.UserNotFound, message, innerException);

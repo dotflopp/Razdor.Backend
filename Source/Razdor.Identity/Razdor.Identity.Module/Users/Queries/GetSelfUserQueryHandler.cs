@@ -4,7 +4,6 @@ using Razdor.Identity.Domain.Users;
 using Razdor.Identity.Module.DataAccess;
 using Razdor.Identity.Module.Users.Queries.Exceptions;
 using Razdor.Identity.Module.Users.ViewModels;
-using Razdor.Shared.Module.Exceptions;
 using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.Identity.Module.Users.Queries;
@@ -18,8 +17,8 @@ public sealed class GetSelfUserQueryHandler(
     {
         UserAccount? user = await dbSqlContext.UserAccounts
             .Where(x => x.Id == senderContext.User.Id)
-            .FirstOrDefaultAsync(cancellationToken: cancellationToken);
-        
+            .FirstOrDefaultAsync(cancellationToken:cancellationToken);
+
         if (user is null)
             throw new UserNotFoundException($"The user with the ID {senderContext.User.Id} was not found");
 

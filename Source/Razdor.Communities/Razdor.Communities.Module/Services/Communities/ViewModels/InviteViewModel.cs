@@ -6,9 +6,9 @@ namespace Razdor.Communities.Services.Communities.Commands.ViewModels;
 
 public sealed record InviteViewModel(
     string Id,
-    [property:JsonConverter(typeof(ULongToStringConverter))]
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong CreatorId,
-    [property:JsonConverter(typeof(ULongToStringConverter))]
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong CommunityId,
     DateTimeOffset? ExpiresAt,
     DateTimeOffset CreatedAt,

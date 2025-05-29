@@ -6,6 +6,6 @@ using Razdor.Shared.Module;
 namespace Razdor.Identity.Module.Users.Queries;
 
 public sealed record GetUserQuery(
-    [property:JsonConverter(typeof(ULongToStringConverter))]
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong UserId
 ) : IIdentityQuery<UserPreviewModel>;

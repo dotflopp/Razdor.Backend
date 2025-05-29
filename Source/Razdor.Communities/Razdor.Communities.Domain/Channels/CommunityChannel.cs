@@ -24,8 +24,8 @@ public abstract class CommunityChannel(
 {
     public string Name { get; set; } = name;
     public ulong ParentId { get; set; } = parentId;
-    public ulong CommunityId { get; init; } = communityId;
-    public ChannelType Type { get; init; } = type;
+    public ulong CommunityId { get; private set; } = communityId;
+    public ChannelType Type { get; private set; } = type;
     public uint Position { get; set; } = position;
 
     public abstract bool IsSyncing { get; }
@@ -37,7 +37,7 @@ public abstract class CommunityChannel(
     /// <param name="member"></param>
     /// <param name="inheritedPermissions">Наследуемые параметры канала</param>
     /// <returns></returns>
-    public virtual UserPermissions GetOverwrites(CommunityMember member, UserPermissions inheritedPermissions)
+    public virtual UserPermissions GetPermissionsWithOverwrites(CommunityMember member, UserPermissions inheritedPermissions)
     {
         UserPermissions result = inheritedPermissions;
         

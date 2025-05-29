@@ -13,13 +13,13 @@ namespace Razdor.Communities.Services.Services.Channels.Commands;
 [JsonDerivedType(typeof(VoiceChannelViewModel))]
 [JsonDerivedType(typeof(CategoryChannelViewModel))]
 public abstract record ChannelViewModel(
-    [property:JsonConverter(typeof(ULongToStringConverter))]
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong Id,   
-    [property:JsonConverter(typeof(ULongToStringConverter))]
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong CommunityId,
     [property:JsonConverter(typeof(JsonStringEnumConverter))]
     ChannelType Type,
-    [property:JsonConverter(typeof(ULongToStringConverter))]
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong ParentId,
     bool IsSyncing,
     IEnumerable<Overwrite> Overwrites

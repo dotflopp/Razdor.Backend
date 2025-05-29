@@ -6,7 +6,7 @@ using Razdor.Shared.Module;
 namespace Razdor.Communities.Services.Communities.ViewModels;
 
 public record RoleViewModel(
-    [property:JsonConverter(typeof(ULongToStringConverter))]
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong Id,
     uint Priority,
     string Name,

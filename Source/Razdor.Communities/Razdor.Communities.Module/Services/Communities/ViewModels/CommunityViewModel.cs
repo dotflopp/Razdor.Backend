@@ -5,9 +5,9 @@ using Razdor.Shared.Module;
 namespace Razdor.Communities.Services.Communities.ViewModels;
 
 public record CommunityViewModel(
-    [property:JsonConverter(typeof(ULongToStringConverter))]
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong Id,
-    [property:JsonConverter(typeof(ULongToStringConverter))]
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong OwnerId,
     string Name,
     string? Avatar,

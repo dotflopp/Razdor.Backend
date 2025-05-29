@@ -25,9 +25,9 @@ public abstract class OverwritesPermissionChannel : CommunityChannel, IOverwrite
     }
     
     [MemberNotNullWhen(true, nameof(_overwrites))]
-    public sealed override bool IsSyncing => ParentId == 0 && _overwrites == null;
+    public override bool IsSyncing => ParentId == 0 && _overwrites == null;
     
-    public sealed override IReadOnlyList<Overwrite> Overwrites 
+    public override IReadOnlyList<Overwrite> Overwrites 
         => _overwrites?.AsReadOnly() ?? ReadOnlyCollection<Overwrite>.Empty;
 
     public void SetRolePermission(ulong roleId, OverwritePermissions permission, List<Overwrite>? inherited)

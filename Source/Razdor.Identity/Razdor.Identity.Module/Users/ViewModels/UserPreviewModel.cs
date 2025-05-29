@@ -5,7 +5,7 @@ using Razdor.Shared.Module;
 namespace Razdor.Identity.Module.Users.ViewModels;
 
 public sealed record UserPreviewModel(
-    [property:JsonConverter(typeof(ULongToStringConverter))]
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong Id,
     string IdentityName, 
     string Nickname,

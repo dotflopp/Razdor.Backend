@@ -32,6 +32,7 @@ public static class CommunitiesRouter
              .WithSummary("Создать новое сообщество");
          
          api.MapCommunityInvites();
+         api.MapCommunityChannels();
          
          return builder;
     }

@@ -11,10 +11,11 @@ namespace Razdor.Communities.Services.Services.Channels.Commands;
 
 public record CreateCommunityChannelCommand(
     string Name,
+    [property:JsonConverter(typeof(JsonStringEnumConverter))]
     ChannelType Type,
-    [property:JsonConverter(typeof(ULongToStringConverter))]
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong CommunityId,
-    [property:JsonConverter(typeof(ULongToStringConverter))]
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong ParentId
 ) : ICommunitiesCommand<ChannelViewModel>, IRequiredCommunityPermissionsMessage
 {

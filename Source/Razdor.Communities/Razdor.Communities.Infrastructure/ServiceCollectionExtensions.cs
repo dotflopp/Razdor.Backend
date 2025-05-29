@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Razdor.Communities.Domain;
+using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Domain.Invites;
 using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Infrastructure.Authorization;
@@ -27,6 +28,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICommunityMembersRepository, CommunityMembersRepository>();
         services.AddScoped<ICommunityPermissionsAccessor, CachedCommunityPermissionsAccessor>();
         services.AddScoped<IInvitesRepository, InvitesRepository>();
+        services.AddScoped<ICommunityChannelsRepository, CommunityChannelsRepository>();
         
         return services;
     }

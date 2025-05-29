@@ -41,8 +41,9 @@ public class ChannelConfigurations:
         where TChannel : OverwritesPermissionChannel
     {
         builder.HasBaseType<CommunityChannel>();
+        builder.Ignore(nameof(OverwritesPermissionChannel.Overwrites));
         builder.OwnsMany<Overwrite>("_overwrites")
-            .HasElementName(nameof(CommunityChannel.Overwrites));
+            .HasElementName(nameof(OverwritesPermissionChannel.Overwrites));
     }
     
     static void CommunityChannelConfiguration<TChannel>(EntityTypeBuilder<TChannel> builder) 

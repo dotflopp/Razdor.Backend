@@ -25,9 +25,9 @@ public class ForkChannel: CommunityChannel, IEntity<ulong>
     public override bool IsSyncing => true;
     public override IReadOnlyList<Overwrite> Overwrites => ReadOnlyCollection<Overwrite>.Empty;
 
-    public override UserPermissions GetOverwrites(CommunityMember member, UserPermissions inheritedPermissions)
+    public override UserPermissions GetPermissionsWithOverwrites(CommunityMember member, UserPermissions inheritedPermissions)
     {
-        UserPermissions result = base.GetOverwrites(member, inheritedPermissions);
+        UserPermissions result = base.GetPermissionsWithOverwrites(member, inheritedPermissions);
         
         if (result.HasFlag(UserPermissions.SendMessageInFork))
             return result | UserPermissions.SendMessage;

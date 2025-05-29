@@ -7,13 +7,12 @@ using Razdor.Shared.Module.DataAccess;
 
 namespace Razdor.Communities.Services.Services.Channels.Commands;
 
-public sealed class CreateCommunityChannelCommandHandler<TCreateChannelCommand>(
+public sealed class CreateCommunityChannelCommandHandler(
     ICommunityChannelsRepository repository,
     SnowflakeGenerator snowflake
-) : ICommandHandler<TCreateChannelCommand, ChannelViewModel>
-    where TCreateChannelCommand : CreateCommunityChannelCommand
+) : ICommandHandler<CreateCommunityChannelCommand, ChannelViewModel>
 {
-    public async ValueTask<ChannelViewModel> Handle(TCreateChannelCommand command, CancellationToken cancellationToken)
+    public async ValueTask<ChannelViewModel> Handle(CreateCommunityChannelCommand command, CancellationToken cancellationToken)
     {
         CommunityChannel channel = command.Create(snowflake.Next());
         repository.Add(channel);

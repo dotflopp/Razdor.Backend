@@ -6,5 +6,5 @@ public interface IOverwritesPermission
 {
     IReadOnlyList<Overwrite> Overwrites { get; }
     
-    UserPermissions GetOverwrites(CommunityMember member, UserPermissions inheritedPermissions);
+    UserPermissions GetPermissionsWithOverwrites(CommunityMember member, UserPermissions inheritedPermissions);
 }

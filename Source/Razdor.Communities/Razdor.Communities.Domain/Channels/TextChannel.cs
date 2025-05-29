@@ -36,4 +36,7 @@ public class TextChannel : OverwritesPermissionChannel, IOverwritesOwner
         List<Overwrite>? overwrites
     ) : base(id, name, communityId, position, ChannelType.TextChannel, parentId, overwrites, AvailablePermissions)
     { }
+
+    public static TextChannel CreateNew(ulong id, ulong communityId, ulong parentId, string name)
+        => new (id, name, communityId, 0, parentId, null);
 }

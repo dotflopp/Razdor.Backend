@@ -2,6 +2,6 @@
 
 public record Overwrite(
     ulong TargetId,
-    PermissionTargetType TargetTypeType,
+    PermissionTargetType TargetType,
     OverwritePermissions Permissions
 );

@@ -12,6 +12,7 @@ public record CommunityViewModel(
     string Name,
     string? Avatar,
     string? Description,
+    [property:JsonConverter(typeof(JsonStringEnumConverter))]
     CommunityNotificationPolicy DefaultNotificationPolicy,
     List<RoleViewModel> Roles
 )

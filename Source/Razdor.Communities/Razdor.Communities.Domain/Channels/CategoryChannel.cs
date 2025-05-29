@@ -25,4 +25,7 @@ public class CategoryChannel: OverwritesPermissionChannel
         List<Overwrite>? overwrites
     ) : base(id, name, communityId, position, ChannelType.CategoryChannel, parentId, overwrites, AvailablePermissions)
     { }
+
+    public static CategoryChannel CreateNew(ulong id, ulong communityId, ulong parentId, string name)
+        => new CategoryChannel(id, name, communityId, 0, parentId, null);
 }

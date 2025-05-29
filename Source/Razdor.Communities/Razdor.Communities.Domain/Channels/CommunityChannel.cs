@@ -17,13 +17,13 @@ public abstract class CommunityChannel(
     ulong id,
     string name,
     ulong communityId,
-    ulong? parentId,
+    ulong parentId,
     uint position,
     ChannelType type
 ) : BaseSnowflakeEntity(id), IOverwritesPermission
 {
     public string Name { get; set; } = name;
-    public ulong? ParentId { get; set; } = parentId;
+    public ulong ParentId { get; set; } = parentId;
     public ulong CommunityId { get; init; } = communityId;
     public ChannelType Type { get; init; } = type;
     public uint Position { get; set; } = position;
@@ -62,7 +62,7 @@ public abstract class CommunityChannel(
         
         foreach (var overwrite in Overwrites)
         {
-            if (overwrite.TargetId == member.UserId && overwrite.TargetTypeType == PermissionTargetType.User)
+            if (overwrite.TargetId == member.UserId && overwrite.TargetType == PermissionTargetType.User)
             {
                 yield return overwrite;
                 continue;
@@ -71,7 +71,7 @@ public abstract class CommunityChannel(
             while (overwrite.TargetId > roleIds.Current)
                 roleIds.MoveNext();
             
-            if (roleIds.Current != overwrite.TargetId || overwrite.TargetTypeType != PermissionTargetType.Role)
+            if (roleIds.Current != overwrite.TargetId || overwrite.TargetType != PermissionTargetType.Role)
                 continue;
             
             yield return overwrite;

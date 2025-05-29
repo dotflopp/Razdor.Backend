@@ -33,4 +33,6 @@ public class VoiceChannel: OverwritesPermissionChannel, IOverwritesOwner
     ) : base(id, name, communityId, position, ChannelType.VoiceChannel, parentId, overwrites, AvailablePermissions)
     { }
 
+    public static VoiceChannel CreateNew(ulong id, ulong communityId, ulong parentId, string name)
+        => new (id, name, communityId, 0, parentId, null);
 }

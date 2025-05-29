@@ -34,5 +34,8 @@ public class ForkChannel: CommunityChannel, IEntity<ulong>
         
         return result;
     }
+
+    public static ForkChannel CreateNew(ulong id, ulong communityId, ulong parentId, string name)
+        => new ForkChannel(id, name, communityId, 0, parentId);
 }
 

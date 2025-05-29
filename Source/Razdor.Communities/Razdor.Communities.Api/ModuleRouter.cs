@@ -12,7 +12,8 @@ public static class ModuleRouter
     {
         IEndpointRouteBuilder api = builder
             .NewVersionedApi("communities")
-            .HasApiVersion(0.1);
+            .HasApiVersion(0.1)
+            .MapGroup("/api/");
         
         api.MapInvites();
         api.MapCommunities();

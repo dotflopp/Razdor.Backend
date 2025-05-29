@@ -148,17 +148,22 @@ var app = builder.Build();
 app.UseCors();
 
 // Map OpenApi and Swagger UI
-app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwagger(options =>
+{
+    options.RouteTemplate = "/api/swagger/{documentName}/swagger.json";
+});
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/api/swagger/v1/swagger.json", "main-docs");
+    options.RoutePrefix = "api/swagger";
+});
 
 app.UseCustomNotAuthorizedResponse();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseStaticFiles();
-app.UseDefaultFiles();
-
 app.UseRazdorExceptionHandlerMiddleware();
+
 app.MapIdentityApi();
 app.MapCommunitiesApi();
 app.MapSignalingHub();

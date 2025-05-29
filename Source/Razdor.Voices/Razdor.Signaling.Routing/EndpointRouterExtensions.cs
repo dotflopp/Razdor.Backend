@@ -6,7 +6,7 @@ public static class EndpointRouterExtensions
 {
     public static HubEndpointConventionBuilder MapSignalingHub(
         this IEndpointRouteBuilder routeBuilder,
-        string pattern = "/signaling"
+        string pattern = "api/signaling"
     )
     {
         return routeBuilder.MapHub<SignalingHub>(pattern);

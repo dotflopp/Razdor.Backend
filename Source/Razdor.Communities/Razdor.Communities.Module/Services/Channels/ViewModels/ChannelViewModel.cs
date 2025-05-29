@@ -1,5 +1,8 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using Razdor.Communities.Api.Communities.Channels.ViewModels;
 using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Domain.Channels.Abstractions;
 using Razdor.Communities.Domain.Permissions;
@@ -17,12 +20,12 @@ public abstract record ChannelViewModel(
     ulong Id,   
     [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong CommunityId,
-    [property:JsonConverter(typeof(JsonStringEnumConverter))]
     ChannelType Type,
     [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong ParentId,
+    string Name,
     bool IsSyncing,
-    IEnumerable<Overwrite> Overwrites
+    IEnumerable<OverwriteViewModel> Overwrites
 ){
     public static ChannelViewModel From(CommunityChannel channel)
         => channel switch
@@ -35,11 +38,11 @@ public abstract record ChannelViewModel(
         };
     
     public static TextChannelViewModel From(TextChannel channel)
-        => new TextChannelViewModel(channel.Id, channel.CommunityId, channel.Type, channel.ParentId, channel.IsSyncing, channel.Overwrites);
+        => new(channel.Id, channel.CommunityId, channel.Type, channel.ParentId, channel.Name, channel.IsSyncing, channel.Overwrites.Select(OverwriteViewModel.From));
     public static VoiceChannelViewModel From(VoiceChannel channel)
-        => new VoiceChannelViewModel(channel.Id, channel.CommunityId, channel.Type, channel.ParentId, channel.IsSyncing, channel.Overwrites);
+        => new(channel.Id, channel.CommunityId, channel.Type, channel.ParentId, channel.Name, channel.IsSyncing, channel.Overwrites.Select(OverwriteViewModel.From));
     public static ForkChannelViewModel From(ForkChannel channel)
-        => new ForkChannelViewModel(channel.Id, channel.CommunityId, channel.Type, channel.ParentId, channel.IsSyncing, channel.Overwrites);
+        => new(channel.Id, channel.CommunityId, channel.Type, channel.ParentId, channel.Name, channel.IsSyncing, channel.Overwrites.Select(OverwriteViewModel.From));
     public static CategoryChannelViewModel From(CategoryChannel channel)
-        => new CategoryChannelViewModel(channel.Id, channel.CommunityId, channel.Type, channel.ParentId, channel.IsSyncing, channel.Overwrites);
+        => new(channel.Id, channel.CommunityId, channel.Type, channel.ParentId, channel.Name, channel.IsSyncing, channel.Overwrites.Select(OverwriteViewModel.From));
 }

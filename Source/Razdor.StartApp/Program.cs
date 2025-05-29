@@ -73,8 +73,9 @@ builder.Services.AddSwaggerGen(options =>
     
     OpenApiSecurityRequirement securityRequirement = new();
     securityRequirement.Add(scheme, []);
-
+    
     options.AddSecurityRequirement(securityRequirement);
+    options.SchemaFilter<StringTypesSchemaFilter>();
 });
 
 // Mediator

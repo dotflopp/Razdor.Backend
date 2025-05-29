@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Razdor.Communities.Api.Communities.ViewModels;
+using Razdor.Communities.Api.Invites;
 using Razdor.Communities.Services.Communities.Commands;
 using Razdor.Communities.Services.Communities.Commands.ViewModels;
 using Razdor.Communities.Services.Contracts;
@@ -12,7 +13,8 @@ public static class InvitesRouter
     public static IEndpointRouteBuilder MapInvites(this IEndpointRouteBuilder builder)
     { 
         builder.MapPost("/invites/{inviteId:alpha}", AcceptInviteAsync)
-            .WithSummary("Принять приглашение в сообщество");
+            .WithSummary("Принять приглашение в сообщество")
+            .Produces(StatusCodes.Status200OK);
         
         return builder;
     }

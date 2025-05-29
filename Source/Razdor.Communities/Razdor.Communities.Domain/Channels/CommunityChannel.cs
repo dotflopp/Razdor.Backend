@@ -1,10 +1,12 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
 using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Shared.Domain;
 
 namespace Razdor.Communities.Domain.Channels.Abstractions;
 
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum ChannelType
 {
     CategoryChannel,

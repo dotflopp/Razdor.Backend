@@ -13,8 +13,12 @@ public static class ChannelsRouter
     {
         RouteGroupBuilder api = builder.MapGroup("{communityId:ulong}/channels");
 
-        api.MapGet("/", GetCommunityChannels);
-        api.MapPost("/", CreateCommunityChannel);
+        api.MapGet("/", GetCommunityChannels)
+            .Produces<IEnumerable<ChannelViewModel>>()
+            .WithSummary("Получить каналы сообщества");
+        api.MapPost("/", CreateCommunityChannel)
+            .Produces<ChannelViewModel>()
+            .WithSummary("Создать новый канал в сообществе");
         
         return builder;
     }

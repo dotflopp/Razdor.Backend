@@ -13,7 +13,9 @@ public static class InvitesRouter
     {
         RouteGroupBuilder api = builder.MapGroup("{communityId:ulong}/invites");
         
-        api.MapPost("/", CreateInviteAsync);
+        api.MapPost("/", CreateInviteAsync)
+            .Produces<InviteViewModel>()
+            .WithSummary("Создать приглашение в сообщество");
         
         return builder;
     }

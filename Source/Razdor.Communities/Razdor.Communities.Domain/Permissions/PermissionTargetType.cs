@@ -1,5 +1,8 @@
-﻿namespace Razdor.Communities.Domain.Permissions;
+﻿using System.Text.Json.Serialization;
 
+namespace Razdor.Communities.Domain.Permissions;
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
 public enum PermissionTargetType
 {
     User,

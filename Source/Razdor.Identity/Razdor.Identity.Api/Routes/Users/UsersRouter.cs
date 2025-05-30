@@ -20,7 +20,7 @@ public static class UsersRouter
 
         api.MapGet("/@me", GetSelfUserAsync)
             .RequireAuthorization()
-            .WithSummary("Вернет аутентифицированного пользователя")
+            .WithSummary("Получить данные аутентифицированного пользователя")
             .Produces<SelfUserViewModel>()
             .Produces((int)HttpStatusCode.Unauthorized)
             .Produces<ExceptionViewModel>((int)HttpStatusCode.NotFound);
@@ -28,7 +28,7 @@ public static class UsersRouter
         api.MapGet("/{userId:ulong}", GetUserAsync)
             .Produces<UserPreviewModel>()
             .Produces((int)HttpStatusCode.NotFound)
-            .WithSummary("Вернет пользователя с соответствующим идентификатором");
+            .WithSummary("Получить данные пользователя с соответствующим идентификатором");
 
         return router;
     }

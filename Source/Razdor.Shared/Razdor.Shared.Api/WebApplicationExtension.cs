@@ -19,11 +19,14 @@ public static class WebApplicationExtension
             await next(context);
             if (context.Response.StatusCode != StatusCodes.Status401Unauthorized)
                 return;
-
+            
+            if (context.Response.Headers.IsReadOnly)
+                return;
+            
             await context.Response.WriteAsJsonAsync(
                 new ExceptionViewModel(
                     ErrorCode.Unauthorized,
-                    "The user is unauthorized."
+                    "Client is unauthorized."
                 ),
                 SharedJsonSerializerContext.Default.GetRequiredTypeInfo<ExceptionViewModel>()
             );
@@ -41,6 +44,9 @@ public static class WebApplicationExtension
             if (context.Response.StatusCode != StatusCodes.Status404NotFound)
                 return;
 
+            if (context.Response.Headers.IsReadOnly)
+                return;
+            
             await context.Response.WriteAsJsonAsync(
                 new ExceptionViewModel(
                     ErrorCode.NonExistentRoute,

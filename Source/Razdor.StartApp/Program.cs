@@ -18,6 +18,7 @@ using Razdor.Shared.Module.Authorization;
 using Razdor.Shared.Module.RequestSenderContext;
 using Razdor.Signaling.Routing;
 using Razdor.Signaling.Services;
+using Scalar.AspNetCore;
 
 WebApplicationBuilder builder = WebApplication.CreateSlimBuilder(args);
 
@@ -59,6 +60,13 @@ builder.Services.AddOpenApi(options =>
 {
     options.AddDocumentTransformer<BearerSecuritySchemeTransformer>();
     options.AddSchemaTransformer<StringTypesSchemaFilter>();
+    options.AddDocumentTransformer((document, context, token) =>
+    {
+        foreach (var server in document.Servers.Where(x => x.Url.StartsWith("http://dotflopp.ru/")))
+            server.Url = "https://dotflopp.ru/";
+        
+        return Task.CompletedTask;
+    });
 });
 
 // Mediator
@@ -144,11 +152,17 @@ app.UseCors();
 // Map OpenApi and Swagger UI
 app.MapOpenApi("/api/swagger/{documentName}/swagger.json");
 
-app.UseSwaggerUI(options =>
+app.MapScalarApiReference("/api/swagger", options =>
 {
-    options.SwaggerEndpoint("/api/swagger/v1/swagger.json", "main-docs");
-    options.RoutePrefix = "api/swagger";
+    options.WithOpenApiRoutePattern("/api/swagger/{documentName}/swagger.json");
+    options.AddDocument("v1", "Main API");
 });
+
+// app.UseSwaggerUI(options =>
+// {
+//     options.SwaggerEndpoint("/api/swagger/v1/swagger.json", "main-docs");
+//     options.RoutePrefix = "api/swagger";
+// });
 
 app.UseCustomNotAuthorizedResponse();
 app.UseAuthentication();

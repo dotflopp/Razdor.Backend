@@ -19,10 +19,12 @@ public static class AuthRouter
 
         api.MapPost("/login", AuthAsync<LoginCommand>)
             .Produces<AccessToken>()
-            .Produces<ExceptionViewModel>(400);
+            .Produces<ExceptionViewModel>(400)
+            .WithSummary("Войти");
         api.MapPost("/signup", AuthAsync<SignupCommand>)
             .Produces<AccessToken>()
-            .Produces<ExceptionViewModel>(400);
+            .Produces<ExceptionViewModel>(400)
+            .WithSummary("Зарегистрироваться");
 
         return api;
     }

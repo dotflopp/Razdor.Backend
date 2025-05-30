@@ -131,6 +131,7 @@ builder.Services.AddIdentityServices(
     )
 );
 
+// Community Services
 string communityDb = builder.Configuration.GetConnectionString("communitydb")!;
 builder.Services.AddCommunityServices(
     new CommunitiesOptions(
@@ -139,7 +140,7 @@ builder.Services.AddCommunityServices(
     )
 );
 
-// SignalingServices
+// Signaling Services
 builder.Services.AddSignalingServices(
     builder.Configuration.GetValue<string>(
         "ASPNETCORE_URLS"
@@ -157,12 +158,6 @@ app.MapScalarApiReference("/api/swagger", options =>
     options.WithOpenApiRoutePattern("/api/swagger/{documentName}/swagger.json");
     options.AddDocument("v1", "Main API");
 });
-
-// app.UseSwaggerUI(options =>
-// {
-//     options.SwaggerEndpoint("/api/swagger/v1/swagger.json", "main-docs");
-//     options.RoutePrefix = "api/swagger";
-// });
 
 app.UseCustomNotAuthorizedResponse();
 app.UseAuthentication();

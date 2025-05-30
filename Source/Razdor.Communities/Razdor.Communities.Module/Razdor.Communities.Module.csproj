@@ -20,7 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Module.csproj"/>
+        <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Module.csproj" />
         <ProjectReference Include="..\Razdor.Communities.Domain\Razdor.Communities.Domain.csproj"/>
     </ItemGroup>
 

@@ -6,9 +6,11 @@ using Razdor.Communities.Domain.Invites;
 using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Infrastructure.Authorization;
 using Razdor.Communities.Infrastructure.DataAccess;
+using Razdor.Communities.Infrastructure.Signaling;
 using Razdor.Communities.Services.Authorization;
 using Razdor.Communities.Services.Contracts;
 using Razdor.Communities.Services.DataAccess;
+using Razdor.Communities.Services.Services.Channels.Commands;
 using Razdor.Shared.Module.DataAccess;
 
 namespace Razdor.Communities.Infrastructure;
@@ -31,6 +33,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICommunityPermissionsAccessor, CachedCommunityPermissionsAccessor>();
         services.AddScoped<IInvitesRepository, InvitesRepository>();
         services.AddScoped<ICommunityChannelsRepository, CommunityChannelsRepository>();
+        services.AddScoped<ISignalingService, SignalingService>();
 
         return services;
     }

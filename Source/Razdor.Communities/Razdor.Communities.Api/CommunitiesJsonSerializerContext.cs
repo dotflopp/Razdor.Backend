@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Razdor.Communities.Api.Communities.Channels.ViewModels;
 using Razdor.Communities.Api.Communities.Invites.ViewModels;
+using Razdor.Communities.Module.Services.Channels.Commands;
 using Razdor.Communities.Services.Services.Channels.Commands;
 using Razdor.Communities.Services.Services.Channels.Queries;
 using Razdor.Communities.Services.Services.Channels.ViewModels;
@@ -31,6 +32,8 @@ namespace Razdor.Communities.Api;
 [JsonSerializable(typeof(CreateInviteCommand))]
 [JsonSerializable(typeof(IEnumerable<CommunityViewModel>))]
 [JsonSerializable(typeof(IEnumerable<ChannelViewModel>))]
+[JsonSerializable(typeof(SessionViewModel))]
+[JsonSerializable(typeof(ConnectChannelCommand))]
 public partial class CommunitiesJsonSerializerContext: JsonSerializerContext
 {
     

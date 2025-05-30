@@ -6,6 +6,8 @@
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
         <IsTrimmable>true</IsTrimmable>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <EnableRequestDelegateGenerator>true</EnableRequestDelegateGenerator>
     </PropertyGroup>
 
     <ItemGroup>
@@ -13,9 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="8.1.1"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="8.1.1"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="8.1.1"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.5" />
     </ItemGroup>
 
 </Project>

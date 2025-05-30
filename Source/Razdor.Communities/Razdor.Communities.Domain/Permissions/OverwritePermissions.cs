@@ -1,6 +1,6 @@
 ﻿namespace Razdor.Communities.Domain.Permissions;
 
-public readonly record struct OverwritePermissions(
+public record OverwritePermissions(
     UserPermissions Allow,
     UserPermissions Deny
 )

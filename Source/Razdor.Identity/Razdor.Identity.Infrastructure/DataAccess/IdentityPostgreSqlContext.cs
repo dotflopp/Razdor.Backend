@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 using Razdor.Identity.Infrastructure.DataAccess.EntityConfigurations;
 using Razdor.Identity.Module.DataAccess;
 

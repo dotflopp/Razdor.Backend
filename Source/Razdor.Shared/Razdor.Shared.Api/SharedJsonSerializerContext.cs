@@ -4,6 +4,6 @@ using Razdor.Shared.Api.ViewModels;
 namespace Razdor.Shared.Api;
 
 [JsonSerializable(typeof(ExceptionViewModel))]
-internal partial class SharedJsonSerializerContext : JsonSerializerContext
+public partial class SharedJsonSerializerContext : JsonSerializerContext
 {
 }

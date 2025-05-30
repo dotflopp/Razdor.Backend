@@ -4,14 +4,14 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <IsTrimmable>true</IsTrimmable>
         <EnableRequestDelegateGenerator>true</EnableRequestDelegateGenerator>
         <OutputType>Library</OutputType>
+        <IsTrimmable>true</IsTrimmable>
+        <InvariantGlobalization>true</InvariantGlobalization>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Asp.Versioning.Http" Version="8.1.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4"/>
     </ItemGroup>
 
     <ItemGroup>

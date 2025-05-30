@@ -2,7 +2,7 @@
 
 namespace Razdor.Identity.Domain.Users;
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<DisplayedCommunicationStatus>))]
 public enum DisplayedCommunicationStatus
 {
     Online,

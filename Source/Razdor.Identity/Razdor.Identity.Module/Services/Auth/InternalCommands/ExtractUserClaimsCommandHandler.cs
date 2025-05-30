@@ -14,32 +14,19 @@ public class ExtractUserClaimsCommandHandler(
     public async ValueTask<UserClaims> Handle(ExtractUserClaimsCommand command, CancellationToken cancellationToken)
     {
         if (!tokenSource.Check(command.AccessToken))
-            ValidationExceptionHelper.ThrowInvalidAccessTokenException();
+            InvalidAccessTokenException.Throw();
 
-        TokenClaims tokenClaims = ReadToken(command.AccessToken);
+        TokenClaims tokenClaims = tokenSource.Read(command.AccessToken);
         UserAccount? user = await users.FindByIdAsync(tokenClaims.UserId);
 
         if (user == null)
-            ValidationExceptionHelper.ThrowInvalidAccessTokenException();
+            InvalidAccessTokenException.Throw();
 
         if (user.CredentialsChangeDate > tokenClaims.CreationTime)
-            ValidationExceptionHelper.ThrowTokenExpiredException();
+            AccessTokenExpiredException.Throw();
 
         return new UserClaims(
             tokenClaims.UserId
         );
-    }
-
-    private TokenClaims ReadToken(string token)
-    {
-        try
-        {
-            return tokenSource.Read(token);
-        }
-        catch (Exception ex)
-        {
-            ValidationExceptionHelper.ThrowInvalidAccessTokenException(ex);
-            return null!;
-        }
     }
 }

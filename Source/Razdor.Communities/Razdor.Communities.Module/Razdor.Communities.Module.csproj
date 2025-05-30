@@ -4,15 +4,19 @@
         <TargetFramework>net9.0</TargetFramework>
         <LangVersion>preview</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
-        <IsTrimmable>true</IsTrimmable>
         <Nullable>enable</Nullable>
-        <RootNamespace>Razdor.Communities.Services</RootNamespace>
+        <IsTrimmable>true</IsTrimmable>
+        <InvariantGlobalization>true</InvariantGlobalization>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Mediator.Abstractions" Version="3.0.0-preview.65"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4"/>
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.5"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tasks" Version="9.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>

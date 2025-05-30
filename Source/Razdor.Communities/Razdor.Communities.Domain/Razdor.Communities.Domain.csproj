@@ -5,6 +5,7 @@
         <LangVersion>preview</LangVersion>
         <ImplicitUsings>enable</ImplicitUsings>
         <IsTrimmable>true</IsTrimmable>
+        <InvariantGlobalization>true</InvariantGlobalization>
         <Nullable>enable</Nullable>
     </PropertyGroup>
 

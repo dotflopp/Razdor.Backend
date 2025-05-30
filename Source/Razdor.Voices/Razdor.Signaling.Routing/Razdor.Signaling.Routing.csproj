@@ -3,13 +3,10 @@
         <TargetFramework>net9.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>true</InvariantGlobalization>
         <UserSecretsId>4</UserSecretsId>
         <OutputType>Library</OutputType>
     </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.4"/>
-    </ItemGroup>
 
     <ItemGroup>
         <ProjectReference Include="..\Razdor.Signaling.Internal\Razdor.Signaling.Internal.csproj"/>

@@ -9,6 +9,13 @@ public abstract class OverwritesPermissionChannel : CommunityChannel, IOverwrite
     private readonly UserPermissions _availablePermissions;
     private List<Overwrite>? _overwrites;
 
+    /// <summary>
+    /// EF constructor
+    /// </summary>
+    private OverwritesPermissionChannel() : this(0, null!, 0, 0, (ChannelType)0, 0, null, UserPermissions.None)
+    {
+    }
+    
     internal OverwritesPermissionChannel(
         ulong id,
         string name,

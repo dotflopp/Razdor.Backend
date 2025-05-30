@@ -28,15 +28,11 @@ public static class ServiceCollectionExtensions
 
         collection.AddSingleton(_ => new AccessTokenSource(accessTokenOptions));
 
-        collection.ConfigureHttpJsonOptions(options =>
-        {
-            options.SerializerOptions.TypeInfoResolverChain.Insert(0, IdentityJsonSerializerContext.Default);
-        });
-
         collection.AddTransient<UnitOfWork<IdentityDbContext>>();
         collection.AddDbContext<IdentityDbContext, IdentityPostgreSqlContext>(options =>
         {
             options.UseNpgsql(moduleOptions.ConnectionString);
+            options.UseModel(IdentityPostgreSqlContextModel.Instance);
         });
 
         collection.AddTransient<IUsersCounter, UsersEfCounter>();

@@ -5,7 +5,7 @@ namespace Razdor.Communities.Domain.Members;
 
 public class CommunityMember : BaseAggregateRoot
 {
-    private readonly List<ulong>? _roleIds;
+    private List<ulong>? _roleIds;
 
     /// <summary>
     ///     EF constructor

@@ -6,11 +6,12 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <IsTrimmable>true</IsTrimmable>
+        <InvariantGlobalization>true</InvariantGlobalization>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Mediator.Abstractions" Version="3.0.0-preview.65"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.4"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
     </ItemGroup>
 
     <ItemGroup>

@@ -1,15 +1,18 @@
+using System.Text.Json.Serialization.Metadata;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Routing.Constraints;
 using Microsoft.OpenApi.Models;
 using Razdor.Communities.Api;
 using Razdor.Communities.Infrastructure;
 using Razdor.Communities.Services.Authorization;
+using Razdor.Identity.Api;
 using Razdor.Identity.Api.AuthenticationScheme;
 using Razdor.Identity.Api.Routes;
 using Razdor.Identity.Infrastructure;
 using Razdor.ServiceDefaults;
 using Razdor.Shared.Api;
 using Razdor.Shared.Api.Constraints;
+using Razdor.Shared.Api.OpenAPI;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Authorization;
 using Razdor.Shared.Module.RequestSenderContext;
@@ -50,30 +53,12 @@ builder.Services.AddAuthentication()
 builder.Services.Configure<RouteOptions>(
     options => options.SetParameterPolicy<RegexInlineRouteConstraint>("regex")
 );
-// Swagger UI configuration
+// OpenApi configuration
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
+builder.Services.AddOpenApi(options =>
 {
-    OpenApiSecurityScheme scheme = new();
-    scheme.Name = "Authorization";
-    scheme.In = ParameterLocation.Header;
-    scheme.Type = SecuritySchemeType.ApiKey;
-    scheme.BearerFormat = "JWT";
-    scheme.Scheme = "oauth2";
-
-    options.AddSecurityDefinition(scheme.Scheme, scheme);
-
-    OpenApiReference reference = new();
-    reference.Type = ReferenceType.SecurityScheme;
-    reference.Id = scheme.Scheme;
-
-    scheme.Reference = reference;
-
-    OpenApiSecurityRequirement securityRequirement = new();
-    securityRequirement.Add(scheme, []);
-
-    options.AddSecurityRequirement(securityRequirement);
-    options.SchemaFilter<StringTypesSchemaFilter>();
+    options.AddDocumentTransformer<BearerSecuritySchemeTransformer>();
+    options.AddSchemaTransformer<StringTypesSchemaFilter>();
 });
 
 // Mediator
@@ -103,6 +88,20 @@ builder.Services.Configure<RouteOptions>(options =>
     );
 });
 
+
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    IList<IJsonTypeInfoResolver> typeResolver = options.SerializerOptions.TypeInfoResolverChain;
+    typeResolver.Add(SharedJsonSerializerContext.Default);
+    typeResolver.Add(CommunitiesJsonSerializerContext.Default);
+    typeResolver.Add(IdentityJsonSerializerContext.Default);
+});
+
+builder.Services.AddOutputCache(options =>
+{
+    options.AddBasePolicy(policy => policy.Expire(TimeSpan.FromMinutes(10)));
+});
+
 // Snowflake Generator
 builder.Services.AddSingleton(
     new SnowflakeGenerator(0, new DateTime(2025, 1, 1))
@@ -113,9 +112,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IRequestSenderContextAccessor, RequestSenderContextAccessor>();
 
 // Identity services
-string? identityDb = builder.Configuration.GetConnectionString("identitydb");
-ArgumentNullException.ThrowIfNull(identityDb);
-
+string identityDb = builder.Configuration.GetConnectionString("identitydb")!;
 builder.Services.AddIdentityServices(
     new IdentityModuleOptions(
         new DateTime(2025, 1, 1),
@@ -126,9 +123,7 @@ builder.Services.AddIdentityServices(
     )
 );
 
-string? communityDb = builder.Configuration.GetConnectionString("communitydb");
-ArgumentNullException.ThrowIfNull(communityDb);
-
+string communityDb = builder.Configuration.GetConnectionString("communitydb")!;
 builder.Services.AddCommunityServices(
     new CommunitiesOptions(
         communityDb,
@@ -146,12 +141,9 @@ builder.Services.AddSignalingServices(
 WebApplication app = builder.Build();
 
 app.UseCors();
-
 // Map OpenApi and Swagger UI
-app.UseSwagger(options =>
-{
-    options.RouteTemplate = "/api/swagger/{documentName}/swagger.json";
-});
+app.MapOpenApi("/api/swagger/{documentName}/swagger.json");
+
 app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/api/swagger/v1/swagger.json", "main-docs");

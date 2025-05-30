@@ -11,7 +11,7 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
     public const int NameMaxLength = 100;
     public const int DescriptionMaxLength = 400;
 
-    private readonly List<Role>? _roles;
+    private List<Role>? _roles;
 
     /// <summary>
     ///     EF constructor
@@ -39,19 +39,19 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
         Everyone = everyone;
         _roles = roles;
     }
-
-    public ulong OwnerId { get; }
+    
+    public string Name { get; private set; }
+    public ulong OwnerId { get; private set; }
     public string? Avatar { get; private set; }
     public string? Description { get; private set; }
     public CommunityNotificationPolicy DefaultNotificationPolicy { get; private set; }
-    public EveryonePermissions Everyone { get; }
+    public EveryonePermissions Everyone { get; private set;  }
 
     /// <summary>
     ///     Должна быть отсортированая коллекция по ID роли
     /// </summary>
     public IReadOnlyCollection<Role> Roles => _roles?.AsReadOnly() ?? ReadOnlyCollection<Role>.Empty;
 
-    public string Name { get; }
 
     public static Community CreateNew(ulong id, ulong ownerId, string name, string? avatar, string? description)
     {

@@ -2,7 +2,7 @@
 
 namespace Razdor.Shared.Domain.Exceptions;
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ErrorCode>))]
 public enum ErrorCode : ulong
 {
     Unauthorized,

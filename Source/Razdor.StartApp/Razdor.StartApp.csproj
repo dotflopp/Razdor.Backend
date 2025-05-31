@@ -30,14 +30,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Api\Razdor.Communities.Api.csproj"/>
+        <ProjectReference Include="..\Razdor.Api\Razdor.Api.csproj" />
         <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Infrastructure\Razdor.Communities.Infrastructure.csproj"/>
         <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Module\Razdor.Communities.Module.csproj"/>
-        <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Api\Razdor.Identity.Api.csproj"/>
         <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj"/>
         <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Infrastructure\Razdor.Identity.Infrastructure.csproj"/>
         <ProjectReference Include="..\Razdor.ServiceDefaults\Razdor.ServiceDefaults.csproj"/>
-        <ProjectReference Include="..\Razdor.Shared\Razdor.Shared.Api\Razdor.Shared.Api.csproj"/>
         <ProjectReference Include="..\Razdor.Voices\Razdor.Signaling.Routing\Razdor.Signaling.Routing.csproj"/>
         <ProjectReference Include="..\Razdor.Voices\Razdor.Signaling.Services\Razdor.Signaling.Services.csproj"/>
     </ItemGroup>

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Razdor.Identity.Api;
 using Razdor.Identity.Domain.Users;
 using Razdor.Identity.Infrastructure.DataAccess;
 using Razdor.Identity.Module.Auth.AccessTokens;

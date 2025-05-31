@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <OutputType>Library</OutputType>
+    </PropertyGroup>
+
+
+    <ItemGroup>
+        <PackageReference Include="Asp.Versioning.Http" Version="8.1.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.5" />
+    </ItemGroup>
+
+
+    <ItemGroup>
+      <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Module\Razdor.Communities.Module.csproj" />
+      <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Module\Razdor.Identity.Module.csproj" />
+    </ItemGroup>
+</Project>

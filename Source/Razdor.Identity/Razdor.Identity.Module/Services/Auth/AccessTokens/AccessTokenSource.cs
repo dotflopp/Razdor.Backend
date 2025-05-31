@@ -25,7 +25,7 @@ public partial class AccessTokenSource
     {
         ulong now = (ulong)(claims.CreationTime - _options.StartTime).TotalMilliseconds;
 
-        string userIdBase64 = Base64Url.EncodeToString(
+            string userIdBase64 = Base64Url.EncodeToString(
             Encoding.UTF8.GetBytes(claims.UserId.ToString())
         );
         string nowBase64 = Base64Url.EncodeToString(

@@ -1,28 +1,20 @@
 <Solution>
-  <Folder Name="/Razdor.Communities/">
-    <Project Path="Source\Razdor.Communities\Razdor.Communities.Api\Razdor.Communities.Api.csproj" />
+  <Folder Name="/Communities/">
     <Project Path="Source\Razdor.Communities\Razdor.Communities.Domain\Razdor.Communities.Domain.csproj" />
     <Project Path="Source\Razdor.Communities\Razdor.Communities.Infrastructure\Razdor.Communities.Infrastructure.csproj" />
     <Project Path="Source\Razdor.Communities\Razdor.Communities.MigrationService\Razdor.Communities.MigrationService.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Communities\Razdor.Communities.Module\Razdor.Communities.Module.csproj" />
   </Folder>
-  <Folder Name="/Razdor.Identity/">
-    <Project Path="Source\Razdor.Identity\Razdor.Identity.Api\Razdor.Identity.Api.csproj" />
+  <Folder Name="/Identity/">
     <Project Path="Source\Razdor.Identity\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj" />
     <Project Path="Source\Razdor.Identity\Razdor.Identity.Infrastructure\Razdor.Identity.Infrastructure.csproj" />
     <Project Path="Source\Razdor.Identity\Razdor.Identity.MigrationService\Razdor.Identity.MigrationService.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Identity\Razdor.Identity.Module\Razdor.Identity.Module.csproj" />
   </Folder>
-  <Folder Name="/Razdor.Shared/">
-    <Project Path="Source\Razdor.Shared\Razdor.Shared.Api\Razdor.Shared.Api.csproj" />
+  <Folder Name="/Shared/">
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Domain\Razdor.Shared.Domain.csproj" />
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Extensions\Razdor.Shared.Extensions.csproj" />
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Module.csproj" />
-  </Folder>
-  <Folder Name="/Razdor.Voices/">
-    <Project Path="Source\Razdor.Voices\Razdor.Signaling.Internal\Razdor.Signaling.Internal.csproj" />
-    <Project Path="Source\Razdor.Voices\Razdor.Signaling.Routing\Razdor.Signaling.Routing.csproj" />
-    <Project Path="Source\Razdor.Voices\Razdor.Signaling.Services\Razdor.Signaling.Services.csproj" />
   </Folder>
   <Folder Name="/Solution Items/">
     <File Path=".gitignore" />
@@ -32,6 +24,12 @@
     <File Path="Scripts\initdb.bat" />
     <File Path="compose.yaml" />
   </Folder>
+  <Folder Name="/Voices/">
+    <Project Path="Source\Razdor.Voices\Razdor.Signaling.Internal\Razdor.Signaling.Internal.csproj" />
+    <Project Path="Source\Razdor.Voices\Razdor.Signaling.Routing\Razdor.Signaling.Routing.csproj" />
+    <Project Path="Source\Razdor.Voices\Razdor.Signaling.Services\Razdor.Signaling.Services.csproj" />
+  </Folder>
+  <Project Path="Source\Razdor.Api\Razdor.Api.csproj" Type="Classic C#" />
   <Project Path="Source\Razdor.AppHost\Razdor.AppHost.csproj" />
   <Project Path="Source\Razdor.ServiceDefaults\Razdor.ServiceDefaults.csproj" />
   <Project Path="Source\Razdor.StartApp\Razdor.StartApp.csproj" />

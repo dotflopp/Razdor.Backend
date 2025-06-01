@@ -1,4 +1,4 @@
-﻿using Razdor.Communities.Services.Services.Channels.Commands;
+﻿using Razdor.Communities.Module.Services.Channels.Commands;
 using Razdor.Signaling.Internal;
 
 namespace Razdor.Communities.Infrastructure.Signaling;

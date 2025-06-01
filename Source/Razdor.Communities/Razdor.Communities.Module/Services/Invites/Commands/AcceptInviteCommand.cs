@@ -1,7 +1,7 @@
-﻿using Razdor.Communities.Services.Contracts;
+﻿using Razdor.Communities.Module.Contracts;
 using Razdor.Shared.Module.Authorization;
 
-namespace Razdor.Communities.Services.Services.Invites.Commands;
+namespace Razdor.Communities.Module.Services.Invites.Commands;
 
 public sealed record AcceptInviteCommand(
     string InviteId

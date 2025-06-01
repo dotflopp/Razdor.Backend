@@ -1,11 +1,11 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Razdor.Communities.Domain;
-using Razdor.Communities.Services.DataAccess;
-using Razdor.Communities.Services.Services.Communities.ViewModels;
+using Razdor.Communities.Module.DataAccess;
+using Razdor.Communities.Module.Services.Communities.ViewModels;
 using Razdor.Shared.Module.RequestSenderContext;
 
-namespace Razdor.Communities.Services.Services.Communities.Queries;
+namespace Razdor.Communities.Module.Services.Communities.Queries;
 
 public sealed class GetSelfUserCommunitiesQueryHandler(
     CommunityDataContext context,

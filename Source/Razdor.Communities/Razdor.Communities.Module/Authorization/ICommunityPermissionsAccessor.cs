@@ -1,8 +1,8 @@
 ﻿using Razdor.Communities.Domain.Permissions;
 
-namespace Razdor.Communities.Services.Authorization;
+namespace Razdor.Communities.Module.Authorization;
 
 public interface ICommunityPermissionsAccessor
 {
-    Task<UserPermissions> GetMemberPermissionsAsync(ulong userId, ulong communityId, CancellationToken cancellationToken = default);
+    Task<UserPermissions> GetMemberPermissionsAsync(ulong communityId, ulong userId, CancellationToken cancellationToken = default);
 }

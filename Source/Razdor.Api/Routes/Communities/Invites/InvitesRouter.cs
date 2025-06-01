@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Razdor.Api.Routes.Communities.Invites.ViewModels;
-using Razdor.Communities.Services.Contracts;
-using Razdor.Communities.Services.Services.Communities.ViewModels;
-using Razdor.Communities.Services.Services.Invites.Commands;
+using Razdor.Communities.Module.Contracts;
+using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Communities.Module.Services.Invites.Commands;
 
 namespace Razdor.Api.Routes.Communities.Invites;
 

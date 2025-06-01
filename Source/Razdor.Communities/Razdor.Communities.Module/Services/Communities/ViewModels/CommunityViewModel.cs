@@ -2,7 +2,7 @@
 using Razdor.Communities.Domain;
 using Razdor.Shared.Module;
 
-namespace Razdor.Communities.Services.Services.Communities.ViewModels;
+namespace Razdor.Communities.Module.Services.Communities.ViewModels;
 
 public record CommunityViewModel(
     [property:JsonConverter(typeof(JsonStringULongConverter))]

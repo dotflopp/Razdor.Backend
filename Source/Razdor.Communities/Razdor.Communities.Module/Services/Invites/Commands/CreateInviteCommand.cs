@@ -1,14 +1,14 @@
 ﻿using Razdor.Communities.Domain.Permissions;
-using Razdor.Communities.Services.Authorization;
-using Razdor.Communities.Services.Contracts;
-using Razdor.Communities.Services.Services.Communities.ViewModels;
+using Razdor.Communities.Module.Authorization;
+using Razdor.Communities.Module.Contracts;
+using Razdor.Communities.Module.Services.Communities.ViewModels;
 
-namespace Razdor.Communities.Services.Services.Invites.Commands;
+namespace Razdor.Communities.Module.Services.Invites.Commands;
 
 public sealed record CreateInviteCommand(
     ulong CommunityId,
     TimeSpan? LifeTime
-) : ICommunitiesCommand<InviteViewModel>, IRequiredCommunityPermissionsMessage
+) : ICommunitiesCommand<InviteViewModel>, IRequiredCommunityPermissions
 {
     public UserPermissions RequiredPermissions => UserPermissions.InviteMembers;
 }

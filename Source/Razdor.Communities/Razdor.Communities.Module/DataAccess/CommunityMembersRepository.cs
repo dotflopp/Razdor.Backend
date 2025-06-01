@@ -4,7 +4,7 @@ using Razdor.Communities.Domain.Members;
 using Razdor.Shared.Domain.Repository;
 using Razdor.Shared.Module.DataAccess;
 
-namespace Razdor.Communities.Services.DataAccess;
+namespace Razdor.Communities.Module.DataAccess;
 
 public class CommunityMembersRepository(
     CommunityDataContext context,

@@ -1,13 +1,13 @@
 ﻿using Mediator;
 using Razdor.Communities.Domain;
 using Razdor.Communities.Domain.Members;
-using Razdor.Communities.Services.DataAccess;
-using Razdor.Communities.Services.Services.Communities.ViewModels;
+using Razdor.Communities.Module.DataAccess;
+using Razdor.Communities.Module.Services.Communities.ViewModels;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.DataAccess;
 using Razdor.Shared.Module.RequestSenderContext;
 
-namespace Razdor.Communities.Services.Services.Communities.Commands;
+namespace Razdor.Communities.Module.Services.Communities.Commands;
 
 public sealed class CreateCommunityCommandHandler(
     UnitOfWork<CommunityDataContext> unitOfWork,

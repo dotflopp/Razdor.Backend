@@ -1,5 +1,5 @@
 ﻿using Mediator;
-using Razdor.Communities.Services.Contracts;
+using Razdor.Communities.Module.Contracts;
 
 namespace Razdor.Communities.Infrastructure;
 

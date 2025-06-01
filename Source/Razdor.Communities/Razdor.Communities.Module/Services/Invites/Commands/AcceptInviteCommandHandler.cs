@@ -3,13 +3,13 @@ using Razdor.Communities.Domain;
 using Razdor.Communities.Domain.Invites;
 using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Rules;
-using Razdor.Communities.Services.DataAccess;
-using Razdor.Communities.Services.Exceptions;
+using Razdor.Communities.Module.DataAccess;
+using Razdor.Communities.Module.Exceptions;
 using Razdor.Shared.Domain.Rules;
 using Razdor.Shared.Module.DataAccess;
 using Razdor.Shared.Module.RequestSenderContext;
 
-namespace Razdor.Communities.Services.Services.Invites.Commands;
+namespace Razdor.Communities.Module.Services.Invites.Commands;
 
 public sealed class AcceptInviteCommandHandler(
     IInvitesRepository invites,

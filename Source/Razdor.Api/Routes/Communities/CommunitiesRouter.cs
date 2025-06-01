@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Razdor.Api.Routes.Communities.Channels;
 using Razdor.Api.Routes.Communities.Invites;
-using Razdor.Communities.Services.Contracts;
-using Razdor.Communities.Services.Services.Communities.Commands;
-using Razdor.Communities.Services.Services.Communities.Queries;
-using Razdor.Communities.Services.Services.Communities.ViewModels;
+using Razdor.Communities.Module.Contracts;
+using Razdor.Communities.Module.Services.Communities.Commands;
+using Razdor.Communities.Module.Services.Communities.Queries;
+using Razdor.Communities.Module.Services.Communities.ViewModels;
 
 namespace Razdor.Api.Routes.Communities;
 

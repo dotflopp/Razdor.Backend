@@ -1,6 +1,6 @@
 ﻿using Razdor.Communities.Domain.Channels;
 
-namespace Razdor.Communities.Services.Services.Channels.ViewModels;
+namespace Razdor.Communities.Module.Services.Channels.ViewModels;
 
 public record CategoryChannelViewModel(
     ulong Id,

@@ -9,7 +9,7 @@ using Razdor.Api.OpenAPI;
 using Razdor.Api.Routes.Communities;
 using Razdor.Api.Routes.Identity;
 using Razdor.Communities.Infrastructure;
-using Razdor.Communities.Services.Authorization;
+using Razdor.Communities.Module.Authorization;
 using Razdor.Identity.Infrastructure;
 using Razdor.ServiceDefaults;
 using Razdor.Shared.Module;
@@ -78,7 +78,8 @@ builder.Services.AddMediator(options =>
     options.PipelineBehaviors =
     [
         typeof(AuthorizationHandler<,>),
-        typeof(CommunityPermissionsHandler<,>)
+        typeof(CommunityPermissionsHandler<,>),
+        typeof(ChannelPermissionsHandler<,>)
     ];
 });
 

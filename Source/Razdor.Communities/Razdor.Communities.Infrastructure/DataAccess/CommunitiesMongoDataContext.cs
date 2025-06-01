@@ -2,7 +2,7 @@
 using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Infrastructure.DataAccess.EntityConfigurations;
 using Razdor.Communities.Infrastructure.DataAccess.TypeConverters;
-using Razdor.Communities.Services.DataAccess;
+using Razdor.Communities.Module.DataAccess;
 
 namespace Razdor.Communities.Infrastructure.DataAccess;
 

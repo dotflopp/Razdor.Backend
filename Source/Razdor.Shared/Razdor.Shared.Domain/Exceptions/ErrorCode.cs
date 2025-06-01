@@ -20,9 +20,10 @@ public enum ErrorCode : ulong
     //Communities
     CommunityMemberNotFound,
     CommunityNotFound,
+    ChannelNotFound,
     InviteNotFound,
     ReJoiningToCommunity,
 
     //Routing
-    NonExistentRoute
+    NonExistentRoute,
 }

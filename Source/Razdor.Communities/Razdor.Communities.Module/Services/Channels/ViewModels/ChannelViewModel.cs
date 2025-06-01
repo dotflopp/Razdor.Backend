@@ -2,7 +2,7 @@
 using Razdor.Communities.Domain.Channels;
 using Razdor.Shared.Module;
 
-namespace Razdor.Communities.Services.Services.Channels.ViewModels;
+namespace Razdor.Communities.Module.Services.Channels.ViewModels;
 
 [JsonDerivedType(typeof(ForkChannelViewModel))]
 [JsonDerivedType(typeof(TextChannelViewModel))]

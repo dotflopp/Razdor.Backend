@@ -1,6 +1,6 @@
 ﻿using Mediator;
 
-namespace Razdor.Communities.Services.Contracts;
+namespace Razdor.Communities.Module.Contracts;
 
 public interface ICommunitiesCommand : ICommand, ICommunitiesCommand<Unit>
 {

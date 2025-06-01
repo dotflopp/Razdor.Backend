@@ -1,9 +1,9 @@
 ﻿using Mediator;
 using Razdor.Communities.Domain.Channels;
-using Razdor.Communities.Services.Services.Channels.ViewModels;
+using Razdor.Communities.Module.Services.Channels.ViewModels;
 using Razdor.Shared.Module;
 
-namespace Razdor.Communities.Services.Services.Channels.Commands;
+namespace Razdor.Communities.Module.Services.Channels.Commands;
 
 public sealed class CreateCommunityChannelCommandHandler(
     ICommunityChannelsRepository repository,

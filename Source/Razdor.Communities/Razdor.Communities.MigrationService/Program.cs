@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Razdor.Communities.Infrastructure.DataAccess;
-using Razdor.Communities.Services.DataAccess;
+using Razdor.Communities.Module.DataAccess;
 
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 

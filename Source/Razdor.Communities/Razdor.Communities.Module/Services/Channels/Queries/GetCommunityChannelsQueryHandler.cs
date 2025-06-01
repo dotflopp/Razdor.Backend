@@ -1,10 +1,10 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Razdor.Communities.Domain.Channels;
-using Razdor.Communities.Services.DataAccess;
-using Razdor.Communities.Services.Services.Channels.ViewModels;
+using Razdor.Communities.Module.DataAccess;
+using Razdor.Communities.Module.Services.Channels.ViewModels;
 
-namespace Razdor.Communities.Services.Services.Channels.Queries;
+namespace Razdor.Communities.Module.Services.Channels.Queries;
 
 public class GetCommunityChannelsQueryHandler(
     CommunityDataContext context

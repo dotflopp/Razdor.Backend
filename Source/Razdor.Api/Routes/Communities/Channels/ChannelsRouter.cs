@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Razdor.Api.Routes.Communities.Channels.ViewModels;
+using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Channels.Commands;
-using Razdor.Communities.Services.Contracts;
-using Razdor.Communities.Services.Services.Channels.Commands;
-using Razdor.Communities.Services.Services.Channels.Queries;
-using Razdor.Communities.Services.Services.Channels.ViewModels;
+using Razdor.Communities.Module.Services.Channels.Queries;
+using Razdor.Communities.Module.Services.Channels.ViewModels;
 
 namespace Razdor.Api.Routes.Communities.Channels;
 

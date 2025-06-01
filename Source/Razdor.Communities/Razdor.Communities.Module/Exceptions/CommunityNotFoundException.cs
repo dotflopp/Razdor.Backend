@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Razdor.Shared.Domain.Exceptions;
 
-namespace Razdor.Communities.Services.Exceptions;
+namespace Razdor.Communities.Module.Exceptions;
 
 public sealed class CommunityNotFoundException(
     string? message = null,

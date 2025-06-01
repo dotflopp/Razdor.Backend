@@ -2,12 +2,11 @@
 using Razdor.Api.Routes.Communities.Channels.ViewModels;
 using Razdor.Api.Routes.Communities.Invites.ViewModels;
 using Razdor.Communities.Module.Services.Channels.Commands;
-using Razdor.Communities.Services.Services.Channels.Commands;
-using Razdor.Communities.Services.Services.Channels.Queries;
-using Razdor.Communities.Services.Services.Channels.ViewModels;
-using Razdor.Communities.Services.Services.Communities.Commands;
-using Razdor.Communities.Services.Services.Communities.ViewModels;
-using Razdor.Communities.Services.Services.Invites.Commands;
+using Razdor.Communities.Module.Services.Channels.Queries;
+using Razdor.Communities.Module.Services.Channels.ViewModels;
+using Razdor.Communities.Module.Services.Communities.Commands;
+using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Communities.Module.Services.Invites.Commands;
 
 namespace Razdor.Api.Serialization;
 

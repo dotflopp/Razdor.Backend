@@ -2,8 +2,6 @@
 
 namespace Razor.Shared.Infrastructure;
 
-
-
 public class InMemoryEventBus: IEventBus
 {
     private readonly Dictionary<Type, List<Delegate>> _eventHandlers = new();

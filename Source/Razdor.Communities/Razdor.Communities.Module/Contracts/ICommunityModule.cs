@@ -1,4 +1,4 @@
-﻿namespace Razdor.Communities.Services.Contracts;
+﻿namespace Razdor.Communities.Module.Contracts;
 
 public interface ICommunityModule
 {

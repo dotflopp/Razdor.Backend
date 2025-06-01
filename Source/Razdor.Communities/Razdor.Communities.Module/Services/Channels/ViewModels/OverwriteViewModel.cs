@@ -2,7 +2,7 @@
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Shared.Module;
 
-namespace Razdor.Communities.Services.Services.Channels.ViewModels;
+namespace Razdor.Communities.Module.Services.Channels.ViewModels;
 
 public record OverwriteViewModel(
     [property:JsonConverter(typeof(JsonStringULongConverter))]

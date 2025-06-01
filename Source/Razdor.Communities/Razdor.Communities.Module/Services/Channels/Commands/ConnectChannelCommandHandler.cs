@@ -1,8 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Mediator;
-using Razdor.Communities.Module.Services.Channels.Commands;
 
-namespace Razdor.Communities.Services.Services.Channels.Commands;
+namespace Razdor.Communities.Module.Services.Channels.Commands;
 
 public interface ISignalingService
 {

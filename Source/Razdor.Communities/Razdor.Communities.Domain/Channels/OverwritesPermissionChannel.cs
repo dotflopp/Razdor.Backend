@@ -32,7 +32,7 @@ public abstract class OverwritesPermissionChannel : CommunityChannel, IOverwrite
     }
 
     [MemberNotNullWhen(true, nameof(_overwrites))]
-    public override bool IsSyncing => ParentId == 0 && _overwrites == null;
+    public override bool IsSyncing => ParentId != 0 && _overwrites == null;
 
     public override IReadOnlyList<Overwrite> Overwrites
         => _overwrites?.AsReadOnly() ?? ReadOnlyCollection<Overwrite>.Empty;

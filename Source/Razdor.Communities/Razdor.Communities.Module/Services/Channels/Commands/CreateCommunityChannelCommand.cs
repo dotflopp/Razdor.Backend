@@ -1,12 +1,12 @@
 ﻿using System.Text.Json.Serialization;
 using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Domain.Permissions;
-using Razdor.Communities.Services.Authorization;
-using Razdor.Communities.Services.Contracts;
-using Razdor.Communities.Services.Services.Channels.ViewModels;
+using Razdor.Communities.Module.Authorization;
+using Razdor.Communities.Module.Contracts;
+using Razdor.Communities.Module.Services.Channels.ViewModels;
 using Razdor.Shared.Module;
 
-namespace Razdor.Communities.Services.Services.Channels.Commands;
+namespace Razdor.Communities.Module.Services.Channels.Commands;
 
 public record CreateCommunityChannelCommand(
     string Name,
@@ -16,7 +16,7 @@ public record CreateCommunityChannelCommand(
     ulong CommunityId,
     [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong ParentId
-) : ICommunitiesCommand<ChannelViewModel>, IRequiredCommunityPermissionsMessage
+) : ICommunitiesCommand<ChannelViewModel>, IRequiredCommunityPermissions
 {
     public UserPermissions RequiredPermissions => UserPermissions.ManageChannel;
 

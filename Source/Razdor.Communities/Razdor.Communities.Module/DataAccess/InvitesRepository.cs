@@ -3,7 +3,7 @@ using Razdor.Communities.Domain.Invites;
 using Razdor.Shared.Domain.Repository;
 using Razdor.Shared.Module.DataAccess;
 
-namespace Razdor.Communities.Services.DataAccess;
+namespace Razdor.Communities.Module.DataAccess;
 
 public class InvitesRepository(
     UnitOfWork<CommunityDataContext> unitOfWork,

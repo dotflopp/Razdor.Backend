@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.Caching.Hybrid;
-using Razdor.Communities.Domain;
-using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Module.Authorization;
 using Razdor.Communities.Module.Contracts;
@@ -9,18 +7,20 @@ using static Razdor.Communities.Infrastructure.Authorization.TagsHelper;
 
 namespace Razdor.Communities.Infrastructure.Authorization;
 
-public class CachedCommunityPermissionsAccessor(
+
+public class CachedChannelPermissionsAccessor(
     HybridCache cache,
     ICommunityModule module
-) : ICommunityPermissionsAccessor 
-{
-    public async Task<UserPermissions> GetMemberPermissionsAsync(ulong communityId, ulong userId, CancellationToken cancellationToken)
+) : IChannelPermissionsAccessor {
+    
+    public async Task<UserPermissions> GetMemberPermissionsAsync(ulong communityId, ulong userId, ulong channelId, CancellationToken cancellationToken)
     {
         return await cache.GetOrCreateAsync(
-            key: CommunityPermissionsKey(communityId, userId), 
-            factory: async cancel => await module.ExecuteQueryAsync(
-                new GetCommunityMemberPermissions(communityId, userId), cancel
+            key: ChannelPermissionsKey(channelId, userId),
+            factory: async (cancel) => await module.ExecuteQueryAsync(
+                new GetChannelMemberPermissions(communityId, channelId, userId), cancel
             ),
+            tags: [ChannelTag(channelId), MemberTag(communityId, userId)],
             cancellationToken: cancellationToken
         );
     }

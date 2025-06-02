@@ -3,6 +3,7 @@ using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Razdor.Api.Routes.ViewModels;
 using Razdor.Identity.Module.Contracts;
+using Razdor.Identity.Module.Services.Users.Commands;
 using Razdor.Identity.Module.Users.Queries;
 using Razdor.Identity.Module.Users.ViewModels;
 
@@ -29,8 +30,21 @@ public static class UsersRouter
             .Produces<UserPreviewModel>()
             .Produces((int)HttpStatusCode.NotFound)
             .WithSummary("Получить данные пользователя с соответствующим идентификатором");
+        
+        api.MapPut("/@me/status", SetStatusAsync)
+            .Produces((int)HttpStatusCode.NotFound)
+            .WithSummary("Поменять статус пользователя");
+
 
         return router;
+    }
+    private static async Task<IResult> SetStatusAsync(
+        [FromServices] IIdentityModule module,
+        [FromBody] ChangeSelectedStatusCommand command
+    )
+    {
+        await module.ExecuteCommandAsync(command);
+        return Results.Ok();
     }
 
     private static async Task<IResult> GetUserAsync(

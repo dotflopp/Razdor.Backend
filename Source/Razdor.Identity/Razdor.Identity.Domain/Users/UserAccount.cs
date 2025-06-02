@@ -48,7 +48,23 @@ public class UserAccount : BaseSnowflakeEntity, IEntity<ulong>, IAggregateRoot
     /// </summary>
     public DateTimeOffset CredentialsChangeDate { get; private set; }
 
-    public SelectedCommunicationStatus SelectedStatus { get; }
+    public SelectedCommunicationStatus SelectedStatus
+    {
+        get;
+        set
+        {
+            if (IsOnline)
+            {
+                AddDomainEvent(new UserCommunicationStatusChanged(
+                    Id,
+                    DisplayedStatus,
+                    (DisplayedCommunicationStatus)value
+                ));
+            }
+
+            field = value;
+        }
+    }
 
     public DisplayedCommunicationStatus DisplayedStatus =>
         !IsOnline

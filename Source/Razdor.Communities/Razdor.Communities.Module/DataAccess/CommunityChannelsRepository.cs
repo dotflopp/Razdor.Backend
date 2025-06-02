@@ -7,8 +7,8 @@ using Razdor.Shared.Module.DataAccess;
 namespace Razdor.Communities.Module.DataAccess;
 
 public class CommunityChannelsRepository(
-    UnitOfWork<CommunityDataContext> unitOfWork,
-    CommunityDataContext _context
+    UnitOfWork<CommunitiesDBContext> unitOfWork,
+    CommunitiesDBContext _context
 ) : ICommunityChannelsRepository
 {
     public IUnitOfWork UnitOfWork => unitOfWork;
@@ -17,10 +17,10 @@ public class CommunityChannelsRepository(
         EntityEntry<CommunityChannel> entry = _context.Add(communityChannel);
         return entry.Entity;
     }
-    public async Task<CommunityChannel?> FindAsync(ulong communityId, ulong channelId, CancellationToken cancellationToken = default)
+    public async Task<CommunityChannel?> FindAsync(ulong channelId, CancellationToken cancellationToken = default)
     {
         return await _context.Channels.FirstOrDefaultAsync(
-            channel => channel.Id == channelId && channel.CommunityId == communityId, 
+            channel => channel.Id == channelId, 
             cancellationToken
         );
     }

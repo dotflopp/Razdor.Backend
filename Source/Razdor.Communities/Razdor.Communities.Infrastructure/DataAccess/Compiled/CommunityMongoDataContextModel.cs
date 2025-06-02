@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Razdor.Communities.Infrastructure.DataAccess
 {
-    [DbContext(typeof(CommunityMongoDataContext))]
+    [DbContext(typeof(CommunitiesMongoDBContext))]
     public partial class CommunityMongoDataContextModel : RuntimeModel
     {
         private static readonly bool _useOldBehavior31751 =

@@ -1,24 +1,25 @@
 ﻿using System.Text.Json.Serialization;
 using Mediator;
+using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.Communities.Module.Services.Channels.Commands;
 
 public interface ISignalingService
 {
-    public Task<SessionViewModel> CreateUserSession(ulong communityId, ulong channelId, ulong userId);
+    public Task<SessionViewModel> CreateUserSession(ulong userId, ulong channelId);
 }
 
 public record SessionViewModel(
-    [property:JsonPropertyName("SessionId")]
     string AccessToken
 );
 
 public class ConnectChannelCommandHandler(
-    ISignalingService signalingService
+    ISignalingService signalingService,
+    IRequestSenderContextAccessor sender
 ): ICommandHandler<ConnectChannelCommand, SessionViewModel>
 {
     public async ValueTask<SessionViewModel> Handle(ConnectChannelCommand command, CancellationToken cancellationToken)
     {
-        return await signalingService.CreateUserSession(command.CommunityId, command.CommunityId, command.ChannelId);
+        return await signalingService.CreateUserSession(sender.User.Id,  command.ChannelId);
     }
 }

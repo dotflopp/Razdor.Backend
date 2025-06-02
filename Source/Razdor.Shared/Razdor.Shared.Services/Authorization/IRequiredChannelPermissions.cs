@@ -6,6 +6,5 @@ namespace Razdor.Communities.Module.Authorization;
 public interface IRequiredChannelPermissions : IAuthorizationRequiredMessage
 {
     ulong ChannelId { get; }
-    ulong CommunityId { get; }
     UserPermissions RequiredPermissions { get; }
 }

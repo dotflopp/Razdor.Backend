@@ -4,5 +4,5 @@ namespace Razdor.Communities.Module.Authorization;
 
 public interface IChannelPermissionsAccessor
 {
-    Task<UserPermissions> GetMemberPermissionsAsync(ulong communityId, ulong userId, ulong channelId, CancellationToken cancellationToken = default);
+    Task<UserPermissions> GetMemberPermissionsAsync(ulong userId, ulong channelId, CancellationToken cancellationToken = default);
 }

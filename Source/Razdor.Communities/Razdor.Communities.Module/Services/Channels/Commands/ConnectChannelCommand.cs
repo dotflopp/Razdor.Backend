@@ -8,8 +8,6 @@ namespace Razdor.Communities.Module.Services.Channels.Commands;
 
 public record ConnectChannelCommand(
     [property:JsonConverter(typeof(JsonStringULongConverter))]
-    ulong CommunityId, 
-    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong ChannelId
 ): ICommunitiesCommand<SessionViewModel>, IRequiredChannelPermissions
 {

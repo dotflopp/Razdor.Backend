@@ -5,4 +5,4 @@ using Razdor.Communities.Infrastructure.DataAccess;
 #pragma warning disable 219, 612, 618
 #nullable disable
 
-[assembly: DbContextModel(typeof(CommunityMongoDataContext), typeof(CommunityMongoDataContextModel))]
+[assembly: DbContextModel(typeof(CommunitiesMongoDBContext), typeof(CommunityMongoDataContextModel))]

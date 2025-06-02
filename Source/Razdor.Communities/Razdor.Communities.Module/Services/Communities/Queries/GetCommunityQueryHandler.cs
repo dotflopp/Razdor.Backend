@@ -8,7 +8,7 @@ using Razdor.Communities.Module.Services.Communities.ViewModels;
 namespace Razdor.Communities.Module.Services.Communities.Queries;
 
 public class GetCommunityQueryHandler(
-    CommunityDataContext context
+    CommunitiesDBContext context
 ) : IQueryHandler<GetCommunityQuery, CommunityViewModel>
 {
     public async ValueTask<CommunityViewModel> Handle(GetCommunityQuery query, CancellationToken cancellationToken)

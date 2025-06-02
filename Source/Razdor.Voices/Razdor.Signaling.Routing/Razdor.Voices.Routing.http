@@ -1,6 +1,0 @@
-@Razdor.Voices.Routing_HostAddress = http://localhost:5083
-
-GET {{Razdor.Voices.Routing_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

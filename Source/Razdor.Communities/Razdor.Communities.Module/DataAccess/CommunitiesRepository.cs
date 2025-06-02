@@ -7,11 +7,11 @@ using Razdor.Shared.Module.DataAccess;
 namespace Razdor.Communities.Module.DataAccess;
 
 public class CommunitiesRepository(
-    CommunityDataContext context,
-    UnitOfWork<CommunityDataContext> unitOfWork
+    CommunitiesDBContext context,
+    UnitOfWork<CommunitiesDBContext> unitOfWork
 ) : ICommunitiesRepository
 {
-    private readonly CommunityDataContext _context = context;
+    private readonly CommunitiesDBContext _context = context;
     public IUnitOfWork UnitOfWork => unitOfWork;
     public Community Add(Community community)
     {

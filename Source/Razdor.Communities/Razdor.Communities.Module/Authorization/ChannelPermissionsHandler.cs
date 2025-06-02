@@ -22,7 +22,6 @@ public class ChannelPermissionsHandler<TMessage, TResponse>(
         try
         {
             permissions = await channelPermissions.GetMemberPermissionsAsync(
-                message.CommunityId,
                 sender.User.Id,
                 message.ChannelId,
                 cancellationToken
@@ -32,7 +31,7 @@ public class ChannelPermissionsHandler<TMessage, TResponse>(
         {
             throw new AccessForbiddenException(exception.Message, exception);
         }
-        catch (CommunityChannelNotFoundException exception)
+        catch (ChannelNotFoundException exception)
         {
             throw new AccessForbiddenException(exception.Message, exception);
         }

@@ -7,7 +7,7 @@ public sealed class JsonStringULongConverter : JsonConverter<ulong>
 {
     public override ulong Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (reader.TryGetUInt64(out ulong value))
+        if (reader.TokenType == JsonTokenType.Number && reader.TryGetUInt64(out ulong value))
             return value;
         return Convert.ToUInt64(reader.GetString());
     }

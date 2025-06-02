@@ -18,14 +18,13 @@ public class GetChannelMemberPermissionsHandler(
 {
     public async ValueTask<UserPermissions> Handle(GetChannelMemberPermissions query, CancellationToken cancellationToken)
     {
-        CommunityChannel? channel = await channels.FindAsync(query.CommunityId, query.ChannelId, cancellationToken);
-        CommunityMember? member = await members.FindAsync(query.CommunityId, query.UserId, cancellationToken);
-        
-        if (member == null)
-            CommunityMemberNotFoundException.Throw(query.CommunityId, query.UserId);
-        
+        CommunityChannel? channel = await channels.FindAsync(query.ChannelId, cancellationToken);
         if (channel == null)
-            CommunityChannelNotFoundException.Throw(query.CommunityId, query.ChannelId);
+            ChannelNotFoundException.Throw(query.ChannelId);
+            
+        CommunityMember? member = await members.FindAsync(channel.CommunityId, query.UserId, cancellationToken);
+        if (member == null)
+            CommunityMemberNotFoundException.Throw(channel.CommunityId, query.UserId);
         
         bool hasParentPermissions = false;
         UserPermissions inheritedPermissions = UserPermissions.None;
@@ -35,11 +34,11 @@ public class GetChannelMemberPermissionsHandler(
             try
             {
                 inheritedPermissions = await channelPermissions.GetMemberPermissionsAsync(
-                    query.CommunityId, query.UserId, channel.ParentId, cancellationToken
+                    query.UserId, channel.ParentId, cancellationToken
                 );
                 hasParentPermissions = true;
             }
-            catch (CommunityChannelNotFoundException ex)
+            catch (ChannelNotFoundException ex)
             {
                 logger.LogError(ex, $"Parent channel by id {channel.ParentId} not found for channel {channel.Id}");       
             }
@@ -48,7 +47,7 @@ public class GetChannelMemberPermissionsHandler(
         if (!hasParentPermissions)
         {
             inheritedPermissions = await communityPermissions.GetMemberPermissionsAsync(
-                query.CommunityId, query.UserId, cancellationToken
+                channel.CommunityId, query.UserId, cancellationToken
             );
         }
         

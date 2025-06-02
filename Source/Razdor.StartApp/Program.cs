@@ -5,22 +5,23 @@ using Microsoft.OpenApi.Models;
 using Razdor.Api;
 using Razdor.Api.AuthenticationScheme;
 using Razdor.Api.Constraints;
+using Razdor.Api.Middlewares;
 using Razdor.Api.OpenAPI;
+using Razdor.Api.Routes;
 using Razdor.Api.Routes.Communities;
-using Razdor.Api.Routes.Identity;
+using Razdor.Api.Routes.Communities.ViewModels;
+using Razdor.Api.Routes.Messaging;
 using Razdor.Communities.Infrastructure;
 using Razdor.Communities.Module.Authorization;
 using Razdor.Identity.Infrastructure;
+using Razdor.Messaging.Infrastructure;
 using Razdor.ServiceDefaults;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Authorization;
 using Razdor.Shared.Module.RequestSenderContext;
-using Razdor.Signaling.Routing;
-using Razdor.Signaling.Services;
 using Scalar.AspNetCore;
-using CommunitiesJsonSerializerContext = Razdor.Api.Serialization.CommunitiesJsonSerializerContext;
-using IdentityJsonSerializerContext = Razdor.Api.Serialization.IdentityJsonSerializerContext;
-using SharedJsonSerializerContext = Razdor.Api.Serialization.SharedJsonSerializerContext;
+using Razdor.Api.Serialization;
+using Razdor.StartApp;
 
 WebApplicationBuilder builder = WebApplication.CreateSlimBuilder(args);
 
@@ -135,19 +136,20 @@ builder.Services.AddIdentityServices(
 );
 
 // Community Services
-string communityDb = builder.Configuration.GetConnectionString("communitydb")!;
+string communityDb = builder.Configuration.GetConnectionString(DbNames.CommunityDb)!;
 builder.Services.AddCommunityServices(
     new CommunitiesOptions(
         communityDb,
-        "communitydb"
+        DbNames.CommunityDb
     )
 );
 
-// Signaling Services
-builder.Services.AddSignalingServices(
-    builder.Configuration.GetValue<string>(
-        "ASPNETCORE_URLS"
-    ) + "/signaling"
+string messagingDb = builder.Configuration.GetConnectionString(DbNames.MessagingDb)!;
+builder.Services.AddMessagingServices(
+    new MessagingOptions(
+        messagingDb,
+        DbNames.MessagingDb
+    )
 );
 
 WebApplication app = builder.Build();
@@ -170,7 +172,7 @@ app.UseRazdorExceptionHandlerMiddleware();
 
 app.MapIdentityApi();
 app.MapCommunitiesApi();
-app.MapSignalingHub();
+app.MapMessagingApi();
 
 app.UseNonExistentRouteResponse();
 

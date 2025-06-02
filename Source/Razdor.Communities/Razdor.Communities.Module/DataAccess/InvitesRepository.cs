@@ -6,8 +6,8 @@ using Razdor.Shared.Module.DataAccess;
 namespace Razdor.Communities.Module.DataAccess;
 
 public class InvitesRepository(
-    UnitOfWork<CommunityDataContext> unitOfWork,
-    CommunityDataContext context
+    UnitOfWork<CommunitiesDBContext> unitOfWork,
+    CommunitiesDBContext context
 ) : IInvitesRepository
 {
     public IUnitOfWork UnitOfWork => unitOfWork;

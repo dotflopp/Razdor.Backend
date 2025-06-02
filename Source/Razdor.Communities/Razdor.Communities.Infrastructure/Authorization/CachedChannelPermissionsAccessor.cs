@@ -13,14 +13,13 @@ public class CachedChannelPermissionsAccessor(
     ICommunityModule module
 ) : IChannelPermissionsAccessor {
     
-    public async Task<UserPermissions> GetMemberPermissionsAsync(ulong communityId, ulong userId, ulong channelId, CancellationToken cancellationToken)
+    public async Task<UserPermissions> GetMemberPermissionsAsync(ulong userId, ulong channelId, CancellationToken cancellationToken)
     {
         return await cache.GetOrCreateAsync(
             key: ChannelPermissionsKey(channelId, userId),
             factory: async (cancel) => await module.ExecuteQueryAsync(
-                new GetChannelMemberPermissions(communityId, channelId, userId), cancel
+                new GetChannelMemberPermissions(channelId, userId), cancel
             ),
-            tags: [ChannelTag(channelId), MemberTag(communityId, userId)],
             cancellationToken: cancellationToken
         );
     }

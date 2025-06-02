@@ -8,7 +8,7 @@ namespace Razdor.Communities.Infrastructure.DataAccess;
 
 public class CommunitiesMongoDBContext(
     DbContextOptions<CommunitiesMongoDBContext> options
-) : CommunitiesDBContext(options)
+) : CommunitiesDbContext(options)
 {
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

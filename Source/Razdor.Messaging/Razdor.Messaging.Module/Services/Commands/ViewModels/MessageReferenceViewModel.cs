@@ -8,6 +8,7 @@ namespace Razdor.Messaging.Module.Services.Commands.ViewModels;
 public record MessageReferenceViewModel(
     [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong ChannelId,
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong MessageId
 ){
     public static MessageReferenceViewModel From(MessageReference messageReference)

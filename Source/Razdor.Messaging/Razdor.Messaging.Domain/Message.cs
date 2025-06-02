@@ -51,11 +51,11 @@ public class Message: BaseSnowflakeEntity, IEntity<ulong>
     public DateTimeOffset CreatedAt { get; private set; }
     public DateTimeOffset? EditedAt { get; private set; }
     
-    public bool IsMentionEveryone => Mentions.EveryoneIsMentioned;
+    public bool MentionedEveryone => Mentions.MentionedEveryone;
     public Mentions Mentions { get; private set; }
     public IReadOnlyCollection<MentionedUser> MentionedUsers => Mentions.Users;
     public IReadOnlyCollection<MentionedChannel> MentionedChannels => Mentions.Channels;
-    public IReadOnlyCollection<MentionedRole> MentionedRoles =>Mentions.Roles;
+    public IReadOnlyCollection<MentionedRole> MentionedRoles => Mentions.Roles;
     public IReadOnlyCollection<Attachment> Attachments => _attachments?.AsReadOnly() ?? ReadOnlyCollection<Attachment>.Empty;
 
     public static Message CreateNew(

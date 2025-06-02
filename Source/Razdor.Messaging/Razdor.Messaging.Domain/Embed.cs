@@ -15,7 +15,7 @@ public class EmbedFooter
 {
     public string? ImageUrl { get; set; }
     public string? Title { get; set; }
-    public DateTimeOffset Timestamp { get; set; }
+    public DateTimeOffset? Timestamp { get; set; }
 }
 
 public class EmbedField

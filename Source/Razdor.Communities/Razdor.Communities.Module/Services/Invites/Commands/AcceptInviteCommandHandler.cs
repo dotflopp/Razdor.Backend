@@ -15,7 +15,7 @@ public sealed class AcceptInviteCommandHandler(
     IInvitesRepository invites,
     ICommunitiesRepository communities,
     ICommunityMembersRepository members,
-    UnitOfWork<CommunitiesDBContext> unitOfWork,
+    UnitOfWork<CommunitiesDbContext> unitOfWork,
     IRequestSenderContextAccessor sender,
     TimeProvider timeProvider
 ) : ICommandHandler<AcceptInviteCommand>

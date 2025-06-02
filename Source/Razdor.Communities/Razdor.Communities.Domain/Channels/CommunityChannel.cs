@@ -6,12 +6,13 @@ using Razdor.Shared.Domain;
 namespace Razdor.Communities.Domain.Channels;
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
+[Flags]
 public enum ChannelType
 {
-    CategoryChannel,
-    TextChannel,
-    VoiceChannel,
-    ForkChannel
+    CategoryChannel = 0x1,
+    TextChannel = 0x2,
+    VoiceChannel = 0x4,
+    ForkChannel = 0x8
 }
 
 public abstract class CommunityChannel(

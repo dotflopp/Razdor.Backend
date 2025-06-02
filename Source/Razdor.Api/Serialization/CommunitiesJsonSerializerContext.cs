@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using Razdor.Api.Routes.Communities;
+using Razdor.Api.Routes.Communities.ViewModels;
 using Razdor.Api.Routes.Invites.ViewModels;
 using Razdor.Communities.Module.Services.Channels.Commands;
 using Razdor.Communities.Module.Services.Channels.Queries;

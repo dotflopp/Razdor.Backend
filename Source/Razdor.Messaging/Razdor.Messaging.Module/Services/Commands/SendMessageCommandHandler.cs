@@ -16,13 +16,17 @@ public class SendMessageCommandHandler(
 
     public async ValueTask<MessageViewModel> Handle(SendMessageCommand command, CancellationToken cancellationToken)
     {
+        MessageReference? reference = (command.Reference != null)
+            ? new MessageReference(command.Reference.ChannelId, command.Reference.MessageId)
+            : null;
+        
         Message message = Message.CreateNew(
             snowflake.Next(),
             sender.User.Id,
             command.ChannelId,
             command.Text,
             timeProvider,
-            new MessageReference(command.Reference.ChannelId, command.Reference.MessageId),
+            reference,
             command.Embed,
             null
         );

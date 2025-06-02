@@ -65,7 +65,7 @@ public static partial class MentionsHelper
 
     private static void FindChannelMentions(string text, MentionsBuilder builder)
     {
-            
+               
     }
     private static void FindUserMentions(string text, MentionsBuilder builder)
     {

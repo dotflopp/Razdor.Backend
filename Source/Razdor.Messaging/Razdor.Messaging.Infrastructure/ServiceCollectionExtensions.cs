@@ -21,6 +21,7 @@ public static class ServiceCollectionExtensions
         
         services.AddScoped<IMessagesRepository, MessagesRepository>();
         services.AddScoped<UnitOfWork<MessagingDataContext>>();
+        services.AddScoped<IMessagingModule, MessagingModule>();
         return services;
     }
 }

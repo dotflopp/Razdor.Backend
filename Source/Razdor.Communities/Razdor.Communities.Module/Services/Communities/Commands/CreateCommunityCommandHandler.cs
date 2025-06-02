@@ -10,7 +10,7 @@ using Razdor.Shared.Module.RequestSenderContext;
 namespace Razdor.Communities.Module.Services.Communities.Commands;
 
 public sealed class CreateCommunityCommandHandler(
-    UnitOfWork<CommunitiesDBContext> unitOfWork,
+    UnitOfWork<CommunitiesDbContext> unitOfWork,
     ICommunitiesRepository communities,
     ICommunityMembersRepository communityMembers,
     IRequestSenderContextAccessor senderContext,

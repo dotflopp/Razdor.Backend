@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Razdor.Api.Routes.Channels;
-using Razdor.Api.Routes.Invites;
+using Razdor.Api.Routes.Communities.ViewModels;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Channels.Commands;
 using Razdor.Communities.Module.Services.Channels.Queries;
@@ -9,29 +8,11 @@ using Razdor.Communities.Module.Services.Communities.Commands;
 using Razdor.Communities.Module.Services.Communities.Queries;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
 
-namespace Razdor.Api.Routes.Communities.ViewModels;
+namespace Razdor.Api.Routes.Communities;
 
 public static class CommunitiesRouter
 {
-    public static IEndpointRouteBuilder MapCommunitiesApi(
-        this IEndpointRouteBuilder builder,
-        string pattern = "/"
-    )
-    {
-        IEndpointRouteBuilder api = builder
-            .NewVersionedApi("communities")
-            .HasApiVersion(0.1)
-            .MapGroup("/api/");
-
-        api.MapInvites();
-        api.MapCommunities();
-        api.MapCommunityInvites();
-        api.MapCommunityChannels();
-
-        return builder;
-    }
-    
-    private static IEndpointRouteBuilder MapCommunities(
+    public static IEndpointRouteBuilder MapCommunities(
         this IEndpointRouteBuilder builder
     )
     {

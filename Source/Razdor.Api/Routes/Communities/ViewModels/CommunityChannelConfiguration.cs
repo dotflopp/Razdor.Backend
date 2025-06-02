@@ -2,7 +2,7 @@
 using Razdor.Communities.Domain.Channels;
 using Razdor.Shared.Module;
 
-namespace Razdor.Api.Routes.Communities;
+namespace Razdor.Api.Routes.Communities.ViewModels;
 
 public record CommunityChannelConfiguration(
     string Name,

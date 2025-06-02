@@ -5,12 +5,11 @@ public class MentionsBuilder
     private List<MentionedUser>? _users = null;
     private List<MentionedChannel>? _channels = null;
     private List<MentionedRole>? _roles = null;
-    
-    private bool _everyoneIsMentioned { get; set; } = false;
+    private bool _mentionedEveryone = false;
 
     public MentionsBuilder HasEveryoneMention(bool hasMention = true)
     {
-        _everyoneIsMentioned = hasMention;
+        _mentionedEveryone = hasMention;
         return this;
     }
 
@@ -43,6 +42,6 @@ public class MentionsBuilder
 
     public Mentions Build()
     {
-        return new Mentions(_everyoneIsMentioned, _users, _channels, _roles);
+        return new Mentions(_mentionedEveryone, _users, _channels, _roles);
     }
 }

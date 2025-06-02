@@ -19,6 +19,7 @@ public record MessageViewModel(
     bool IsPinned,
     DateTimeOffset? EditedAt,
     IEnumerable<AttachmentViewModel>? Attachments,
+    bool MentionedEveryone,
     IEnumerable<MentionedUserViewModel>? MentionedUsers,
     IEnumerable<MentionedChannelViewModel>? MentionedChannels,
     IEnumerable<MentionedRoleViewModel>? MentionedRoles
@@ -41,6 +42,7 @@ public record MessageViewModel(
             message.IsPinned,
             message.EditedAt,
             message.Attachments.Select(AttachmentViewModel.From),
+            message.MentionedEveryone,
             message.MentionedUsers.Select(MentionedUserViewModel.From),
             message.MentionedChannels.Select(MentionedChannelViewModel.From),
             message.MentionedRoles.Select(MentionedRoleViewModel.From)

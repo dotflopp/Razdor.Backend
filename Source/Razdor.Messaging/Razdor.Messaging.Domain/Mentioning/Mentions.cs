@@ -12,15 +12,15 @@ public class Mentions
     { }
 
     public Mentions(
-        bool everyoneIsMentioned,
+        bool mentionedEveryone,
         IReadOnlyCollection<MentionedUser>? users = null,
         IReadOnlyCollection<MentionedChannel>? channels = null,
         IReadOnlyCollection<MentionedRole>? roles = null
     ){
-        EveryoneIsMentioned = everyoneIsMentioned;
+        MentionedEveryone = mentionedEveryone;
     }
     
-    public bool EveryoneIsMentioned { get; private set; }
+    public bool MentionedEveryone { get; private set; }
     public IReadOnlyCollection<MentionedUser> Users => _users ?? ReadOnlyCollection<MentionedUser>.Empty;
     public IReadOnlyCollection<MentionedChannel> Channels => _channels ?? ReadOnlyCollection<MentionedChannel>.Empty;
     public IReadOnlyCollection<MentionedRole> Roles => _roles ?? ReadOnlyCollection<MentionedRole>.Empty;

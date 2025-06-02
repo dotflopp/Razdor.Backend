@@ -8,7 +8,7 @@ using Razdor.Shared.Module.RequestSenderContext;
 namespace Razdor.Communities.Module.Services.Communities.Queries;
 
 public sealed class GetSelfUserCommunitiesQueryHandler(
-    CommunitiesDBContext context,
+    CommunitiesDbContext context,
     IRequestSenderContextAccessor sender
 ) : IQueryHandler<GetSelfUserCommunitiesQuery, IEnumerable<CommunityViewModel>>
 {

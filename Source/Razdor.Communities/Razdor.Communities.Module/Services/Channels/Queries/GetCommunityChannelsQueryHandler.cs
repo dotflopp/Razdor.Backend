@@ -7,7 +7,7 @@ using Razdor.Communities.Module.Services.Channels.ViewModels;
 namespace Razdor.Communities.Module.Services.Channels.Queries;
 
 public class GetCommunityChannelsQueryHandler(
-    CommunitiesDBContext context
+    CommunitiesDbContext context
 ) : IQueryHandler<GetCommunityChannelsQuery, IEnumerable<ChannelViewModel>>
 {
     public async ValueTask<IEnumerable<ChannelViewModel>> Handle(GetCommunityChannelsQuery query, CancellationToken cancellationToken)

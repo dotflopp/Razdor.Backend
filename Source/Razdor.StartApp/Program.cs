@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Routing.Constraints;
@@ -9,7 +10,6 @@ using Razdor.Api.Middlewares;
 using Razdor.Api.OpenAPI;
 using Razdor.Api.Routes;
 using Razdor.Api.Routes.Communities;
-using Razdor.Api.Routes.Communities.ViewModels;
 using Razdor.Api.Routes.Messaging;
 using Razdor.Communities.Infrastructure;
 using Razdor.Communities.Module.Authorization;
@@ -80,7 +80,8 @@ builder.Services.AddMediator(options =>
     [
         typeof(AuthorizationHandler<,>),
         typeof(CommunityPermissionsHandler<,>),
-        typeof(ChannelPermissionsHandler<,>)
+        typeof(ChannelPermissionsHandler<,>),
+        typeof(RequiredChannelTypeHandler<,>)
     ];
 });
 
@@ -143,6 +144,7 @@ builder.Services.AddCommunityServices(
         DbNames.CommunityDb
     )
 );
+
 
 string messagingDb = builder.Configuration.GetConnectionString(DbNames.MessagingDb)!;
 builder.Services.AddMessagingServices(

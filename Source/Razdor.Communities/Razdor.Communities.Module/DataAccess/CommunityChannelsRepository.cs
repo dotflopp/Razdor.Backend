@@ -7,8 +7,8 @@ using Razdor.Shared.Module.DataAccess;
 namespace Razdor.Communities.Module.DataAccess;
 
 public class CommunityChannelsRepository(
-    UnitOfWork<CommunitiesDBContext> unitOfWork,
-    CommunitiesDBContext _context
+    UnitOfWork<CommunitiesDbContext> unitOfWork,
+    CommunitiesDbContext _context
 ) : ICommunityChannelsRepository
 {
     public IUnitOfWork UnitOfWork => unitOfWork;

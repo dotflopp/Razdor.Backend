@@ -17,7 +17,7 @@ public sealed class CreateInviteCommandHandler(
     ICommunitiesRepository communities,
     IInvitesRepository invites,
     SnowflakeGenerator snowflakeGenerator,
-    UnitOfWork<CommunitiesDBContext> unitOfWork
+    UnitOfWork<CommunitiesDbContext> unitOfWork
 ) : ICommandHandler<CreateInviteCommand, InviteViewModel>
 {
     public async ValueTask<InviteViewModel> Handle(CreateInviteCommand command, CancellationToken cancellationToken)

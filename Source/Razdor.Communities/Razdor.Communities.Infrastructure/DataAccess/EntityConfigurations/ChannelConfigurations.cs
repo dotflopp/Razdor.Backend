@@ -62,7 +62,6 @@ public class ChannelConfigurations :
         builder.ToCollection(CollectionNames.Channels);
 
         builder.Ignore(x => x.DomainEvents);
-        builder.Ignore(x => x.IsTransient);
 
         builder.HasDiscriminator(x => x.Type)
             .HasValue<ForkChannel>(ChannelType.ForkChannel)

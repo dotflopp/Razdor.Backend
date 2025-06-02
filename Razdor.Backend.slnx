@@ -11,6 +11,9 @@
     <Project Path="Source\Razdor.Identity\Razdor.Identity.MigrationService\Razdor.Identity.MigrationService.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Identity\Razdor.Identity.Module\Razdor.Identity.Module.csproj" />
   </Folder>
+  <Folder Name="/Messaging/">
+    <Project Path="Source\Razdor.Messaging\Razdor.Messaging.Domain\Razdor.Messaging.Domain.csproj" Type="Classic C#" />
+  </Folder>
   <Folder Name="/Shared/">
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Domain\Razdor.Shared.Domain.csproj" />
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Extensions\Razdor.Shared.Extensions.csproj" />

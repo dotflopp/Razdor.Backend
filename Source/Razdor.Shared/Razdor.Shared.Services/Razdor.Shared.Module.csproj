@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Razdor.Communities\Razdor.Communities.Domain\Razdor.Communities.Domain.csproj" />
         <ProjectReference Include="..\Razdor.Shared.Domain\Razdor.Shared.Domain.csproj"/>
     </ItemGroup>
 

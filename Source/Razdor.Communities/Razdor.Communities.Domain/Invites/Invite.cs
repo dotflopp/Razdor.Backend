@@ -29,7 +29,6 @@ public class Invite : BaseAggregateRoot, IEntity<string>
     public uint UsesCount { get; init; }
 
     public string Id { get; }
-    public bool IsTransient => string.IsNullOrEmpty(Id);
 
     public static Invite Create(string id, ulong creatorId, ulong communityId, TimeSpan? lifeTime, TimeProvider? timeProvider = null)
     {

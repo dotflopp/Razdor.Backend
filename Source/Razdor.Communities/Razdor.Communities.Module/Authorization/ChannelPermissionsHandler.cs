@@ -8,9 +8,9 @@ using Razdor.Shared.Module.RequestSenderContext;
 namespace Razdor.Communities.Module.Authorization;
 
 public class ChannelPermissionsHandler<TMessage, TResponse>(
-        IRequestSenderContextAccessor sender,
-        IChannelPermissionsAccessor channelPermissions,
-        ILogger<ChannelPermissionsHandler<TMessage, TResponse>> logger
+    IRequestSenderContextAccessor sender,
+    IChannelPermissionsAccessor channelPermissions,
+    ILogger<ChannelPermissionsHandler<TMessage, TResponse>> logger
 ) : IPipelineBehavior<TMessage, TResponse> where TMessage : IRequiredChannelPermissions
 {
     public async ValueTask<TResponse> Handle(

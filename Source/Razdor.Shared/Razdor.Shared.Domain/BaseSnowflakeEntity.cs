@@ -5,5 +5,4 @@ public abstract class BaseSnowflakeEntity(
 ) : BaseAggregateRoot, IAggregateRoot, IEntity<ulong>
 {
     public ulong Id { get; protected set; } = id;
-    public bool IsTransient => Id == 0;
 }

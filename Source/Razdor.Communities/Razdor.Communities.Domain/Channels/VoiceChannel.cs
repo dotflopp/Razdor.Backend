@@ -32,6 +32,7 @@ public class VoiceChannel : OverwritesPermissionChannel, IOverwritesOwner
 
     public static VoiceChannel CreateNew(ulong id, ulong communityId, ulong parentId, string name)
     {
+        ArgumentException.ThrowIfNullOrEmpty(nameof(name));
         return new VoiceChannel(id, name, communityId, 0, parentId, null);
     }
 }

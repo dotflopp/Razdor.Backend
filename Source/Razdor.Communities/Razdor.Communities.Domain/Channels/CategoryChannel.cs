@@ -26,6 +26,8 @@ public class CategoryChannel : OverwritesPermissionChannel
 
     public static CategoryChannel CreateNew(ulong id, ulong communityId, ulong parentId, string name)
     {
+        ArgumentException.ThrowIfNullOrEmpty(nameof(name));
+        
         return new CategoryChannel(id, name, communityId, 0, parentId, null);
     }
 }

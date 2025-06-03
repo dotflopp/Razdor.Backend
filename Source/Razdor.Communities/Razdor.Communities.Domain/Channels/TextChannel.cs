@@ -36,6 +36,7 @@ public class TextChannel : OverwritesPermissionChannel, IOverwritesOwner
 
     public static TextChannel CreateNew(ulong id, ulong communityId, ulong parentId, string name)
     {
+        ArgumentException.ThrowIfNullOrEmpty(nameof(name));
         return new TextChannel(id, name, communityId, 0, parentId, null);
     }
 }

@@ -36,6 +36,7 @@ public class ForkChannel : CommunityChannel, IEntity<ulong>
 
     public static ForkChannel CreateNew(ulong id, ulong communityId, ulong parentId, string name)
     {
+        ArgumentException.ThrowIfNullOrEmpty(nameof(name));
         return new ForkChannel(id, name, communityId, 0, parentId);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Razdor.Communities.Domain.Permissions;
-using Razdor.Shared.Module.Authorization;
 
-namespace Razdor.Communities.Module.Authorization;
+namespace Razdor.Shared.Module.Authorization;
 
 public interface IRequiredCommunityPermissions : IAuthorizationRequiredMessage
 {

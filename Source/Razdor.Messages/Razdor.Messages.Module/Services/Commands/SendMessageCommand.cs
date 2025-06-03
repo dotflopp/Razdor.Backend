@@ -1,6 +1,5 @@
 ﻿using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Domain.Permissions;
-using Razdor.Communities.Module.Authorization;
 using Razdor.Messages.Domain;
 using Razdor.Messages.Module.Contracts;
 using Razdor.Messages.Module.Services.Commands.ViewModels;
@@ -13,7 +12,7 @@ public record SendMessageCommand(
   string? Text,
   Embed? Embed,
   MessageReferenceViewModel? Reference,
-  IAsyncEnumerable<AttachmentFileViewModel> Files
+  IAsyncEnumerable<MediaFileViewModel> Files
 ): IMessagesCommand<MessageViewModel>, IRequiredChannelPermissions, IRequiredChannelType
 {
   public UserPermissions RequiredPermissions => UserPermissions.ViewChannel | UserPermissions.SendMessage;

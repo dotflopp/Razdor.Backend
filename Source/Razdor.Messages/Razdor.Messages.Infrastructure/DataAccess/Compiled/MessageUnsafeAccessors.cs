@@ -40,6 +40,6 @@ namespace Razdor.Messages.Infrastructure.DataAccess
         public static extern ref MessageReference Reference(Message @this);
 
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_attachments")]
-        public static extern ref List<Attachment> _attachments(Message @this);
+        public static extern ref List<AttachmentMeta> _attachments(Message @this);
     }
 }

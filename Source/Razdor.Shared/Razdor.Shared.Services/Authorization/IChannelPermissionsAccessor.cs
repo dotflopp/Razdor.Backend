@@ -1,6 +1,6 @@
 ﻿using Razdor.Communities.Domain.Permissions;
 
-namespace Razdor.Communities.Module.Authorization;
+namespace Razdor.Shared.Module.Authorization;
 
 public interface IChannelPermissionsAccessor
 {

@@ -11,6 +11,7 @@ using Razdor.Communities.Module.Authorization;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.DataAccess;
 using Razdor.Communities.Module.Services.Channels.Commands;
+using Razdor.Shared.Module.Authorization;
 using Razdor.Shared.Module.DataAccess;
 
 namespace Razdor.Communities.Infrastructure;

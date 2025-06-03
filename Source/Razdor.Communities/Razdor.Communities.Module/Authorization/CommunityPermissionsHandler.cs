@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Module.Exceptions;
+using Razdor.Shared.Module.Authorization;
 using Razdor.Shared.Module.Exceptions;
 using Razdor.Shared.Module.RequestSenderContext;
 

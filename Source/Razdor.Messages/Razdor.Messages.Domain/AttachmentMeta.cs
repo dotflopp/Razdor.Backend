@@ -2,10 +2,10 @@
 
 namespace Razdor.Messages.Domain;
 
-public record Attachment(
+public record AttachmentMeta(
     ulong Id,
     string FileName,
     string SourceUrl,
     string MediaType, 
     long Size
-) : IEntity<ulong>;
+) : MediaFileMeta(FileName, SourceUrl, MediaType, Size);

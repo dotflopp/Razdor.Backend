@@ -34,8 +34,8 @@ public static class MessagingRouter
         [FromRoute] ulong attachmentId
     )
     {
-        AttachmentFileViewModel attachment = await module.ExecuteQueryAsync(new GetAttachmentQuery(channelId, messageId, attachmentId));
-        return Results.File(attachment.Stream, attachment.MediaType, attachment.FileName);
+        MediaFileViewModel media = await module.ExecuteQueryAsync(new GetAttachmentQuery(channelId, messageId, attachmentId));
+        return Results.File(media.Stream, media.ContentType, media.FileName);
     }
     
     private static async Task<IResult> GetMessagesAsync(
@@ -83,8 +83,8 @@ public static class MessagingRouter
                 contentWithFiles.Conetent.Text,
                 contentWithFiles.Conetent.Embed,
                 contentWithFiles.Conetent.Reference,
-                contentWithFiles.Files.Select(x => new AttachmentFileViewModel(
-                    x.Name, x.Filename, x.MediaType, x.Stream
+                contentWithFiles.Files.Select(x => new MediaFileViewModel(
+                    x.Filename, x.MediaType, x.Stream
                 ))
             )
         );

@@ -27,7 +27,7 @@ public sealed class GetSelfUserQueryHandler(
             user.Email,
             user.IdentityName,
             user.Nickname,
-            user.Avatar,
+            user.Avatar?.SourceUrl,
             user.CredentialsChangeDate,
             user.SelectedStatus,
             user.DisplayedStatus,

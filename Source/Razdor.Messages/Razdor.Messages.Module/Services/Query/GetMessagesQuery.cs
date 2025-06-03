@@ -1,7 +1,6 @@
 ﻿using Mediator;
 using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Domain.Permissions;
-using Razdor.Communities.Module.Authorization;
 using Razdor.Messages.Module.Contracts;
 using Razdor.Messages.Module.Services.Commands.ViewModels;
 using Razdor.Shared.Module.Authorization;

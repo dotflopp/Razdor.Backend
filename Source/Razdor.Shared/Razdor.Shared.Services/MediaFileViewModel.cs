@@ -1,8 +1,7 @@
 ﻿namespace Razdor.Messages.Module.Services.Commands.ViewModels;
 
-public record AttachmentFileViewModel(
-    string Name,
+public record MediaFileViewModel(
     string FileName,  
-    string MediaType,
+    string ContentType,
     Stream Stream
 );

@@ -16,8 +16,6 @@ public class UserAccountConfiguration : IEntityTypeConfiguration<UserAccount>
         builder.HasIndex(x => x.IdentityName)
             .IsUnique();
 
-        builder.Ignore(x => x.DomainEvents);
-
         builder.Property(x => x.Id)
             .IsRequired();
 
@@ -33,15 +31,11 @@ public class UserAccountConfiguration : IEntityTypeConfiguration<UserAccount>
             .HasColumnName(nameof(UserAccount.Nickname))
             .HasMaxLength(UserAccount.MaxNicknameLength);
 
-        builder.Property(x => x.Email)
-            .IsRequired();
-
-        builder.Property(x => x.IsOnline)
-            .IsRequired();
-
-        builder.Property(x => x.SelectedStatus)
-            .IsRequired();
-        builder.Ignore(x => x.DisplayedStatus);
+        builder.OwnsOne(x => x.Avatar, ownsBuilder =>
+        {
+            ownsBuilder.WithOwner().HasForeignKey(nameof(UserAccount.Id));
+            ownsBuilder.HasKey(nameof(UserAccount.Id));
+        });
 
         builder.Property(x => x.Description)
             .HasMaxLength(UserAccount.MaxDescriptionLength)

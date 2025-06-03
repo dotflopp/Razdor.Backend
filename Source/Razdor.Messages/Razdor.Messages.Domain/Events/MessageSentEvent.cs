@@ -11,7 +11,7 @@ public record MessageSentEvent(
     DateTimeOffset СreatedAt,
     MessageReference? MessageReference,
     Embed? Embed,
-    IReadOnlyCollection<Attachment> Attachments,
+    IReadOnlyCollection<AttachmentMeta> Attachments,
     Mentions? Mentions
 ) : IDomainEvent
 {

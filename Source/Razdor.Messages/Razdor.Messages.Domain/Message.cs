@@ -7,7 +7,7 @@ namespace Razdor.Messages.Domain;
 
 public class Message: BaseSnowflakeEntity, IEntity<ulong>
 {
-    private List<Attachment>? _attachments;
+    private List<AttachmentMeta>? _attachments;
 
     /// <summary>
     /// EF constructor
@@ -26,7 +26,7 @@ public class Message: BaseSnowflakeEntity, IEntity<ulong>
         Embed? embed = null,
         bool isPinned = false,
         DateTimeOffset? editedAt = null,
-        List<Attachment>? attachments = null,
+        List<AttachmentMeta>? attachments = null,
         Mentions? mentions = null
     ) : base(id)
     {
@@ -56,7 +56,7 @@ public class Message: BaseSnowflakeEntity, IEntity<ulong>
     public IReadOnlyCollection<MentionedUser> MentionedUsers => Mentions.Users;
     public IReadOnlyCollection<MentionedChannel> MentionedChannels => Mentions.Channels;
     public IReadOnlyCollection<MentionedRole> MentionedRoles => Mentions.Roles;
-    public IReadOnlyCollection<Attachment> Attachments => _attachments?.AsReadOnly() ?? ReadOnlyCollection<Attachment>.Empty;
+    public IReadOnlyCollection<AttachmentMeta> Attachments => _attachments?.AsReadOnly() ?? ReadOnlyCollection<AttachmentMeta>.Empty;
 
     public static Message CreateNew(
         ulong id, 
@@ -66,7 +66,7 @@ public class Message: BaseSnowflakeEntity, IEntity<ulong>
         TimeProvider? time,
         MessageReference? messageReference = null,
         Embed? embed = null,
-        List<Attachment>? attachments = null
+        List<AttachmentMeta>? attachments = null
     ){
         Mentions mentions = MentionsHelper.ExtractMentions(text, embed);
         Message message = new(

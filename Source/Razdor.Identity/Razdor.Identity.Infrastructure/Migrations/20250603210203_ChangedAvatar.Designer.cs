@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Razdor.Identity.Infrastructure.DataAccess;
@@ -11,9 +12,11 @@ using Razdor.Identity.Infrastructure.DataAccess;
 namespace Razdor.Identity.Infrastructure.Migrations
 {
     [DbContext(typeof(IdentityPostgresDbContext))]
-    partial class IdentityPostgresDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250603210203_ChangedAvatar")]
+    partial class ChangedAvatar
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

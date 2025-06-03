@@ -24,7 +24,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
         {
             var runtimeEntityType = model.AddEntityType(
                 "Razdor.Messages.Domain.Attachment",
-                typeof(Attachment),
+                typeof(AttachmentMeta),
                 baseEntityType,
                 propertyCount: 7,
                 foreignKeyCount: 1,
@@ -101,20 +101,20 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             var fileName = runtimeEntityType.AddProperty(
                 "FileName",
                 typeof(string),
-                propertyInfo: typeof(Attachment).GetProperty("FileName", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(Attachment).GetField("<FileName>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+                propertyInfo: typeof(AttachmentMeta).GetProperty("FileName", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(AttachmentMeta).GetField("<FileName>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
             fileName.SetGetter(
-                string (Attachment entity) => AttachmentUnsafeAccessors.FileName(entity),
-                bool (Attachment entity) => AttachmentUnsafeAccessors.FileName(entity) == null,
-                string (Attachment instance) => AttachmentUnsafeAccessors.FileName(instance),
-                bool (Attachment instance) => AttachmentUnsafeAccessors.FileName(instance) == null);
+                string (AttachmentMeta entity) => AttachmentUnsafeAccessors.FileName(entity),
+                bool (AttachmentMeta entity) => AttachmentUnsafeAccessors.FileName(entity) == null,
+                string (AttachmentMeta instance) => AttachmentUnsafeAccessors.FileName(instance),
+                bool (AttachmentMeta instance) => AttachmentUnsafeAccessors.FileName(instance) == null);
             fileName.SetSetter(
-                (Attachment entity, string value) => AttachmentUnsafeAccessors.FileName(entity) = value);
+                (AttachmentMeta entity, string value) => AttachmentUnsafeAccessors.FileName(entity) = value);
             fileName.SetMaterializationSetter(
-                (Attachment entity, string value) => AttachmentUnsafeAccessors.FileName(entity) = value);
+                (AttachmentMeta entity, string value) => AttachmentUnsafeAccessors.FileName(entity) = value);
             fileName.SetAccessors(
-                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.FileName(((Attachment)(entry.Entity))),
-                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.FileName(((Attachment)(entry.Entity))),
+                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.FileName(((AttachmentMeta)(entry.Entity))),
+                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.FileName(((AttachmentMeta)(entry.Entity))),
                 string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(fileName, 2),
                 string (InternalEntityEntry entry) => entry.GetCurrentValue<string>(fileName),
                 object (ValueBuffer valueBuffer) => valueBuffer[2]);
@@ -142,21 +142,21 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             var id = runtimeEntityType.AddProperty(
                 "Id",
                 typeof(ulong),
-                propertyInfo: typeof(Attachment).GetProperty("Id", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(Attachment).GetField("<Id>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                propertyInfo: typeof(AttachmentMeta).GetProperty("Id", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(AttachmentMeta).GetField("<Id>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 sentinel: 0ul);
             id.SetGetter(
-                ulong (Attachment entity) => AttachmentUnsafeAccessors.Id(entity),
-                bool (Attachment entity) => AttachmentUnsafeAccessors.Id(entity) == 0UL,
-                ulong (Attachment instance) => AttachmentUnsafeAccessors.Id(instance),
-                bool (Attachment instance) => AttachmentUnsafeAccessors.Id(instance) == 0UL);
+                ulong (AttachmentMeta entity) => AttachmentUnsafeAccessors.Id(entity),
+                bool (AttachmentMeta entity) => AttachmentUnsafeAccessors.Id(entity) == 0UL,
+                ulong (AttachmentMeta instance) => AttachmentUnsafeAccessors.Id(instance),
+                bool (AttachmentMeta instance) => AttachmentUnsafeAccessors.Id(instance) == 0UL);
             id.SetSetter(
-                (Attachment entity, ulong value) => AttachmentUnsafeAccessors.Id(entity) = value);
+                (AttachmentMeta entity, ulong value) => AttachmentUnsafeAccessors.Id(entity) = value);
             id.SetMaterializationSetter(
-                (Attachment entity, ulong value) => AttachmentUnsafeAccessors.Id(entity) = value);
+                (AttachmentMeta entity, ulong value) => AttachmentUnsafeAccessors.Id(entity) = value);
             id.SetAccessors(
-                ulong (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Id(((Attachment)(entry.Entity))),
-                ulong (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Id(((Attachment)(entry.Entity))),
+                ulong (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Id(((AttachmentMeta)(entry.Entity))),
+                ulong (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Id(((AttachmentMeta)(entry.Entity))),
                 ulong (InternalEntityEntry entry) => entry.ReadOriginalValue<ulong>(id, 3),
                 ulong (InternalEntityEntry entry) => entry.GetCurrentValue<ulong>(id),
                 object (ValueBuffer valueBuffer) => valueBuffer[3]);
@@ -184,20 +184,20 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             var mediaType = runtimeEntityType.AddProperty(
                 "MediaType",
                 typeof(string),
-                propertyInfo: typeof(Attachment).GetProperty("MediaType", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(Attachment).GetField("<MediaType>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+                propertyInfo: typeof(AttachmentMeta).GetProperty("MediaType", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(AttachmentMeta).GetField("<MediaType>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
             mediaType.SetGetter(
-                string (Attachment entity) => AttachmentUnsafeAccessors.MediaType(entity),
-                bool (Attachment entity) => AttachmentUnsafeAccessors.MediaType(entity) == null,
-                string (Attachment instance) => AttachmentUnsafeAccessors.MediaType(instance),
-                bool (Attachment instance) => AttachmentUnsafeAccessors.MediaType(instance) == null);
+                string (AttachmentMeta entity) => AttachmentUnsafeAccessors.MediaType(entity),
+                bool (AttachmentMeta entity) => AttachmentUnsafeAccessors.MediaType(entity) == null,
+                string (AttachmentMeta instance) => AttachmentUnsafeAccessors.MediaType(instance),
+                bool (AttachmentMeta instance) => AttachmentUnsafeAccessors.MediaType(instance) == null);
             mediaType.SetSetter(
-                (Attachment entity, string value) => AttachmentUnsafeAccessors.MediaType(entity) = value);
+                (AttachmentMeta entity, string value) => AttachmentUnsafeAccessors.MediaType(entity) = value);
             mediaType.SetMaterializationSetter(
-                (Attachment entity, string value) => AttachmentUnsafeAccessors.MediaType(entity) = value);
+                (AttachmentMeta entity, string value) => AttachmentUnsafeAccessors.MediaType(entity) = value);
             mediaType.SetAccessors(
-                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.MediaType(((Attachment)(entry.Entity))),
-                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.MediaType(((Attachment)(entry.Entity))),
+                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.MediaType(((AttachmentMeta)(entry.Entity))),
+                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.MediaType(((AttachmentMeta)(entry.Entity))),
                 string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(mediaType, 4),
                 string (InternalEntityEntry entry) => entry.GetCurrentValue<string>(mediaType),
                 object (ValueBuffer valueBuffer) => valueBuffer[4]);
@@ -225,21 +225,21 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             var size = runtimeEntityType.AddProperty(
                 "Size",
                 typeof(long),
-                propertyInfo: typeof(Attachment).GetProperty("Size", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(Attachment).GetField("<Size>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                propertyInfo: typeof(AttachmentMeta).GetProperty("Size", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(AttachmentMeta).GetField("<Size>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 sentinel: 0L);
             size.SetGetter(
-                long (Attachment entity) => AttachmentUnsafeAccessors.Size(entity),
-                bool (Attachment entity) => AttachmentUnsafeAccessors.Size(entity) == 0L,
-                long (Attachment instance) => AttachmentUnsafeAccessors.Size(instance),
-                bool (Attachment instance) => AttachmentUnsafeAccessors.Size(instance) == 0L);
+                long (AttachmentMeta entity) => AttachmentUnsafeAccessors.Size(entity),
+                bool (AttachmentMeta entity) => AttachmentUnsafeAccessors.Size(entity) == 0L,
+                long (AttachmentMeta instance) => AttachmentUnsafeAccessors.Size(instance),
+                bool (AttachmentMeta instance) => AttachmentUnsafeAccessors.Size(instance) == 0L);
             size.SetSetter(
-                (Attachment entity, long value) => AttachmentUnsafeAccessors.Size(entity) = value);
+                (AttachmentMeta entity, long value) => AttachmentUnsafeAccessors.Size(entity) = value);
             size.SetMaterializationSetter(
-                (Attachment entity, long value) => AttachmentUnsafeAccessors.Size(entity) = value);
+                (AttachmentMeta entity, long value) => AttachmentUnsafeAccessors.Size(entity) = value);
             size.SetAccessors(
-                long (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Size(((Attachment)(entry.Entity))),
-                long (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Size(((Attachment)(entry.Entity))),
+                long (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Size(((AttachmentMeta)(entry.Entity))),
+                long (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Size(((AttachmentMeta)(entry.Entity))),
                 long (InternalEntityEntry entry) => entry.ReadOriginalValue<long>(size, 5),
                 long (InternalEntityEntry entry) => entry.GetCurrentValue<long>(size),
                 object (ValueBuffer valueBuffer) => valueBuffer[5]);
@@ -267,20 +267,20 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             var sourceUrl = runtimeEntityType.AddProperty(
                 "SourceUrl",
                 typeof(string),
-                propertyInfo: typeof(Attachment).GetProperty("SourceUrl", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(Attachment).GetField("<SourceUrl>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+                propertyInfo: typeof(AttachmentMeta).GetProperty("SourceUrl", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(AttachmentMeta).GetField("<SourceUrl>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
             sourceUrl.SetGetter(
-                string (Attachment entity) => AttachmentUnsafeAccessors.SourceUrl(entity),
-                bool (Attachment entity) => AttachmentUnsafeAccessors.SourceUrl(entity) == null,
-                string (Attachment instance) => AttachmentUnsafeAccessors.SourceUrl(instance),
-                bool (Attachment instance) => AttachmentUnsafeAccessors.SourceUrl(instance) == null);
+                string (AttachmentMeta entity) => AttachmentUnsafeAccessors.SourceUrl(entity),
+                bool (AttachmentMeta entity) => AttachmentUnsafeAccessors.SourceUrl(entity) == null,
+                string (AttachmentMeta instance) => AttachmentUnsafeAccessors.SourceUrl(instance),
+                bool (AttachmentMeta instance) => AttachmentUnsafeAccessors.SourceUrl(instance) == null);
             sourceUrl.SetSetter(
-                (Attachment entity, string value) => AttachmentUnsafeAccessors.SourceUrl(entity) = value);
+                (AttachmentMeta entity, string value) => AttachmentUnsafeAccessors.SourceUrl(entity) = value);
             sourceUrl.SetMaterializationSetter(
-                (Attachment entity, string value) => AttachmentUnsafeAccessors.SourceUrl(entity) = value);
+                (AttachmentMeta entity, string value) => AttachmentUnsafeAccessors.SourceUrl(entity) = value);
             sourceUrl.SetAccessors(
-                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.SourceUrl(((Attachment)(entry.Entity))),
-                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.SourceUrl(((Attachment)(entry.Entity))),
+                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.SourceUrl(((AttachmentMeta)(entry.Entity))),
+                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.SourceUrl(((AttachmentMeta)(entry.Entity))),
                 string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(sourceUrl, 6),
                 string (InternalEntityEntry entry) => entry.GetCurrentValue<string>(sourceUrl),
                 object (ValueBuffer valueBuffer) => valueBuffer[6]);
@@ -324,24 +324,24 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             var _attachments = principalEntityType.AddNavigation("_attachments",
                 runtimeForeignKey,
                 onDependent: false,
-                typeof(List<Attachment>),
+                typeof(List<AttachmentMeta>),
                 fieldInfo: typeof(Message).GetField("_attachments", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 eagerLoaded: true);
 
             _attachments.SetGetter(
-                List<Attachment> (Message entity) => MessageUnsafeAccessors._attachments(entity),
+                List<AttachmentMeta> (Message entity) => MessageUnsafeAccessors._attachments(entity),
                 bool (Message entity) => MessageUnsafeAccessors._attachments(entity) == null,
-                List<Attachment> (Message instance) => MessageUnsafeAccessors._attachments(instance),
+                List<AttachmentMeta> (Message instance) => MessageUnsafeAccessors._attachments(instance),
                 bool (Message instance) => MessageUnsafeAccessors._attachments(instance) == null);
             _attachments.SetSetter(
-                (Message entity, List<Attachment> value) => MessageUnsafeAccessors._attachments(entity) = value);
+                (Message entity, List<AttachmentMeta> value) => MessageUnsafeAccessors._attachments(entity) = value);
             _attachments.SetMaterializationSetter(
-                (Message entity, List<Attachment> value) => MessageUnsafeAccessors._attachments(entity) = value);
+                (Message entity, List<AttachmentMeta> value) => MessageUnsafeAccessors._attachments(entity) = value);
             _attachments.SetAccessors(
-                List<Attachment> (InternalEntityEntry entry) => MessageUnsafeAccessors._attachments(((Message)(entry.Entity))),
-                List<Attachment> (InternalEntityEntry entry) => MessageUnsafeAccessors._attachments(((Message)(entry.Entity))),
+                List<AttachmentMeta> (InternalEntityEntry entry) => MessageUnsafeAccessors._attachments(((Message)(entry.Entity))),
+                List<AttachmentMeta> (InternalEntityEntry entry) => MessageUnsafeAccessors._attachments(((Message)(entry.Entity))),
                 null,
-                List<Attachment> (InternalEntityEntry entry) => entry.GetCurrentValue<List<Attachment>>(_attachments),
+                List<AttachmentMeta> (InternalEntityEntry entry) => entry.GetCurrentValue<List<AttachmentMeta>>(_attachments),
                 null);
             _attachments.SetPropertyIndexes(
                 index: 3,
@@ -349,12 +349,12 @@ namespace Razdor.Messages.Infrastructure.DataAccess
                 shadowIndex: -1,
                 relationshipIndex: 4,
                 storeGenerationIndex: -1);
-            _attachments.SetCollectionAccessor<Message, List<Attachment>, Attachment>(
-                List<Attachment> (Message entity) => MessageUnsafeAccessors._attachments(entity),
-                (Message entity, List<Attachment> collection) => MessageUnsafeAccessors._attachments(entity) = ((List<Attachment>)(collection)),
-                (Message entity, List<Attachment> collection) => MessageUnsafeAccessors._attachments(entity) = ((List<Attachment>)(collection)),
-                List<Attachment> (Message entity, Action<Message, List<Attachment>> setter) => ClrCollectionAccessorFactory.CreateAndSet<Message, List<Attachment>, List<Attachment>>(entity, setter),
-                List<Attachment> () => new List<Attachment>());
+            _attachments.SetCollectionAccessor<Message, List<AttachmentMeta>, AttachmentMeta>(
+                List<AttachmentMeta> (Message entity) => MessageUnsafeAccessors._attachments(entity),
+                (Message entity, List<AttachmentMeta> collection) => MessageUnsafeAccessors._attachments(entity) = ((List<AttachmentMeta>)(collection)),
+                (Message entity, List<AttachmentMeta> collection) => MessageUnsafeAccessors._attachments(entity) = ((List<AttachmentMeta>)(collection)),
+                List<AttachmentMeta> (Message entity, Action<Message, List<AttachmentMeta>> setter) => ClrCollectionAccessorFactory.CreateAndSet<Message, List<AttachmentMeta>, List<AttachmentMeta>>(entity, setter),
+                List<AttachmentMeta> () => new List<AttachmentMeta>());
             return runtimeForeignKey;
         }
 
@@ -373,7 +373,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             runtimeEntityType.SetOriginalValuesFactory(
                 ISnapshot (InternalEntityEntry source) =>
                 {
-                    var entity = ((Attachment)(source.Entity));
+                    var entity = ((AttachmentMeta)(source.Entity));
                     return ((ISnapshot)(new Snapshot<ulong, int, string, ulong, string, long, string>(((ValueComparer<ulong>)(((IProperty)messageId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(messageId)), ((ValueComparer<int>)(((IProperty)id1).GetValueComparer())).Snapshot(source.GetCurrentValue<int>(id1)), (source.GetCurrentValue<string>(fileName) == null ? null : ((ValueComparer<string>)(((IProperty)fileName).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(fileName))), ((ValueComparer<ulong>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), (source.GetCurrentValue<string>(mediaType) == null ? null : ((ValueComparer<string>)(((IProperty)mediaType).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(mediaType))), ((ValueComparer<long>)(((IProperty)size).GetValueComparer())).Snapshot(source.GetCurrentValue<long>(size)), (source.GetCurrentValue<string>(sourceUrl) == null ? null : ((ValueComparer<string>)(((IProperty)sourceUrl).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(sourceUrl))))));
                 });
             runtimeEntityType.SetStoreGeneratedValuesFactory(
@@ -387,7 +387,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             runtimeEntityType.SetRelationshipSnapshotFactory(
                 ISnapshot (InternalEntityEntry source) =>
                 {
-                    var entity = ((Attachment)(source.Entity));
+                    var entity = ((AttachmentMeta)(source.Entity));
                     return ((ISnapshot)(new Snapshot<ulong, int>(((ValueComparer<ulong>)(((IProperty)messageId).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<ulong>(messageId)), ((ValueComparer<int>)(((IProperty)id1).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<int>(id1)))));
                 });
             runtimeEntityType.Counts = new PropertyCounts(

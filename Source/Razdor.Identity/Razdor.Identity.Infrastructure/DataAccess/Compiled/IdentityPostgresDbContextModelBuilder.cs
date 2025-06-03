@@ -16,15 +16,19 @@ namespace Razdor.Identity.Infrastructure.DataAccess
     public partial class IdentityPostgresDbContextModel
     {
         private IdentityPostgresDbContextModel()
-            : base(skipDetectChanges: false, modelId: new Guid("72790883-8f74-436f-acf5-6d3167f2ba69"), entityTypeCount: 1)
+            : base(skipDetectChanges: false, modelId: new Guid("2685ac48-094e-4114-9ff2-6f35fc2cb12b"), entityTypeCount: 2)
         {
         }
 
         partial void Initialize()
         {
             var userAccount = UserAccountEntityType.Create(this);
+            var mediaFileMeta = MediaFileMetaEntityType.Create(this);
+
+            MediaFileMetaEntityType.CreateForeignKey1(mediaFileMeta, userAccount);
 
             UserAccountEntityType.CreateAnnotations(userAccount);
+            MediaFileMetaEntityType.CreateAnnotations(mediaFileMeta);
 
             AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
             AddAnnotation("ProductVersion", "9.0.5");
@@ -41,11 +45,6 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             var defaultTableMappings = new List<TableMappingBase<ColumnMappingBase>>();
             userAccount.SetRuntimeAnnotation("Relational:DefaultMappings", defaultTableMappings);
             var razdorIdentityDomainUsersUserAccountTableBase = new TableBase("Razdor.Identity.Domain.Users.UserAccount", null, relationalModel);
-            var avatarColumnBase = new ColumnBase<ColumnMappingBase>("Avatar", "text", razdorIdentityDomainUsersUserAccountTableBase)
-            {
-                IsNullable = true
-            };
-            razdorIdentityDomainUsersUserAccountTableBase.Columns.Add("Avatar", avatarColumnBase);
             var credentialsChangeDateColumnBase = new ColumnBase<ColumnMappingBase>("CredentialsChangeDate", "timestamp with time zone", razdorIdentityDomainUsersUserAccountTableBase);
             razdorIdentityDomainUsersUserAccountTableBase.Columns.Add("CredentialsChangeDate", credentialsChangeDateColumnBase);
             var descriptionColumnBase = new ColumnBase<ColumnMappingBase>("Description", "character varying(300)", razdorIdentityDomainUsersUserAccountTableBase)
@@ -64,8 +63,6 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             razdorIdentityDomainUsersUserAccountTableBase.Columns.Add("Id", idColumnBase);
             var identityNameColumnBase = new ColumnBase<ColumnMappingBase>("IdentityName", "character varying(50)", razdorIdentityDomainUsersUserAccountTableBase);
             razdorIdentityDomainUsersUserAccountTableBase.Columns.Add("IdentityName", identityNameColumnBase);
-            var isOnlineColumnBase = new ColumnBase<ColumnMappingBase>("IsOnline", "boolean", razdorIdentityDomainUsersUserAccountTableBase);
-            razdorIdentityDomainUsersUserAccountTableBase.Columns.Add("IsOnline", isOnlineColumnBase);
             var nicknameColumnBase = new ColumnBase<ColumnMappingBase>("Nickname", "character varying(50)", razdorIdentityDomainUsersUserAccountTableBase)
             {
                 IsNullable = true
@@ -80,13 +77,11 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             razdorIdentityDomainUsersUserAccountTableBase.AddTypeMapping(razdorIdentityDomainUsersUserAccountMappingBase, false);
             defaultTableMappings.Add(razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)idColumnBase, userAccount.FindProperty("Id")!, razdorIdentityDomainUsersUserAccountMappingBase);
-            RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)avatarColumnBase, userAccount.FindProperty("Avatar")!, razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)credentialsChangeDateColumnBase, userAccount.FindProperty("CredentialsChangeDate")!, razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)descriptionColumnBase, userAccount.FindProperty("Description")!, razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)emailColumnBase, userAccount.FindProperty("Email")!, razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)hashedPasswordColumnBase, userAccount.FindProperty("HashedPassword")!, razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)identityNameColumnBase, userAccount.FindProperty("IdentityName")!, razdorIdentityDomainUsersUserAccountMappingBase);
-            RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)isOnlineColumnBase, userAccount.FindProperty("IsOnline")!, razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)registrationDateColumnBase, userAccount.FindProperty("RegistrationDate")!, razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)selectedStatusColumnBase, userAccount.FindProperty("SelectedStatus")!, razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)nicknameColumnBase, userAccount.FindProperty("_nickname")!, razdorIdentityDomainUsersUserAccountMappingBase);
@@ -97,12 +92,30 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             var idColumn = new Column("Id", "numeric(20,0)", useraccountsTable);
             useraccountsTable.Columns.Add("Id", idColumn);
             idColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<decimal>(idColumn);
-            var avatarColumn = new Column("Avatar", "text", useraccountsTable)
+            var avatar_FileNameColumn = new Column("Avatar_FileName", "text", useraccountsTable)
             {
                 IsNullable = true
             };
-            useraccountsTable.Columns.Add("Avatar", avatarColumn);
-            avatarColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<string>(avatarColumn);
+            useraccountsTable.Columns.Add("Avatar_FileName", avatar_FileNameColumn);
+            avatar_FileNameColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<string>(avatar_FileNameColumn);
+            var avatar_MediaTypeColumn = new Column("Avatar_MediaType", "text", useraccountsTable)
+            {
+                IsNullable = true
+            };
+            useraccountsTable.Columns.Add("Avatar_MediaType", avatar_MediaTypeColumn);
+            avatar_MediaTypeColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<string>(avatar_MediaTypeColumn);
+            var avatar_SizeColumn = new Column("Avatar_Size", "bigint", useraccountsTable)
+            {
+                IsNullable = true
+            };
+            useraccountsTable.Columns.Add("Avatar_Size", avatar_SizeColumn);
+            avatar_SizeColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<long>(avatar_SizeColumn);
+            var avatar_SourceUrlColumn = new Column("Avatar_SourceUrl", "text", useraccountsTable)
+            {
+                IsNullable = true
+            };
+            useraccountsTable.Columns.Add("Avatar_SourceUrl", avatar_SourceUrlColumn);
+            avatar_SourceUrlColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<string>(avatar_SourceUrlColumn);
             var credentialsChangeDateColumn = new Column("CredentialsChangeDate", "timestamp with time zone", useraccountsTable);
             useraccountsTable.Columns.Add("CredentialsChangeDate", credentialsChangeDateColumn);
             credentialsChangeDateColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<DateTimeOffset>(credentialsChangeDateColumn);
@@ -124,9 +137,6 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             var identityNameColumn = new Column("IdentityName", "character varying(50)", useraccountsTable);
             useraccountsTable.Columns.Add("IdentityName", identityNameColumn);
             identityNameColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<string>(identityNameColumn);
-            var isOnlineColumn = new Column("IsOnline", "boolean", useraccountsTable);
-            useraccountsTable.Columns.Add("IsOnline", isOnlineColumn);
-            isOnlineColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<bool>(isOnlineColumn);
             var nicknameColumn = new Column("Nickname", "character varying(50)", useraccountsTable)
             {
                 IsNullable = true
@@ -140,20 +150,65 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             useraccountsTable.Columns.Add("SelectedStatus", selectedStatusColumn);
             selectedStatusColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<int>(selectedStatusColumn);
             relationalModel.Tables.Add(("user-accounts", null), useraccountsTable);
-            var useraccountsTableMapping = new TableMapping(userAccount, useraccountsTable, null);
+            var useraccountsTableMapping = new TableMapping(userAccount, useraccountsTable, null)
+            {
+                IsSharedTablePrincipal = true,
+            };
             useraccountsTable.AddTypeMapping(useraccountsTableMapping, false);
             tableMappings.Add(useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(idColumn, userAccount.FindProperty("Id")!, useraccountsTableMapping);
-            RelationalModel.CreateColumnMapping(avatarColumn, userAccount.FindProperty("Avatar")!, useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(credentialsChangeDateColumn, userAccount.FindProperty("CredentialsChangeDate")!, useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(descriptionColumn, userAccount.FindProperty("Description")!, useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(emailColumn, userAccount.FindProperty("Email")!, useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(hashedPasswordColumn, userAccount.FindProperty("HashedPassword")!, useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(identityNameColumn, userAccount.FindProperty("IdentityName")!, useraccountsTableMapping);
-            RelationalModel.CreateColumnMapping(isOnlineColumn, userAccount.FindProperty("IsOnline")!, useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(registrationDateColumn, userAccount.FindProperty("RegistrationDate")!, useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(selectedStatusColumn, userAccount.FindProperty("SelectedStatus")!, useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(nicknameColumn, userAccount.FindProperty("_nickname")!, useraccountsTableMapping);
+
+            var mediaFileMeta = FindEntityType("Razdor.Shared.Domain.MediaFileMeta")!;
+
+            var defaultTableMappings0 = new List<TableMappingBase<ColumnMappingBase>>();
+            mediaFileMeta.SetRuntimeAnnotation("Relational:DefaultMappings", defaultTableMappings0);
+            var razdorSharedDomainMediaFileMetaTableBase = new TableBase("Razdor.Shared.Domain.MediaFileMeta", null, relationalModel);
+            var fileNameColumnBase = new ColumnBase<ColumnMappingBase>("FileName", "text", razdorSharedDomainMediaFileMetaTableBase);
+            razdorSharedDomainMediaFileMetaTableBase.Columns.Add("FileName", fileNameColumnBase);
+            var idColumnBase0 = new ColumnBase<ColumnMappingBase>("Id", "numeric(20,0)", razdorSharedDomainMediaFileMetaTableBase);
+            razdorSharedDomainMediaFileMetaTableBase.Columns.Add("Id", idColumnBase0);
+            var mediaTypeColumnBase = new ColumnBase<ColumnMappingBase>("MediaType", "text", razdorSharedDomainMediaFileMetaTableBase);
+            razdorSharedDomainMediaFileMetaTableBase.Columns.Add("MediaType", mediaTypeColumnBase);
+            var sizeColumnBase = new ColumnBase<ColumnMappingBase>("Size", "bigint", razdorSharedDomainMediaFileMetaTableBase);
+            razdorSharedDomainMediaFileMetaTableBase.Columns.Add("Size", sizeColumnBase);
+            var sourceUrlColumnBase = new ColumnBase<ColumnMappingBase>("SourceUrl", "text", razdorSharedDomainMediaFileMetaTableBase);
+            razdorSharedDomainMediaFileMetaTableBase.Columns.Add("SourceUrl", sourceUrlColumnBase);
+            relationalModel.DefaultTables.Add("Razdor.Shared.Domain.MediaFileMeta", razdorSharedDomainMediaFileMetaTableBase);
+            var razdorSharedDomainMediaFileMetaMappingBase = new TableMappingBase<ColumnMappingBase>(mediaFileMeta, razdorSharedDomainMediaFileMetaTableBase, null);
+            razdorSharedDomainMediaFileMetaTableBase.AddTypeMapping(razdorSharedDomainMediaFileMetaMappingBase, false);
+            defaultTableMappings0.Add(razdorSharedDomainMediaFileMetaMappingBase);
+            RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)idColumnBase0, mediaFileMeta.FindProperty("Id")!, razdorSharedDomainMediaFileMetaMappingBase);
+            RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)fileNameColumnBase, mediaFileMeta.FindProperty("FileName")!, razdorSharedDomainMediaFileMetaMappingBase);
+            RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)mediaTypeColumnBase, mediaFileMeta.FindProperty("MediaType")!, razdorSharedDomainMediaFileMetaMappingBase);
+            RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)sizeColumnBase, mediaFileMeta.FindProperty("Size")!, razdorSharedDomainMediaFileMetaMappingBase);
+            RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)sourceUrlColumnBase, mediaFileMeta.FindProperty("SourceUrl")!, razdorSharedDomainMediaFileMetaMappingBase);
+
+            var tableMappings0 = new List<TableMapping>();
+            mediaFileMeta.SetRuntimeAnnotation("Relational:TableMappings", tableMappings0);
+            var useraccountsTableMapping0 = new TableMapping(mediaFileMeta, useraccountsTable, null)
+            {
+                IsSharedTablePrincipal = false,
+            };
+            useraccountsTable.AddTypeMapping(useraccountsTableMapping0, true);
+            tableMappings0.Add(useraccountsTableMapping0);
+            useraccountsTable.AddRowInternalForeignKey(mediaFileMeta, RelationalModel.GetForeignKey(this,
+                "Razdor.Shared.Domain.MediaFileMeta",
+                new[] { "Id" },
+                "Razdor.Identity.Domain.Users.UserAccount",
+                new[] { "Id" }));
+            RelationalModel.CreateColumnMapping(idColumn, mediaFileMeta.FindProperty("Id")!, useraccountsTableMapping0);
+            RelationalModel.CreateColumnMapping(avatar_FileNameColumn, mediaFileMeta.FindProperty("FileName")!, useraccountsTableMapping0);
+            RelationalModel.CreateColumnMapping(avatar_MediaTypeColumn, mediaFileMeta.FindProperty("MediaType")!, useraccountsTableMapping0);
+            RelationalModel.CreateColumnMapping(avatar_SizeColumn, mediaFileMeta.FindProperty("Size")!, useraccountsTableMapping0);
+            RelationalModel.CreateColumnMapping(avatar_SourceUrlColumn, mediaFileMeta.FindProperty("SourceUrl")!, useraccountsTableMapping0);
             var pK_useraccounts = new UniqueConstraint("PK_user-accounts", useraccountsTable, new[] { idColumn });
             useraccountsTable.PrimaryKey = pK_useraccounts;
             pK_useraccounts.SetRowKeyValueFactory(new SimpleRowKeyValueFactory<decimal>(pK_useraccounts));
@@ -162,6 +217,11 @@ namespace Razdor.Identity.Infrastructure.DataAccess
                 new[] { "Id" });
             pK_useraccounts.MappedKeys.Add(pK_useraccountsKey);
             RelationalModel.GetOrCreateUniqueConstraints(pK_useraccountsKey).Add(pK_useraccounts);
+            var pK_useraccountsKey0 = RelationalModel.GetKey(this,
+                "Razdor.Shared.Domain.MediaFileMeta",
+                new[] { "Id" });
+            pK_useraccounts.MappedKeys.Add(pK_useraccountsKey0);
+            RelationalModel.GetOrCreateUniqueConstraints(pK_useraccountsKey0).Add(pK_useraccounts);
             useraccountsTable.UniqueConstraints.Add("PK_user-accounts", pK_useraccounts);
             var iX_useraccounts_Email = new TableIndex(
             "IX_user-accounts_Email", useraccountsTable, new[] { emailColumn }, true);

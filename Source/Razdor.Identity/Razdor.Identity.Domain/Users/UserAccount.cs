@@ -8,15 +8,20 @@ public class UserAccount : BaseSnowflakeEntity, IEntity<ulong>, IAggregateRoot
     public const int MaxIdentityNameLength = 50;
     public const int MaxNicknameLength = MaxIdentityNameLength;
     public const int MaxDescriptionLength = 300;
+    private string? _nickname;
 
-    private readonly string? _nickname;
-
+    /// <summary>
+    /// EF constructor
+    /// </summary>
+    private UserAccount():this(0, null!, null!, null, null, null, default, false, default, null, default)
+    { }
+    
     internal UserAccount(
         ulong id,
         string identityName,
         string email,
         string? nickname,
-        string? avatar,
+        MediaFileMeta? avatar,
         string? hashedPassword,
         DateTimeOffset credentialsChangeDate,
         bool isOnline,
@@ -39,7 +44,15 @@ public class UserAccount : BaseSnowflakeEntity, IEntity<ulong>, IAggregateRoot
     public string IdentityName { get; }
     public string Email { get; private set; }
     public string Nickname => _nickname ?? IdentityName;
-    public string? Avatar { get; private set; }
+    public MediaFileMeta? Avatar
+    {
+        get => field;
+        set
+        {
+            AddDomainEvent(new UserAvatarChanged(Id));
+            field = value;
+        }
+    }
     public string? HashedPassword { get; private set; }
     public bool IsOnline { get; }
 
@@ -95,7 +108,7 @@ public class UserAccount : BaseSnowflakeEntity, IEntity<ulong>, IAggregateRoot
         string identityName,
         string email,
         string? nickname,
-        string? avatar,
+        MediaFileMeta? avatar,
         string? hashedPassword,
         IUsersCounter counter,
         TimeProvider? time = null

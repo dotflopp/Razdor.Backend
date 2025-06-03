@@ -3,6 +3,7 @@ using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Module.Authorization;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Communities.InternalQueries;
+using Razdor.Shared.Module.Authorization;
 using static Razdor.Communities.Infrastructure.Authorization.TagsHelper;
 
 namespace Razdor.Communities.Infrastructure.Authorization;

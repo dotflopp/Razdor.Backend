@@ -2,6 +2,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Razdor.Identity.Domain.Users;
+using Razdor.Shared.Domain;
 
 #pragma warning disable 219, 612, 618
 #nullable disable
@@ -10,9 +11,6 @@ namespace Razdor.Identity.Infrastructure.DataAccess
 {
     public static class UserAccountUnsafeAccessors
     {
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<Avatar>k__BackingField")]
-        public static extern ref string Avatar(UserAccount @this);
-
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<CredentialsChangeDate>k__BackingField")]
         public static extern ref DateTimeOffset CredentialsChangeDate(UserAccount @this);
 
@@ -28,9 +26,6 @@ namespace Razdor.Identity.Infrastructure.DataAccess
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<IdentityName>k__BackingField")]
         public static extern ref string IdentityName(UserAccount @this);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<IsOnline>k__BackingField")]
-        public static extern ref bool IsOnline(UserAccount @this);
-
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<RegistrationDate>k__BackingField")]
         public static extern ref DateTimeOffset RegistrationDate(UserAccount @this);
 
@@ -39,5 +34,8 @@ namespace Razdor.Identity.Infrastructure.DataAccess
 
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_nickname")]
         public static extern ref string _nickname(UserAccount @this);
+
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<Avatar>k__BackingField")]
+        public static extern ref MediaFileMeta Avatar(UserAccount @this);
     }
 }

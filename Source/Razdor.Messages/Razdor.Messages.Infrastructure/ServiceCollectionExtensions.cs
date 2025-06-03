@@ -24,7 +24,6 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IMessagesRepository, MessagesRepository>();
         services.AddScoped<UnitOfWork<MessagesDbContext>>();
         services.AddScoped<IMessagesModule, MessagesModule>();
-        services.AddScoped<AttachmentsStore>();
         
         return services;
     }

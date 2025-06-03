@@ -5,6 +5,7 @@ using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Module.Authorization;
 using Razdor.Communities.Module.Exceptions;
+using Razdor.Shared.Module.Authorization;
 
 namespace Razdor.Communities.Module.Services.Communities.InternalQueries;
 

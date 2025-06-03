@@ -17,4 +17,8 @@
       <ProjectReference Include="..\Razdor.Messages.Domain\Razdor.Messages.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Exceptions\" />
+    </ItemGroup>
+
 </Project>

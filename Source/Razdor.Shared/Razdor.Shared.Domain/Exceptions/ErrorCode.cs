@@ -25,9 +25,10 @@ public enum ErrorCode : ulong
     InviteNotFound,
     ReJoiningToCommunity,
 
-    //Messaging
-    AttachmentNotFound,
-    AttachmentNotUploaded,
+    //Media
+    InvalidMediaType,
+    MediaNotFound,
+    MediaNotUploaded,
     
     //Routing
     NonExistentRoute,

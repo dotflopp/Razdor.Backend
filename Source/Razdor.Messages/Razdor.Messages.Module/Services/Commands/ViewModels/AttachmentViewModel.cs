@@ -11,7 +11,7 @@ public record AttachmentViewModel(
     string MediaType,
     long Size
 ){
-    public static AttachmentViewModel From(Attachment arg)
+    public static AttachmentViewModel From(AttachmentMeta arg)
     {
         return new AttachmentViewModel(arg.Id, arg.SourceUrl, arg.MediaType, arg.Size);
     }

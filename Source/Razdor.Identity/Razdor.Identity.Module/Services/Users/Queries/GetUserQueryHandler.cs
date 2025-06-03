@@ -24,7 +24,7 @@ public sealed class GetUserQueryHandler(
             user.Id,
             user.IdentityName,
             user.Nickname,
-            user.Avatar,
+            user.Avatar?.SourceUrl,
             user.DisplayedStatus,
             user.Description
         );

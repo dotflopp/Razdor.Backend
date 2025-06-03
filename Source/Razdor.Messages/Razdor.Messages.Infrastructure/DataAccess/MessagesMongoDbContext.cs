@@ -58,7 +58,7 @@ public class MessagesMongoDbContext(
          });
 
          builder.Ignore(x => x.Attachments);
-         builder.OwnsMany<Attachment>("_attachments")
+         builder.OwnsMany<AttachmentMeta>("_attachments")
              .HasElementName(nameof(Message.Attachments));
     }
 }

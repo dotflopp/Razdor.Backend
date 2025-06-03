@@ -10,7 +10,7 @@ public interface ISignalingService
 }
 
 public record SessionViewModel(
-    string AccessToken
+    string Token
 );
 
 public class ConnectChannelCommandHandler(

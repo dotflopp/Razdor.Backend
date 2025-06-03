@@ -2,7 +2,7 @@
 
 namespace Razdor.Communities.Domain;
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<CommunityNotificationPolicy>))]
 public enum CommunityNotificationPolicy
 {
     All,

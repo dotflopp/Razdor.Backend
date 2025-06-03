@@ -5,7 +5,7 @@ using Razdor.Shared.Domain;
 
 namespace Razdor.Communities.Domain.Channels;
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<ChannelType>))]
 [Flags]
 public enum ChannelType
 {

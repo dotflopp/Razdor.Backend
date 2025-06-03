@@ -14,13 +14,13 @@ using Razdor.Api.Routes.Messaging;
 using Razdor.Communities.Infrastructure;
 using Razdor.Communities.Module.Authorization;
 using Razdor.Identity.Infrastructure;
-using Razdor.Messaging.Infrastructure;
 using Razdor.ServiceDefaults;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Authorization;
 using Razdor.Shared.Module.RequestSenderContext;
 using Scalar.AspNetCore;
 using Razdor.Api.Serialization;
+using Razdor.Messages.Infrastructure;
 using Razdor.StartApp;
 
 WebApplicationBuilder builder = WebApplication.CreateSlimBuilder(args);
@@ -48,6 +48,7 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddAuthorization();
 builder.Services.AddAuthentication()
     .AddScheme<AccessTokenAuthenticationOptions, AccessTokenAuthenticationHandler>(
         "AccessTokenAuthentication",
@@ -57,6 +58,7 @@ builder.Services.AddAuthentication()
 builder.Services.Configure<RouteOptions>(
     options => options.SetParameterPolicy<RegexInlineRouteConstraint>("regex")
 );
+
 // OpenApi configuration
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi(options =>
@@ -88,9 +90,6 @@ builder.Services.AddMediator(options =>
 //Cache
 builder.Services.AddHybridCache();
 
-// SignalR
-builder.Services.AddSignalR();
-
 // Ulong Constraint for api routes
 builder.Services.Configure<RouteOptions>(options =>
 {
@@ -108,6 +107,7 @@ builder.Services.ConfigureHttpJsonOptions(options =>
     typeResolver.Add(SharedJsonSerializerContext.Default);
     typeResolver.Add(CommunitiesJsonSerializerContext.Default);
     typeResolver.Add(IdentityJsonSerializerContext.Default);
+    typeResolver.Add(MessagesJsonSerializationContext.Default);
 });
 
 builder.Services.AddOutputCache(options =>
@@ -147,8 +147,8 @@ builder.Services.AddCommunityServices(
 
 
 string messagingDb = builder.Configuration.GetConnectionString(DbNames.MessagingDb)!;
-builder.Services.AddMessagingServices(
-    new MessagingOptions(
+builder.Services.AddMessagesServices(
+    new MessagesOptions(
         messagingDb,
         DbNames.MessagingDb
     )

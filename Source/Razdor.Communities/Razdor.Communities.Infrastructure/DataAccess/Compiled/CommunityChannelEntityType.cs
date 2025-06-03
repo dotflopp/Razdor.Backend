@@ -251,12 +251,12 @@ namespace Razdor.Communities.Infrastructure.DataAccess
                 propertyInfo: typeof(CommunityChannel).GetProperty("Type", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 fieldInfo: typeof(CommunityChannel).GetField("<Type>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 valueGeneratorFactory: new DiscriminatorValueGeneratorFactory().Create,
-                sentinel: ChannelType.CategoryChannel);
+                sentinel: (ChannelType)0);
             type.SetGetter(
                 ChannelType (CommunityChannel entity) => CommunityChannelUnsafeAccessors.Type(entity),
-                bool (CommunityChannel entity) => object.Equals(((object)(CommunityChannelUnsafeAccessors.Type(entity))), ((object)(ChannelType.CategoryChannel))),
+                bool (CommunityChannel entity) => object.Equals(((object)(CommunityChannelUnsafeAccessors.Type(entity))), ((object)((ChannelType)0L))),
                 ChannelType (CommunityChannel instance) => CommunityChannelUnsafeAccessors.Type(instance),
-                bool (CommunityChannel instance) => object.Equals(((object)(CommunityChannelUnsafeAccessors.Type(instance))), ((object)(ChannelType.CategoryChannel))));
+                bool (CommunityChannel instance) => object.Equals(((object)(CommunityChannelUnsafeAccessors.Type(instance))), ((object)((ChannelType)0L))));
             type.SetSetter(
                 (CommunityChannel entity, ChannelType value) => CommunityChannelUnsafeAccessors.Type(entity) = value);
             type.SetMaterializationSetter(

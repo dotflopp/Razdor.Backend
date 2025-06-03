@@ -2,7 +2,7 @@
 
 namespace Razdor.Communities.Domain.Permissions;
 
-[JsonConverter(typeof(JsonStringEnumConverter))]
+[JsonConverter(typeof(JsonStringEnumConverter<PermissionTargetType>))]
 public enum PermissionTargetType
 {
     User,

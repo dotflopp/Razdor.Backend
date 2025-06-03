@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsTrimmable>true</IsTrimmable>
+        <RootNamespace>Razdor.Messages.Module</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Module.csproj" />
+      <ProjectReference Include="..\Razdor.Messages.Domain\Razdor.Messages.Domain.csproj" />
+    </ItemGroup>
+
+</Project>

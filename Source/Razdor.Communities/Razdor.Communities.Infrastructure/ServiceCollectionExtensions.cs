@@ -21,10 +21,10 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<ICommunityModule, CommunityModule>();
 
-        services.AddDbContext<CommunitiesDbContext, CommunitiesMongoDBContext>(builder =>
+        services.AddDbContext<CommunitiesDbContext, CommunitiesMongoDbContext>(builder =>
         {
             builder.UseMongoDB(options.ConnectionString, options.DataBaseName);
-            builder.UseModel(CommunityMongoDataContextModel.Instance);
+            builder.UseModel(CommunitiesMongoDbContextModel.Instance);
         });
 
         services.AddScoped<UnitOfWork<CommunitiesDbContext>>();

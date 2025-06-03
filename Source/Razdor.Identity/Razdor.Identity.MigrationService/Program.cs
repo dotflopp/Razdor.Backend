@@ -19,13 +19,13 @@ builder.Services
         tracing.AddSource(Worker<IdentityDbContext>.ActivitySourceName)
     );
 
-builder.Services.AddDbContext<IdentityDbContext, IdentityPostgreSqlContext>(options =>
+builder.Services.AddDbContext<IdentityDbContext, IdentityPostgresDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("identitydb"));
 });
 
 
-builder.Services.AddHostedService<Worker<IdentityPostgreSqlContext>>();
+builder.Services.AddHostedService<Worker<IdentityPostgresDbContext>>();
 
 IHost host = builder.Build();
 host.Run();

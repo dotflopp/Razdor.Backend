@@ -28,10 +28,10 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton(_ => new AccessTokenSource(accessTokenOptions));
 
         collection.AddTransient<UnitOfWork<IdentityDbContext>>();
-        collection.AddDbContext<IdentityDbContext, IdentityPostgreSqlContext>(options =>
+        collection.AddDbContext<IdentityDbContext, IdentityPostgresDbContext>(options =>
         {
             options.UseNpgsql(moduleOptions.ConnectionString);
-            options.UseModel(IdentityPostgreSqlContextModel.Instance);
+            options.UseModel(IdentityPostgresDbContextModel.Instance);
         });
 
         collection.AddTransient<IUsersCounter, UsersEfCounter>();

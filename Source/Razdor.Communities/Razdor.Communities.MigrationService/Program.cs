@@ -8,7 +8,7 @@ using Razdor.Communities.Module.DataAccess;
 HostApplicationBuilder builder = Host.CreateApplicationBuilder(args);
 
 string fakeConnectionString = "mongodb://admin:admin@localhost:27017/communitydb?authSource=admin&authMechanism=SCRAM-SHA-256";
-builder.Services.AddDbContext<CommunitiesDbContext, CommunitiesMongoDBContext>(options =>
+builder.Services.AddDbContext<CommunitiesDbContext, CommunitiesMongoDbContext>(options =>
     options.UseMongoDB(fakeConnectionString,"communitydb")
 );
 

@@ -12,9 +12,10 @@
     <Project Path="Source\Razdor.Identity\Razdor.Identity.Module\Razdor.Identity.Module.csproj" />
   </Folder>
   <Folder Name="/Messaging/">
-    <Project Path="Source\Razdor.Messaging\Razdor.Messaging.Domain\Razdor.Messaging.Domain.csproj" Type="Classic C#" />
-    <Project Path="Source\Razdor.Messaging\Razdor.Messaging.Infrastructure\Razdor.Messaging.Infrastructure.csproj" Type="Classic C#" />
-    <Project Path="Source\Razdor.Messaging\Razdor.Messaging.Module\Razdor.Messaging.Module.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Messages\Razdor.Messages.MigrationService\Razdor.Messages.MigrationService.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Messages\Razdor.Messages.Domain\Razdor.Messages.Domain.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Messages\Razdor.Messages.Infrastructure\Razdor.Messages.Infrastructure.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Messages\Razdor.Messages.Module\Razdor.Messages.Module.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/Shared/">
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Domain\Razdor.Shared.Domain.csproj" />
@@ -28,8 +29,8 @@
     <File Path="Dockerfile" />
     <File Path="LICENSE" />
     <File Path="README.md" />
-    <File Path="Scripts\initdb.bat" />
     <File Path="compose.yaml" />
+    <File Path="Scripts\CompileModels.txt" />
   </Folder>
   <Folder Name="/Voices/" />
   <Project Path="Source\Razdor.Api\Razdor.Api.csproj" Type="Classic C#" />

@@ -9,7 +9,7 @@ public record AttachmentViewModel(
     ulong Id,
     string SourceUrl,
     string MediaType,
-    int Size
+    long Size
 ){
     public static AttachmentViewModel From(Attachment arg)
     {

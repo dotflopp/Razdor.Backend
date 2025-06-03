@@ -2,4 +2,4 @@
 
 namespace Razdor.Messages.Module.Contracts;
 
-public interface IMessagingQuery<out TResult> : IQuery<TResult>;
+public interface IMessagesQuery<out TResult> : IQuery<TResult>;

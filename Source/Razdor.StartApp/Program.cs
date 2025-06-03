@@ -7,6 +7,7 @@ using Razdor.Api;
 using Razdor.Api.AuthenticationScheme;
 using Razdor.Api.Constraints;
 using Razdor.Api.Middlewares;
+using Razdor.Api.Multipart;
 using Razdor.Api.OpenAPI;
 using Razdor.Api.Routes;
 using Razdor.Api.Routes.Communities;
@@ -33,7 +34,7 @@ builder.Services.AddApiVersioning(options =>
     options.DefaultApiVersion = new ApiVersion(0, 1);
     options.AssumeDefaultVersionWhenUnspecified = true;
     options.ReportApiVersions = true;
-    options.ApiVersionReader = new MediaTypeApiVersionReader("v");
+    options.ApiVersionReader = new MediaTypeApiVersionReader("dotflopp.v");
 });
 
 // CORS
@@ -58,6 +59,7 @@ builder.Services.AddAuthentication()
 builder.Services.Configure<RouteOptions>(
     options => options.SetParameterPolicy<RegexInlineRouteConstraint>("regex")
 );
+
 
 // OpenApi configuration
 builder.Services.AddEndpointsApiExplorer();
@@ -117,6 +119,9 @@ builder.Services.AddOutputCache(options =>
     options.AddBasePolicy(policy => policy.Expire(TimeSpan.FromMinutes(10)));
 });
 
+builder.Services.AddScoped<ContentWithFilesAccessor>();
+
+builder.Services.AddScoped<IFileStore, LocalFileStore>();
 // Snowflake Generator
 builder.Services.AddSingleton(
     new SnowflakeGenerator(0, new DateTime(2025, 1, 1))

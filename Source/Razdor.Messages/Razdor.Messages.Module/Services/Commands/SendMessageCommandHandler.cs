@@ -1,5 +1,6 @@
 ﻿using Mediator;
 using Razdor.Messages.Domain;
+using Razdor.Messages.Module.Exceptions;
 using Razdor.Messages.Module.Services.Commands.ViewModels;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.RequestSenderContext;
@@ -10,7 +11,8 @@ public class SendMessageCommandHandler(
     SnowflakeGenerator snowflake,
     IRequestSenderContextAccessor sender,
     IMessagesRepository messageses,
-    TimeProvider timeProvider
+    TimeProvider timeProvider,
+    AttachmentsStore attachmentsStore
 ): ICommandHandler<SendMessageCommand, MessageViewModel>
 {
 
@@ -19,16 +21,41 @@ public class SendMessageCommandHandler(
         MessageReference? reference = (command.Reference != null)
             ? new MessageReference(command.Reference.ChannelId, command.Reference.MessageId)
             : null;
+
+        ulong messageId = snowflake.Next();
+        List<Attachment> attachments = [];
+        
+        AttachmentPath path = new AttachmentPath(command.ChannelId, messageId, 0);
+        await foreach (var attachment in command.Files.WithCancellation(cancellationToken))
+        {
+            path.AttachmentId = snowflake.Next();
+            bool isSuccess = await attachmentsStore.UploadFileAsync(
+                path, attachment.MediaType, attachment.Stream, cancellationToken
+            );
+
+            if (!isSuccess)
+                AttachmentNotUploadedException.Throw();
+            
+            attachments.Add(
+                new Attachment(
+                    path.AttachmentId,
+                    attachment.FileName,
+                    path.AsString(),
+                    attachment.MediaType,
+                    attachment.Stream.Length
+                )    
+            );
+        }
         
         Message message = Message.CreateNew(
-            snowflake.Next(),
+            messageId,
             sender.User.Id,
             command.ChannelId,
             command.Text,
             timeProvider,
             reference,
             command.Embed,
-            null
+            attachments
         );
         
         messageses.Add(message);

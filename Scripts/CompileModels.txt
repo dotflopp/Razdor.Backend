@@ -2,7 +2,7 @@
 
 dotnet ef dbcontext optimize --precompile-queries --nativeaot --project Source\Razdor.Identity\Razdor.Identity.Infrastructure --startup-project Source\Razdor.Identity\Razdor.Identity.MigrationService --context  Razdor.Identity.Infrastructure.DataAccess.IdentityPostgresDbContext --output-dir DataAccess/Compiled --namespace Razdor.Identity.Infrastructure.DataAccess
 
-#Communities model
+#Communities model  
 
 dotnet ef dbcontext optimize --precompile-queries --nativeaot --project Source\Razdor.Communities\Razdor.Communities.Infrastructure --startup-project  Source\Razdor.Communities\Razdor.Communities.MigrationService --context  Razdor.Communities.Infrastructure.DataAccess.CommunitiesMongoDbContext --output-dir DataAccess/Compiled --namespace Razdor.Communities.Infrastructure.DataAccess
 

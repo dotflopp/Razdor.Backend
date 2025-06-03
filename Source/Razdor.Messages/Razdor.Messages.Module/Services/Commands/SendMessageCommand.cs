@@ -14,7 +14,7 @@ public record SendMessageCommand(
   Embed? Embed,
   MessageReferenceViewModel? Reference,
   IAsyncEnumerable<AttachmentFileViewModel> Files
-): IMessagingCommand<MessageViewModel>, IRequiredChannelPermissions, IRequiredChannelType
+): IMessagesCommand<MessageViewModel>, IRequiredChannelPermissions, IRequiredChannelType
 {
   public UserPermissions RequiredPermissions => UserPermissions.ViewChannel | UserPermissions.SendMessage;
   public ChannelType AllowedTypes => ChannelType.TextChannel | ChannelType.ForkChannel;

@@ -25,6 +25,10 @@ public enum ErrorCode : ulong
     InviteNotFound,
     ReJoiningToCommunity,
 
+    //Messaging
+    AttachmentNotFound,
+    AttachmentNotUploaded,
+    
     //Routing
     NonExistentRoute,
 }

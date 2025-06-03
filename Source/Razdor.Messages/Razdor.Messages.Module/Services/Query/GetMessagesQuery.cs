@@ -12,7 +12,7 @@ public record GetMessagesQuery(
     ulong ChannelId,
     ulong? LastMessageId, 
     int? MessagesCount  
-) : IMessagingQuery<IEnumerable<MessageViewModel>>, IRequiredChannelPermissions, IRequiredChannelType
+) : IMessagesQuery<IEnumerable<MessageViewModel>>, IRequiredChannelPermissions, IRequiredChannelType
 {
     public const int DefaultMessageCount = 100;
     public ChannelType AllowedTypes => ChannelType.TextChannel | ChannelType.ForkChannel;

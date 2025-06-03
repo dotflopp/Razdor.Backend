@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 using Razdor.Api.Middlewares.ViewModels;
 using Razdor.Api.Multipart;
 using Razdor.Api.Routes.Messaging.ViewModels;
@@ -13,17 +14,32 @@ public static class MessagingRouter
 {
     public static IEndpointRouteBuilder MapMessages(this IEndpointRouteBuilder builder)
     {
-        IEndpointRouteBuilder api = builder.MapGroup("channel/{channelId:ulong}/messages");
+        IEndpointRouteBuilder api = builder.MapGroup("/channels/{channelId:ulong}/messages");
+        
         api.MapPost("/", SendMessageAsync)
             .DisableAntiforgery()
             .WithSummary("Отправить сообщение в канал");
         api.MapGet("/", GetMessagesAsync)
             .WithSummary("Получить сообщения канала");
 
+        builder.MapGet("/attachments/{channelId:ulong}/{messageId:ulong}/{attachmentId:ulong}", GetAttachmentsAsync)
+            .WithSummary("Получить файл вложения");
+
         return builder;
     }
+    private static async Task<IResult> GetAttachmentsAsync(
+        [FromServices] IMessagesModule module,
+        [FromRoute] ulong channelId,
+        [FromRoute] ulong messageId,
+        [FromRoute] ulong attachmentId
+    )
+    {
+        AttachmentFileViewModel attachment = await module.ExecuteQueryAsync(new GetAttachmentQuery(channelId, messageId, attachmentId));
+        return Results.File(attachment.Stream, attachment.MediaType, attachment.FileName);
+    }
+    
     private static async Task<IResult> GetMessagesAsync(
-        [FromServices] IMessagingModule module,
+        [FromServices] IMessagesModule module,
         [FromRoute] ulong channelId,
         [FromQuery] ulong? lastMessageId,
         [FromQuery] int? messagesCount
@@ -55,12 +71,12 @@ public static class MessagingRouter
     // }
 
     private static async Task<IResult> SendMessageAsync(
-        [FromServices] IMessagingModule module,
+        [FromServices] IMessagesModule module,
         [FromRoute] ulong channelId,
-        [FromServices] ContentWithFilesAccessor<MessagePyload> contentWithFilesAccessor
+        [FromServices] ContentWithFilesAccessor contentWithFilesAccessor
     )
     {
-        ContentWithFiles<MessagePyload> contentWithFiles = await contentWithFilesAccessor.ParseAsync();
+        ContentWithFiles<MessagePyload> contentWithFiles = await contentWithFilesAccessor.ParseAsync<MessagePyload>();
         MessageViewModel message = await module.ExecuteCommandAsync(
             new SendMessageCommand(
                 channelId,

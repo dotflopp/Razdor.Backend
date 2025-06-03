@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Razdor.Messages.Domain;
 using Razdor.Messages.Infrastructure.DataAccess;
+using Razdor.Messages.Module;
 using Razdor.Messages.Module.Contracts;
 using Razdor.Messages.Module.DataAccess;
 using Razdor.Shared.Module.DataAccess;
@@ -22,7 +23,9 @@ public static class ServiceCollectionExtensions
         
         services.AddScoped<IMessagesRepository, MessagesRepository>();
         services.AddScoped<UnitOfWork<MessagesDbContext>>();
-        services.AddScoped<IMessagingModule, MessagesModule>();
+        services.AddScoped<IMessagesModule, MessagesModule>();
+        services.AddScoped<AttachmentsStore>();
+        
         return services;
     }
 }

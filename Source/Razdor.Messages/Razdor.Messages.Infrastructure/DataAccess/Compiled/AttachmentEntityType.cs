@@ -26,7 +26,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
                 "Razdor.Messages.Domain.Attachment",
                 typeof(Attachment),
                 baseEntityType,
-                propertyCount: 6,
+                propertyCount: 7,
                 foreignKeyCount: 1,
                 keyCount: 1);
 
@@ -98,6 +98,47 @@ namespace Razdor.Messages.Infrastructure.DataAccess
                 clrType: typeof(int));
             id1.SetCurrentValueComparer(new EntryCurrentValueComparer<int>(id1));
 
+            var fileName = runtimeEntityType.AddProperty(
+                "FileName",
+                typeof(string),
+                propertyInfo: typeof(Attachment).GetProperty("FileName", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(Attachment).GetField("<FileName>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+            fileName.SetGetter(
+                string (Attachment entity) => AttachmentUnsafeAccessors.FileName(entity),
+                bool (Attachment entity) => AttachmentUnsafeAccessors.FileName(entity) == null,
+                string (Attachment instance) => AttachmentUnsafeAccessors.FileName(instance),
+                bool (Attachment instance) => AttachmentUnsafeAccessors.FileName(instance) == null);
+            fileName.SetSetter(
+                (Attachment entity, string value) => AttachmentUnsafeAccessors.FileName(entity) = value);
+            fileName.SetMaterializationSetter(
+                (Attachment entity, string value) => AttachmentUnsafeAccessors.FileName(entity) = value);
+            fileName.SetAccessors(
+                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.FileName(((Attachment)(entry.Entity))),
+                string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.FileName(((Attachment)(entry.Entity))),
+                string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(fileName, 2),
+                string (InternalEntityEntry entry) => entry.GetCurrentValue<string>(fileName),
+                object (ValueBuffer valueBuffer) => valueBuffer[2]);
+            fileName.SetPropertyIndexes(
+                index: 2,
+                originalValueIndex: 2,
+                shadowIndex: -1,
+                relationshipIndex: -1,
+                storeGenerationIndex: -1);
+            fileName.TypeMapping = MongoTypeMapping.Default.Clone(
+                comparer: new ValueComparer<string>(
+                    bool (string v1, string v2) => v1 == v2,
+                    int (string v) => ((object)v).GetHashCode(),
+                    string (string v) => v),
+                keyComparer: new ValueComparer<string>(
+                    bool (string v1, string v2) => v1 == v2,
+                    int (string v) => ((object)v).GetHashCode(),
+                    string (string v) => v),
+                providerValueComparer: new ValueComparer<string>(
+                    bool (string v1, string v2) => v1 == v2,
+                    int (string v) => ((object)v).GetHashCode(),
+                    string (string v) => v),
+                clrType: typeof(string));
+
             var id = runtimeEntityType.AddProperty(
                 "Id",
                 typeof(ulong),
@@ -116,12 +157,12 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             id.SetAccessors(
                 ulong (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Id(((Attachment)(entry.Entity))),
                 ulong (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Id(((Attachment)(entry.Entity))),
-                ulong (InternalEntityEntry entry) => entry.ReadOriginalValue<ulong>(id, 2),
+                ulong (InternalEntityEntry entry) => entry.ReadOriginalValue<ulong>(id, 3),
                 ulong (InternalEntityEntry entry) => entry.GetCurrentValue<ulong>(id),
-                object (ValueBuffer valueBuffer) => valueBuffer[2]);
+                object (ValueBuffer valueBuffer) => valueBuffer[3]);
             id.SetPropertyIndexes(
-                index: 2,
-                originalValueIndex: 2,
+                index: 3,
+                originalValueIndex: 3,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -157,12 +198,12 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             mediaType.SetAccessors(
                 string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.MediaType(((Attachment)(entry.Entity))),
                 string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.MediaType(((Attachment)(entry.Entity))),
-                string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(mediaType, 3),
+                string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(mediaType, 4),
                 string (InternalEntityEntry entry) => entry.GetCurrentValue<string>(mediaType),
-                object (ValueBuffer valueBuffer) => valueBuffer[3]);
+                object (ValueBuffer valueBuffer) => valueBuffer[4]);
             mediaType.SetPropertyIndexes(
-                index: 3,
-                originalValueIndex: 3,
+                index: 4,
+                originalValueIndex: 4,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -183,45 +224,45 @@ namespace Razdor.Messages.Infrastructure.DataAccess
 
             var size = runtimeEntityType.AddProperty(
                 "Size",
-                typeof(int),
+                typeof(long),
                 propertyInfo: typeof(Attachment).GetProperty("Size", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 fieldInfo: typeof(Attachment).GetField("<Size>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                sentinel: 0);
+                sentinel: 0L);
             size.SetGetter(
-                int (Attachment entity) => AttachmentUnsafeAccessors.Size(entity),
-                bool (Attachment entity) => AttachmentUnsafeAccessors.Size(entity) == 0,
-                int (Attachment instance) => AttachmentUnsafeAccessors.Size(instance),
-                bool (Attachment instance) => AttachmentUnsafeAccessors.Size(instance) == 0);
+                long (Attachment entity) => AttachmentUnsafeAccessors.Size(entity),
+                bool (Attachment entity) => AttachmentUnsafeAccessors.Size(entity) == 0L,
+                long (Attachment instance) => AttachmentUnsafeAccessors.Size(instance),
+                bool (Attachment instance) => AttachmentUnsafeAccessors.Size(instance) == 0L);
             size.SetSetter(
-                (Attachment entity, int value) => AttachmentUnsafeAccessors.Size(entity) = value);
+                (Attachment entity, long value) => AttachmentUnsafeAccessors.Size(entity) = value);
             size.SetMaterializationSetter(
-                (Attachment entity, int value) => AttachmentUnsafeAccessors.Size(entity) = value);
+                (Attachment entity, long value) => AttachmentUnsafeAccessors.Size(entity) = value);
             size.SetAccessors(
-                int (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Size(((Attachment)(entry.Entity))),
-                int (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Size(((Attachment)(entry.Entity))),
-                int (InternalEntityEntry entry) => entry.ReadOriginalValue<int>(size, 4),
-                int (InternalEntityEntry entry) => entry.GetCurrentValue<int>(size),
-                object (ValueBuffer valueBuffer) => valueBuffer[4]);
+                long (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Size(((Attachment)(entry.Entity))),
+                long (InternalEntityEntry entry) => AttachmentUnsafeAccessors.Size(((Attachment)(entry.Entity))),
+                long (InternalEntityEntry entry) => entry.ReadOriginalValue<long>(size, 5),
+                long (InternalEntityEntry entry) => entry.GetCurrentValue<long>(size),
+                object (ValueBuffer valueBuffer) => valueBuffer[5]);
             size.SetPropertyIndexes(
-                index: 4,
-                originalValueIndex: 4,
+                index: 5,
+                originalValueIndex: 5,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
             size.TypeMapping = MongoTypeMapping.Default.Clone(
-                comparer: new ValueComparer<int>(
-                    bool (int v1, int v2) => v1 == v2,
-                    int (int v) => v,
-                    int (int v) => v),
-                keyComparer: new ValueComparer<int>(
-                    bool (int v1, int v2) => v1 == v2,
-                    int (int v) => v,
-                    int (int v) => v),
-                providerValueComparer: new ValueComparer<int>(
-                    bool (int v1, int v2) => v1 == v2,
-                    int (int v) => v,
-                    int (int v) => v),
-                clrType: typeof(int));
+                comparer: new ValueComparer<long>(
+                    bool (long v1, long v2) => v1 == v2,
+                    int (long v) => ((object)v).GetHashCode(),
+                    long (long v) => v),
+                keyComparer: new ValueComparer<long>(
+                    bool (long v1, long v2) => v1 == v2,
+                    int (long v) => ((object)v).GetHashCode(),
+                    long (long v) => v),
+                providerValueComparer: new ValueComparer<long>(
+                    bool (long v1, long v2) => v1 == v2,
+                    int (long v) => ((object)v).GetHashCode(),
+                    long (long v) => v),
+                clrType: typeof(long));
 
             var sourceUrl = runtimeEntityType.AddProperty(
                 "SourceUrl",
@@ -240,12 +281,12 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             sourceUrl.SetAccessors(
                 string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.SourceUrl(((Attachment)(entry.Entity))),
                 string (InternalEntityEntry entry) => AttachmentUnsafeAccessors.SourceUrl(((Attachment)(entry.Entity))),
-                string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(sourceUrl, 5),
+                string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(sourceUrl, 6),
                 string (InternalEntityEntry entry) => entry.GetCurrentValue<string>(sourceUrl),
-                object (ValueBuffer valueBuffer) => valueBuffer[5]);
+                object (ValueBuffer valueBuffer) => valueBuffer[6]);
             sourceUrl.SetPropertyIndexes(
-                index: 5,
-                originalValueIndex: 5,
+                index: 6,
+                originalValueIndex: 6,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -321,6 +362,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
         {
             var messageId = runtimeEntityType.FindProperty("MessageId");
             var id1 = runtimeEntityType.FindProperty("Id1");
+            var fileName = runtimeEntityType.FindProperty("FileName");
             var id = runtimeEntityType.FindProperty("Id");
             var mediaType = runtimeEntityType.FindProperty("MediaType");
             var size = runtimeEntityType.FindProperty("Size");
@@ -332,7 +374,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
                 ISnapshot (InternalEntityEntry source) =>
                 {
                     var entity = ((Attachment)(source.Entity));
-                    return ((ISnapshot)(new Snapshot<ulong, int, ulong, string, int, string>(((ValueComparer<ulong>)(((IProperty)messageId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(messageId)), ((ValueComparer<int>)(((IProperty)id1).GetValueComparer())).Snapshot(source.GetCurrentValue<int>(id1)), ((ValueComparer<ulong>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), (source.GetCurrentValue<string>(mediaType) == null ? null : ((ValueComparer<string>)(((IProperty)mediaType).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(mediaType))), ((ValueComparer<int>)(((IProperty)size).GetValueComparer())).Snapshot(source.GetCurrentValue<int>(size)), (source.GetCurrentValue<string>(sourceUrl) == null ? null : ((ValueComparer<string>)(((IProperty)sourceUrl).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(sourceUrl))))));
+                    return ((ISnapshot)(new Snapshot<ulong, int, string, ulong, string, long, string>(((ValueComparer<ulong>)(((IProperty)messageId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(messageId)), ((ValueComparer<int>)(((IProperty)id1).GetValueComparer())).Snapshot(source.GetCurrentValue<int>(id1)), (source.GetCurrentValue<string>(fileName) == null ? null : ((ValueComparer<string>)(((IProperty)fileName).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(fileName))), ((ValueComparer<ulong>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), (source.GetCurrentValue<string>(mediaType) == null ? null : ((ValueComparer<string>)(((IProperty)mediaType).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(mediaType))), ((ValueComparer<long>)(((IProperty)size).GetValueComparer())).Snapshot(source.GetCurrentValue<long>(size)), (source.GetCurrentValue<string>(sourceUrl) == null ? null : ((ValueComparer<string>)(((IProperty)sourceUrl).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(sourceUrl))))));
                 });
             runtimeEntityType.SetStoreGeneratedValuesFactory(
                 ISnapshot () => ((ISnapshot)(new Snapshot<ulong, int>(((ValueComparer<ulong>)(((IProperty)messageId).GetValueComparer())).Snapshot(default(ulong)), ((ValueComparer<int>)(((IProperty)id1).GetValueComparer())).Snapshot(default(int))))));
@@ -349,10 +391,10 @@ namespace Razdor.Messages.Infrastructure.DataAccess
                     return ((ISnapshot)(new Snapshot<ulong, int>(((ValueComparer<ulong>)(((IProperty)messageId).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<ulong>(messageId)), ((ValueComparer<int>)(((IProperty)id1).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<int>(id1)))));
                 });
             runtimeEntityType.Counts = new PropertyCounts(
-                propertyCount: 6,
+                propertyCount: 7,
                 navigationCount: 0,
                 complexPropertyCount: 0,
-                originalValueCount: 6,
+                originalValueCount: 7,
                 shadowCount: 2,
                 relationshipCount: 2,
                 storeGeneratedCount: 2);

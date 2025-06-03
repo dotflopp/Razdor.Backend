@@ -10,6 +10,9 @@ namespace Razdor.Messages.Infrastructure.DataAccess
 {
     public static class AttachmentUnsafeAccessors
     {
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<FileName>k__BackingField")]
+        public static extern ref string FileName(Attachment @this);
+
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<Id>k__BackingField")]
         public static extern ref ulong Id(Attachment @this);
 
@@ -17,7 +20,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
         public static extern ref string MediaType(Attachment @this);
 
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<Size>k__BackingField")]
-        public static extern ref int Size(Attachment @this);
+        public static extern ref long Size(Attachment @this);
 
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<SourceUrl>k__BackingField")]
         public static extern ref string SourceUrl(Attachment @this);

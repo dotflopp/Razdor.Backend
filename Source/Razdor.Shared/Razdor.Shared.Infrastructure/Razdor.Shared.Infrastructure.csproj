@@ -9,6 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Razdor.Shared.IntegrationEvents\Razdor.Shared.IntegrationEvents.csproj" />
+      <ProjectReference Include="..\Razdor.Shared.Services\Razdor.Shared.Module.csproj" />
     </ItemGroup>
 
 </Project>

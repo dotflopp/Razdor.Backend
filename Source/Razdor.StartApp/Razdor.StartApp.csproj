@@ -37,6 +37,7 @@
         <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Infrastructure\Razdor.Identity.Infrastructure.csproj"/>
         <ProjectReference Include="..\Razdor.Messages\Razdor.Messages.Infrastructure\Razdor.Messages.Infrastructure.csproj"/>
         <ProjectReference Include="..\Razdor.ServiceDefaults\Razdor.ServiceDefaults.csproj"/>
+        <ProjectReference Include="..\Razdor.Shared\Razdor.Shared.Infrastructure\Razdor.Shared.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

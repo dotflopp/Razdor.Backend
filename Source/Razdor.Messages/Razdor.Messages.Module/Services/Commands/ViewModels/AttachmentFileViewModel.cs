@@ -4,5 +4,5 @@ public record AttachmentFileViewModel(
     string Name,
     string FileName,  
     string MediaType,
-    Stream Content
+    Stream Stream
 );

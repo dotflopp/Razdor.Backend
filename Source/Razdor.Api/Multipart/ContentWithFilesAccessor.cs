@@ -8,14 +8,14 @@ using Microsoft.Net.Http.Headers;
 
 namespace Razdor.Api.Multipart;
 
-public class ContentWithFilesAccessor<TMainContent>(
+public class ContentWithFilesAccessor(
     IHttpContextAccessor contextAccessor,
     IOptions<JsonOptions> jsonOptions
 )
 {
     private HttpContext Context => contextAccessor.HttpContext!;
 
-    public async Task<ContentWithFiles<TMainContent>> ParseAsync(CancellationToken cancellationToken = default)
+    public async Task<ContentWithFiles<TMainContent>> ParseAsync<TMainContent>(CancellationToken cancellationToken = default)
     {
 
         if (!MediaTypeHeaderValue.TryParse(Context.Request.ContentType, out MediaTypeHeaderValue? contentType))
@@ -24,7 +24,7 @@ public class ContentWithFilesAccessor<TMainContent>(
         TMainContent content;
         if (contentType.MediaType.StartsWith(MediaTypeNames.Application.Json, StringComparison.OrdinalIgnoreCase))
         { 
-            content = await ParseMainContentAsync(Context.Request.Body,  cancellationToken);
+            content = await ParseMainContentAsync<TMainContent>(Context.Request.Body,  cancellationToken);
             return new ContentWithFiles<TMainContent>(content, AsyncEnumerable.Empty<MultipartRequestFile>());
         }
 
@@ -41,7 +41,7 @@ public class ContentWithFilesAccessor<TMainContent>(
         if (section == null)
             throw new BadHttpRequestException("Missing main content section");
         
-        content = await ParseMainContentAsync(section.Body, cancellationToken);
+        content = await ParseMainContentAsync<TMainContent>(section.Body, cancellationToken);
         return new ContentWithFiles<TMainContent>(content, AwaitParseFiles(multipartReader));
     }
 
@@ -59,7 +59,7 @@ public class ContentWithFilesAccessor<TMainContent>(
         return boundary.ToString();
     }
 
-    private async Task<TMainContent> ParseMainContentAsync(
+    private async Task<TMainContent> ParseMainContentAsync<TMainContent>(
         Stream content, CancellationToken cancellationToken = default
     ){
         return await JsonSerializer.DeserializeAsync<TMainContent>(
@@ -69,9 +69,9 @@ public class ContentWithFilesAccessor<TMainContent>(
         ) ?? throw new BadHttpRequestException("Missing content json");   
     }
     
-    private async IAsyncEnumerable<MultipartRequestFile> AwaitParseFiles(MultipartReader multipartReader, CancellationToken cancellationToken = default)
+    private async IAsyncEnumerable<MultipartRequestFile> AwaitParseFiles(MultipartReader multipartReader)
     {
-        while (await multipartReader.ReadNextSectionAsync(cancellationToken) is { } section)
+        while (await multipartReader.ReadNextSectionAsync() is { } section)
         {
             if(!MediaTypeHeaderValue.TryParse(section.ContentType, out MediaTypeHeaderValue? sectionType) || !sectionType.MediaType.HasValue)
                 throw new BadHttpRequestException("Invalid content type in section " + section.ContentType);
@@ -83,7 +83,7 @@ public class ContentWithFilesAccessor<TMainContent>(
                 throw new BadHttpRequestException("Disposition Name and FileName is Required");
 
             MemoryStream memoryStream = new MemoryStream();
-            await section.Body.CopyToAsync(memoryStream, cancellationToken);
+            await section.Body.CopyToAsync(memoryStream);
             
             yield return new MultipartRequestFile(
                 disposition.Name.Value,

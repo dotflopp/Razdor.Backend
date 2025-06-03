@@ -103,6 +103,8 @@ builder.Services.Configure<RouteOptions>(options =>
 
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
+    options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault;
+    
     IList<IJsonTypeInfoResolver> typeResolver = options.SerializerOptions.TypeInfoResolverChain;
     typeResolver.Add(SharedJsonSerializerContext.Default);
     typeResolver.Add(CommunitiesJsonSerializerContext.Default);

@@ -29,7 +29,20 @@ public record MessageViewModel(
         MessageReferenceViewModel? reference = (message.Reference != null)
             ? MessageReferenceViewModel.From(message.Reference)
             : null;
-
+        
+        IEnumerable<AttachmentViewModel>? attachments = (message.Attachments.Count > 0)
+            ? message.Attachments.Select(AttachmentViewModel.From)
+            : null;
+        IEnumerable<MentionedUserViewModel>? mentionedUsers = (message.MentionedUsers.Count > 0)
+            ? message.MentionedUsers.Select(MentionedUserViewModel.From)
+            : null;
+        IEnumerable<MentionedChannelViewModel>? mentionedChannels = (message.MentionedChannels.Count > 0)
+            ? message.MentionedChannels.Select(MentionedChannelViewModel.From)
+            : null;
+        IEnumerable<MentionedRoleViewModel>? mentionedRoles = (message.MentionedRoles.Count > 0)
+            ? message.MentionedRoles.Select(MentionedRoleViewModel.From)
+            : null;
+        
         return new MessageViewModel(
             message.Id,
             message.UserId,
@@ -40,11 +53,11 @@ public record MessageViewModel(
             message.Embed,
             message.IsPinned,
             message.EditedAt,
-            message.Attachments.Select(AttachmentViewModel.From),
+            attachments,
             message.MentionedEveryone,
-            message.MentionedUsers.Select(MentionedUserViewModel.From),
-            message.MentionedChannels.Select(MentionedChannelViewModel.From),
-            message.MentionedRoles.Select(MentionedRoleViewModel.From)
+            mentionedUsers,
+            mentionedChannels,
+            mentionedRoles
         );
     }
 };

@@ -12,7 +12,8 @@ public record SendMessageCommand(
   ulong ChannelId,
   string? Text,
   Embed? Embed,
-  MessageReferenceViewModel? Reference
+  MessageReferenceViewModel? Reference,
+  IAsyncEnumerable<AttachmentFileViewModel> Files
 ): IMessagingCommand<MessageViewModel>, IRequiredChannelPermissions, IRequiredChannelType
 {
   public UserPermissions RequiredPermissions => UserPermissions.ViewChannel | UserPermissions.SendMessage;

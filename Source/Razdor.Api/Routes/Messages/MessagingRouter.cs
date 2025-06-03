@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Razdor.Api.Middlewares.ViewModels;
+using Razdor.Api.Multipart;
 using Razdor.Api.Routes.Messaging.ViewModels;
 using Razdor.Messages.Module.Contracts;
 using Razdor.Messages.Module.Services.Commands;
@@ -18,7 +19,7 @@ public static class MessagingRouter
             .WithSummary("Отправить сообщение в канал");
         api.MapGet("/", GetMessagesAsync)
             .WithSummary("Получить сообщения канала");
-            
+
         return builder;
     }
     private static async Task<IResult> GetMessagesAsync(
@@ -35,21 +36,43 @@ public static class MessagingRouter
         return Results.Ok(messags);
     }
 
+    // private static async Task<IResult> SendMessageAsync(
+    //     [FromServices] IMessagingModule module,
+    //     [FromRoute] ulong channelId,
+    //     [FromBody] MessagePyload messagePyload
+    // )
+    // {
+    //      MessageViewModel message = await module.ExecuteCommandAsync(
+    //         new SendMessageCommand(
+    //             channelId, 
+    //             messagePyload.Text, 
+    //             messagePyload.Embed,
+    //             messagePyload.Reference
+    //         )
+    //      );
+    //      
+    //      return Results.Ok(message);
+    // }
+
     private static async Task<IResult> SendMessageAsync(
         [FromServices] IMessagingModule module,
         [FromRoute] ulong channelId,
-        [FromBody] MessagePyload messagePyload
+        [FromServices] ContentWithFilesAccessor<MessagePyload> contentWithFilesAccessor
     )
     {
-         MessageViewModel message = await module.ExecuteCommandAsync(
+        ContentWithFiles<MessagePyload> contentWithFiles = await contentWithFilesAccessor.ParseAsync();
+        MessageViewModel message = await module.ExecuteCommandAsync(
             new SendMessageCommand(
-                channelId, 
-                messagePyload.Text, 
-                messagePyload.Embed,
-                messagePyload.Reference
+                channelId,
+                contentWithFiles.Conetent.Text,
+                contentWithFiles.Conetent.Embed,
+                contentWithFiles.Conetent.Reference,
+                contentWithFiles.Files.Select(x => new AttachmentFileViewModel(
+                    x.Name, x.Filename, x.MediaType, x.Stream
+                ))
             )
         );
-         
-         return Results.Ok(message);
+
+        return Results.Ok(message);
     }
 }

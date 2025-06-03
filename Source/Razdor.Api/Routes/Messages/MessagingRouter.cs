@@ -19,8 +19,7 @@ public static class MessagingRouter
     private static async Task<IResult> SendMessageAsync(
         [FromRoute] ulong channelId,
         [FromServices] IMessagingModule module,
-        [FromForm(Name="Message")] MessagePyload messagePyload,
-        [FromForm] List<IFormFile> files
+        [FromBody] MessagePyload messagePyload
     )
     {
          MessageViewModel message = await module.ExecuteCommandAsync(

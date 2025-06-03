@@ -3,6 +3,7 @@ services:
     build: .
     command: /app/Razdor.StartApp.dll
     environment:
+      - ConnectionStrings:messagesdb=mongodb://admin:admin@localhost:27017/messagesdb?authSource=admin&authMechanism=SCRAM-SHA-256
       - ConnectionStrings:communitydb=mongodb://admin:admin@localhost:27017/communitydb?authSource=admin&authMechanism=SCRAM-SHA-256
       - ConnectionStrings:identitydb=Host=localhost;port=5432;database=identitydb;username=admin;password=admin
     ports:

@@ -9,6 +9,8 @@ services:
     ports:
       - "8080:8080"
     network_mode: host
+    volumes:
+      - local_storage:/api
     depends_on:
       - mongodb
       - postgres
@@ -47,5 +49,6 @@ services:
     network_mode: host
 
 volumes:
+  local_storage:
   postgres_data:
   mongo_data:

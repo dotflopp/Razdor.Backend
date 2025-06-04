@@ -11,14 +11,14 @@ using Razdor.Identity.Module.Users.ViewModels;
 
 namespace Razdor.Communities.Infrastructure;
 
-public class CachedUserProfileFiler(
+public class CachedCommunityUserDataAccessor(
     HybridCache cache,
     IIdentityModule identityModule
-) : IUserProfileFiller {
-    public async Task<MemberProfileViewModel> FillAsync(ulong userId, MemberProfile profile, CancellationToken cancellationToken)
+) : ICommunityUserDataAccessor {
+    public async Task<UserDataViewModel> FillAsync(ulong userId, MemberProfile profile, CancellationToken cancellationToken)
     {
-        MemberProfileViewModel userProfile = await cache.GetOrCreateAsync(
-            key: ProfileCacheKey(userId),
+        UserDataViewModel userProfile = await cache.GetOrCreateAsync(
+            key: UserDataCacheKey(userId),
             factory: async (cancel) => await GetUserProfileAsync(userId, cancel),
             cancellationToken: cancellationToken
         );
@@ -29,14 +29,14 @@ public class CachedUserProfileFiler(
         }; 
     }
     
-    private string ProfileCacheKey(ulong userId)
+    private string UserDataCacheKey(ulong userId)
     {
-        return $"profiles/{userId}";
+        return $"users/{userId}";
     }
 
-    private async Task<MemberProfileViewModel> GetUserProfileAsync(ulong userId, CancellationToken cancellationToken)
+    private async Task<UserDataViewModel> GetUserProfileAsync(ulong userId, CancellationToken cancellationToken)
     {
         UserPreviewModel user = await identityModule.ExecuteQueryAsync(new GetUserQuery(userId));
-        return new MemberProfileViewModel(user.IdentityName, user.Nickname, user.Avatar);
+        return new UserDataViewModel(user.IdentityName, user.Nickname, user.Avatar, (CommunicationStatus)user.Status);
     }
 }

@@ -1,7 +1,8 @@
 ﻿namespace Razdor.Communities.Module.Services.Members.ViewModels;
 
-public record MemberProfileViewModel(
+public record UserDataViewModel(
     string IdentityName,
     string Nickname,
-    string? Avatar
+    string? Avatar,
+    CommunicationStatus CommunicationStatus
 );

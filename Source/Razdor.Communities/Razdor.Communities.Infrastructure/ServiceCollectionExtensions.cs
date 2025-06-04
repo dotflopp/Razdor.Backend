@@ -37,7 +37,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IInvitesRepository, InvitesRepository>();
         services.AddScoped<ICommunityChannelsRepository, CommunityChannelsRepository>();
         services.AddScoped<ISignalingService, SignalingService>();
-        services.AddScoped<IUserProfileFiller, CachedUserProfileFiler>();
+        services.AddScoped<ICommunityUserDataAccessor, CachedCommunityUserDataAccessor>();
 
         return services;
     }

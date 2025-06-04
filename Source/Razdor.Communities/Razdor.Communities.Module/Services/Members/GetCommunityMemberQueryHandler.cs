@@ -10,7 +10,7 @@ namespace Razdor.Communities.Module.Services.Members;
 
 public class GetCommunityMemberQueryHandler(
     CommunitiesDbContext context,
-    IUserProfileFiller profileFiller     
+    ICommunityUserDataAccessor dataAccessor     
 ) : IQueryHandler<GetCommunityMemberQuery, CommunityMemberPreviewModel>
 {
     public async ValueTask<CommunityMemberPreviewModel> Handle(GetCommunityMemberQuery query, CancellationToken cancellationToken)
@@ -21,9 +21,8 @@ public class GetCommunityMemberQueryHandler(
         
         if (member == null)
             CommunityMemberNotFoundException.Throw(query.CommunityId, query.UserId);
-
-        MemberProfile emptyProfile = new MemberProfile(null, null);
-        MemberProfileViewModel profile = await profileFiller.FillAsync(member.UserId, emptyProfile, cancellationToken);
+        
+        UserDataViewModel profile = await dataAccessor.FillAsync(member.UserId, new MemberProfile(null, null), cancellationToken);
 
         return CommunityMemberPreviewModel.From(member, profile);
     }

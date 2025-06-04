@@ -8,7 +8,7 @@ namespace Razdor.Communities.Module.Services.Members;
 
 public class GetCommunityMembersQueryHandler(
     CommunitiesDbContext context,
-    IUserProfileFiller profileFiller 
+    ICommunityUserDataAccessor dataAccessor 
 ) : IQueryHandler<GetCommunityMembersQuery, IEnumerable<CommunityMemberPreviewModel>>
 {
     public async ValueTask<IEnumerable<CommunityMemberPreviewModel>> Handle(GetCommunityMembersQuery query, CancellationToken cancellationToken)
@@ -22,12 +22,12 @@ public class GetCommunityMembersQueryHandler(
             .OrderBy(x => x.UserId)
             .ToListAsync();
 
-        List<MemberProfileViewModel> profiles = new (members.Count);
+        List<UserDataViewModel> profiles = new (members.Count);
 
         MemberProfile emptyProfile = new MemberProfile(null, null);
         foreach (CommunityMember member in members)
         {
-            MemberProfileViewModel profile = await profileFiller.FillAsync(member.UserId, emptyProfile);
+            UserDataViewModel profile = await dataAccessor.FillAsync(member.UserId, emptyProfile);
             profiles.Add(profile);
         }
         

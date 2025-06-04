@@ -12,9 +12,9 @@ namespace Razdor.Messages.Module.Services.Query;
 public class GetAttachmentQueryHandler(
     IFileStore store,
     MessagesDbContext context
-) : IQueryHandler<GetAttachmentQuery, MediaFileViewModel>
+) : IQueryHandler<GetAttachmentQuery, MediaFile>
 {
-    public async ValueTask<MediaFileViewModel> Handle(GetAttachmentQuery query, CancellationToken cancellationToken)
+    public async ValueTask<MediaFile> Handle(GetAttachmentQuery query, CancellationToken cancellationToken)
     {
         var message = await context.Messages
             .AsNoTracking()

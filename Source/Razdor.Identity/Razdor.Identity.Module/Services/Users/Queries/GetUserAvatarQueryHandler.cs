@@ -13,9 +13,9 @@ using Razdor.Shared.Module.Media;
 public class GetUserAvatarQueryHandler(
     IFileStore store,
     IdentityDbContext context
-) : ICommandHandler<GetUserAvatarQuery, MediaFileViewModel>
+) : ICommandHandler<GetUserAvatarQuery, MediaFile>
 {
-    public async ValueTask<MediaFileViewModel> Handle(GetUserAvatarQuery command, CancellationToken cancellationToken)
+    public async ValueTask<MediaFile> Handle(GetUserAvatarQuery command, CancellationToken cancellationToken)
     {
         var user = await context.UserAccounts
             .AsNoTracking()
@@ -26,7 +26,7 @@ public class GetUserAvatarQueryHandler(
         if (user?.Avatar == null)
             MediaFileNotFoundException.Throw();
         
-        AvatarPath path = new(user.Id);
+        UserAvatarPath path = new(user.Id);
         return await store.GetMediaFileAsync(path, user.Avatar, cancellationToken);
     }
 }

@@ -12,7 +12,7 @@ public record SendMessageCommand(
   string? Text,
   Embed? Embed,
   MessageReferenceViewModel? Reference,
-  IAsyncEnumerable<MediaFileViewModel> Files
+  IAsyncEnumerable<MediaFile> Files
 ): IMessagesCommand<MessageViewModel>, IRequiredChannelPermissions, IRequiredChannelType
 {
   public UserPermissions RequiredPermissions => UserPermissions.ViewChannel | UserPermissions.SendMessage;

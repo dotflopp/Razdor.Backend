@@ -2,7 +2,7 @@
 
 namespace Razdor.Identity.Module.Services.Users.Avatars;
 
-public record struct AvatarPath(
+public record struct UserAvatarPath(
     ulong UserId
 ) : IMediaContentPath
 {

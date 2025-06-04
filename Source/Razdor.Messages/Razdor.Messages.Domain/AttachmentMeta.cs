@@ -6,6 +6,13 @@ public record AttachmentMeta(
     ulong Id,
     string FileName,
     string SourceUrl,
-    string MediaType, 
+    string MediaType,
     long Size
-) : MediaFileMeta(FileName, SourceUrl, MediaType, Size);
+) : MediaFileMeta(FileName, SourceUrl, MediaType, Size)
+{
+    public AttachmentMeta(ulong id, MediaFileMeta meta) 
+        : this(id, meta.FileName, meta.SourceUrl, meta.MediaType, meta.Size)
+    {
+        
+    }
+};

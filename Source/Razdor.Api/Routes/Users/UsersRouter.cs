@@ -54,7 +54,7 @@ public static class UsersRouter
         [FromRoute] ulong userId
     ) 
     {
-        MediaFileViewModel media = await module.ExecuteCommandAsync(
+        MediaFile media = await module.ExecuteCommandAsync(
             new GetUserAvatarQuery(userId)
         );
 

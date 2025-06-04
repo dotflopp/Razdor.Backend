@@ -6,4 +6,4 @@ namespace Razdor.Identity.Module.Services.Users.Avatars.Queries;
 
 public record GetUserAvatarQuery(
     ulong UserId
-) : IIdentityCommand<MediaFileViewModel>;
+) : IIdentityCommand<MediaFile>;

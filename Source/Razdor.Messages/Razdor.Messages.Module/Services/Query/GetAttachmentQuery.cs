@@ -11,7 +11,7 @@ public record GetAttachmentQuery(
     ulong ChannelId,
     ulong MessageId,
     ulong AttachmentId    
-): IMessagesQuery<MediaFileViewModel>, IRequiredChannelPermissions
+): IMessagesQuery<MediaFile>, IRequiredChannelPermissions
 {
     public UserPermissions RequiredPermissions => UserPermissions.ViewChannel;
 }

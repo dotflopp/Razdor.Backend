@@ -34,7 +34,7 @@ public static class MessagingRouter
         [FromRoute] ulong attachmentId
     )
     {
-        MediaFileViewModel media = await module.ExecuteQueryAsync(new GetAttachmentQuery(channelId, messageId, attachmentId));
+        MediaFile media = await module.ExecuteQueryAsync(new GetAttachmentQuery(channelId, messageId, attachmentId));
         return Results.File(media.Stream, media.ContentType, media.FileName);
     }
     
@@ -83,7 +83,7 @@ public static class MessagingRouter
                 contentWithFiles.Conetent.Text,
                 contentWithFiles.Conetent.Embed,
                 contentWithFiles.Conetent.Reference,
-                contentWithFiles.Files.Select(x => new MediaFileViewModel(
+                contentWithFiles.Files.Select(x => new MediaFile(
                     x.Filename, x.MediaType, x.Stream
                 ))
             )

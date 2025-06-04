@@ -1,8 +1,10 @@
 ﻿using Mediator;
 using Razdor.Messages.Domain;
 using Razdor.Messages.Module.Services.Commands.ViewModels;
+using Razdor.Shared.Domain;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Exceptions;
+using Razdor.Shared.Module.Media;
 using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.Messages.Module.Services.Commands;
@@ -22,33 +24,20 @@ public class SendMessageCommandHandler(
             ? new MessageReference(command.Reference.ChannelId, command.Reference.MessageId)
             : null;
 
-        ulong messageId = snowflake.Next();
-        List<AttachmentMeta> attachments = [];
         
-        AttachmentPath path = new AttachmentPath(command.ChannelId, messageId, 0);
+        AttachmentPath path = new AttachmentPath(command.ChannelId, snowflake.Next(), 0);
+        List<AttachmentMeta> attachments = [];
         await foreach (var attachment in command.Files.WithCancellation(cancellationToken))
         {
             path.AttachmentId = snowflake.Next();
-            bool isSuccess = await store.UploadFileAsync(
-                path.AsString(), attachment.ContentType, attachment.Stream, cancellationToken
-            );
-
-            if (!isSuccess)
-                MediaFileNotUploadedException.Throw();
-            
+            MediaFileMeta meta = await store.UploadMediaFileAsync(path, attachment, cancellationToken);
             attachments.Add(
-                new AttachmentMeta(
-                    path.AttachmentId,
-                    attachment.FileName,
-                    path.AsString(),
-                    attachment.ContentType,
-                    attachment.Stream.Length
-                )    
+                new AttachmentMeta(path.AttachmentId, meta)    
             );
         }
         
         Message message = Message.CreateNew(
-            messageId,
+            path.MessageId,
             sender.User.Id,
             command.ChannelId,
             command.Text,

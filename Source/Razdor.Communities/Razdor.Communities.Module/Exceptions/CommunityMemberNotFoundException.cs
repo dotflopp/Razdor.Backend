@@ -7,7 +7,7 @@ namespace Razdor.Communities.Module.Exceptions;
 public sealed class CommunityMemberNotFoundException(
     string? message = null,
     Exception? innerException = null
-) : ModuleException(ErrorCode.CommunityMemberNotFound, message, innerException)
+) : RazdorException(ErrorCode.CommunityMemberNotFound, message, innerException)
 {
     [DoesNotReturn]
     public static void Throw(ulong communityId, ulong userId)

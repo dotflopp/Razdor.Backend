@@ -7,7 +7,7 @@ namespace Razdor.Identity.Module.Users.Queries.Exceptions;
 public class UserNotFoundException(
     string? message = null,
     Exception? innerException = null
-) : ModuleException(ErrorCode.UserNotFound, message, innerException)
+) : RazdorException(ErrorCode.UserNotFound, message, innerException)
 {
     [DoesNotReturn]
     public static void Throw(ulong userId)

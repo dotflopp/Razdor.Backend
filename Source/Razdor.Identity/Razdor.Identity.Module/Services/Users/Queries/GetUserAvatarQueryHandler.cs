@@ -8,6 +8,7 @@ using Razdor.Messages.Module.Services.Commands.ViewModels;
 using Razdor.Shared.Domain;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Exceptions;
+using Razdor.Shared.Module.Media;
 
 public class GetUserAvatarQueryHandler(
     IFileStore store,
@@ -22,22 +23,10 @@ public class GetUserAvatarQueryHandler(
             .Select(x => new {x.Id, x.Avatar})
             .FirstOrDefaultAsync(cancellationToken);
 
-        if (user == null)
-            UserNotFoundException.Throw(command.UserId);
+        if (user?.Avatar == null)
+            MediaFileNotFoundException.Throw();
         
         AvatarPath path = new(user.Id);
-        Stream stream = await store.GetFileStreamAsync(
-            path.AsString(),
-            cancellationToken
-        );
-        
-        if (stream == Stream.Null)
-            MediaFileNotFoundException.Throw();
-
-        return new MediaFileViewModel(
-            user.Avatar.FileName,
-            user.Avatar.MediaType,
-            stream
-        );
+        return await MediaHelper.GetMediaFileAsync(store, path, user.Avatar, cancellationToken);
     }
 }

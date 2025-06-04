@@ -5,4 +5,4 @@ namespace Razdor.Shared.Module.Exceptions;
 public sealed class UnauthenticatedException(
     string? message = null,
     Exception? innerException = null
-) : ModuleException(ErrorCode.Unauthorized, message, innerException);
+) : RazdorException(ErrorCode.Unauthorized, message, innerException);

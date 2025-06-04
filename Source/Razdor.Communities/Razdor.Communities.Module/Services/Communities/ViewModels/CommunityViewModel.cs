@@ -22,7 +22,7 @@ public record CommunityViewModel(
             community.Id,
             community.OwnerId,
             community.Name,
-            community.Avatar,
+            community.Avatar?.SourceUrl,
             community.Description,
             community.DefaultNotificationPolicy,
             community.Roles.Select(RoleViewModel.From).ToList()

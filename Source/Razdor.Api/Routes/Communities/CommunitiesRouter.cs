@@ -5,8 +5,10 @@ using Razdor.Communities.Module.Services.Channels.Commands;
 using Razdor.Communities.Module.Services.Channels.Queries;
 using Razdor.Communities.Module.Services.Channels.ViewModels;
 using Razdor.Communities.Module.Services.Communities.Commands;
+using Razdor.Communities.Module.Services.Communities.InternalQueries;
 using Razdor.Communities.Module.Services.Communities.Queries;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Messages.Module.Services.Commands.ViewModels;
 
 namespace Razdor.Api.Routes.Communities;
 
@@ -31,15 +33,45 @@ public static class CommunitiesRouter
             .Produces<CommunityViewModel>()
             .WithSummary("Создать новое сообщество");
         
-        api.MapGet("/{communityId:ulong}/channels", GetCommunityChannels)
+        api.MapGet("/{communityId:ulong}/channels", GetCommunityChannelsAsync)
             .Produces<IEnumerable<ChannelViewModel>>()
             .WithSummary("Получить каналы сообщества");
         
-        api.MapPost("/{communityId:ulong}/channels", CreateCommunityChannel)
+        api.MapPost("/{communityId:ulong}/channels", CreateCommunityChannelAsync)
             .Produces<ChannelViewModel>()
             .WithSummary("Создать новый канал в сообществе");
         
+        api.MapPost("/{communityId:ulong}/avatar", UploadCommunityAvatarAsync)
+            .WithSummary("Создать новый канал в сообществе");
+        
+        api.MapGet("/{communityId:ulong}/avatar", GetCommunityAvatarAsync)
+            .Produces<FileContentResult>()
+            .WithSummary("Создать новый канал в сообществе");
+        
         return builder;
+    }
+    private static async Task<IResult> GetCommunityAvatarAsync(
+        [FromServices] ICommunityModule communityModule,
+        [FromRoute] ulong communityId
+    )
+    {
+        MediaFile file = await communityModule.ExecuteQueryAsync(new GetCommunityAvatarQuery(communityId));
+        return Results.File(file.Stream, file.ContentType, file.FileName);
+    }
+    private static async Task UploadCommunityAvatarAsync(
+        [FromServices] ICommunityModule communityModule,
+        [FromRoute] ulong communityId,
+        [FromForm] IFormFile file
+    )
+    {
+        await communityModule.ExecuteCommandAsync(
+            new UploadCommunityAvatarCommand(
+                communityId,
+                file.FileName,
+                file.ContentType,
+                file.OpenReadStream()
+            )
+        );
     }
 
 
@@ -76,7 +108,7 @@ public static class CommunitiesRouter
     }
     
     
-    private static async Task<IResult> CreateCommunityChannel(
+    private static async Task<IResult> CreateCommunityChannelAsync(
         [FromServices] ICommunityModule module,
         [FromRoute] ulong communityId,
         [FromBody] CommunityChannelConfiguration channelConfig
@@ -94,7 +126,7 @@ public static class CommunitiesRouter
         return Results.Ok(channel);
     }
 
-    private static async Task<IResult> GetCommunityChannels(
+    private static async Task<IResult> GetCommunityChannelsAsync(
         [FromServices] ICommunityModule module,
         [FromRoute] ulong communityId
     )

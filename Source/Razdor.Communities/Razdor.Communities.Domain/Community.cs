@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using Razdor.Communities.Domain.Events;
 using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Domain.Roles;
@@ -24,7 +25,7 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
         ulong id,
         ulong ownerId,
         string name,
-        string? avatar,
+        MediaFileMeta? avatar,
         string? description,
         CommunityNotificationPolicy defaultNotificationPolicy,
         EveryonePermissions everyone,
@@ -42,7 +43,15 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
     
     public string Name { get; private set; }
     public ulong OwnerId { get; private set; }
-    public string? Avatar { get; private set; }
+    public MediaFileMeta? Avatar
+    {
+        get => field;
+        set
+        {
+            AddDomainEvent(new CommunityAvatarChanged(Id));
+            field = value;
+        }
+    }
     public string? Description { get; private set; }
     public CommunityNotificationPolicy DefaultNotificationPolicy { get; private set; }
     public EveryonePermissions Everyone { get; private set;  }
@@ -53,7 +62,7 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
     public IReadOnlyCollection<Role> Roles => _roles?.AsReadOnly() ?? ReadOnlyCollection<Role>.Empty;
 
 
-    public static Community CreateNew(ulong id, ulong ownerId, string name, string? avatar, string? description)
+    public static Community CreateNew(ulong id, ulong ownerId, string name, MediaFileMeta? avatar, string? description)
     {
         if (id == 0)
             throw new ArgumentException("The community ID cannot be zero.", nameof(id));

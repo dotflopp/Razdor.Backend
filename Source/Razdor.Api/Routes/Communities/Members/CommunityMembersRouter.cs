@@ -26,7 +26,7 @@ public static class CommunityMembersRouter
         return builder;
     }
     private static async Task<IResult> GetCommunityMember(
-        [FromServices] ICommunityModule module,
+        [FromServices] ICommunitiesModule module,
         [FromRoute] ulong communityId,
         [FromRoute] ulong userId
     )
@@ -39,7 +39,7 @@ public static class CommunityMembersRouter
         return Results.Ok(member);
     }
     private static async Task<IResult> GetCommunityMembers(       
-        [FromServices] ICommunityModule module,
+        [FromServices] ICommunitiesModule module,
         [FromRoute] ulong communityId,
         [FromQuery] ulong? lastUserId,
         [FromQuery] int? usersCount

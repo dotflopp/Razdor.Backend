@@ -11,7 +11,8 @@ public record RoleViewModel(
     uint Priority,
     string Name,
     UserPermissions Permissions,
-    bool IsMentioned
+    bool IsMentionable,
+    ulong Color
 )
 {
     public static RoleViewModel From(Role role)
@@ -21,7 +22,8 @@ public record RoleViewModel(
             role.Priority,
             role.Name,
             role.Permissions,
-            role.IsMentioned
+            role.IsMentionable,
+            role.Color
         );
     }
 }

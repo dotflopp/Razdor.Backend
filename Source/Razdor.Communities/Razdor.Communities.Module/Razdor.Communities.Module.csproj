@@ -24,4 +24,8 @@
         <ProjectReference Include="..\Razdor.Communities.Domain\Razdor.Communities.Domain.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Services\Roles\Queries\" />
+    </ItemGroup>
+
 </Project>

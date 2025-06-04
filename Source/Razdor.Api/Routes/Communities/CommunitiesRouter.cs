@@ -52,20 +52,20 @@ public static class CommunitiesRouter
         return builder;
     }
     private static async Task<IResult> GetCommunityAvatarAsync(
-        [FromServices] ICommunityModule communityModule,
+        [FromServices] ICommunitiesModule communitiesModule,
         [FromRoute] ulong communityId
     )
     {
-        MediaFile file = await communityModule.ExecuteQueryAsync(new GetCommunityAvatarQuery(communityId));
+        MediaFile file = await communitiesModule.ExecuteQueryAsync(new GetCommunityAvatarQuery(communityId));
         return Results.File(file.Stream, file.ContentType, file.FileName);
     }
     private static async Task UploadCommunityAvatarAsync(
-        [FromServices] ICommunityModule communityModule,
+        [FromServices] ICommunitiesModule communitiesModule,
         [FromRoute] ulong communityId,
         [FromForm] IFormFile file
     )
     {
-        await communityModule.ExecuteCommandAsync(
+        await communitiesModule.ExecuteCommandAsync(
             new UploadCommunityAvatarCommand(
                 communityId,
                 file.FileName,
@@ -77,19 +77,19 @@ public static class CommunitiesRouter
 
 
     private static async Task<IResult> CreateCommunityAsync(
-        [FromServices] ICommunityModule communityModule,
+        [FromServices] ICommunitiesModule communitiesModule,
         [FromBody] CreateCommunityCommand command
     )
     {
-        CommunityViewModel community = await communityModule.ExecuteCommandAsync(command);
+        CommunityViewModel community = await communitiesModule.ExecuteCommandAsync(command);
         return Results.Ok(community);
     }
 
     private static async Task<IResult> GetSelfUserCommunitiesAsync(
-        [FromServices] ICommunityModule communityModule
+        [FromServices] ICommunitiesModule communitiesModule
     )
     {
-        IEnumerable<CommunityViewModel> communities = await communityModule.ExecuteQueryAsync(
+        IEnumerable<CommunityViewModel> communities = await communitiesModule.ExecuteQueryAsync(
             new GetSelfUserCommunitiesQuery()
         );
 
@@ -97,11 +97,11 @@ public static class CommunitiesRouter
     }
 
     private static async Task<IResult> GetCommunityAsync(
-        [FromServices] ICommunityModule communityModule,
+        [FromServices] ICommunitiesModule communitiesModule,
         [FromRoute] ulong communityId
     )
     {
-        CommunityViewModel community = await communityModule.ExecuteQueryAsync(
+        CommunityViewModel community = await communitiesModule.ExecuteQueryAsync(
             new GetCommunityQuery(communityId)
         );
 
@@ -110,7 +110,7 @@ public static class CommunitiesRouter
     
     
     private static async Task<IResult> CreateCommunityChannelAsync(
-        [FromServices] ICommunityModule module,
+        [FromServices] ICommunitiesModule module,
         [FromRoute] ulong communityId,
         [FromBody] CommunityChannelConfiguration channelConfig
     )
@@ -128,7 +128,7 @@ public static class CommunitiesRouter
     }
 
     private static async Task<IResult> GetCommunityChannelsAsync(
-        [FromServices] ICommunityModule module,
+        [FromServices] ICommunitiesModule module,
         [FromRoute] ulong communityId
     )
     {

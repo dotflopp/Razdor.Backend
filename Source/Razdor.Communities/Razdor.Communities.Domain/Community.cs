@@ -4,6 +4,7 @@ using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Domain.Roles;
 using Razdor.Shared.Domain;
+using Razdor.Shared.Extensions;
 
 namespace Razdor.Communities.Domain;
 
@@ -57,7 +58,7 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
     public EveryonePermissions Everyone { get; private set;  }
 
     /// <summary>
-    ///     Должна быть отсортированая коллекция по ID роли
+    ///     Должна быть отсортированная коллекция по ID роли
     /// </summary>
     public IReadOnlyCollection<Role> Roles => _roles?.AsReadOnly() ?? ReadOnlyCollection<Role>.Empty;
 
@@ -99,7 +100,7 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
     /// <summary>
     ///     Вычисляет наибольший приоритет для пользователя сообщества
     /// </summary>
-    public ulong GetHighestPriority(CommunityMember member)
+    public uint GetHighestPriority(CommunityMember member)
     {
         if (member.UserId == OwnerId)
             return 0;
@@ -111,7 +112,7 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
     ///     Вычисляет права пользователя на основе ролей
     /// </summary>
     /// <param name="roleIds">!Отсортированная по Id в порядке возрастания коллекция ролей</param>
-    private UserPermissions GetPermissions(IEnumerable<ulong> roleIds)
+    public UserPermissions GetPermissions(IEnumerable<ulong> roleIds)
     {
         UserPermissions permissions = Everyone.Permissions;
         if (Roles.Count <= 0)
@@ -127,9 +128,9 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
     ///     Вычисляет приоритет пользователя на основе ролей
     /// </summary>
     /// <param name="roleIds">!Отсортированная по Id в порядке возрастания коллекция ролей</param>
-    private ulong GetHighestPriority(IEnumerable<ulong> roleIds)
+    public uint GetHighestPriority(IEnumerable<ulong> roleIds)
     {
-        ulong priority = Everyone.Priority;
+        uint priority = Everyone.Priority;
 
         foreach (Role role in GetIntersectionRoles(roleIds))
         {
@@ -157,5 +158,31 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
             if (roleId == roles.Current.Id)
                 yield return roles.Current;
         }
+    }
+
+    public Role? FindRoleById(ulong roleId)
+    {
+        if (_roles == null || _roles.Count < 0)
+            return null;
+        
+        int index = _roles.BinarySearchBy(roleId, (role) => role.Id);
+        if (index < 0)
+            return null;
+
+        return _roles[index];
+    }
+
+    public void AddRole(Role role)
+    {
+        
+        _roles ??= new();
+        
+        //TODO роли определяют так же и приоритет, добавить события для работы с приоритетом у ролей.
+        
+        // По идее роль добавляется в конец, а так как у новой роли snowflake id > чем у старой,
+        // то массив отсортирован в порядке возрастания
+        _roles.Add(role);
+
+        Everyone.Priority = _roles.Max(x => x.Priority) + 1;
     }
 }

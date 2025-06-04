@@ -11,7 +11,7 @@ namespace Razdor.Communities.Infrastructure.Authorization;
 
 public class CachedChannelPermissionsAccessor(
     HybridCache cache,
-    ICommunityModule module
+    ICommunitiesModule module
 ) : IChannelPermissionsAccessor {
     
     public async Task<UserPermissions> GetMemberPermissionsAsync(ulong userId, ulong channelId, CancellationToken cancellationToken)

@@ -12,10 +12,23 @@ namespace Razdor.Communities.Infrastructure.Authorization;
 
 public class CachedCommunityPermissionsAccessor(
     HybridCache cache,
-    ICommunityModule module
+    ICommunitiesModule module
 ) : ICommunityPermissionsAccessor 
 {
     public async Task<UserPermissions> GetMemberPermissionsAsync(ulong communityId, ulong userId, CancellationToken cancellationToken)
+    {
+         (UserPermissions permissons, uint priority) = await cache.GetOrCreateAsync(
+            key: CommunityPermissionsKey(communityId, userId), 
+            factory: async cancel => await module.ExecuteQueryAsync(
+                new GetCommunityMemberPermissions(communityId, userId), cancel
+            ),
+            cancellationToken: cancellationToken
+        );
+
+        return permissons;
+    }
+    
+    public async Task<(UserPermissions permissions, uint Priority)> GetMemberPermissionsAndPriorityAsync(ulong communityId, ulong userId, CancellationToken cancellationToken = default)
     {
         return await cache.GetOrCreateAsync(
             key: CommunityPermissionsKey(communityId, userId), 

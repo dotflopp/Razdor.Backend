@@ -9,10 +9,11 @@ namespace Razdor.Communities.Module.Services.Communities.InternalQueries;
 public class GetCommunityMemberPermissionsQueryHandler(
     ICommunityMembersRepository members,
     ICommunitiesRepository communities
-): IQueryHandler<GetCommunityMemberPermissions, UserPermissions>
+): IQueryHandler<GetCommunityMemberPermissions, (UserPermissions permissions, uint Priority)>
 {
-    public async ValueTask<UserPermissions> Handle(GetCommunityMemberPermissions query, CancellationToken cancellationToken)
-    {
+    public async ValueTask<(UserPermissions permissions, uint Priority)> Handle(
+        GetCommunityMemberPermissions query, CancellationToken cancellationToken
+    ){
         CommunityMember? member = await members.FindAsync(query.CommunityId, query.UserId, cancellationToken);
 
         if (member == null)
@@ -23,6 +24,8 @@ public class GetCommunityMemberPermissionsQueryHandler(
         if (community == null)
             throw new InvalidOperationException($"There is a CommunityMember({query.UserId}) for whom there is no Community({query.CommunityId})");
 
-        return community.GetPermissions(member);
+        UserPermissions permissions = community.GetPermissions(member);
+        uint priority = community.GetHighestPriority(member);
+        return (permissions,priority);
     }
 }

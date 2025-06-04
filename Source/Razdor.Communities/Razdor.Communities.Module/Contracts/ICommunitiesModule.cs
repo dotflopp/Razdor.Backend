@@ -1,6 +1,6 @@
 ﻿namespace Razdor.Communities.Module.Contracts;
 
-public interface ICommunityModule
+public interface ICommunitiesModule
 {
     Task<TResult> ExecuteCommandAsync<TResult>(ICommunitiesCommand<TResult> command, CancellationToken cancellationToken = default);
     Task ExecuteCommandAsync(ICommunitiesCommand command, CancellationToken cancellationToken = default);

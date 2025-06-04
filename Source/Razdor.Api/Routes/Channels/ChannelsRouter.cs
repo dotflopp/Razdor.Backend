@@ -17,7 +17,7 @@ public static class ChannelsRouter
         return builder;
     }
     private static async Task<IResult> ConnectChannelAsync(
-        [FromServices] ICommunityModule module,
+        [FromServices] ICommunitiesModule module,
         [FromRoute] ulong channelId
     ){
         SessionViewModel session = await module.ExecuteCommandAsync(new ConnectChannelCommand(channelId));

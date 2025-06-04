@@ -7,6 +7,7 @@ public enum ErrorCode : ulong
 {
     Unauthorized,
     AccessForbidden,
+    NotEnoughRights,
     InvalidOperationException,
     
     //Identitiy

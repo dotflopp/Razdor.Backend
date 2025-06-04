@@ -1,0 +1,39 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using Razdor.Api.Routes.Communities.Roles.ViewModels;
+using Razdor.Communities.Domain.Roles;
+using Razdor.Communities.Module.Contracts;
+using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Communities.Module.Services.Roles.Commands;
+
+namespace Razdor.Api.Routes.Communities.Roles;
+
+public static class CommunityRolesRouter
+{
+    internal static IEndpointRouteBuilder MapCommunityRoles(this IEndpointRouteBuilder builder)
+    {
+        IEndpointRouteBuilder api = builder.MapGroup("communities/{communityId}/roles");
+
+        api.MapPost("/", CreateRoleAsync)
+            .Produces<RoleViewModel>();
+        
+        return builder;
+    }
+    
+    private static async Task<IResult> CreateRoleAsync(
+        [FromServices] ICommunitiesModule module,
+        [FromRoute] ulong communityId,
+        [FromBody] RolePyload rolePyload
+    )
+    {
+        RoleViewModel role = await module.ExecuteCommandAsync(new CreateRoleCommand(
+            communityId,
+            rolePyload.Name,
+            rolePyload.Permissions,
+            rolePyload.Priority,
+            rolePyload.IsMentionable,
+            rolePyload.Color
+        ));
+
+        return Results.Ok(role);
+    }
+}

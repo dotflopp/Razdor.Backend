@@ -24,12 +24,12 @@ public sealed class AcceptInviteCommandHandler(
     {
         Invite? invite = await invites.FindAsync(command.InviteId);
 
-        if (invite is null)
+        if (invite is null || invite.CreatedAt < timeProvider.GetUtcNow())
             InviteNotFoundException.Throw(command.InviteId);
-
+        
         if (!await communities.ContainsAsync(invite.CommunityId))
             throw new InvalidOperationException($"There is an Invite({invite.Id}) without a Community({invite.CommunityId})");
-
+        
         await RuleValidationHelper.ThrowIfBrokenAsync(
             new CantJoinSameCommunityTwice(members, invite.CommunityId, sender.User.Id)
         );

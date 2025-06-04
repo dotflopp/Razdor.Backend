@@ -25,7 +25,7 @@ namespace Razdor.Api.Serialization;
 [JsonSerializable(typeof(CreateCommunityCommand))]
 [JsonSerializable(typeof(GetCommunityChannelsQuery))]
 [JsonSerializable(typeof(CommunityViewModel))]
-[JsonSerializable(typeof(InviteViewModel))]
+[JsonSerializable(typeof(InvitePreviewModel))]
 [JsonSerializable(typeof(RoleViewModel))]
 [JsonSerializable(typeof(AcceptInviteCommand))]
 [JsonSerializable(typeof(CreateInviteCommand))]

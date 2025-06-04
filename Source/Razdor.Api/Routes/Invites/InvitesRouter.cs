@@ -3,6 +3,8 @@ using Razdor.Api.Routes.Invites.ViewModels;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
 using Razdor.Communities.Module.Services.Invites.Commands;
+using Razdor.Communities.Module.Services.Invites.Queries;
+using Razdor.Shared.Module;
 
 namespace Razdor.Api.Routes.Invites;
 
@@ -13,23 +15,40 @@ public static class InvitesRouter
         RouteGroupBuilder api = builder.MapGroup("/communities/{communityId:ulong}/invites");
 
         api.MapPost("/", CreateInviteAsync)
-            .Produces<InviteViewModel>()
+            .Produces<InvitePreviewModel>()
             .WithSummary("Создать приглашение в сообщество");
 
         return builder;
     }
-    
+
+
     public static IEndpointRouteBuilder MapInvites(this IEndpointRouteBuilder builder)
     {
         builder.MapPost("/invites/{inviteId:alpha}", AcceptInviteAsync)
             .WithSummary("Принять приглашение в сообщество")
-            .Produces(StatusCodes.Status200OK);
+            .Produces<InviteViewModel>();
 
+        builder.MapGet("/invites/{inviteId:alpha}", GetInviteAsync)
+            .WithSummary("Получить информацию о приглашении в сообщество")
+            .Produces<InviteViewModel>();
+            
         return builder;
+    }
+    
+    private static async Task<IResult> GetInviteAsync(       
+        [FromServices] ICommunitiesModule module,
+        [FromRoute] string inviteId
+    )
+    {
+        InviteViewModel invite = await module.ExecuteCommandAsync(
+            new GetInviteCommand(inviteId)    
+        );
+
+        return Results.Ok(invite);
     }
 
     private static async Task<IResult> CreateInviteAsync(
-        [FromServices] ICommunityModule module,
+        [FromServices] ICommunitiesModule module,
         [FromRoute] ulong communityId,
         [FromBody] InviteParametersViewModel parameters
     )
@@ -38,16 +57,16 @@ public static class InvitesRouter
         if (parameters.LifeTime is { } lifeTimeSeconds)
             lifeTime = TimeSpan.FromSeconds(lifeTimeSeconds);
 
-        InviteViewModel invite = await module.ExecuteCommandAsync(
+        InvitePreviewModel inviteId = await module.ExecuteCommandAsync(
             new CreateInviteCommand(communityId, lifeTime)
         );
 
-        return Results.Ok(invite);
+        return Results.Ok(inviteId);
     }
     
     
     private static async Task<IResult> AcceptInviteAsync(
-        [FromServices] ICommunityModule module,
+        [FromServices] ICommunitiesModule module,
         [FromRoute] string inviteId
     )
     {

@@ -10,4 +10,4 @@ public record GetCommunityMemberPermissions(
     ulong CommunityId, 
     [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong UserId
-): ICommunitiesQuery<UserPermissions>;
+): ICommunitiesQuery<(UserPermissions permissions, uint Priority)>;

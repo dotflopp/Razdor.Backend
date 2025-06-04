@@ -3,7 +3,7 @@ using Razdor.Communities.Module.Contracts;
 
 namespace Razdor.Communities.Infrastructure;
 
-public class CommunityModule(IMediator mediator) : ICommunityModule
+public class CommunitiesModule(IMediator mediator) : ICommunitiesModule
 {
     public async Task<TResult> ExecuteCommandAsync<TResult>(ICommunitiesCommand<TResult> command, CancellationToken cancellationToken = default)
     {

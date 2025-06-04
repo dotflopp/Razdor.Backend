@@ -11,11 +11,14 @@ namespace Razdor.Communities.Infrastructure.DataAccess
 {
     public static class RoleUnsafeAccessors
     {
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<Color>k__BackingField")]
+        public static extern ref uint Color(Role @this);
+
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<CommunityId>k__BackingField")]
         public static extern ref ulong CommunityId(Role @this);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<IsMentioned>k__BackingField")]
-        public static extern ref bool IsMentioned(Role @this);
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<IsMentionable>k__BackingField")]
+        public static extern ref bool IsMentionable(Role @this);
 
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<Name>k__BackingField")]
         public static extern ref string Name(Role @this);

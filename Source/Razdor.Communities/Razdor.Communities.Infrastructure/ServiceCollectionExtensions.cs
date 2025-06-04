@@ -21,7 +21,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddCommunityServices(this IServiceCollection services, CommunitiesOptions options)
     {
-        services.AddScoped<ICommunityModule, CommunityModule>();
+        services.AddScoped<ICommunitiesModule, CommunitiesModule>();
 
         services.AddDbContext<CommunitiesDbContext, CommunitiesMongoDbContext>(builder =>
         {

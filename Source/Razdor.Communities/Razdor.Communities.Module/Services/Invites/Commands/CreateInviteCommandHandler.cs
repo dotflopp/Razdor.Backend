@@ -18,9 +18,9 @@ public sealed class CreateInviteCommandHandler(
     IInvitesRepository invites,
     SnowflakeGenerator snowflakeGenerator,
     UnitOfWork<CommunitiesDbContext> unitOfWork
-) : ICommandHandler<CreateInviteCommand, InviteViewModel>
+) : ICommandHandler<CreateInviteCommand, InvitePreviewModel>
 {
-    public async ValueTask<InviteViewModel> Handle(CreateInviteCommand command, CancellationToken cancellationToken)
+    public async ValueTask<InvitePreviewModel> Handle(CreateInviteCommand command, CancellationToken cancellationToken)
     {
         Community? community = await communities.FindAsync(command.CommunityId, cancellationToken);
 
@@ -44,6 +44,6 @@ public sealed class CreateInviteCommandHandler(
 
         await unitOfWork.SaveEntitiesAsync();
 
-        return InviteViewModel.From(invite);
+        return InvitePreviewModel.From(invite);
     }
 }

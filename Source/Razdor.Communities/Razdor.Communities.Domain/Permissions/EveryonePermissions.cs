@@ -23,7 +23,7 @@ public class EveryonePermissions(UserPermissions permissions, uint priority)
         | UserPermissions.Speak;
 
     public UserPermissions Permissions { get; private set; } = permissions;
-    public uint Priority { get; private set; } = priority;
+    public uint Priority { get; set; } = priority;
 
     public static EveryonePermissions Default { get; } = new(InitialPermissions, 1);
 }

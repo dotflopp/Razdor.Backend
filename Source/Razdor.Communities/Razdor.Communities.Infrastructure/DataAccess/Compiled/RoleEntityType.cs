@@ -29,7 +29,7 @@ namespace Razdor.Communities.Infrastructure.DataAccess
                 "Razdor.Communities.Domain.Roles.Role",
                 typeof(Role),
                 baseEntityType,
-                propertyCount: 6,
+                propertyCount: 7,
                 foreignKeyCount: 1,
                 unnamedIndexCount: 1,
                 keyCount: 1);
@@ -78,6 +78,48 @@ namespace Razdor.Communities.Infrastructure.DataAccess
                 clrType: typeof(ulong));
             id.SetCurrentValueComparer(new EntryCurrentValueComparer<ulong>(id));
 
+            var color = runtimeEntityType.AddProperty(
+                "Color",
+                typeof(uint),
+                propertyInfo: typeof(Role).GetProperty("Color", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(Role).GetField("<Color>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                sentinel: 0u);
+            color.SetGetter(
+                uint (Role entity) => RoleUnsafeAccessors.Color(entity),
+                bool (Role entity) => RoleUnsafeAccessors.Color(entity) == 0U,
+                uint (Role instance) => RoleUnsafeAccessors.Color(instance),
+                bool (Role instance) => RoleUnsafeAccessors.Color(instance) == 0U);
+            color.SetSetter(
+                (Role entity, uint value) => RoleUnsafeAccessors.Color(entity) = value);
+            color.SetMaterializationSetter(
+                (Role entity, uint value) => RoleUnsafeAccessors.Color(entity) = value);
+            color.SetAccessors(
+                uint (InternalEntityEntry entry) => RoleUnsafeAccessors.Color(((Role)(entry.Entity))),
+                uint (InternalEntityEntry entry) => RoleUnsafeAccessors.Color(((Role)(entry.Entity))),
+                uint (InternalEntityEntry entry) => entry.ReadOriginalValue<uint>(color, 1),
+                uint (InternalEntityEntry entry) => entry.GetCurrentValue<uint>(color),
+                object (ValueBuffer valueBuffer) => valueBuffer[1]);
+            color.SetPropertyIndexes(
+                index: 1,
+                originalValueIndex: 1,
+                shadowIndex: -1,
+                relationshipIndex: -1,
+                storeGenerationIndex: -1);
+            color.TypeMapping = MongoTypeMapping.Default.Clone(
+                comparer: new ValueComparer<uint>(
+                    bool (uint v1, uint v2) => v1 == v2,
+                    int (uint v) => ((int)(v)),
+                    uint (uint v) => v),
+                keyComparer: new ValueComparer<uint>(
+                    bool (uint v1, uint v2) => v1 == v2,
+                    int (uint v) => ((int)(v)),
+                    uint (uint v) => v),
+                providerValueComparer: new ValueComparer<uint>(
+                    bool (uint v1, uint v2) => v1 == v2,
+                    int (uint v) => ((int)(v)),
+                    uint (uint v) => v),
+                clrType: typeof(uint));
+
             var communityId = runtimeEntityType.AddProperty(
                 "CommunityId",
                 typeof(ulong),
@@ -94,14 +136,14 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             communityId.SetMaterializationSetter(
                 (Role entity, ulong value) => RoleUnsafeAccessors.CommunityId(entity) = value);
             communityId.SetAccessors(
-                ulong (InternalEntityEntry entry) => (entry.FlaggedAsStoreGenerated(1) ? entry.ReadStoreGeneratedValue<ulong>(0) : (entry.FlaggedAsTemporary(1) && RoleUnsafeAccessors.CommunityId(((Role)(entry.Entity))) == 0UL ? entry.ReadTemporaryValue<ulong>(0) : RoleUnsafeAccessors.CommunityId(((Role)(entry.Entity))))),
+                ulong (InternalEntityEntry entry) => (entry.FlaggedAsStoreGenerated(2) ? entry.ReadStoreGeneratedValue<ulong>(0) : (entry.FlaggedAsTemporary(2) && RoleUnsafeAccessors.CommunityId(((Role)(entry.Entity))) == 0UL ? entry.ReadTemporaryValue<ulong>(0) : RoleUnsafeAccessors.CommunityId(((Role)(entry.Entity))))),
                 ulong (InternalEntityEntry entry) => RoleUnsafeAccessors.CommunityId(((Role)(entry.Entity))),
-                ulong (InternalEntityEntry entry) => entry.ReadOriginalValue<ulong>(communityId, 1),
+                ulong (InternalEntityEntry entry) => entry.ReadOriginalValue<ulong>(communityId, 2),
                 ulong (InternalEntityEntry entry) => entry.ReadRelationshipSnapshotValue<ulong>(communityId, 1),
-                object (ValueBuffer valueBuffer) => valueBuffer[1]);
+                object (ValueBuffer valueBuffer) => valueBuffer[2]);
             communityId.SetPropertyIndexes(
-                index: 1,
-                originalValueIndex: 1,
+                index: 2,
+                originalValueIndex: 2,
                 shadowIndex: -1,
                 relationshipIndex: 1,
                 storeGenerationIndex: 0);
@@ -121,34 +163,34 @@ namespace Razdor.Communities.Infrastructure.DataAccess
                 clrType: typeof(ulong));
             communityId.SetCurrentValueComparer(new EntryCurrentValueComparer<ulong>(communityId));
 
-            var isMentioned = runtimeEntityType.AddProperty(
-                "IsMentioned",
+            var isMentionable = runtimeEntityType.AddProperty(
+                "IsMentionable",
                 typeof(bool),
-                propertyInfo: typeof(Role).GetProperty("IsMentioned", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(Role).GetField("<IsMentioned>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                propertyInfo: typeof(Role).GetProperty("IsMentionable", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(Role).GetField("<IsMentionable>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 sentinel: false);
-            isMentioned.SetGetter(
-                bool (Role entity) => RoleUnsafeAccessors.IsMentioned(entity),
-                bool (Role entity) => RoleUnsafeAccessors.IsMentioned(entity) == false,
-                bool (Role instance) => RoleUnsafeAccessors.IsMentioned(instance),
-                bool (Role instance) => RoleUnsafeAccessors.IsMentioned(instance) == false);
-            isMentioned.SetSetter(
-                (Role entity, bool value) => RoleUnsafeAccessors.IsMentioned(entity) = value);
-            isMentioned.SetMaterializationSetter(
-                (Role entity, bool value) => RoleUnsafeAccessors.IsMentioned(entity) = value);
-            isMentioned.SetAccessors(
-                bool (InternalEntityEntry entry) => RoleUnsafeAccessors.IsMentioned(((Role)(entry.Entity))),
-                bool (InternalEntityEntry entry) => RoleUnsafeAccessors.IsMentioned(((Role)(entry.Entity))),
-                bool (InternalEntityEntry entry) => entry.ReadOriginalValue<bool>(isMentioned, 2),
-                bool (InternalEntityEntry entry) => entry.GetCurrentValue<bool>(isMentioned),
-                object (ValueBuffer valueBuffer) => valueBuffer[2]);
-            isMentioned.SetPropertyIndexes(
-                index: 2,
-                originalValueIndex: 2,
+            isMentionable.SetGetter(
+                bool (Role entity) => RoleUnsafeAccessors.IsMentionable(entity),
+                bool (Role entity) => RoleUnsafeAccessors.IsMentionable(entity) == false,
+                bool (Role instance) => RoleUnsafeAccessors.IsMentionable(instance),
+                bool (Role instance) => RoleUnsafeAccessors.IsMentionable(instance) == false);
+            isMentionable.SetSetter(
+                (Role entity, bool value) => RoleUnsafeAccessors.IsMentionable(entity) = value);
+            isMentionable.SetMaterializationSetter(
+                (Role entity, bool value) => RoleUnsafeAccessors.IsMentionable(entity) = value);
+            isMentionable.SetAccessors(
+                bool (InternalEntityEntry entry) => RoleUnsafeAccessors.IsMentionable(((Role)(entry.Entity))),
+                bool (InternalEntityEntry entry) => RoleUnsafeAccessors.IsMentionable(((Role)(entry.Entity))),
+                bool (InternalEntityEntry entry) => entry.ReadOriginalValue<bool>(isMentionable, 3),
+                bool (InternalEntityEntry entry) => entry.GetCurrentValue<bool>(isMentionable),
+                object (ValueBuffer valueBuffer) => valueBuffer[3]);
+            isMentionable.SetPropertyIndexes(
+                index: 3,
+                originalValueIndex: 3,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
-            isMentioned.TypeMapping = MongoTypeMapping.Default.Clone(
+            isMentionable.TypeMapping = MongoTypeMapping.Default.Clone(
                 comparer: new ValueComparer<bool>(
                     bool (bool v1, bool v2) => v1 == v2,
                     int (bool v) => ((object)v).GetHashCode(),
@@ -180,12 +222,12 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             name.SetAccessors(
                 string (InternalEntityEntry entry) => RoleUnsafeAccessors.Name(((Role)(entry.Entity))),
                 string (InternalEntityEntry entry) => RoleUnsafeAccessors.Name(((Role)(entry.Entity))),
-                string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(name, 3),
+                string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(name, 4),
                 string (InternalEntityEntry entry) => entry.GetCurrentValue<string>(name),
-                object (ValueBuffer valueBuffer) => valueBuffer[3]);
+                object (ValueBuffer valueBuffer) => valueBuffer[4]);
             name.SetPropertyIndexes(
-                index: 3,
-                originalValueIndex: 3,
+                index: 4,
+                originalValueIndex: 4,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -222,12 +264,12 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             permissions.SetAccessors(
                 UserPermissions (InternalEntityEntry entry) => RoleUnsafeAccessors.Permissions(((Role)(entry.Entity))),
                 UserPermissions (InternalEntityEntry entry) => RoleUnsafeAccessors.Permissions(((Role)(entry.Entity))),
-                UserPermissions (InternalEntityEntry entry) => entry.ReadOriginalValue<UserPermissions>(permissions, 4),
+                UserPermissions (InternalEntityEntry entry) => entry.ReadOriginalValue<UserPermissions>(permissions, 5),
                 UserPermissions (InternalEntityEntry entry) => entry.GetCurrentValue<UserPermissions>(permissions),
-                object (ValueBuffer valueBuffer) => valueBuffer[4]);
+                object (ValueBuffer valueBuffer) => valueBuffer[5]);
             permissions.SetPropertyIndexes(
-                index: 4,
-                originalValueIndex: 4,
+                index: 5,
+                originalValueIndex: 5,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -264,12 +306,12 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             priority.SetAccessors(
                 uint (InternalEntityEntry entry) => RoleUnsafeAccessors.Priority(((Role)(entry.Entity))),
                 uint (InternalEntityEntry entry) => RoleUnsafeAccessors.Priority(((Role)(entry.Entity))),
-                uint (InternalEntityEntry entry) => entry.ReadOriginalValue<uint>(priority, 5),
+                uint (InternalEntityEntry entry) => entry.ReadOriginalValue<uint>(priority, 6),
                 uint (InternalEntityEntry entry) => entry.GetCurrentValue<uint>(priority),
-                object (ValueBuffer valueBuffer) => valueBuffer[5]);
+                object (ValueBuffer valueBuffer) => valueBuffer[6]);
             priority.SetPropertyIndexes(
-                index: 5,
-                originalValueIndex: 5,
+                index: 6,
+                originalValueIndex: 6,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -347,8 +389,9 @@ namespace Razdor.Communities.Infrastructure.DataAccess
         public static void CreateAnnotations(RuntimeEntityType runtimeEntityType)
         {
             var id = runtimeEntityType.FindProperty("Id");
+            var color = runtimeEntityType.FindProperty("Color");
             var communityId = runtimeEntityType.FindProperty("CommunityId");
-            var isMentioned = runtimeEntityType.FindProperty("IsMentioned");
+            var isMentionable = runtimeEntityType.FindProperty("IsMentionable");
             var name = runtimeEntityType.FindProperty("Name");
             var permissions = runtimeEntityType.FindProperty("Permissions");
             var priority = runtimeEntityType.FindProperty("Priority");
@@ -359,7 +402,7 @@ namespace Razdor.Communities.Infrastructure.DataAccess
                 ISnapshot (InternalEntityEntry source) =>
                 {
                     var entity = ((Role)(source.Entity));
-                    return ((ISnapshot)(new Snapshot<ulong, ulong, bool, string, UserPermissions, uint>(((ValueComparer<ulong>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), ((ValueComparer<ulong>)(((IProperty)communityId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(communityId)), ((ValueComparer<bool>)(((IProperty)isMentioned).GetValueComparer())).Snapshot(source.GetCurrentValue<bool>(isMentioned)), (source.GetCurrentValue<string>(name) == null ? null : ((ValueComparer<string>)(((IProperty)name).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(name))), ((ValueComparer<UserPermissions>)(((IProperty)permissions).GetValueComparer())).Snapshot(source.GetCurrentValue<UserPermissions>(permissions)), ((ValueComparer<uint>)(((IProperty)priority).GetValueComparer())).Snapshot(source.GetCurrentValue<uint>(priority)))));
+                    return ((ISnapshot)(new Snapshot<ulong, uint, ulong, bool, string, UserPermissions, uint>(((ValueComparer<ulong>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), ((ValueComparer<uint>)(((IProperty)color).GetValueComparer())).Snapshot(source.GetCurrentValue<uint>(color)), ((ValueComparer<ulong>)(((IProperty)communityId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(communityId)), ((ValueComparer<bool>)(((IProperty)isMentionable).GetValueComparer())).Snapshot(source.GetCurrentValue<bool>(isMentionable)), (source.GetCurrentValue<string>(name) == null ? null : ((ValueComparer<string>)(((IProperty)name).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(name))), ((ValueComparer<UserPermissions>)(((IProperty)permissions).GetValueComparer())).Snapshot(source.GetCurrentValue<UserPermissions>(permissions)), ((ValueComparer<uint>)(((IProperty)priority).GetValueComparer())).Snapshot(source.GetCurrentValue<uint>(priority)))));
                 });
             runtimeEntityType.SetStoreGeneratedValuesFactory(
                 ISnapshot () => ((ISnapshot)(new Snapshot<ulong>(((ValueComparer<ulong>)(((IProperty)communityId).GetValueComparer())).Snapshot(default(ulong))))));
@@ -376,10 +419,10 @@ namespace Razdor.Communities.Infrastructure.DataAccess
                     return ((ISnapshot)(new Snapshot<ulong, ulong>(((ValueComparer<ulong>)(((IProperty)id).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), ((ValueComparer<ulong>)(((IProperty)communityId).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<ulong>(communityId)))));
                 });
             runtimeEntityType.Counts = new PropertyCounts(
-                propertyCount: 6,
+                propertyCount: 7,
                 navigationCount: 0,
                 complexPropertyCount: 0,
-                originalValueCount: 6,
+                originalValueCount: 7,
                 shadowCount: 0,
                 relationshipCount: 2,
                 storeGeneratedCount: 1);

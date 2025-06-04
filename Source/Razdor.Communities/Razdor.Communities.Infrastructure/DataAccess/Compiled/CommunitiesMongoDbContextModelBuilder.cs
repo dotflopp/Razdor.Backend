@@ -11,7 +11,7 @@ namespace Razdor.Communities.Infrastructure.DataAccess
     public partial class CommunitiesMongoDbContextModel
     {
         private CommunitiesMongoDbContextModel()
-            : base(skipDetectChanges: false, modelId: new Guid("6fabcb57-a00a-41de-8e7a-a236b89f62f8"), entityTypeCount: 15)
+            : base(skipDetectChanges: false, modelId: new Guid("e351b1d2-9d29-4342-91ef-fdad0f31879b"), entityTypeCount: 15)
         {
         }
 

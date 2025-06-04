@@ -9,6 +9,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Razdor.Identity\Razdor.Identity.Module\Razdor.Identity.Module.csproj" />
         <ProjectReference Include="..\Razdor.Communities.Module\Razdor.Communities.Module.csproj"/>
     </ItemGroup>
 

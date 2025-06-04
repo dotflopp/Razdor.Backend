@@ -6,6 +6,6 @@ namespace Razdor.Communities.Module.Services.Members;
 
 public record GetCommunityMembersQuery(
     ulong CommunityId,
-    ulong LastUserId,
-    ulong UsersCount
+    ulong? LastUserId,
+    int? UsersCount
 ): ICommunitiesQuery<IEnumerable<CommunityMemberPreviewModel>>;

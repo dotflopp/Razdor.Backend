@@ -11,6 +11,7 @@ using Razdor.Communities.Module.Authorization;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.DataAccess;
 using Razdor.Communities.Module.Services.Channels.Commands;
+using Razdor.Communities.Module.Services.Members;
 using Razdor.Shared.Module.Authorization;
 using Razdor.Shared.Module.DataAccess;
 
@@ -36,6 +37,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IInvitesRepository, InvitesRepository>();
         services.AddScoped<ICommunityChannelsRepository, CommunityChannelsRepository>();
         services.AddScoped<ISignalingService, SignalingService>();
+        services.AddScoped<IUserProfileFiller, CachedUserProfileFiler>();
 
         return services;
     }

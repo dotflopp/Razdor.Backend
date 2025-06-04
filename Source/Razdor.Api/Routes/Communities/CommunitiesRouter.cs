@@ -42,6 +42,7 @@ public static class CommunitiesRouter
             .WithSummary("Создать новый канал в сообществе");
         
         api.MapPost("/{communityId:ulong}/avatar", UploadCommunityAvatarAsync)
+            .DisableAntiforgery()
             .WithSummary("Изменить аватар сообщества");
         
         api.MapGet("/{communityId:ulong}/avatar", GetCommunityAvatarAsync)

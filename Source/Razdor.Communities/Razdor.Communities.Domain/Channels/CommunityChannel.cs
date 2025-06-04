@@ -5,8 +5,10 @@ using Razdor.Shared.Domain;
 
 namespace Razdor.Communities.Domain.Channels;
 
+/// <summary>
+/// Коды каналов, битовые флаги, можно использовать для проверки, но не для присваивания каналу
+/// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter<ChannelType>))]
-[Flags]
 public enum ChannelType
 {
     CategoryChannel = 0x1,

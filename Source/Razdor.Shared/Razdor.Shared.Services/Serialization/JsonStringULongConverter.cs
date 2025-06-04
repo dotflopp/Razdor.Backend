@@ -19,7 +19,7 @@ public sealed class JsonStringULongConverter : JsonConverter<ulong>
         }
         catch (FormatException exception)
         {
-            throw new ArgumentException(exception.Message, exception);
+            throw new JsonException(exception.Message, exception);
         }
     }
 

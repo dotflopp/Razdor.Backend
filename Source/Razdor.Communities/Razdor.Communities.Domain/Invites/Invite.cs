@@ -22,13 +22,13 @@ public class Invite : BaseAggregateRoot, IEntity<string>
         UsesCount = usesCount;
     }
 
-    public ulong CommunityId { get; init; }
-    public ulong CreatorId { get; init; }
-    public DateTimeOffset? ExpiresAt { get; init; }
-    public DateTimeOffset CreatedAt { get; init; }
-    public uint UsesCount { get; init; }
+    public ulong CommunityId { get; private set;  }
+    public ulong CreatorId { get; private set;  }
+    public DateTimeOffset? ExpiresAt { get; private set;  }
+    public DateTimeOffset CreatedAt { get; private set; }
+    public uint UsesCount { get; set; }
 
-    public string Id { get; }
+    public string Id { get; private set; }
 
     public static Invite Create(string id, ulong creatorId, ulong communityId, TimeSpan? lifeTime, TimeProvider? timeProvider = null)
     {

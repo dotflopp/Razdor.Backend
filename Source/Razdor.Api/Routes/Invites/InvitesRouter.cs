@@ -30,7 +30,7 @@ public static class InvitesRouter
         
         api.MapPost("/", AcceptInviteAsync)
             .WithSummary("Принять приглашение в сообщество")
-            .Produces<InviteViewModel>();
+            .Produces<InvitePreviewModel>();
 
         api.MapGet("/", GetInviteAsync)
             .WithSummary("Получить информацию о приглашении в сообщество")
@@ -74,10 +74,10 @@ public static class InvitesRouter
         [FromRoute] string inviteId
     )
     {
-        await module.ExecuteCommandAsync(
+        InvitePreviewModel model = await module.ExecuteCommandAsync(
             new AcceptInviteCommand(inviteId)
         );
 
-        return Results.Ok();
+        return Results.Ok(model);
     }
 }

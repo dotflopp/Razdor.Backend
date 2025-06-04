@@ -5,6 +5,7 @@ using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Rules;
 using Razdor.Communities.Module.DataAccess;
 using Razdor.Communities.Module.Exceptions;
+using Razdor.Communities.Module.Services.Communities.ViewModels;
 using Razdor.Shared.Domain.Rules;
 using Razdor.Shared.Module.DataAccess;
 using Razdor.Shared.Module.RequestSenderContext;
@@ -18,9 +19,9 @@ public sealed class AcceptInviteCommandHandler(
     UnitOfWork<CommunitiesDbContext> unitOfWork,
     IRequestSenderContextAccessor sender,
     TimeProvider timeProvider
-) : ICommandHandler<AcceptInviteCommand>
+) : ICommandHandler<AcceptInviteCommand, InvitePreviewModel>
 {
-    public async ValueTask<Unit> Handle(AcceptInviteCommand command, CancellationToken cancellationToken)
+    public async ValueTask<InvitePreviewModel> Handle(AcceptInviteCommand command, CancellationToken cancellationToken)
     {
         Invite? invite = await invites.FindAsync(command.InviteId);
 
@@ -37,7 +38,9 @@ public sealed class AcceptInviteCommandHandler(
         var communityMember = CommunityMember.CreateNew(sender.User.Id, invite.CommunityId, timeProvider);
         members.Add(communityMember);
 
+        invite.UsesCount++;
+        
         await unitOfWork.SaveEntitiesAsync();
-        return Unit.Value;
+        return InvitePreviewModel.From(invite);
     }
 }

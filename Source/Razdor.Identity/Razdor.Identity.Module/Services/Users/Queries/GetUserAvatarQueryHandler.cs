@@ -27,6 +27,6 @@ public class GetUserAvatarQueryHandler(
             MediaFileNotFoundException.Throw();
         
         AvatarPath path = new(user.Id);
-        return await MediaHelper.GetMediaFileAsync(store, path, user.Avatar, cancellationToken);
+        return await store.GetMediaFileAsync(path, user.Avatar, cancellationToken);
     }
 }

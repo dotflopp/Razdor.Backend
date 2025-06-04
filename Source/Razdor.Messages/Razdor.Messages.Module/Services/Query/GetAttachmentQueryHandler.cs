@@ -30,6 +30,6 @@ public class GetAttachmentQueryHandler(
             MediaFileNotFoundException.Throw();
 
         AttachmentPath path = new AttachmentPath(query.ChannelId, query.MessageId, query.AttachmentId);
-        return await MediaHelper.GetMediaFileAsync(store, path, attachment, cancellationToken);
+        return await store.GetMediaFileAsync(path, attachment, cancellationToken);
     }
 }

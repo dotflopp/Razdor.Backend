@@ -9,7 +9,7 @@ namespace Razdor.Shared.Module.Media;
 public static class MediaHelper
 {
     public static async Task<MediaFileViewModel> GetMediaFileAsync<TPath>(
-        IFileStore store,
+        this IFileStore store,
         TPath path,
         MediaFileMeta meta,
         CancellationToken cancellationToken = default

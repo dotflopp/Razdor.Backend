@@ -16,10 +16,10 @@ public static class CommunityMembersRouter
         );
 
         api.MapGet("/", GetCommunityMembers)
-            .Produces<CommunityMemberPreviewModel>()
+            .Produces<IEnumerable<CommunityMemberPreviewModel>>()
             .WithSummary("Получить пользователей сообщества");
         api.MapGet("/{userId:ulong}", GetCommunityMember)
-            .Produces<IEnumerable<CommunityMemberPreviewModel>>()
+            .Produces<CommunityMemberPreviewModel>()
             .WithSummary("Получить пользователя сообщества");
 
         

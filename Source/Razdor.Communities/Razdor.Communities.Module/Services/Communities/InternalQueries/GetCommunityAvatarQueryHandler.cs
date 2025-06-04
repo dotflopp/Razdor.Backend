@@ -18,7 +18,6 @@ public class GetCommunityAvatarQueryHandler(
         var community = await context.Communities
             .AsNoTracking()
             .Where(x => x.Id == query.CommunityId)
-            .Select(x => new { x.Avatar })
             .FirstOrDefaultAsync(cancellationToken);
         
         if (community?.Avatar == null)

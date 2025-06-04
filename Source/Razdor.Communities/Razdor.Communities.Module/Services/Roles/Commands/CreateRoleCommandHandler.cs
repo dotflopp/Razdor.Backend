@@ -20,23 +20,23 @@ public class CreateRoleCommandHandler(
 
     public async ValueTask<RoleViewModel> Handle(CreateRoleCommand command, CancellationToken cancellationToken)
     {
-        (UserPermissions permissions, uint priority) = await permissionsAccessor.GetMemberPermissionsAndPriorityAsync(
+        (UserPermissions permissions, uint userPriority) = await permissionsAccessor.GetMemberPermissionsAndPriorityAsync(
             command.CommunityId, sender.User.Id, cancellationToken
         );
 
-        if (command.Priority <= priority)
-            throw new NotEnoughRightsException("A user cannot create a role with a higher or equal priority.");
 
         if (!permissions.HasFlag(UserPermissions.Administrator) && ((command.Permissions & permissions) != command.Permissions))
             throw new NotEnoughRightsException("A user cannot grant rights that they do not have.");
 
-        Community? community = await communities.FindAsync(command.CommunityId, cancellationToken);
-        if (community == null)
-            throw new InvalidOperationException("Authorized access to a non-existent community");
+        Community? community = await communities.FindAsync(command.CommunityId, cancellationToken)
+            ?? throw new InvalidOperationException("Authorized access to a non-existent community");
 
         uint rolePriority = command.Priority ?? 0u;
         if (rolePriority == 0)
-             rolePriority = (uint)(community.Roles.Count);
+             rolePriority = (uint)(community.Roles.Count) + 1;
+
+        if (command.Priority <= userPriority)
+            throw new NotEnoughRightsException("A user cannot create a role with a higher or equal priority.");
         
 
         Role role = Role.CreateNew(

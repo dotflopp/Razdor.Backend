@@ -11,9 +11,10 @@ public static class CommunityMemberRolesRouter
     {
         IEndpointRouteBuilder api = builder.MapGroup(
             "/communities/{communityId:ulong}/members/{userId:ulong}/roles"
-        );
+        ).WithTags("Members", "Roles");
 
-        api.MapPost("/", ChangeMemberRolesAsync);
+        api.MapPost("/", ChangeMemberRolesAsync)
+            .WithSummary("Добавить роль участнику сообщества");
         
         return builder;
     }

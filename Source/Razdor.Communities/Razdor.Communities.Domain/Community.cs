@@ -142,21 +142,26 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
     }
 
     /// <param name="roleIds">!Отсортированная по Id в порядке возрастания коллекция ролей</param>
-    private IEnumerable<Role> GetIntersectionRoles(IEnumerable<ulong> roleIds)
+    public IEnumerable<Role> GetIntersectionRoles(IEnumerable<ulong> roleIds)
     {
         if (Roles.Count <= 0)
             yield break;
 
         using IEnumerator<Role> roles = Roles.GetEnumerator();
-
+        if (!roles.MoveNext())
+            yield break;
+        
         foreach (ulong roleId in roleIds)
         {
             while (roleId > roles.Current.Id)
                 if (!roles.MoveNext())
-                    yield break;
-
+                    break;
+            
             if (roleId == roles.Current.Id)
                 yield return roles.Current;
+            
+            if (!roles.MoveNext())
+                yield break;
         }
     }
 

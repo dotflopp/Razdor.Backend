@@ -25,7 +25,7 @@ public static class InvitesRouter
 
     public static IEndpointRouteBuilder MapInvites(this IEndpointRouteBuilder builder)
     {
-        RouteGroupBuilder api = builder.MapGroup("/invites/{inviteId:alpha}")
+        RouteGroupBuilder api = builder.MapGroup("/invites/{inviteId}")
             .WithTags("Invites");
         
         api.MapPost("/", AcceptInviteAsync)

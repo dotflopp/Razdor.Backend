@@ -2,6 +2,7 @@
 using Razdor.Api.Routes.Channels;
 using Razdor.Api.Routes.Communities;
 using Razdor.Api.Routes.Communities.Members;
+using Razdor.Api.Routes.Communities.Members.Roles;
 using Razdor.Api.Routes.Communities.Roles;
 using Razdor.Api.Routes.Invites;
 using Razdor.Api.Routes.Messaging;
@@ -41,6 +42,7 @@ public static class ApiRouter
         api.MapCommunityChannels();
         api.MapCommunityMembers();
         api.MapCommunityRoles();
+        api.MepCommunityMemberRoles();
 
         return builder;
     }

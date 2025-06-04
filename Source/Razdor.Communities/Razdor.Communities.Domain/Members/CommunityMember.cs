@@ -1,4 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using Razdor.Communities.Domain.Events;
+using Razdor.Communities.Domain.Permissions;
+using Razdor.Communities.Domain.Roles;
 using Razdor.Shared.Domain;
 
 namespace Razdor.Communities.Domain.Members;
@@ -45,7 +48,11 @@ public class CommunityMember : BaseAggregateRoot
     /// <summary>
     ///     Отсортированная в порядке возрастания коллекция ролей
     /// </summary>
-    public IReadOnlyCollection<ulong> RoleIds => _roleIds?.AsReadOnly() ?? ReadOnlyCollection<ulong>.Empty;
+    public IReadOnlyCollection<ulong> RoleIds
+    {
+        get => _roleIds?.AsReadOnly() ?? ReadOnlyCollection<ulong>.Empty;
+        set => throw new NotImplementedException();
+    }
 
     /// <summary>
     /// Переопределенный профиль пользователя
@@ -71,5 +78,10 @@ public class CommunityMember : BaseAggregateRoot
 
         // member.AddDomainEvent(new UserJoined(communityId, userId));
         return member;
+    }
+
+    public void UpdateRoles(List<ulong> roleIds)
+    {
+        AddDomainEvent(new MemberRolesChanged(CommunityId, UserId, roleIds));
     }
 }

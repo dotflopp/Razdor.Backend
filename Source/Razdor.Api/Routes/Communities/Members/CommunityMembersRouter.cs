@@ -11,13 +11,14 @@ public static class CommunityMembersRouter
         this IEndpointRouteBuilder builder
     )
     {
-        IEndpointRouteBuilder api = builder.MapGroup(
-            "/communities/{communityId:ulong}/members")
+        IEndpointRouteBuilder api = builder
+            .MapGroup("/communities/{communityId:ulong}/members")
             .WithTags("Members");
 
         api.MapGet("/", GetCommunityMembers)
             .Produces<IEnumerable<CommunityMemberPreviewModel>>()
             .WithSummary("Получить пользователей сообщества");
+        
         api.MapGet("/{userId:ulong}", GetCommunityMember)
             .Produces<CommunityMemberPreviewModel>()
             .WithSummary("Получить пользователя сообщества");

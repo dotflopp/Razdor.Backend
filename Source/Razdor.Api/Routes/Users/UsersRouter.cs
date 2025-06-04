@@ -36,7 +36,8 @@ public static class UsersRouter
             .Produces<ExceptionViewModel>((int)HttpStatusCode.NotFound);
 
         api.MapGet("/{userId:ulong}/avatar", GetUserAvatarAsync)
-            .Produces<FileContentResult>();
+            .Produces<FileContentResult>()
+            .WithSummary("Получить аватар пользователя");
         
         api.MapGet("/{userId:ulong}", GetUserAsync)
             .Produces<UserPreviewModel>()

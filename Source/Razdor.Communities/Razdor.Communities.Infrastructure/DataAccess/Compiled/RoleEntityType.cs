@@ -330,10 +330,10 @@ namespace Razdor.Communities.Infrastructure.DataAccess
                 List<Role> (InternalEntityEntry entry) => entry.GetCurrentValue<List<Role>>(_roles),
                 null);
             _roles.SetPropertyIndexes(
-                index: 1,
+                index: 2,
                 originalValueIndex: -1,
                 shadowIndex: -1,
-                relationshipIndex: 2,
+                relationshipIndex: 3,
                 storeGenerationIndex: -1);
             _roles.SetCollectionAccessor<Community, List<Role>, Role>(
                 List<Role> (Community entity) => CommunityUnsafeAccessors._roles(entity),

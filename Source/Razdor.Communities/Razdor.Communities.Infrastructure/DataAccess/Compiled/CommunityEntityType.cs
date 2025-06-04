@@ -26,8 +26,8 @@ namespace Razdor.Communities.Infrastructure.DataAccess
                 "Razdor.Communities.Domain.Community",
                 typeof(Community),
                 baseEntityType,
-                propertyCount: 6,
-                navigationCount: 2,
+                propertyCount: 5,
+                navigationCount: 3,
                 unnamedIndexCount: 1,
                 keyCount: 1);
 
@@ -76,48 +76,6 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             id.SetCurrentValueComparer(new EntryCurrentValueComparer<ulong>(id));
             id.AddAnnotation("Mongo:ElementName", "_id");
 
-            var avatar = runtimeEntityType.AddProperty(
-                "Avatar",
-                typeof(string),
-                propertyInfo: typeof(Community).GetProperty("Avatar", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(Community).GetField("<Avatar>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                nullable: true);
-            avatar.SetGetter(
-                string (Community entity) => CommunityUnsafeAccessors.Avatar(entity),
-                bool (Community entity) => CommunityUnsafeAccessors.Avatar(entity) == null,
-                string (Community instance) => CommunityUnsafeAccessors.Avatar(instance),
-                bool (Community instance) => CommunityUnsafeAccessors.Avatar(instance) == null);
-            avatar.SetSetter(
-                (Community entity, string value) => CommunityUnsafeAccessors.Avatar(entity) = value);
-            avatar.SetMaterializationSetter(
-                (Community entity, string value) => CommunityUnsafeAccessors.Avatar(entity) = value);
-            avatar.SetAccessors(
-                string (InternalEntityEntry entry) => CommunityUnsafeAccessors.Avatar(((Community)(entry.Entity))),
-                string (InternalEntityEntry entry) => CommunityUnsafeAccessors.Avatar(((Community)(entry.Entity))),
-                string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(avatar, 1),
-                string (InternalEntityEntry entry) => entry.GetCurrentValue<string>(avatar),
-                object (ValueBuffer valueBuffer) => valueBuffer[1]);
-            avatar.SetPropertyIndexes(
-                index: 1,
-                originalValueIndex: 1,
-                shadowIndex: -1,
-                relationshipIndex: -1,
-                storeGenerationIndex: -1);
-            avatar.TypeMapping = MongoTypeMapping.Default.Clone(
-                comparer: new ValueComparer<string>(
-                    bool (string v1, string v2) => v1 == v2,
-                    int (string v) => ((object)v).GetHashCode(),
-                    string (string v) => v),
-                keyComparer: new ValueComparer<string>(
-                    bool (string v1, string v2) => v1 == v2,
-                    int (string v) => ((object)v).GetHashCode(),
-                    string (string v) => v),
-                providerValueComparer: new ValueComparer<string>(
-                    bool (string v1, string v2) => v1 == v2,
-                    int (string v) => ((object)v).GetHashCode(),
-                    string (string v) => v),
-                clrType: typeof(string));
-
             var defaultNotificationPolicy = runtimeEntityType.AddProperty(
                 "DefaultNotificationPolicy",
                 typeof(CommunityNotificationPolicy),
@@ -136,12 +94,12 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             defaultNotificationPolicy.SetAccessors(
                 CommunityNotificationPolicy (InternalEntityEntry entry) => CommunityUnsafeAccessors.DefaultNotificationPolicy(((Community)(entry.Entity))),
                 CommunityNotificationPolicy (InternalEntityEntry entry) => CommunityUnsafeAccessors.DefaultNotificationPolicy(((Community)(entry.Entity))),
-                CommunityNotificationPolicy (InternalEntityEntry entry) => entry.ReadOriginalValue<CommunityNotificationPolicy>(defaultNotificationPolicy, 2),
+                CommunityNotificationPolicy (InternalEntityEntry entry) => entry.ReadOriginalValue<CommunityNotificationPolicy>(defaultNotificationPolicy, 1),
                 CommunityNotificationPolicy (InternalEntityEntry entry) => entry.GetCurrentValue<CommunityNotificationPolicy>(defaultNotificationPolicy),
-                object (ValueBuffer valueBuffer) => valueBuffer[2]);
+                object (ValueBuffer valueBuffer) => valueBuffer[1]);
             defaultNotificationPolicy.SetPropertyIndexes(
-                index: 2,
-                originalValueIndex: 2,
+                index: 1,
+                originalValueIndex: 1,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -179,12 +137,12 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             description.SetAccessors(
                 string (InternalEntityEntry entry) => CommunityUnsafeAccessors.Description(((Community)(entry.Entity))),
                 string (InternalEntityEntry entry) => CommunityUnsafeAccessors.Description(((Community)(entry.Entity))),
-                string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(description, 3),
+                string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(description, 2),
                 string (InternalEntityEntry entry) => entry.GetCurrentValue<string>(description),
-                object (ValueBuffer valueBuffer) => valueBuffer[3]);
+                object (ValueBuffer valueBuffer) => valueBuffer[2]);
             description.SetPropertyIndexes(
-                index: 3,
-                originalValueIndex: 3,
+                index: 2,
+                originalValueIndex: 2,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -221,12 +179,12 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             name.SetAccessors(
                 string (InternalEntityEntry entry) => CommunityUnsafeAccessors.Name(((Community)(entry.Entity))),
                 string (InternalEntityEntry entry) => CommunityUnsafeAccessors.Name(((Community)(entry.Entity))),
-                string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(name, 4),
+                string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(name, 3),
                 string (InternalEntityEntry entry) => entry.GetCurrentValue<string>(name),
-                object (ValueBuffer valueBuffer) => valueBuffer[4]);
+                object (ValueBuffer valueBuffer) => valueBuffer[3]);
             name.SetPropertyIndexes(
-                index: 4,
-                originalValueIndex: 4,
+                index: 3,
+                originalValueIndex: 3,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -263,12 +221,12 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             ownerId.SetAccessors(
                 ulong (InternalEntityEntry entry) => CommunityUnsafeAccessors.OwnerId(((Community)(entry.Entity))),
                 ulong (InternalEntityEntry entry) => CommunityUnsafeAccessors.OwnerId(((Community)(entry.Entity))),
-                ulong (InternalEntityEntry entry) => entry.ReadOriginalValue<ulong>(ownerId, 5),
+                ulong (InternalEntityEntry entry) => entry.ReadOriginalValue<ulong>(ownerId, 4),
                 ulong (InternalEntityEntry entry) => entry.GetCurrentValue<ulong>(ownerId),
-                object (ValueBuffer valueBuffer) => valueBuffer[5]);
+                object (ValueBuffer valueBuffer) => valueBuffer[4]);
             ownerId.SetPropertyIndexes(
-                index: 5,
-                originalValueIndex: 5,
+                index: 4,
+                originalValueIndex: 4,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -300,7 +258,6 @@ namespace Razdor.Communities.Infrastructure.DataAccess
         public static void CreateAnnotations(RuntimeEntityType runtimeEntityType)
         {
             var id = runtimeEntityType.FindProperty("Id");
-            var avatar = runtimeEntityType.FindProperty("Avatar");
             var defaultNotificationPolicy = runtimeEntityType.FindProperty("DefaultNotificationPolicy");
             var description = runtimeEntityType.FindProperty("Description");
             var name = runtimeEntityType.FindProperty("Name");
@@ -308,13 +265,14 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             var key = runtimeEntityType.FindKey(new[] { id });
             key.SetPrincipalKeyValueFactory(KeyValueFactoryFactory.CreateSimpleNonNullableFactory<ulong>(key));
             key.SetIdentityMapFactory(IdentityMapFactoryFactory.CreateFactory<ulong>(key));
+            var avatar = runtimeEntityType.FindNavigation("Avatar");
             var everyone = runtimeEntityType.FindNavigation("Everyone");
             var _roles = runtimeEntityType.FindNavigation("_roles");
             runtimeEntityType.SetOriginalValuesFactory(
                 ISnapshot (InternalEntityEntry source) =>
                 {
                     var entity = ((Community)(source.Entity));
-                    return ((ISnapshot)(new Snapshot<ulong, string, CommunityNotificationPolicy, string, string, ulong>(((ValueComparer<ulong>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), (source.GetCurrentValue<string>(avatar) == null ? null : ((ValueComparer<string>)(((IProperty)avatar).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(avatar))), ((ValueComparer<CommunityNotificationPolicy>)(((IProperty)defaultNotificationPolicy).GetValueComparer())).Snapshot(source.GetCurrentValue<CommunityNotificationPolicy>(defaultNotificationPolicy)), (source.GetCurrentValue<string>(description) == null ? null : ((ValueComparer<string>)(((IProperty)description).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(description))), (source.GetCurrentValue<string>(name) == null ? null : ((ValueComparer<string>)(((IProperty)name).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(name))), ((ValueComparer<ulong>)(((IProperty)ownerId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(ownerId)))));
+                    return ((ISnapshot)(new Snapshot<ulong, CommunityNotificationPolicy, string, string, ulong>(((ValueComparer<ulong>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), ((ValueComparer<CommunityNotificationPolicy>)(((IProperty)defaultNotificationPolicy).GetValueComparer())).Snapshot(source.GetCurrentValue<CommunityNotificationPolicy>(defaultNotificationPolicy)), (source.GetCurrentValue<string>(description) == null ? null : ((ValueComparer<string>)(((IProperty)description).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(description))), (source.GetCurrentValue<string>(name) == null ? null : ((ValueComparer<string>)(((IProperty)name).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(name))), ((ValueComparer<ulong>)(((IProperty)ownerId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(ownerId)))));
                 });
             runtimeEntityType.SetStoreGeneratedValuesFactory(
                 ISnapshot () => Snapshot.Empty);
@@ -328,15 +286,15 @@ namespace Razdor.Communities.Infrastructure.DataAccess
                 ISnapshot (InternalEntityEntry source) =>
                 {
                     var entity = ((Community)(source.Entity));
-                    return ((ISnapshot)(new Snapshot<ulong, object, object>(((ValueComparer<ulong>)(((IProperty)id).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), CommunityUnsafeAccessors.Everyone(entity), SnapshotFactoryFactory.SnapshotCollection(CommunityUnsafeAccessors._roles(entity)))));
+                    return ((ISnapshot)(new Snapshot<ulong, object, object, object>(((ValueComparer<ulong>)(((IProperty)id).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), CommunityUnsafeAccessors.Avatar(entity), CommunityUnsafeAccessors.Everyone(entity), SnapshotFactoryFactory.SnapshotCollection(CommunityUnsafeAccessors._roles(entity)))));
                 });
             runtimeEntityType.Counts = new PropertyCounts(
-                propertyCount: 6,
-                navigationCount: 2,
+                propertyCount: 5,
+                navigationCount: 3,
                 complexPropertyCount: 0,
-                originalValueCount: 6,
+                originalValueCount: 5,
                 shadowCount: 0,
-                relationshipCount: 3,
+                relationshipCount: 4,
                 storeGeneratedCount: 0);
             runtimeEntityType.AddAnnotation("Mongo:CollectionName", "communities");
 

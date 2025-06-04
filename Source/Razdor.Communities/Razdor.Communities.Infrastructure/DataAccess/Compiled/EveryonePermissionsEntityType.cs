@@ -190,10 +190,10 @@ namespace Razdor.Communities.Infrastructure.DataAccess
                 EveryonePermissions (InternalEntityEntry entry) => entry.GetCurrentValue<EveryonePermissions>(everyone),
                 null);
             everyone.SetPropertyIndexes(
-                index: 0,
+                index: 1,
                 originalValueIndex: -1,
                 shadowIndex: -1,
-                relationshipIndex: 1,
+                relationshipIndex: 2,
                 storeGenerationIndex: -1);
             return runtimeForeignKey;
         }

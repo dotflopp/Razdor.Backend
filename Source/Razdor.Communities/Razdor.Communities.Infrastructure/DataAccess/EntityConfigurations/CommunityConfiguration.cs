@@ -31,6 +31,13 @@ public class CommunityConfiguration : IEntityTypeConfiguration<Community>
             ownsBuild.WithOwner().HasForeignKey(nameof(Community.Id));
             ownsBuild.HasKey(nameof(Community.Id));
         });
+        
+        builder.OwnsOne(x => x.Avatar, ownsBuild =>
+        {
+            ownsBuild.WithOwner().HasForeignKey(nameof(Community.Id));
+            ownsBuild.HasKey(nameof(Community.Id));
+        });
+
 
         builder.HasIndex(x => x.OwnerId);
 

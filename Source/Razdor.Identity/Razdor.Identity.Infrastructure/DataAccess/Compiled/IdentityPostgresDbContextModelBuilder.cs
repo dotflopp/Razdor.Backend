@@ -16,7 +16,7 @@ namespace Razdor.Identity.Infrastructure.DataAccess
     public partial class IdentityPostgresDbContextModel
     {
         private IdentityPostgresDbContextModel()
-            : base(skipDetectChanges: false, modelId: new Guid("2685ac48-094e-4114-9ff2-6f35fc2cb12b"), entityTypeCount: 2)
+            : base(skipDetectChanges: false, modelId: new Guid("291f112d-ab56-4316-92e6-b7a44ec2fb23"), entityTypeCount: 2)
         {
         }
 

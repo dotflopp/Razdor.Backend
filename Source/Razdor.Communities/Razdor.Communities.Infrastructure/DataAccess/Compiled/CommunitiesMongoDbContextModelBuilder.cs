@@ -11,7 +11,7 @@ namespace Razdor.Communities.Infrastructure.DataAccess
     public partial class CommunitiesMongoDbContextModel
     {
         private CommunitiesMongoDbContextModel()
-            : base(skipDetectChanges: false, modelId: new Guid("2bdaf468-782e-45ef-812b-99446a7a03b2"), entityTypeCount: 14)
+            : base(skipDetectChanges: false, modelId: new Guid("7ecd8f52-74b4-42a9-b4b2-c5d82f6947b2"), entityTypeCount: 15)
         {
         }
 
@@ -26,6 +26,7 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             var everyonePermissions = EveryonePermissionsEntityType.Create(this);
             var overwritePermissions = OverwritePermissionsEntityType.Create(this);
             var role = RoleEntityType.Create(this);
+            var mediaFileMeta = MediaFileMetaEntityType.Create(this);
             var forkChannel = ForkChannelEntityType.Create(this, communityChannel);
             var overwritesPermissionChannel = OverwritesPermissionChannelEntityType.Create(this, communityChannel);
             var categoryChannel = CategoryChannelEntityType.Create(this, overwritesPermissionChannel);
@@ -37,6 +38,7 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             EveryonePermissionsEntityType.CreateForeignKey1(everyonePermissions, community);
             OverwritePermissionsEntityType.CreateForeignKey1(overwritePermissions, overwrite);
             RoleEntityType.CreateForeignKey1(role, community);
+            MediaFileMetaEntityType.CreateForeignKey1(mediaFileMeta, community);
 
             CommunityChannelEntityType.CreateAnnotations(communityChannel);
             OverwriteEntityType.CreateAnnotations(overwrite);
@@ -47,6 +49,7 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             EveryonePermissionsEntityType.CreateAnnotations(everyonePermissions);
             OverwritePermissionsEntityType.CreateAnnotations(overwritePermissions);
             RoleEntityType.CreateAnnotations(role);
+            MediaFileMetaEntityType.CreateAnnotations(mediaFileMeta);
             ForkChannelEntityType.CreateAnnotations(forkChannel);
             OverwritesPermissionChannelEntityType.CreateAnnotations(overwritesPermissionChannel);
             CategoryChannelEntityType.CreateAnnotations(categoryChannel);

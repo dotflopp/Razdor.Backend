@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using Razdor.Communities.Domain;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Domain.Roles;
+using Razdor.Shared.Domain;
 
 #pragma warning disable 219, 612, 618
 #nullable disable
@@ -13,9 +14,6 @@ namespace Razdor.Communities.Infrastructure.DataAccess
 {
     public static class CommunityUnsafeAccessors
     {
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<Avatar>k__BackingField")]
-        public static extern ref string Avatar(Community @this);
-
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<DefaultNotificationPolicy>k__BackingField")]
         public static extern ref CommunityNotificationPolicy DefaultNotificationPolicy(Community @this);
 
@@ -27,6 +25,9 @@ namespace Razdor.Communities.Infrastructure.DataAccess
 
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<OwnerId>k__BackingField")]
         public static extern ref ulong OwnerId(Community @this);
+
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<Avatar>k__BackingField")]
+        public static extern ref MediaFileMeta Avatar(Community @this);
 
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<Everyone>k__BackingField")]
         public static extern ref EveryonePermissions Everyone(Community @this);

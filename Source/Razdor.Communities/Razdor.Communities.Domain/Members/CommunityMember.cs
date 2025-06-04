@@ -46,7 +46,11 @@ public class CommunityMember : BaseAggregateRoot
     ///     Отсортированная в порядке возрастания коллекция ролей
     /// </summary>
     public IReadOnlyCollection<ulong> RoleIds => _roleIds?.AsReadOnly() ?? ReadOnlyCollection<ulong>.Empty;
-    // public List<ulong>? RoleIds 
+
+    /// <summary>
+    /// Переопределенный профиль пользователя
+    /// </summary>
+    /// public MemberProfile? Profile { get; set; }
 
 
     /// <summary>

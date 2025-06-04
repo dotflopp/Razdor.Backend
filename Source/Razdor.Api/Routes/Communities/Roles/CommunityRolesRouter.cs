@@ -11,10 +11,14 @@ public static class CommunityRolesRouter
 {
     internal static IEndpointRouteBuilder MapCommunityRoles(this IEndpointRouteBuilder builder)
     {
-        IEndpointRouteBuilder api = builder.MapGroup("communities/{communityId}/roles");
+        IEndpointRouteBuilder api = builder
+            .MapGroup("communities/{communityId}/roles")
+            .RequireAuthorization()
+            .WithTags("Roles");
 
         api.MapPost("/", CreateRoleAsync)
-            .Produces<RoleViewModel>();
+            .Produces<RoleViewModel>()
+            .WithSummary("Создать роль в сообществе");
         
         return builder;
     }

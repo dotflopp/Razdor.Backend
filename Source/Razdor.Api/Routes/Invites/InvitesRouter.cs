@@ -12,7 +12,8 @@ public static class InvitesRouter
 {
     public static IEndpointRouteBuilder MapCommunityInvites(this IEndpointRouteBuilder builder)
     {
-        RouteGroupBuilder api = builder.MapGroup("/communities/{communityId:ulong}/invites");
+        RouteGroupBuilder api = builder.MapGroup("/communities/{communityId:ulong}/invites")
+            .WithTags("Communities", "Invites");
 
         api.MapPost("/", CreateInviteAsync)
             .Produces<InvitePreviewModel>()
@@ -24,11 +25,14 @@ public static class InvitesRouter
 
     public static IEndpointRouteBuilder MapInvites(this IEndpointRouteBuilder builder)
     {
-        builder.MapPost("/invites/{inviteId:alpha}", AcceptInviteAsync)
+        RouteGroupBuilder api = builder.MapGroup("/invites/{inviteId:alpha}")
+            .WithTags("Invites");
+        
+        api.MapPost("/", AcceptInviteAsync)
             .WithSummary("Принять приглашение в сообщество")
             .Produces<InviteViewModel>();
 
-        builder.MapGet("/invites/{inviteId:alpha}", GetInviteAsync)
+        api.MapGet("/", GetInviteAsync)
             .WithSummary("Получить информацию о приглашении в сообщество")
             .Produces<InviteViewModel>();
             

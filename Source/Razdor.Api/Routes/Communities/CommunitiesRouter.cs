@@ -19,7 +19,7 @@ public static class CommunitiesRouter
     )
     {
         RouteGroupBuilder api = builder.MapGroup("/communities")
-            .RequireAuthorization();
+            .WithTags("Communities");
 
         api.MapGet("/@my", GetSelfUserCommunitiesAsync)
             .Produces<IEnumerable<CommunityViewModel>>()

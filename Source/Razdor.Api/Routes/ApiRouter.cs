@@ -18,7 +18,7 @@ public static class ApiRouter
             .HasApiVersion(0.1)
             .MapGroup("/api/")
             .WithTags("Identity");
-
+        
         api.MapAuth();
         api.MapUsers();
         return api;

@@ -12,8 +12,8 @@ public static class CommunityMembersRouter
     )
     {
         IEndpointRouteBuilder api = builder.MapGroup(
-            "/communities/{communityId:ulong}/members"
-        );
+            "/communities/{communityId:ulong}/members")
+            .WithTags("Members");
 
         api.MapGet("/", GetCommunityMembers)
             .Produces<IEnumerable<CommunityMemberPreviewModel>>()
@@ -21,7 +21,6 @@ public static class CommunityMembersRouter
         api.MapGet("/{userId:ulong}", GetCommunityMember)
             .Produces<CommunityMemberPreviewModel>()
             .WithSummary("Получить пользователя сообщества");
-
         
         return builder;
     }

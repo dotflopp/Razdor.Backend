@@ -42,11 +42,11 @@ public static class CommunitiesRouter
             .WithSummary("Создать новый канал в сообществе");
         
         api.MapPost("/{communityId:ulong}/avatar", UploadCommunityAvatarAsync)
-            .WithSummary("Создать новый канал в сообществе");
+            .WithSummary("Изменить аватар сообщества");
         
         api.MapGet("/{communityId:ulong}/avatar", GetCommunityAvatarAsync)
             .Produces<FileContentResult>()
-            .WithSummary("Создать новый канал в сообществе");
+            .WithSummary("Получить аватар сообщества");
         
         return builder;
     }

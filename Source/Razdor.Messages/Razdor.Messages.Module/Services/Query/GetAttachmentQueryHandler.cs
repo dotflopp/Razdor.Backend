@@ -16,8 +16,10 @@ public class GetAttachmentQueryHandler(
 {
     public async ValueTask<MediaFileViewModel> Handle(GetAttachmentQuery query, CancellationToken cancellationToken)
     {
-        Message? message = await context.Messages
+        var message = await context.Messages
+            .AsNoTracking()
             .Where(m => m.Id == query.MessageId)
+            .Select(x => new { x.Attachments })
             .FirstOrDefaultAsync(cancellationToken);
 
         AttachmentMeta? attachment = message?.Attachments?.FirstOrDefault(

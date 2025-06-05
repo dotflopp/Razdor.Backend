@@ -9,6 +9,7 @@ public enum ErrorCode : ulong
     AccessForbidden,
     NotEnoughRights,
     InvalidOperationException,
+    BadRequest,
     NotFound,
     
     //Identitiy

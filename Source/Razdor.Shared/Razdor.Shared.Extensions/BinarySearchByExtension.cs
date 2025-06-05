@@ -5,9 +5,6 @@ public static class BinarySearchByExtension
     public static int BinarySearchBy<T, TSearch>(this List<T> collection, TSearch search, Func<T, TSearch> converter)
         where TSearch : IComparable<TSearch>
     {
-        if (collection.Count <= 0)
-            throw new InvalidOperationException("Collection should not be empty");
-
         int leftIndex = 0;
         int rightIndex = collection.Count - 1;
         

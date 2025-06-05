@@ -35,11 +35,13 @@ public static class CommunitiesRouter
         
         api.MapGet("/{communityId:ulong}/channels", GetCommunityChannelsAsync)
             .Produces<IEnumerable<ChannelViewModel>>()
-            .WithSummary("Получить каналы сообщества");
+            .WithSummary("Получить каналы сообщества")
+            .WithTags("Communities", "Channels");
         
         api.MapPost("/{communityId:ulong}/channels", CreateCommunityChannelAsync)
             .Produces<ChannelViewModel>()
-            .WithSummary("Создать новый канал в сообществе");
+            .WithSummary("Создать новый канал в сообществе")
+            .WithTags("Communities", "Channels");
         
         api.MapPost("/{communityId:ulong}/avatar", UploadCommunityAvatarAsync)
             .DisableAntiforgery()

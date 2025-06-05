@@ -2,8 +2,13 @@
 
 public interface IOverwritesOwner : IOverwritesPermission
 {
-    void SetRolePermission(ulong roleId, OverwritePermissions permission, List<Overwrite>? inherited);
-    void SetUserPermission(ulong userId, OverwritePermissions permission, List<Overwrite>? inherited);
-    void RemoveUserPermission(ulong userId, List<Overwrite>? inherited);
-    void RemoveRolePermission(ulong roleId, List<Overwrite>? inherited);
+    public void SetOverwrite(
+        ulong entityId,
+        OverwritePermissions permission,
+        PermissionTargetType targetType,
+        List<Overwrite>? inherited
+    );
+
+    Overwrite? RemoveOverwrite(ulong entityId, List<Overwrite>? inherited);
+
 }

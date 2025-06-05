@@ -13,7 +13,7 @@ public static class CommunityMemberRolesRouter
             "/communities/{communityId:ulong}/members/{userId:ulong}/roles/{roleId:ulong}"
         ).WithTags("Members", "Roles");
 
-        api.MapPost("/", ChangeMemberRolesAsync)
+        api.MapPatch("/", ChangeMemberRolesAsync)
             .WithSummary("Добавить роль участнику сообщества");
         
         return builder;

@@ -8,7 +8,8 @@ public static class ChannelsRouter
 {
     public static IEndpointRouteBuilder MapCommunityChannels(this IEndpointRouteBuilder builder)
     {
-        RouteGroupBuilder api = builder.MapGroup("");
+        RouteGroupBuilder api = builder.MapGroup("")
+            .WithTags("Channels");
 
         api.MapPost("/channels/{channelId:ulong}/connect", ConnectChannelAsync)
             .Produces<SessionViewModel>()

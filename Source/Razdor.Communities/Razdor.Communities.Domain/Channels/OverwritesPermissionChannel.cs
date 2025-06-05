@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
 using Razdor.Communities.Domain.Permissions;
+using Razdor.Shared.Extensions;
 
 namespace Razdor.Communities.Domain.Channels;
 
@@ -37,72 +38,50 @@ public abstract class OverwritesPermissionChannel : CommunityChannel, IOverwrite
     public override IReadOnlyList<Overwrite> Overwrites
         => _overwrites?.AsReadOnly() ?? ReadOnlyCollection<Overwrite>.Empty;
 
-    public void SetRolePermission(ulong roleId, OverwritePermissions permission, List<Overwrite>? inherited)
-    {
-        SetEntityPermissions(roleId, permission, PermissionTargetType.Role, inherited);
-    }
-
-    public void SetUserPermission(ulong userId, OverwritePermissions permission, List<Overwrite>? inherited)
-    {
-        SetEntityPermissions(userId, permission, PermissionTargetType.User, inherited);
-    }
-
-    public void RemoveUserPermission(ulong userId, List<Overwrite>? inherited)
-    {
-        RemoveEntityPermissions(userId, inherited);
-    }
-
-    public void RemoveRolePermission(ulong roleId, List<Overwrite>? inherited)
-    {
-        RemoveEntityPermissions(roleId, inherited);
-    }
-
-    private void SetEntityPermissions(
+    public void SetOverwrite(
         ulong entityId,
         OverwritePermissions permission,
-        PermissionTargetType targetTypeType,
+        PermissionTargetType targetType,
         List<Overwrite>? inherited
     )
     {
-        InitOverwritesIfNull(inherited);
-        RemoveEntityPermissions(entityId, inherited);
-
+        InitOverwritesIfNull(ref _overwrites, inherited);
+        RemoveOverwrite(entityId, inherited);
+        
         permission = new OverwritePermissions(
             permission.Allow & _availablePermissions,
             permission.Deny & _availablePermissions
         );
 
-        Overwrite overwrite = new(entityId, targetTypeType, permission);
+        Overwrite overwrite = new(entityId, targetType, permission);
         int index = _overwrites.FindIndex(x => x.TargetId < entityId);
         _overwrites.Insert(index + 1, overwrite);
     }
 
-    private void RemoveEntityPermissions(ulong entityId, List<Overwrite>? inherited)
+    public Overwrite? RemoveOverwrite(ulong entityId, List<Overwrite>? inherited)
     {
         List<Overwrite>? overwrites = _overwrites;
 
+        InitOverwritesIfNull(ref overwrites, inherited);
+
+        int targetIndex = overwrites.BinarySearchBy(entityId, x => x.TargetId);
+
+        if (targetIndex < 0)
+            return null;
+
+        Overwrite removed = overwrites[targetIndex];
+        overwrites.RemoveAt(targetIndex);
+        _overwrites = overwrites;
+        
+        return removed;
+    }
+
+    private void InitOverwritesIfNull([NotNull] ref List<Overwrite>? overwrites, List<Overwrite>? inherited)
+    {
         if (!IsSyncing)
             overwrites ??= new List<Overwrite>();
         else if (inherited != null)
             overwrites = inherited;
-        else ThrowInheritedNullException();
-
-        int targetIndex = overwrites.FindIndex(x => x.TargetId == entityId);
-
-        if (targetIndex < 0)
-            return;
-
-        overwrites.RemoveAt(targetIndex);
-        _overwrites = overwrites;
-    }
-
-    [MemberNotNull(nameof(_overwrites))]
-    private void InitOverwritesIfNull(List<Overwrite>? inherited)
-    {
-        if (!IsSyncing)
-            _overwrites ??= new List<Overwrite>();
-        else if (inherited != null)
-            _overwrites = inherited;
         else ThrowInheritedNullException();
     }
 

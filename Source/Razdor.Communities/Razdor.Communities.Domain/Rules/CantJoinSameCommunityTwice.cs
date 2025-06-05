@@ -10,10 +10,10 @@ public class CantJoinSameCommunityTwice(
     ulong userId
 ) : IBusinessRuleAsyncValidator
 {
-    public string Message => "Can't join the same community twice.";
+    public string Message => "Can not join the same community twice.";
     public ErrorCode ErrorCode => ErrorCode.ReJoiningToCommunity;
     public Task<bool> IsBrokenAsync(CancellationToken cancellationToken = default)
     {
-        return members.ContainsAsync(communityId, userId);
+        return members.ContainsAsync(communityId, userId, cancellationToken);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Razdor.Api.Routes.Auth;
 using Razdor.Api.Routes.Channels;
+using Razdor.Api.Routes.Channels.Overwrites;
 using Razdor.Api.Routes.Communities;
 using Razdor.Api.Routes.Communities.Members;
 using Razdor.Api.Routes.Communities.Members.Roles;
@@ -40,6 +41,7 @@ public static class ApiRouter
         api.MapCommunities();
         api.MapCommunityInvites();
         api.MapCommunityChannels();
+        api.MapChannelOverwrites();
         api.MapCommunityMembers();
         api.MapCommunityRoles();
         api.MepCommunityMemberRoles();

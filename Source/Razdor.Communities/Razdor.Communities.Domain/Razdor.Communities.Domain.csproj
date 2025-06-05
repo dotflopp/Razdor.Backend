@@ -13,8 +13,4 @@
         <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Domain\Razdor.Shared.Domain.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Channels\Events\"/>
-    </ItemGroup>
-
 </Project>

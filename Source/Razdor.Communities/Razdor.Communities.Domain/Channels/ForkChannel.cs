@@ -1,7 +1,9 @@
 ﻿using System.Collections.ObjectModel;
 using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
+using Razdor.Communities.Domain.Rules;
 using Razdor.Shared.Domain;
+using Razdor.Shared.Domain.Rules;
 
 namespace Razdor.Communities.Domain.Channels;
 
@@ -24,6 +26,12 @@ public class ForkChannel : CommunityChannel, IEntity<ulong>
     public override bool IsSyncing => true;
     public override IReadOnlyList<Overwrite> Overwrites => ReadOnlyCollection<Overwrite>.Empty;
 
+    public override sealed void RemoveParent(List<Overwrite> inheritedOverwrites)
+    {
+        throw new BusinesRuleValidationException(
+            new ForkChannelCannotExistWithoutParent()    
+        );
+    }
     public override UserPermissions GetPermissionsWithOverwrites(CommunityMember member, UserPermissions inheritedPermissions)
     {
         UserPermissions result = base.GetPermissionsWithOverwrites(member, inheritedPermissions);

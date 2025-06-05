@@ -1,7 +1,7 @@
 ﻿using Razdor.RestApi.ExceptionHandleMiddlewares.ViewModels;
+using Razdor.RestApi.Serialization;
 using Razdor.Shared.Domain.Exceptions;
 using Razdor.Shared.Extensions;
-using SharedJsonSerializerContext = Razdor.Api.Serialization.SharedJsonSerializerContext;
 
 namespace Razdor.RestApi.ExceptionHandleMiddlewares;
 

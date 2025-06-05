@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
+using Razdor.Communities.Domain.Channels.Events;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Shared.Extensions;
 
@@ -33,10 +34,18 @@ public abstract class OverwritesPermissionChannel : CommunityChannel, IOverwrite
     }
 
     [MemberNotNullWhen(true, nameof(_overwrites))]
-    public override bool IsSyncing => ParentId != 0 && _overwrites == null;
+    public override sealed bool IsSyncing => ParentId != 0 && _overwrites == null;
 
-    public override IReadOnlyList<Overwrite> Overwrites
+    public override sealed IReadOnlyList<Overwrite> Overwrites
         => _overwrites?.AsReadOnly() ?? ReadOnlyCollection<Overwrite>.Empty;
+
+    public override sealed void RemoveParent(List<Overwrite> inheritedOverwrites)
+    {
+        AddDomainEvent(new ParentChannelRemoved(Id, ParentId));
+        
+        ParentId = 0;
+        _overwrites = inheritedOverwrites;
+    }
 
     public void SetOverwrite(
         ulong entityId,

@@ -5,7 +5,5 @@ namespace Razdor.Communities.Domain.Channels.Events;
 
 public record OverwritePermissionsChanged(
     ulong ChannelId,
-    IReadOnlyCollection<(Overwrite, Overwrite)>? ChangedPermissions,
-    IReadOnlyCollection<Overwrite>? RemovedPermissions,
-    IReadOnlyCollection<Overwrite>? AddedPermissions
+    List<Overwrite> NewPermissions
 ) : IDomainEvent;

@@ -35,6 +35,8 @@ public abstract class CommunityChannel(
     public abstract bool IsSyncing { get; }
     public abstract IReadOnlyList<Overwrite> Overwrites { get; }
 
+    public abstract void RemoveParent(List<Overwrite> inheritedOverwrites);
+
     /// <summary>
     ///     Вернет права пользователя с учетом перезаписанных прав в канале, наследуемые права необходимо передать отдельным
     ///     параметром
@@ -63,7 +65,8 @@ public abstract class CommunityChannel(
             yield break;
 
         using IEnumerator<ulong> roleIds = member.RoleIds.GetEnumerator();
-        roleIds.MoveNext();
+        if (!roleIds.MoveNext())
+            yield break;
 
         foreach (Overwrite overwrite in Overwrites)
         {
@@ -74,12 +77,17 @@ public abstract class CommunityChannel(
             }
 
             while (overwrite.TargetId > roleIds.Current)
-                roleIds.MoveNext();
+                if (!roleIds.MoveNext())
+                    yield break;
 
             if (roleIds.Current != overwrite.TargetId || overwrite.TargetType != PermissionTargetType.Role)
                 continue;
+            
+            if (!roleIds.MoveNext())
+                yield break;
 
             yield return overwrite;
         }
     }
+    
 }

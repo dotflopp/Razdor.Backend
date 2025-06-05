@@ -5,7 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
-        <RootNamespace>Razdor.WebSocket</RootNamespace>
+        <RootNamespace>Razdor.SignalR</RootNamespace>
     </PropertyGroup>
 
 </Project>

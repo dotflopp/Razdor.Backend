@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/Gateways/">
-    <Project Path="Source\Razdor.Gateway\Razdor.Gateway.RestApi\Razdor.Gateway.RestApi.csproj" Type="Classic C#" />
-    <Project Path="Source\Razdor.Gateway\Razdor.Gateway.WebSocket\Razdor.Gateway.WebSocket.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Gateway\Razdor.RestApi\Razdor.RestApi.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Gateway\Razdor.SignalR\Razdor.SignalR.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/Modules/" />
   <Folder Name="/Modules/Communities/">

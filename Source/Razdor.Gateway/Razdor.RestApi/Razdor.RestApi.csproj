@@ -20,4 +20,8 @@
       <ProjectReference Include="..\..\Razdor.Identity\Razdor.Identity.Module\Razdor.Identity.Module.csproj" />
       <ProjectReference Include="..\..\Razdor.Messages\Razdor.Messages.Module\Razdor.Messages.Module.csproj" />
     </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Properties\launchSettings.json" />
+    </ItemGroup>
 </Project>

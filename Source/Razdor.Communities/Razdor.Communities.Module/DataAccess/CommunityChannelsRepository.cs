@@ -28,4 +28,16 @@ public class CommunityChannelsRepository(
         
         return channel;
     }
+    
+    public void Delete(CommunityChannel channel)
+    {
+        _context.Channels.Remove(channel);
+    }
+    
+    public async Task<List<CommunityChannel>> GetChildsAsync(ulong parentId, CancellationToken cancellationToken)
+    {
+        return await _context.Channels
+            .Where(channel => channel.ParentId == parentId)
+            .ToListAsync(cancellationToken);
+    }
 }

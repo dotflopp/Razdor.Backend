@@ -23,31 +23,35 @@ public class GetChannelMemberPermissionsHandler(
         CommunityChannel channel = await channels.FindAsync(query.ChannelId, cancellationToken);
         CommunityMember member = await members.FindAsync(channel.CommunityId, query.UserId, cancellationToken);
         
-        bool hasParentPermissions = false;
-        UserPermissions inheritedPermissions = UserPermissions.None;
+        Stack<CommunityChannel> channelFamily = new();
+        channelFamily.Push(channel);
         
-        if (channel.IsSyncing)
+        while (channel.IsSyncing)
         {
-            try
+            channel = await channels.FindAsync(channel.ParentId, cancellationToken);
+            channelFamily.Push(channel);
+
+            if (channel.ParentId == query.ChannelId)
             {
-                inheritedPermissions = await channelPermissions.GetMemberPermissionsAsync(
-                    query.UserId, channel.ParentId, cancellationToken
+                string channelIds = string.Join(
+                    ",", channelFamily.Select(x => x.Id)
                 );
-                hasParentPermissions = true;
-            }
-            catch (ResourceNotFoundException ex) when (ex.ResourceType.IsAssignableTo(typeof(CommunityChannel)))
-            {
-                logger.LogError(ex, $"Parent channel by id {channel.ParentId} not found for channel {channel.Id}");       
+                
+                logger.LogWarning($"A closed chain of channel inheritance [{channelIds}]");
+                break;
             }
         }
+
+        UserPermissions memberPermissions = await communityPermissions.GetMemberPermissionsAsync(
+            channel.CommunityId, query.UserId, cancellationToken
+        );
         
-        if (!hasParentPermissions)
+        while (channelFamily.Count > 0)
         {
-            inheritedPermissions = await communityPermissions.GetMemberPermissionsAsync(
-                channel.CommunityId, query.UserId, cancellationToken
-            );
+           channel = channelFamily.Pop();
+           memberPermissions = channel.GetPermissionsWithOverwrites(member, memberPermissions);
         }
         
-        return channel.GetPermissionsWithOverwrites(member, inheritedPermissions);
+        return memberPermissions;
     }
 }

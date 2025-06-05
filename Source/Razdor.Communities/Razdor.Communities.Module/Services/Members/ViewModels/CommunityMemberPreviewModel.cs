@@ -14,7 +14,7 @@ public record CommunityMemberPreviewModel(
     string Nickname, 
     string? Avatar, 
     DateTimeOffset JoiningDate, 
-    VoiceState VoiceState,
+    VoiceState? VoiceState,
     IEnumerable<string> RoleIds
 ){
     public static CommunityMemberPreviewModel From(CommunityMember member, UserDataViewModel userData)
@@ -30,7 +30,7 @@ public record CommunityMemberPreviewModel(
             userData.Nickname,
             userData.Avatar,
             member.JoiningDate,
-            member.VoiceState,
+            member.VoiceState == VoiceState.Default? null: member.VoiceState,
             member.RoleIds.Select(x => x.ToString())
         );
     }

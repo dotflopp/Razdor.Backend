@@ -1,23 +1,29 @@
 <Solution>
-  <Folder Name="/Communities/">
+  <Folder Name="/Gateways/">
+    <Project Path="Source\Razdor.Gateway\Razdor.Gateway.RestApi\Razdor.Gateway.RestApi.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Gateway\Razdor.Gateway.WebSockets\Razdor.Gateway.WebSockets.csproj" Type="Classic C#" />
+  </Folder>
+  <Folder Name="/Modules/" />
+  <Folder Name="/Modules/Communities/">
     <Project Path="Source\Razdor.Communities\Razdor.Communities.Domain\Razdor.Communities.Domain.csproj" />
     <Project Path="Source\Razdor.Communities\Razdor.Communities.Infrastructure\Razdor.Communities.Infrastructure.csproj" />
     <Project Path="Source\Razdor.Communities\Razdor.Communities.MigrationService\Razdor.Communities.MigrationService.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Communities\Razdor.Communities.Module\Razdor.Communities.Module.csproj" />
   </Folder>
-  <Folder Name="/Identity/">
+  <Folder Name="/Modules/Identity/">
     <Project Path="Source\Razdor.Identity\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj" />
     <Project Path="Source\Razdor.Identity\Razdor.Identity.Infrastructure\Razdor.Identity.Infrastructure.csproj" />
     <Project Path="Source\Razdor.Identity\Razdor.Identity.MigrationService\Razdor.Identity.MigrationService.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Identity\Razdor.Identity.Module\Razdor.Identity.Module.csproj" />
   </Folder>
-  <Folder Name="/Messaging/">
-    <Project Path="Source\Razdor.Messages\Razdor.Messages.MigrationService\Razdor.Messages.MigrationService.csproj" Type="Classic C#" />
+  <Folder Name="/Modules/Messaging/">
     <Project Path="Source\Razdor.Messages\Razdor.Messages.Domain\Razdor.Messages.Domain.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Messages\Razdor.Messages.Infrastructure\Razdor.Messages.Infrastructure.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Messages\Razdor.Messages.MigrationService\Razdor.Messages.MigrationService.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Messages\Razdor.Messages.Module\Razdor.Messages.Module.csproj" Type="Classic C#" />
   </Folder>
-  <Folder Name="/Shared/">
+  <Folder Name="/Modules/Shared/">
+    <Project Path="Source\Razdor.ServiceDefaults\Razdor.ServiceDefaults.csproj" />
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Domain\Razdor.Shared.Domain.csproj" />
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Extensions\Razdor.Shared.Extensions.csproj" />
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Infrastructure\Razdor.Shared.Infrastructure.csproj" Type="Classic C#" />
@@ -32,9 +38,6 @@
     <File Path="compose.yaml" />
     <File Path="Scripts\CompileModels.txt" />
   </Folder>
-  <Folder Name="/Voices/" />
-  <Project Path="Source\Razdor.Api\Razdor.Api.csproj" Type="Classic C#" />
   <Project Path="Source\Razdor.AppHost\Razdor.AppHost.csproj" />
-  <Project Path="Source\Razdor.ServiceDefaults\Razdor.ServiceDefaults.csproj" />
   <Project Path="Source\Razdor.StartApp\Razdor.StartApp.csproj" />
 </Solution>

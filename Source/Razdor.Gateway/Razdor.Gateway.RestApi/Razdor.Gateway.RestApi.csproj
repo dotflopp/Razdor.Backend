@@ -5,6 +5,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <OutputType>Library</OutputType>
+        <RootNamespace>Razdor.RestApi</RootNamespace>
     </PropertyGroup>
 
 
@@ -14,10 +15,9 @@
         <PackageReference Include="System.Linq.AsyncEnumerable" Version="10.0.0-preview.4.25258.110" />
     </ItemGroup>
 
-
     <ItemGroup>
-      <ProjectReference Include="..\Razdor.Communities\Razdor.Communities.Module\Razdor.Communities.Module.csproj" />
-      <ProjectReference Include="..\Razdor.Identity\Razdor.Identity.Module\Razdor.Identity.Module.csproj" />
-      <ProjectReference Include="..\Razdor.Messages\Razdor.Messages.Module\Razdor.Messages.Module.csproj" />
+      <ProjectReference Include="..\..\Razdor.Communities\Razdor.Communities.Module\Razdor.Communities.Module.csproj" />
+      <ProjectReference Include="..\..\Razdor.Identity\Razdor.Identity.Module\Razdor.Identity.Module.csproj" />
+      <ProjectReference Include="..\..\Razdor.Messages\Razdor.Messages.Module\Razdor.Messages.Module.csproj" />
     </ItemGroup>
 </Project>

@@ -12,7 +12,6 @@ namespace Razdor.Communities.Module.Services.Channels.Commands;
 
 public record CreateCommunityChannelCommand(
     string Name,
-    [property:JsonConverter(typeof(JsonStringEnumConverter))]
     ChannelType Type,
     [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong CommunityId,

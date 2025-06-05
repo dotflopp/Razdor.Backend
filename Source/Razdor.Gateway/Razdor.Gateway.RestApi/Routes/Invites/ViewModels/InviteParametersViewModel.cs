@@ -1,4 +1,4 @@
-﻿namespace Razdor.Api.Routes.Invites.ViewModels;
+﻿namespace Razdor.RestApi.Routes.Invites.ViewModels;
 
 public record InviteParametersViewModel(
     long? LifeTime // Seconds

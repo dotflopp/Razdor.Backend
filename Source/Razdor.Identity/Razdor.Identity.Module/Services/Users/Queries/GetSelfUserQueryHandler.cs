@@ -10,7 +10,7 @@ namespace Razdor.Identity.Module.Services.Users.Queries;
 
 public sealed class GetSelfUserQueryHandler(
     IdentityDbContext dbSqlContext,
-    IRequestSenderContextAccessor senderContext
+    IRequestSenderContext senderContext
 ) : IQueryHandler<GetSelfUserQuery, SelfUserViewModel>
 {
     public async ValueTask<SelfUserViewModel> Handle(GetSelfUserQuery query, CancellationToken cancellationToken)

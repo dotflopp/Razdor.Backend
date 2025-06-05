@@ -6,7 +6,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
 
-namespace Razdor.Api.Multipart;
+namespace Razdor.RestApi.Multipart;
 
 public class ContentWithFilesAccessor(
     IHttpContextAccessor contextAccessor,

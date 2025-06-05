@@ -1,15 +1,15 @@
-﻿using Razdor.Api.Routes.Auth;
-using Razdor.Api.Routes.Channels;
-using Razdor.Api.Routes.Channels.Overwrites;
-using Razdor.Api.Routes.Communities;
-using Razdor.Api.Routes.Communities.Members;
-using Razdor.Api.Routes.Communities.Members.Roles;
-using Razdor.Api.Routes.Communities.Roles;
-using Razdor.Api.Routes.Invites;
-using Razdor.Api.Routes.Messages;
-using Razdor.Api.Routes.Users;
+﻿using Razdor.RestApi.Routes.Auth;
+using Razdor.RestApi.Routes.Channels;
+using Razdor.RestApi.Routes.Channels.Overwrites;
+using Razdor.RestApi.Routes.Communities;
+using Razdor.RestApi.Routes.Communities.Members;
+using Razdor.RestApi.Routes.Communities.Members.Roles;
+using Razdor.RestApi.Routes.Communities.Roles;
+using Razdor.RestApi.Routes.Invites;
+using Razdor.RestApi.Routes.Messages;
+using Razdor.RestApi.Routes.Users;
 
-namespace Razdor.Api.Routes;
+namespace Razdor.RestApi.Routes;
 
 public static class ApiRouter
 {

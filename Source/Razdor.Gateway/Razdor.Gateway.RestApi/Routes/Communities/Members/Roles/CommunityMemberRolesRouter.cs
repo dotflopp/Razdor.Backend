@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Members.Commands;
-using Razdor.Communities.Module.Services.Members.ViewModels;
 
-namespace Razdor.Api.Routes.Communities.Members.Roles;
+namespace Razdor.RestApi.Routes.Communities.Members.Roles;
 
 public static class CommunityMemberRolesRouter
 {

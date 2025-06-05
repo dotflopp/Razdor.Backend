@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Authentication;
@@ -10,11 +11,11 @@ using Razdor.Identity.Module.Services.Auth.InternalCommands;
 using Razdor.Identity.Module.Services.Auth.InternalCommands.Exceptions;
 using Razdor.Shared.Module.RequestSenderContext;
 
-namespace Razdor.Api.AuthenticationScheme;
+namespace Razdor.RestApi.AuthenticationScheme;
 
 public partial class AccessTokenAuthenticationHandler : AuthenticationHandler<AccessTokenAuthenticationOptions>
 {
-    private readonly Regex _authenticationHeaderRegex;
+    private readonly Regex _bearerTokenRegex;
 
     public AccessTokenAuthenticationHandler(
         IOptionsMonitor<AccessTokenAuthenticationOptions> options,
@@ -22,20 +23,42 @@ public partial class AccessTokenAuthenticationHandler : AuthenticationHandler<Ac
         UrlEncoder encoder
     ) : base(options, logger, encoder)
     {
-        _authenticationHeaderRegex = CreateAuthenticationHeaderRegex();
+        _bearerTokenRegex = CreateBearerTokenRegex();
     }
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
     {
-        if (!Request.Headers.TryGetValue(HeaderNames.Authorization, out StringValues authorization))
+        string? accessToken = ExtractTokenFromHeader();
+
+        accessToken ??= ExtractTokenFromRoute();
+        
+        if (accessToken == null)
             return AuthenticateResult.NoResult();
+        
+        return await ValidateTokenAsync(accessToken);
+    }
+    
+    private string? ExtractTokenFromRoute()
+    {
+        if (Context.Request.Query.TryGetValue("access-token", out StringValues token))
+            return token.ToString();
+        
+        return null;
+    }
 
-        Match headerMatch = _authenticationHeaderRegex.Match(authorization.ToString());
+    private string? ExtractTokenFromHeader()
+    {
+        if (!Request.Headers.TryGetValue(HeaderNames.Authorization, out StringValues authorization))
+            return null;
+        
+        Match headerMatch = _bearerTokenRegex.Match(authorization.ToString());
+        return headerMatch.Success
+            ? headerMatch.Groups[2].Value
+            : null;
+    }
 
-        if (!headerMatch.Success)
-            return AuthenticateResult.Fail("Invalid authorization header");
-
-        string accessToken = headerMatch.Groups[2].Value;
+    private async Task<AuthenticateResult> ValidateTokenAsync(string accessToken)
+    {
         IIdentityModule identity = Context.RequestServices.GetRequiredService<IIdentityModule>();
 
         UserClaims userClaims;
@@ -54,13 +77,14 @@ public partial class AccessTokenAuthenticationHandler : AuthenticationHandler<Ac
         var claimsIdentity = new ClaimsIdentity([claim], nameof(AccessTokenAuthenticationHandler));
         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
         var ticket = new AuthenticationTicket(claimsPrincipal, Scheme.Name);
-
+        
         return AuthenticateResult.Success(ticket);
     }
+
 
     [GeneratedRegex(
         @"(Bearer|Bot)\s+([^.]*\.[^.]*\.[^.]*)",
         RegexOptions.Compiled
     )]
-    private partial Regex CreateAuthenticationHeaderRegex();
+    private partial Regex CreateBearerTokenRegex();
 }

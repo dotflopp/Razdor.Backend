@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Razdor.Api.Routes.Communities.Roles.ViewModels;
-using Razdor.Communities.Domain.Roles;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
 using Razdor.Communities.Module.Services.Roles.Commands;
+using Razdor.RestApi.Routes.Communities.Roles.ViewModels;
 
-namespace Razdor.Api.Routes.Communities.Roles;
+namespace Razdor.RestApi.Routes.Communities.Roles;
 
 public static class CommunityRolesRouter
 {

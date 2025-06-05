@@ -1,6 +1,6 @@
 ﻿using Razdor.Communities.Domain.Permissions;
 
-namespace Razdor.Api.Routes.Communities.Roles.ViewModels;
+namespace Razdor.RestApi.Routes.Communities.Roles.ViewModels;
 
 public record RolePyload(
     string Name,

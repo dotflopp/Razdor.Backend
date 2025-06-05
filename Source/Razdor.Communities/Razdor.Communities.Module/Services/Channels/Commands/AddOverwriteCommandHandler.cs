@@ -15,7 +15,7 @@ namespace Razdor.Communities.Module.Services.Channels.Commands;
 public class AddOverwriteCommandHandler(
     ICommunityChannelsRepository channels,
     ICommunitiesRepository communities,
-    IRequestSenderContextAccessor sender,
+    IRequestSenderContext sender,
     IChannelPermissionsAccessor channelPermissions,
     ICommunityPermissionsAccessor communityPermissions
 ) : ICommandHandler<AddOverwriteCommand>

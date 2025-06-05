@@ -1,6 +1,6 @@
 ﻿using Razdor.Shared.Domain.Exceptions;
 
-namespace Razdor.Api.ExceptionHandleMiddlewares.ViewModels;
+namespace Razdor.RestApi.ExceptionHandleMiddlewares.ViewModels;
 
 public record ExceptionViewModel(
     ErrorCode Code,

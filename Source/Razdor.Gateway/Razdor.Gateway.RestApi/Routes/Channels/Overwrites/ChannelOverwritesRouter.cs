@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Razdor.Api.Routes.Channels.Overwrites.ViewModels;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Channels.Commands;
 using Razdor.Communities.Module.Services.Channels.ViewModels;
+using Razdor.RestApi.Routes.Channels.Overwrites.ViewModels;
 
-namespace Razdor.Api.Routes.Channels.Overwrites;
+namespace Razdor.RestApi.Routes.Channels.Overwrites;
 
 public static class ChannelOverwritesRouter
 {

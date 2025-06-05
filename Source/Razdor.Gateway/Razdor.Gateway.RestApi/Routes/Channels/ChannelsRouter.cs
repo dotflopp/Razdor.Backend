@@ -2,7 +2,7 @@
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Channels.Commands;
 
-namespace Razdor.Api.Routes.Channels;
+namespace Razdor.RestApi.Routes.Channels;
 
 public static class ChannelsRouter
 {

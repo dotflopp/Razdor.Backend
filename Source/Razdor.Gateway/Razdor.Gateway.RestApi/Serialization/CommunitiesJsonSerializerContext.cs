@@ -1,7 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using Razdor.Api.Routes.Communities;
-using Razdor.Api.Routes.Communities.ViewModels;
-using Razdor.Api.Routes.Invites.ViewModels;
 using Razdor.Communities.Module.Services.Channels.Commands;
 using Razdor.Communities.Module.Services.Channels.Queries;
 using Razdor.Communities.Module.Services.Channels.ViewModels;
@@ -9,8 +6,10 @@ using Razdor.Communities.Module.Services.Communities.Commands;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
 using Razdor.Communities.Module.Services.Invites.Commands;
 using Razdor.Communities.Module.Services.Invites.ViewModels;
+using Razdor.RestApi.Routes.Communities.ViewModels;
+using Razdor.RestApi.Routes.Invites.ViewModels;
 
-namespace Razdor.Api.Serialization;
+namespace Razdor.RestApi.Serialization;
 
 [JsonSerializable(typeof(InviteParametersViewModel))]
 [JsonSerializable(typeof(CommunityChannelConfiguration))]

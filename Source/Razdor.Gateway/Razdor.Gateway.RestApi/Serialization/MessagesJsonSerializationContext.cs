@@ -1,10 +1,10 @@
 ﻿using System.Text.Json.Serialization;
-using Razdor.Api.Routes.Messages.ViewModels;
 using Razdor.Messages.Domain;
 using Razdor.Messages.Module.Services.Commands;
 using Razdor.Messages.Module.Services.Commands.ViewModels;
+using Razdor.RestApi.Routes.Messages.ViewModels;
 
-namespace Razdor.Api.Serialization;
+namespace Razdor.RestApi.Serialization;
 
 [JsonSerializable(typeof(MessagePyload))]
 [JsonSerializable(typeof(Embed))]

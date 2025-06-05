@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Razdor.Api.Routes.Communities.ViewModels;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Channels.Commands;
 using Razdor.Communities.Module.Services.Channels.Queries;
@@ -8,10 +7,10 @@ using Razdor.Communities.Module.Services.Communities.Commands;
 using Razdor.Communities.Module.Services.Communities.InternalQueries;
 using Razdor.Communities.Module.Services.Communities.Queries;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
-using Razdor.Messages.Module.Services.Commands.ViewModels;
+using Razdor.RestApi.Routes.Communities.ViewModels;
 using Razdor.Shared.Module.Media;
 
-namespace Razdor.Api.Routes.Communities;
+namespace Razdor.RestApi.Routes.Communities;
 
 public static class CommunitiesRouter
 {

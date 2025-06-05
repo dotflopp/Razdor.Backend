@@ -1,9 +1,9 @@
-﻿using Razdor.Api.ExceptionHandleMiddlewares.ViewModels;
-using Razdor.Api.Serialization;
+﻿using Razdor.RestApi.ExceptionHandleMiddlewares.ViewModels;
 using Razdor.Shared.Domain.Exceptions;
 using Razdor.Shared.Extensions;
+using SharedJsonSerializerContext = Razdor.Api.Serialization.SharedJsonSerializerContext;
 
-namespace Razdor.Api.ExceptionHandleMiddlewares;
+namespace Razdor.RestApi.ExceptionHandleMiddlewares;
 
 public static class WebAppStatusCodeHandleMiddlewareExtensions
 {

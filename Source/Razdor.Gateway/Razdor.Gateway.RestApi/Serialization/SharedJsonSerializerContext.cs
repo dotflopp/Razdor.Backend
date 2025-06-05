@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
-using Razdor.Api.ExceptionHandleMiddlewares.ViewModels;
+using Razdor.RestApi.ExceptionHandleMiddlewares.ViewModels;
 
-namespace Razdor.Api.Serialization;
+namespace Razdor.RestApi.Serialization;
 
 [JsonSerializable(typeof(ExceptionViewModel))]
 public partial class SharedJsonSerializerContext : JsonSerializerContext

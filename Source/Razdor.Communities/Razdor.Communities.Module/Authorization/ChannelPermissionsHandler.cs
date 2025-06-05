@@ -12,7 +12,7 @@ using Razdor.Shared.Module.RequestSenderContext;
 namespace Razdor.Communities.Module.Authorization;
 
 public class ChannelPermissionsHandler<TMessage, TResponse>(
-    IRequestSenderContextAccessor sender,
+    IRequestSenderContext sender,
     IChannelPermissionsAccessor channelPermissions,
     ILogger<ChannelPermissionsHandler<TMessage, TResponse>> logger
 ) : IPipelineBehavior<TMessage, TResponse> where TMessage : IRequiredChannelPermissions

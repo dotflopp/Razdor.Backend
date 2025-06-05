@@ -1,6 +1,6 @@
 ﻿using Razdor.Communities.Domain.Permissions;
 
-namespace Razdor.Api.Routes.Channels.Overwrites.ViewModels;
+namespace Razdor.RestApi.Routes.Channels.Overwrites.ViewModels;
 
 public record OverwritePyload(    
     PermissionTargetType TargetType,

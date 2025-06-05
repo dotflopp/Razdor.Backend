@@ -9,7 +9,7 @@ namespace Razdor.Communities.Module.Services.Communities.Queries;
 
 public sealed class GetSelfUserCommunitiesQueryHandler(
     CommunitiesDbContext context,
-    IRequestSenderContextAccessor sender
+    IRequestSenderContext sender
 ) : IQueryHandler<GetSelfUserCommunitiesQuery, IEnumerable<CommunityViewModel>>
 {
     public async ValueTask<IEnumerable<CommunityViewModel>> Handle(

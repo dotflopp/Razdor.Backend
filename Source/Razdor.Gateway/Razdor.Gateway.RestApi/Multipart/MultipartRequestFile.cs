@@ -1,4 +1,4 @@
-﻿namespace Razdor.Api.Multipart;
+﻿namespace Razdor.RestApi.Multipart;
 
 public record MultipartRequestFile(
     string Name,

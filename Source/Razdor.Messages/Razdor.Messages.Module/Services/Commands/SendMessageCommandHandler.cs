@@ -11,7 +11,7 @@ namespace Razdor.Messages.Module.Services.Commands;
 
 public class SendMessageCommandHandler(
     SnowflakeGenerator snowflake,
-    IRequestSenderContextAccessor sender,
+    IRequestSenderContext sender,
     IMessagesRepository messageses,
     TimeProvider timeProvider,
     IFileStore store

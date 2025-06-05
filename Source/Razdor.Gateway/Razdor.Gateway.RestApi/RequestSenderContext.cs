@@ -1,9 +1,9 @@
 ﻿using System.Security.Claims;
 using Razdor.Shared.Module.RequestSenderContext;
 
-namespace Razdor.Api;
+namespace Razdor.RestApi;
 
-public class RequestSenderContextAccessor(IHttpContextAccessor httpContextAccessor) : IRequestSenderContextAccessor
+public class RequestSenderContext(IHttpContextAccessor httpContextAccessor) : IRequestSenderContext
 {
     private UserClaims? _user;
 

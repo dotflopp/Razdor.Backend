@@ -7,7 +7,7 @@ namespace Razdor.Identity.Module.Services.Users.Commands;
 
 public class ChangeSelectedStatusCommandHandler(
     IUserRepository users,
-    IRequestSenderContextAccessor sender
+    IRequestSenderContext sender
 ): ICommandHandler<ChangeSelectedStatusCommand>
 {
     public async ValueTask<Unit> Handle(ChangeSelectedStatusCommand command, CancellationToken cancellationToken)

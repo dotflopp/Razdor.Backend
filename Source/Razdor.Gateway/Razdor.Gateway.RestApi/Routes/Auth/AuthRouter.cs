@@ -1,11 +1,11 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc;
-using Razdor.Api.ExceptionHandleMiddlewares.ViewModels;
 using Razdor.Identity.Module.Contracts;
 using Razdor.Identity.Module.Services.Auth.Commands;
 using Razdor.Identity.Module.Services.Auth.Commands.ViewModels;
+using Razdor.RestApi.ExceptionHandleMiddlewares.ViewModels;
 
-namespace Razdor.Api.Routes.Auth;
+namespace Razdor.RestApi.Routes.Auth;
 
 public static class AuthRouter
 {

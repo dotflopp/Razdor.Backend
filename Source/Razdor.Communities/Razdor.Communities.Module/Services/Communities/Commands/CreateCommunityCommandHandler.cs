@@ -13,7 +13,7 @@ public sealed class CreateCommunityCommandHandler(
     UnitOfWork<CommunitiesDbContext> unitOfWork,
     ICommunitiesRepository communities,
     ICommunityMembersRepository communityMembers,
-    IRequestSenderContextAccessor senderContext,
+    IRequestSenderContext senderContext,
     SnowflakeGenerator snowflakeGenerator,
     TimeProvider timeProvider
 ) : ICommandHandler<CreateCommunityCommand, CommunityViewModel>

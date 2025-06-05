@@ -5,7 +5,7 @@ using Razdor.Shared.Module.RequestSenderContext;
 namespace Razdor.Shared.Module.Authorization;
 
 public sealed class AuthorizationHandler<TMessage, TResponse>(
-    IRequestSenderContextAccessor sender
+    IRequestSenderContext sender
 ) : IPipelineBehavior<TMessage, TResponse> where TMessage : IAuthorizationRequiredMessage
 {
     public ValueTask<TResponse> Handle(TMessage message, MessageHandlerDelegate<TMessage, TResponse> next, CancellationToken cancellationToken)

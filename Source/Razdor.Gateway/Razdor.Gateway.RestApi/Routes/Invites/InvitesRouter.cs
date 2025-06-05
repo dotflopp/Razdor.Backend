@@ -1,13 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Razdor.Api.Routes.Invites.ViewModels;
 using Razdor.Communities.Module.Contracts;
-using Razdor.Communities.Module.Services.Communities.ViewModels;
 using Razdor.Communities.Module.Services.Invites.Commands;
 using Razdor.Communities.Module.Services.Invites.Queries;
 using Razdor.Communities.Module.Services.Invites.ViewModels;
-using Razdor.Shared.Module;
+using Razdor.RestApi.Routes.Invites.ViewModels;
 
-namespace Razdor.Api.Routes.Invites;
+namespace Razdor.RestApi.Routes.Invites;
 
 public static class InvitesRouter
 {

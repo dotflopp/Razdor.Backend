@@ -14,7 +14,7 @@ namespace Razdor.Communities.Module.Services.Invites.Commands;
 
 public sealed class CreateInviteCommandHandler(
     TimeProvider timeProvider,
-    IRequestSenderContextAccessor senderContext,
+    IRequestSenderContext senderContext,
     ICommunitiesRepository communities,
     IInvitesRepository invites,
     SnowflakeGenerator snowflakeGenerator,

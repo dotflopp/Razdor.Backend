@@ -19,7 +19,7 @@ public sealed class AcceptInviteCommandHandler(
     ICommunitiesRepository communities,
     ICommunityMembersRepository members,
     UnitOfWork<CommunitiesDbContext> unitOfWork,
-    IRequestSenderContextAccessor sender,
+    IRequestSenderContext sender,
     TimeProvider timeProvider
 ) : ICommandHandler<AcceptInviteCommand, InvitePreviewModel>
 {

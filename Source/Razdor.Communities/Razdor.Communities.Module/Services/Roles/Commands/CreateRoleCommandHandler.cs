@@ -13,7 +13,7 @@ namespace Razdor.Communities.Module.Services.Roles.Commands;
 public class CreateRoleCommandHandler(
     ICommunitiesRepository communities,
     ICommunityPermissionsAccessor permissionsAccessor,
-    IRequestSenderContextAccessor sender,
+    IRequestSenderContext sender,
     SnowflakeGenerator snowflake
 ) : ICommandHandler<CreateRoleCommand, RoleViewModel>
 {

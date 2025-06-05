@@ -10,7 +10,7 @@ using Razdor.Shared.Module.RequestSenderContext;
 namespace Razdor.Identity.Module.Services.Users.Commands;
 
 public class UploadUserAvatarCommandHandler(
-    IRequestSenderContextAccessor sender,
+    IRequestSenderContext sender,
     IUserRepository userRepository,
     IFileStore store    
 ): ICommandHandler<UploadUserAvatarCommand>

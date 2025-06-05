@@ -15,7 +15,7 @@ public record SessionViewModel(
 
 public class ConnectChannelCommandHandler(
     ISignalingService signalingService,
-    IRequestSenderContextAccessor sender
+    IRequestSenderContext sender
 ): ICommandHandler<ConnectChannelCommand, SessionViewModel>
 {
     public async ValueTask<SessionViewModel> Handle(ConnectChannelCommand command, CancellationToken cancellationToken)

@@ -2,15 +2,7 @@ using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 using Asp.Versioning;
 using Microsoft.AspNetCore.Routing.Constraints;
-using Microsoft.OpenApi.Models;
 using Razdor.Api;
-using Razdor.Api.AuthenticationScheme;
-using Razdor.Api.Constraints;
-using Razdor.Api.ExceptionHandleMiddlewares;
-using Razdor.Api.Multipart;
-using Razdor.Api.OpenAPI;
-using Razdor.Api.Routes;
-using Razdor.Api.Routes.Communities;
 using Razdor.Communities.Infrastructure;
 using Razdor.Communities.Module.Authorization;
 using Razdor.Identity.Infrastructure;
@@ -21,9 +13,20 @@ using Razdor.Shared.Module.RequestSenderContext;
 using Scalar.AspNetCore;
 using Razdor.Api.Serialization;
 using Razdor.Messages.Infrastructure;
+using Razdor.RestApi;
+using Razdor.RestApi.AuthenticationScheme;
+using Razdor.RestApi.Constraints;
+using Razdor.RestApi.ExceptionHandleMiddlewares;
+using Razdor.RestApi.Multipart;
+using Razdor.RestApi.OpenAPI;
+using Razdor.RestApi.Routes;
 using Razdor.Shared.Infrastructure;
 using Razdor.Shared.Module.Media;
 using Razdor.StartApp;
+using CommunitiesJsonSerializerContext = Razdor.RestApi.Serialization.CommunitiesJsonSerializerContext;
+using IdentityJsonSerializerContext = Razdor.RestApi.Serialization.IdentityJsonSerializerContext;
+using MessagesJsonSerializationContext = Razdor.RestApi.Serialization.MessagesJsonSerializationContext;
+using SharedJsonSerializerContext = Razdor.RestApi.Serialization.SharedJsonSerializerContext;
 
 WebApplicationBuilder builder = WebApplication.CreateSlimBuilder(args);
 
@@ -130,7 +133,7 @@ builder.Services.AddSingleton(
 
 //UserContext Accessor
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<IRequestSenderContextAccessor, RequestSenderContextAccessor>();
+builder.Services.AddScoped<IRequestSenderContext, RequestSenderContext>();
 
 // Identity services
 string identityDb = builder.Configuration.GetConnectionString("identitydb")!;

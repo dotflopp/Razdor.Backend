@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.OpenApi;
 using Microsoft.OpenApi.Models;
 
-namespace Razdor.Api.OpenAPI;
+namespace Razdor.RestApi.OpenAPI;
 
 public class BearerSecuritySchemeTransformer: IOpenApiDocumentTransformer
 {

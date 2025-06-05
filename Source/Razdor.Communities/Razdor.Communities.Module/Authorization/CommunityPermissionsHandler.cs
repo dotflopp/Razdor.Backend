@@ -11,7 +11,7 @@ using Razdor.Shared.Module.RequestSenderContext;
 namespace Razdor.Communities.Module.Authorization;
 
 public sealed class CommunityPermissionsHandler<TMessage, TResponse>(
-    IRequestSenderContextAccessor senderContext,
+    IRequestSenderContext senderContext,
     ICommunityPermissionsAccessor communityPermissions,
     ILogger<CommunityPermissionsHandler<TMessage, TResponse>> logger
 ) : IPipelineBehavior<TMessage, TResponse> where TMessage : IRequiredCommunityPermissions

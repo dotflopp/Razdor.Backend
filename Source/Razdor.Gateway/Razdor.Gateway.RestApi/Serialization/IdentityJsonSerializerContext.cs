@@ -4,7 +4,7 @@ using Razdor.Identity.Module.Services.Auth.Commands.ViewModels;
 using Razdor.Identity.Module.Services.Users.Commands;
 using Razdor.Identity.Module.Services.Users.ViewModels;
 
-namespace Razdor.Api.Serialization;
+namespace Razdor.RestApi.Serialization;
 
 [JsonSerializable(typeof(LoginCommand))]
 [JsonSerializable(typeof(SignupCommand))]

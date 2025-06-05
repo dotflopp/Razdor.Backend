@@ -13,7 +13,7 @@ namespace Razdor.Communities.Module.Services.Members.Commands;
 public class AddMemberRoleCommandHandler(
     ICommunitiesRepository communities,
     ICommunityMembersRepository members,
-    IRequestSenderContextAccessor sender,
+    IRequestSenderContext sender,
     ICommunityPermissionsAccessor permisionsAccessor
 ): ICommandHandler<AddMemberRoleCommand>
 {

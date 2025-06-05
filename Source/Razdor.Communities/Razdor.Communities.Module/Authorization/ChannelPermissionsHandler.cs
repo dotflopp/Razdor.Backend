@@ -31,11 +31,8 @@ public class ChannelPermissionsHandler<TMessage, TResponse>(
                 cancellationToken
             );
         }
-        catch (ResourceNotFoundException ex) when(
-            ex.ResourceType.IsAssignableTo(typeof(CommunityMember))
-            || ex.ResourceType.IsAssignableTo(typeof(CommunityChannel))
-            || ex.ResourceType.IsAssignableTo(typeof(Community))
-        ){
+        catch (ResourceNotFoundException ex) 
+        {
             throw new AccessForbiddenException(ex.Message, ex);
         }
         catch (Exception ex)

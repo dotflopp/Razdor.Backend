@@ -31,10 +31,8 @@ public sealed class CommunityPermissionsHandler<TMessage, TResponse>(
                 cancellationToken
             );
         }
-        catch (ResourceNotFoundException ex) when ( 
-            ex.ResourceType.IsAssignableTo(typeof(Community))
-            || ex.ResourceType.IsAssignableTo(typeof(CommunityMember))
-        ){
+        catch (ResourceNotFoundException ex)
+        {
             throw new AccessForbiddenException(ex.Message, ex);
         }
         catch (Exception ex)

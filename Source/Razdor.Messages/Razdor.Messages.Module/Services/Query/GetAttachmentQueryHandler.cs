@@ -6,6 +6,7 @@ using Razdor.Messages.Module.Services.Commands.ViewModels;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Exceptions;
 using Razdor.Shared.Module.Media;
+using Razdor.Shared.Module.Media.Exceptions;
 
 namespace Razdor.Messages.Module.Services.Query;
 

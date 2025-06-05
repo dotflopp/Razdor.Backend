@@ -1,6 +1,4 @@
-﻿using Razdor.Communities.Domain.Roles;
-
-namespace Razdor.Communities.Module.Services.Members.ViewModels;
+﻿namespace Razdor.Api.Routes.Communities.Members.Roles.ViewModel;
 
 public record MemberRolesViewModel(
     List<string> Roles  

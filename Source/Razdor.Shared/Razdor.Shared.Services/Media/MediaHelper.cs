@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
 using Mediator;
-using Razdor.Messages.Module.Services.Commands.ViewModels;
 using Razdor.Shared.Domain;
 using Razdor.Shared.Module.Exceptions;
+using Razdor.Shared.Module.Media.Exceptions;
 
 namespace Razdor.Shared.Module.Media;
 

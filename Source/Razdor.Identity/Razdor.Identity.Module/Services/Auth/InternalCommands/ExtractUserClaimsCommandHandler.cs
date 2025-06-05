@@ -1,10 +1,10 @@
 ﻿using Mediator;
 using Razdor.Identity.Domain.Users;
-using Razdor.Identity.Module.Auth.AccessTokens;
-using Razdor.Identity.Module.Auth.InternalCommands.Exceptions;
+using Razdor.Identity.Module.Services.Auth.AccessTokens;
+using Razdor.Identity.Module.Services.Auth.InternalCommands.Exceptions;
 using Razdor.Shared.Module.RequestSenderContext;
 
-namespace Razdor.Identity.Module.Auth.InternalCommands;
+namespace Razdor.Identity.Module.Services.Auth.InternalCommands;
 
 public class ExtractUserClaimsCommandHandler(
     AccessTokenSource tokenSource,

@@ -1,6 +1,6 @@
 ﻿using Mediator;
 using Razdor.Identity.Domain.Users;
-using Razdor.Identity.Module.Users.Queries.Exceptions;
+using Razdor.Identity.Module.Services.Users.Queries.Exceptions;
 using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.Identity.Module.Services.Users.Commands;

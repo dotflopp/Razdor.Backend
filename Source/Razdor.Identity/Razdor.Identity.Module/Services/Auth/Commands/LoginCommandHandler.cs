@@ -1,11 +1,11 @@
 ﻿using Mediator;
 using Microsoft.AspNetCore.Identity;
 using Razdor.Identity.Domain.Users;
-using Razdor.Identity.Module.Auth.AccessTokens;
-using Razdor.Identity.Module.Auth.Commands.Exceptions;
-using Razdor.Identity.Module.Auth.Commands.ViewModels;
+using Razdor.Identity.Module.Services.Auth.AccessTokens;
+using Razdor.Identity.Module.Services.Auth.Commands.Exceptions;
+using Razdor.Identity.Module.Services.Auth.Commands.ViewModels;
 
-namespace Razdor.Identity.Module.Auth.Commands;
+namespace Razdor.Identity.Module.Services.Auth.Commands;
 
 public sealed class LoginCommandHandler(
     IPasswordHasher<UserAccount> passwordHasher,

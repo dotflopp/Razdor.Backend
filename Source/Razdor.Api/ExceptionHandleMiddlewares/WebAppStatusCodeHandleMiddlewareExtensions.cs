@@ -1,9 +1,9 @@
-﻿using Razdor.Api.Middlewares.ViewModels;
+﻿using Razdor.Api.ExceptionHandleMiddlewares.ViewModels;
 using Razdor.Api.Serialization;
 using Razdor.Shared.Domain.Exceptions;
 using Razdor.Shared.Extensions;
 
-namespace Razdor.Api.Middlewares;
+namespace Razdor.Api.ExceptionHandleMiddlewares;
 
 public static class WebAppStatusCodeHandleMiddlewareExtensions
 {

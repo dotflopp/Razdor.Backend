@@ -6,8 +6,8 @@ using Razdor.Communities.Module.Services.Communities.InternalQueries;
 using Razdor.Communities.Module.Services.Members;
 using Razdor.Communities.Module.Services.Members.ViewModels;
 using Razdor.Identity.Module.Contracts;
-using Razdor.Identity.Module.Users.Queries;
-using Razdor.Identity.Module.Users.ViewModels;
+using Razdor.Identity.Module.Services.Users.Queries;
+using Razdor.Identity.Module.Services.Users.ViewModels;
 
 namespace Razdor.Communities.Infrastructure;
 

@@ -1,6 +1,6 @@
 ﻿using Mediator;
 
-namespace Razdor.Shared.Module;
+namespace Razdor.Shared.IntegrationEvents;
 
 public interface IIntegrationEventHandler<in TNotification> 
     : INotificationHandler<TNotification> where TNotification : IIntegrationEvent;

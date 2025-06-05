@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNetCore.Mvc;
-using Razdor.Api.Middlewares.ViewModels;
-using Razdor.Identity.Module.Auth.Commands;
-using Razdor.Identity.Module.Auth.Commands.ViewModels;
+using Razdor.Api.ExceptionHandleMiddlewares.ViewModels;
 using Razdor.Identity.Module.Contracts;
+using Razdor.Identity.Module.Services.Auth.Commands;
+using Razdor.Identity.Module.Services.Auth.Commands.ViewModels;
 
 namespace Razdor.Api.Routes.Auth;
 

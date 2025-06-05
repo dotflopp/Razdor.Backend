@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Razdor.Communities.Domain.Invites;
+using Razdor.Shared.Module.Exceptions;
 
-namespace Razdor.Shared.Module.Exceptions;
+namespace Razdor.Communities.Module.Exceptions;
 
 public static class ExceptionHelper
 {

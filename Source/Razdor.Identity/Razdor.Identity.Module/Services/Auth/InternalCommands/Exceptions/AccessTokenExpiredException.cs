@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Razdor.Shared.Domain.Exceptions;
 
-namespace Razdor.Identity.Module.Auth.InternalCommands.Exceptions;
+namespace Razdor.Identity.Module.Services.Auth.InternalCommands.Exceptions;
 
 public class AccessTokenExpiredException(
     string message,

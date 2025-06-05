@@ -1,8 +1,8 @@
 ﻿using System.Text.Json.Serialization;
-using Razdor.Identity.Module.Auth.Commands;
-using Razdor.Identity.Module.Auth.Commands.ViewModels;
+using Razdor.Identity.Module.Services.Auth.Commands;
+using Razdor.Identity.Module.Services.Auth.Commands.ViewModels;
 using Razdor.Identity.Module.Services.Users.Commands;
-using Razdor.Identity.Module.Users.ViewModels;
+using Razdor.Identity.Module.Services.Users.ViewModels;
 
 namespace Razdor.Api.Serialization;
 

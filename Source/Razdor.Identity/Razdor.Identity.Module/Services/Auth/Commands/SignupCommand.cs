@@ -1,7 +1,7 @@
-﻿using Razdor.Identity.Module.Auth.Commands.ViewModels;
-using Razdor.Identity.Module.Contracts;
+﻿using Razdor.Identity.Module.Contracts;
+using Razdor.Identity.Module.Services.Auth.Commands.ViewModels;
 
-namespace Razdor.Identity.Module.Auth.Commands;
+namespace Razdor.Identity.Module.Services.Auth.Commands;
 
 public sealed record SignupCommand(
     string IdentityName,

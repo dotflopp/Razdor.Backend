@@ -1,13 +1,11 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Razdor.Communities.Domain.Members;
-using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.DataAccess;
-using Razdor.Communities.Module.Exceptions;
 using Razdor.Communities.Module.Services.Members.ViewModels;
 using Razdor.Shared.Module.Exceptions;
 
-namespace Razdor.Communities.Module.Services.Members;
+namespace Razdor.Communities.Module.Services.Members.Queries;
 
 public class GetCommunityMemberQueryHandler(
     CommunitiesDbContext context,

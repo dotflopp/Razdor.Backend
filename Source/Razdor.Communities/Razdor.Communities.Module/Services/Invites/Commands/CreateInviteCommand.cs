@@ -2,6 +2,7 @@
 using Razdor.Communities.Module.Authorization;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Communities.Module.Services.Invites.ViewModels;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Authorization;
 

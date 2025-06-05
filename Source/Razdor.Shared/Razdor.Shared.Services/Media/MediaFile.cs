@@ -1,6 +1,4 @@
-﻿using Razdor.Shared.Module.Media;
-
-namespace Razdor.Messages.Module.Services.Commands.ViewModels;
+﻿namespace Razdor.Shared.Module.Media;
 
 public record MediaFile(
     string FileName,

@@ -1,4 +1,4 @@
-﻿namespace Razdor.Shared.Module;
+﻿namespace Razdor.Shared.Module.Media;
 
 public interface IFileStore
 {

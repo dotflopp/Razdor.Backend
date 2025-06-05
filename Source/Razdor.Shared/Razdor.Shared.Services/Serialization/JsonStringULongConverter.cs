@@ -1,7 +1,7 @@
 ﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Razdor.Shared.Module;
+namespace Razdor.Shared.Module.Serialization;
 
 public sealed class JsonStringULongConverter : JsonConverter<ulong>
 {

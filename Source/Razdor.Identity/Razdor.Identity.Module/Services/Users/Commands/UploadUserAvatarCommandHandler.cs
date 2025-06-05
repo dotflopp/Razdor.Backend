@@ -1,10 +1,10 @@
 ﻿using Mediator;
 using Razdor.Identity.Domain.Users;
-using Razdor.Identity.Module.Services.Users.Avatars;
 using Razdor.Shared.Domain;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Exceptions;
 using Razdor.Shared.Module.Media;
+using Razdor.Shared.Module.Media.Exceptions;
 using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.Identity.Module.Services.Users.Commands;

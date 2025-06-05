@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Razdor.Identity.Domain.Users;
 using Razdor.Identity.Infrastructure.DataAccess;
-using Razdor.Identity.Module.Auth.AccessTokens;
 using Razdor.Identity.Module.Contracts;
 using Razdor.Identity.Module.DataAccess;
+using Razdor.Identity.Module.Services.Auth.AccessTokens;
 using Razdor.Shared.Module.DataAccess;
 
 namespace Razdor.Identity.Infrastructure;

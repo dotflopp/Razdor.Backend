@@ -1,4 +1,6 @@
-﻿using Razdor.Shared.Module;
+﻿using Razdor.Shared.Module.Media;
+
+namespace Razdor.Shared.Infrastructure;
 
 public class LocalFileStore : IFileStore
 {

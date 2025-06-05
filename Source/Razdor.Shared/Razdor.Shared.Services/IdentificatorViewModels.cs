@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Razdor.Communities.Domain.Invites;
 using Razdor.Shared.Domain;
+using Razdor.Shared.Module.Serialization;
 
 namespace Razdor.Shared.Module;
 

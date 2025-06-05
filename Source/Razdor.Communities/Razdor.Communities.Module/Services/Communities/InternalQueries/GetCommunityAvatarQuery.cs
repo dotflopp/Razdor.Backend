@@ -1,6 +1,6 @@
 ﻿using Razdor.Communities.Domain;
 using Razdor.Communities.Module.Contracts;
-using Razdor.Messages.Module.Services.Commands.ViewModels;
+using Razdor.Shared.Module.Media;
 
 namespace Razdor.Communities.Module.Services.Communities.InternalQueries;
 

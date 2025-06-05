@@ -1,14 +1,13 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Razdor.Api.Middlewares.ViewModels;
+﻿using Microsoft.AspNetCore.Mvc;
 using Razdor.Api.Multipart;
-using Razdor.Api.Routes.Messaging.ViewModels;
+using Razdor.Api.Routes.Messages.ViewModels;
 using Razdor.Messages.Module.Contracts;
 using Razdor.Messages.Module.Services.Commands;
 using Razdor.Messages.Module.Services.Commands.ViewModels;
 using Razdor.Messages.Module.Services.Query;
+using Razdor.Shared.Module.Media;
 
-namespace Razdor.Api.Routes.Messaging;
+namespace Razdor.Api.Routes.Messages;
 
 public static class MessagingRouter
 {

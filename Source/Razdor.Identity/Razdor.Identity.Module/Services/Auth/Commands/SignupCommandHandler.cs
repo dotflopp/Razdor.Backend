@@ -2,12 +2,12 @@
 using Microsoft.AspNetCore.Identity;
 using Razdor.Identity.Domain.Users;
 using Razdor.Identity.Domain.Users.Rules;
-using Razdor.Identity.Module.Auth.AccessTokens;
-using Razdor.Identity.Module.Auth.Commands.ViewModels;
+using Razdor.Identity.Module.Services.Auth.AccessTokens;
+using Razdor.Identity.Module.Services.Auth.Commands.ViewModels;
 using Razdor.Shared.Domain.Rules;
 using Razdor.Shared.Module;
 
-namespace Razdor.Identity.Module.Auth.Commands;
+namespace Razdor.Identity.Module.Services.Auth.Commands;
 
 public sealed class SignupCommandHandler(
     IPasswordHasher<UserAccount> passwordHasher,

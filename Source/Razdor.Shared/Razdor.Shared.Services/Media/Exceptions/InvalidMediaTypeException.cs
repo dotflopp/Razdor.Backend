@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Razdor.Shared.Domain.Exceptions;
 
-namespace Razdor.Shared.Module.Exceptions;
+namespace Razdor.Shared.Module.Media.Exceptions;
 
 public class InvalidMediaTypeException(
     string? message = null,

@@ -5,6 +5,7 @@ using Razdor.Communities.Domain.Invites;
 using Razdor.Communities.Module.DataAccess;
 using Razdor.Communities.Module.Exceptions;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Communities.Module.Services.Invites.ViewModels;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.DataAccess;
 using Razdor.Shared.Module.RequestSenderContext;

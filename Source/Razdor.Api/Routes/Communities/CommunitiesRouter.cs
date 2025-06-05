@@ -9,6 +9,7 @@ using Razdor.Communities.Module.Services.Communities.InternalQueries;
 using Razdor.Communities.Module.Services.Communities.Queries;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
 using Razdor.Messages.Module.Services.Commands.ViewModels;
+using Razdor.Shared.Module.Media;
 
 namespace Razdor.Api.Routes.Communities;
 

@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Razdor.Identity.Domain.Users;
 using Razdor.Identity.Module.DataAccess;
-using Razdor.Identity.Module.Users.Queries.Exceptions;
-using Razdor.Identity.Module.Users.ViewModels;
+using Razdor.Identity.Module.Services.Users.Queries.Exceptions;
+using Razdor.Identity.Module.Services.Users.ViewModels;
 using Razdor.Shared.Module.RequestSenderContext;
 
-namespace Razdor.Identity.Module.Users.Queries;
+namespace Razdor.Identity.Module.Services.Users.Queries;
 
 public sealed class GetSelfUserQueryHandler(
     IdentityDbContext dbSqlContext,

@@ -1,13 +1,13 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
-using Razdor.Api.Middlewares.ViewModels;
+using Razdor.Api.ExceptionHandleMiddlewares.ViewModels;
 using Razdor.Identity.Module.Contracts;
-using Razdor.Identity.Module.Services.Users.Avatars.Queries;
 using Razdor.Identity.Module.Services.Users.Commands;
-using Razdor.Identity.Module.Users.Queries;
-using Razdor.Identity.Module.Users.ViewModels;
+using Razdor.Identity.Module.Services.Users.Queries;
+using Razdor.Identity.Module.Services.Users.ViewModels;
 using Razdor.Messages.Module.Services.Commands.ViewModels;
+using Razdor.Shared.Module.Media;
 
 namespace Razdor.Api.Routes.Users;
 

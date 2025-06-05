@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
-using Razdor.Identity.Module.Auth.InternalCommands;
-using Razdor.Identity.Module.Auth.InternalCommands.Exceptions;
 using Razdor.Identity.Module.Contracts;
+using Razdor.Identity.Module.Services.Auth.InternalCommands;
+using Razdor.Identity.Module.Services.Auth.InternalCommands.Exceptions;
 using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.Api.AuthenticationScheme;

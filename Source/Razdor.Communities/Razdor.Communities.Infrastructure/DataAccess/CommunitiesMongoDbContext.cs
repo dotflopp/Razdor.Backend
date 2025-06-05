@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Infrastructure.DataAccess.EntityConfigurations;
 using Razdor.Communities.Infrastructure.DataAccess.TypeConverters;
@@ -6,6 +7,8 @@ using Razdor.Communities.Module.DataAccess;
 
 namespace Razdor.Communities.Infrastructure.DataAccess;
 
+[method:RequiresUnreferencedCode("EF Core isn't fully compatible with trimming, and running the application may generate unexpected runtime failures. Some specific coding pattern are usually required to make trimming work properly, see https://aka.ms/efcore-docs-trimming for more details.")]
+[method:RequiresDynamicCode("EF Core isn't fully compatible with NativeAOT, and running the application may generate unexpected runtime failures.")]
 public class CommunitiesMongoDbContext(
     DbContextOptions<CommunitiesMongoDbContext> options
 ) : CommunitiesDbContext(options)

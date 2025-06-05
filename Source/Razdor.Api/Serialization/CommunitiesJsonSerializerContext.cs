@@ -8,6 +8,7 @@ using Razdor.Communities.Module.Services.Channels.ViewModels;
 using Razdor.Communities.Module.Services.Communities.Commands;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
 using Razdor.Communities.Module.Services.Invites.Commands;
+using Razdor.Communities.Module.Services.Invites.ViewModels;
 
 namespace Razdor.Api.Serialization;
 

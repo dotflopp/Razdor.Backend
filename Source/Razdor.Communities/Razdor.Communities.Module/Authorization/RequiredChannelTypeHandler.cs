@@ -5,6 +5,8 @@ using Razdor.Communities.Module.DataAccess;
 using Razdor.Communities.Module.Exceptions;
 using Razdor.Shared.Module.Authorization;
 
+namespace Razdor.Communities.Module.Authorization;
+
 public class RequiredChannelTypeHandler<TMessage, TResponse>(
     CommunitiesDbContext context  
 ): IPipelineBehavior<TMessage, TResponse>

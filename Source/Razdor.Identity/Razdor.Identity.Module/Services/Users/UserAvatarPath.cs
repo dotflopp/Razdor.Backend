@@ -1,6 +1,6 @@
 ﻿using Razdor.Shared.Module.Media;
 
-namespace Razdor.Identity.Module.Services.Users.Avatars;
+namespace Razdor.Identity.Module.Services.Users;
 
 public record struct UserAvatarPath(
     ulong UserId

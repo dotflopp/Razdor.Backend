@@ -6,6 +6,7 @@ using Razdor.Communities.Domain.Rules;
 using Razdor.Communities.Module.DataAccess;
 using Razdor.Communities.Module.Exceptions;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Communities.Module.Services.Invites.ViewModels;
 using Razdor.Shared.Domain.Rules;
 using Razdor.Shared.Module.DataAccess;
 using Razdor.Shared.Module.Exceptions;

@@ -1,4 +1,5 @@
-﻿using Razdor.Shared.Module;
+﻿using Razdor.Shared.IntegrationEvents;
+using Razdor.Shared.Module;
 
 namespace Razdor.Shared.Infrastructure.Events;
 

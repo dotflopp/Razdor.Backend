@@ -6,6 +6,7 @@ using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Channels.ViewModels;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Authorization;
+using Razdor.Shared.Module.Serialization;
 
 namespace Razdor.Communities.Module.Services.Channels.Commands;
 

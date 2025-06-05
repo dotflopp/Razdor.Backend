@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Razdor.Communities.Domain.Channels;
 using Razdor.Shared.Module;
+using Razdor.Shared.Module.Serialization;
 
 namespace Razdor.Api.Routes.Communities.ViewModels;
 

@@ -1,8 +1,7 @@
-﻿using Razdor.Communities.Domain.Members;
-using Razdor.Communities.Module.Contracts;
+﻿using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Members.ViewModels;
 
-namespace Razdor.Communities.Module.Services.Members;
+namespace Razdor.Communities.Module.Services.Members.Queries;
 
 public record GetCommunityMembersQuery(
     ulong CommunityId,

@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Razdor.Identity.Module.Auth.AccessTokens;
+namespace Razdor.Identity.Module.Services.Auth.AccessTokens;
 
 public record AccessTokenSourceOptions(
     DateTime StartTime,

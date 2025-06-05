@@ -1,4 +1,4 @@
-﻿namespace Razdor.Shared.Module;
+﻿namespace Razdor.Shared.IntegrationEvents;
 
 public delegate ValueTask IntegrationEventHandleDelegate<TEvent>(TEvent integrationEvent);
 

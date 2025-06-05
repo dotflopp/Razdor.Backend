@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.OpenApi.Models;
 using Razdor.Shared.Module;
+using Razdor.Shared.Module.Serialization;
 
 namespace Razdor.Api.OpenAPI;
 

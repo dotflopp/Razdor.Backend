@@ -6,7 +6,7 @@ using Razdor.Api.Routes.Communities.Members;
 using Razdor.Api.Routes.Communities.Members.Roles;
 using Razdor.Api.Routes.Communities.Roles;
 using Razdor.Api.Routes.Invites;
-using Razdor.Api.Routes.Messaging;
+using Razdor.Api.Routes.Messages;
 using Razdor.Api.Routes.Users;
 
 namespace Razdor.Api.Routes;

@@ -1,14 +1,10 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Razdor.Identity.Module.DataAccess;
-using Razdor.Identity.Module.Services.Users.Avatars;
-using Razdor.Identity.Module.Services.Users.Avatars.Queries;
-using Razdor.Identity.Module.Users.Queries.Exceptions;
-using Razdor.Messages.Module.Services.Commands.ViewModels;
-using Razdor.Shared.Domain;
-using Razdor.Shared.Module;
-using Razdor.Shared.Module.Exceptions;
 using Razdor.Shared.Module.Media;
+using Razdor.Shared.Module.Media.Exceptions;
+
+namespace Razdor.Identity.Module.Services.Users.Queries;
 
 public class GetUserAvatarQueryHandler(
     IFileStore store,

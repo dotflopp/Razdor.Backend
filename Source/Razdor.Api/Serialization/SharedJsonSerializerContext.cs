@@ -1,5 +1,5 @@
 ﻿using System.Text.Json.Serialization;
-using Razdor.Api.Middlewares.ViewModels;
+using Razdor.Api.ExceptionHandleMiddlewares.ViewModels;
 
 namespace Razdor.Api.Serialization;
 

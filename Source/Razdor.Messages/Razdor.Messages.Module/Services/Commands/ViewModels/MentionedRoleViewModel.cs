@@ -1,6 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Razdor.Messages.Domain.Mentioning;
 using Razdor.Shared.Module;
+using Razdor.Shared.Module.Serialization;
 
 namespace Razdor.Messages.Module.Services.Commands.ViewModels;
 

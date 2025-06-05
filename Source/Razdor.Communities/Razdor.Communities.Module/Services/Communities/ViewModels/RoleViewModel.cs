@@ -2,6 +2,7 @@
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Domain.Roles;
 using Razdor.Shared.Module;
+using Razdor.Shared.Module.Serialization;
 
 namespace Razdor.Communities.Module.Services.Communities.ViewModels;
 

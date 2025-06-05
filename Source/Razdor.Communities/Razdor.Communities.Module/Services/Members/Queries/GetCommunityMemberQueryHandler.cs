@@ -5,6 +5,7 @@ using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.DataAccess;
 using Razdor.Communities.Module.Exceptions;
 using Razdor.Communities.Module.Services.Members.ViewModels;
+using Razdor.Shared.Module.Exceptions;
 
 namespace Razdor.Communities.Module.Services.Members;
 
@@ -19,8 +20,7 @@ public class GetCommunityMemberQueryHandler(
             .Where(x => x.CommunityId == query.CommunityId && x.UserId == query.UserId)
             .FirstOrDefaultAsync();
         
-        if (member == null)
-            CommunityMemberNotFoundException.Throw(query.CommunityId, query.UserId);
+        ResourceNotFoundException.ThrowIfNull(member);
         
         UserDataViewModel profile = await dataAccessor.FillAsync(member.UserId, new MemberProfile(null, null), cancellationToken);
 

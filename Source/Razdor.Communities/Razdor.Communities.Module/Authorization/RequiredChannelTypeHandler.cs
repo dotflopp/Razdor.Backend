@@ -1,4 +1,5 @@
 ﻿using Mediator;
+using Microsoft.EntityFrameworkCore;
 using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Module.DataAccess;
 using Razdor.Communities.Module.Exceptions;
@@ -15,13 +16,10 @@ public class RequiredChannelTypeHandler<TMessage, TResponse>(
         CancellationToken cancellationToken
     )
     {
-        ChannelType? channelType = context.Channels
+        ChannelType? channelType = await context.Channels.AsNoTracking()
             .Where(x => x.Id == message.ChannelId)
             .Select(x => x.Type)
-            .FirstOrDefault();
-        
-        if (channelType == null)
-            ChannelNotFoundException.Throw(message.ChannelId);
+            .FirstOrDefaultAsync(cancellationToken);
 
         if (!message.AllowedTypes.HasFlag(channelType))
             InvalidChannelOperationException.ThrowInvalidType();

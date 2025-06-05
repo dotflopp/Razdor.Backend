@@ -8,6 +8,7 @@ using Razdor.Communities.Module.Exceptions;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
 using Razdor.Shared.Domain.Rules;
 using Razdor.Shared.Module.DataAccess;
+using Razdor.Shared.Module.Exceptions;
 using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.Communities.Module.Services.Invites.Commands;
@@ -23,13 +24,10 @@ public sealed class AcceptInviteCommandHandler(
 {
     public async ValueTask<InvitePreviewModel> Handle(AcceptInviteCommand command, CancellationToken cancellationToken)
     {
-        Invite? invite = await invites.FindAsync(command.InviteId);
+        Invite invite = await invites.FindAsync(command.InviteId);
 
-        if (invite is null || invite.CreatedAt < timeProvider.GetUtcNow())
-            InviteNotFoundException.Throw(command.InviteId);
-        
         if (!await communities.ContainsAsync(invite.CommunityId))
-            throw new InvalidOperationException($"There is an Invite({invite.Id}) without a Community({invite.CommunityId})");
+            ExceptionHelper.ThrowInviteWithoutCommunity(invite);
         
         await RuleValidationHelper.ThrowIfBrokenAsync(
             new CantJoinSameCommunityTwice(members, invite.CommunityId, sender.User.Id)

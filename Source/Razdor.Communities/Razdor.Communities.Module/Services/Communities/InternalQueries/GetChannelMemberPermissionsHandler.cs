@@ -6,6 +6,7 @@ using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Module.Authorization;
 using Razdor.Communities.Module.Exceptions;
 using Razdor.Shared.Module.Authorization;
+using Razdor.Shared.Module.Exceptions;
 
 namespace Razdor.Communities.Module.Services.Communities.InternalQueries;
 
@@ -19,13 +20,8 @@ public class GetChannelMemberPermissionsHandler(
 {
     public async ValueTask<UserPermissions> Handle(GetChannelMemberPermissions query, CancellationToken cancellationToken)
     {
-        CommunityChannel? channel = await channels.FindAsync(query.ChannelId, cancellationToken);
-        if (channel == null)
-            ChannelNotFoundException.Throw(query.ChannelId);
-            
-        CommunityMember? member = await members.FindAsync(channel.CommunityId, query.UserId, cancellationToken);
-        if (member == null)
-            CommunityMemberNotFoundException.Throw(channel.CommunityId, query.UserId);
+        CommunityChannel channel = await channels.FindAsync(query.ChannelId, cancellationToken);
+        CommunityMember member = await members.FindAsync(channel.CommunityId, query.UserId, cancellationToken);
         
         bool hasParentPermissions = false;
         UserPermissions inheritedPermissions = UserPermissions.None;
@@ -39,7 +35,7 @@ public class GetChannelMemberPermissionsHandler(
                 );
                 hasParentPermissions = true;
             }
-            catch (ChannelNotFoundException ex)
+            catch (ResourceNotFoundException ex) when (ex.ResourceType.IsAssignableTo(typeof(CommunityChannel)))
             {
                 logger.LogError(ex, $"Parent channel by id {channel.ParentId} not found for channel {channel.Id}");       
             }

@@ -179,7 +179,6 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
 
     public void AddRole(Role role)
     {
-        
         _roles ??= new();
         
         //TODO роли определяют так же и приоритет, добавить события для работы с приоритетом у ролей.

@@ -1,5 +1,7 @@
 ﻿using Mediator;
 using Microsoft.Extensions.Logging;
+using Razdor.Communities.Domain;
+using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Module.Exceptions;
 using Razdor.Shared.Module.Authorization;
@@ -29,14 +31,16 @@ public sealed class CommunityPermissionsHandler<TMessage, TResponse>(
                 cancellationToken
             );
         }
-        catch (CommunityMemberNotFoundException exception)
-        {
-            throw new AccessForbiddenException(exception.Message, exception);
+        catch (ResourceNotFoundException ex) when ( 
+            ex.ResourceType.IsAssignableTo(typeof(Community))
+            || ex.ResourceType.IsAssignableTo(typeof(CommunityMember))
+        ){
+            throw new AccessForbiddenException(ex.Message, ex);
         }
-        catch (Exception exception)
+        catch (Exception ex)
         {
-            logger.LogError(exception, "Unknown access community permissions error.");
-            throw new AccessForbiddenException("Unknown exception", exception);
+            logger.LogError(ex, "Unknown access community permissions error.");
+            throw new AccessForbiddenException("Unknown exception", ex);
         }
 
         if (!permissions.HasFlag(UserPermissions.Administrator) && !permissions.HasFlag(message.RequiredPermissions))

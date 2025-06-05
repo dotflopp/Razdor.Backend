@@ -4,6 +4,7 @@ using Razdor.Communities.Domain;
 using Razdor.Communities.Module.DataAccess;
 using Razdor.Communities.Module.Exceptions;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Shared.Module.Exceptions;
 
 namespace Razdor.Communities.Module.Services.Communities.Queries;
 
@@ -17,9 +18,8 @@ public class GetCommunityQueryHandler(
             .AsNoTracking()
             .FirstOrDefaultAsync(x => x.Id == query.CommunityId, cancellationToken);
 
-        if (community is null)
-            CommunityNotFoundException.Throw(query.CommunityId);
-
+        ResourceNotFoundException.ThrowIfNull(community, query.CommunityId);
+        
         return CommunityViewModel.From(community);
     }
 }

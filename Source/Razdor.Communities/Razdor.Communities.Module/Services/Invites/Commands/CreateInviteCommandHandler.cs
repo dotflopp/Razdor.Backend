@@ -22,11 +22,8 @@ public sealed class CreateInviteCommandHandler(
 {
     public async ValueTask<InvitePreviewModel> Handle(CreateInviteCommand command, CancellationToken cancellationToken)
     {
-        Community? community = await communities.FindAsync(command.CommunityId, cancellationToken);
-
-        if (community is null)
-            CommunityNotFoundException.Throw(command.CommunityId);
-
+        Community community = await communities.FindAsync(command.CommunityId, cancellationToken);
+        
         ulong snowflakeId = snowflakeGenerator.Next();
         string strId = Base64Url.EncodeToString(
             BitConverter.GetBytes(snowflakeId)

@@ -5,10 +5,10 @@ using Razdor.Shared.Module.Authorization;
 
 namespace Razdor.Communities.Module.Services.Members.Commands;
 
-public record ChangeMemberRolesCommand(
+public record AddMemberRoleCommand(
     ulong CommunityId,
     ulong UserId,
-    List<ulong> Roles
+    ulong RoleId
 ): ICommunitiesCommand, IRequiredCommunityPermissions
 {
     public UserPermissions RequiredPermissions => UserPermissions.ManageRole;

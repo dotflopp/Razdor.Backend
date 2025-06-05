@@ -5,6 +5,7 @@ using Razdor.Communities.Domain.Invites;
 using Razdor.Communities.Module.DataAccess;
 using Razdor.Communities.Module.Exceptions;
 using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Shared.Module.Exceptions;
 
 namespace Razdor.Communities.Module.Services.Invites.Queries;
 
@@ -17,13 +18,14 @@ public class GetInviteCommandHandler(
         Invite? invite = await context.Invites.AsNoTracking()
             .Where(x => x.Id == command.InviteId)
             .FirstOrDefaultAsync(cancellationToken);
-        
-        if (invite == null)
-            InviteNotFoundException.Throw(command.InviteId);
 
-        Community community = await context.Communities.AsNoTracking()
+        ResourceNotFoundException.ThrowIfNull(invite, command.InviteId);
+        
+        Community? community = await context.Communities.AsNoTracking()
             .Where(x => x.Id == invite.CommunityId)
-            .FirstAsync();
+            .FirstOrDefaultAsync();
+
+        ResourceNotFoundException.ThrowIfNull(community, invite.CommunityId);
 
         return InviteViewModel.From(invite, community);
     }

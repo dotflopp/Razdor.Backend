@@ -76,12 +76,15 @@ public class CommunityMember : BaseAggregateRoot
             time?.GetUtcNow() ?? DateTimeOffset.UtcNow
         );
 
-        // member.AddDomainEvent(new UserJoined(communityId, userId));
+        member.AddDomainEvent(new UserJoined(communityId, userId));
         return member;
     }
-
-    public void UpdateRoles(List<ulong> roleIds)
+    
+    public void AddRole(Role role)
     {
-        AddDomainEvent(new MemberRolesChanged(CommunityId, UserId, roleIds));
+        _roleIds ??= new();
+        _roleIds.Add(role.Id);
+        
+        AddDomainEvent(new MemberRolesChanged(CommunityId, UserId, _roleIds));
     }
 }

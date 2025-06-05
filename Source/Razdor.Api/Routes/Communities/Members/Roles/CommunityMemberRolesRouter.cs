@@ -10,7 +10,7 @@ public static class CommunityMemberRolesRouter
     internal static IEndpointRouteBuilder MepCommunityMemberRoles(this IEndpointRouteBuilder builder)
     {
         IEndpointRouteBuilder api = builder.MapGroup(
-            "/communities/{communityId:ulong}/members/{userId:ulong}/roles"
+            "/communities/{communityId:ulong}/members/{userId:ulong}/roles/{roleId:ulong}"
         ).WithTags("Members", "Roles");
 
         api.MapPost("/", ChangeMemberRolesAsync)
@@ -23,12 +23,12 @@ public static class CommunityMemberRolesRouter
         [FromServices] ICommunitiesModule module,
         [FromRoute] ulong communityId,
         [FromRoute] ulong userId,
-        [FromBody] MemberRolesViewModel member
+        [FromRoute] ulong roleId
     )
     {
         await module.ExecuteCommandAsync(
-            new ChangeMemberRolesCommand(
-                communityId, userId, member.Roles.Select(x => ulong.Parse(x)).ToList()
+            new AddMemberRoleCommand(
+                communityId, userId, roleId
             )    
         );
 

@@ -2,6 +2,7 @@
 using Razdor.Communities.Domain.Invites;
 using Razdor.Shared.Domain.Repository;
 using Razdor.Shared.Module.DataAccess;
+using Razdor.Shared.Module.Exceptions;
 
 namespace Razdor.Communities.Module.DataAccess;
 
@@ -21,8 +22,10 @@ public class InvitesRepository(
         context.Invites.Remove(invite);
     }
 
-    public Task<Invite?> FindAsync(string id)
+    public async Task<Invite> FindAsync(string id)
     {
-        return context.Invites.FirstOrDefaultAsync(x => x.Id == id);
+        Invite? invite = await context.Invites.FirstOrDefaultAsync(x => x.Id == id);
+        ResourceNotFoundException.ThrowIfNull(invite, id);
+        return invite;
     }
 }

@@ -9,6 +9,7 @@ public enum ErrorCode : ulong
     AccessForbidden,
     NotEnoughRights,
     InvalidOperationException,
+    NotFound,
     
     //Identitiy
     InvalidPasswordOrEmail,
@@ -20,10 +21,6 @@ public enum ErrorCode : ulong
     AccessTokenExpired,
 
     //Communities
-    CommunityMemberNotFound,
-    CommunityNotFound,
-    ChannelNotFound,
-    InviteNotFound,
     ReJoiningToCommunity,
 
     //Media

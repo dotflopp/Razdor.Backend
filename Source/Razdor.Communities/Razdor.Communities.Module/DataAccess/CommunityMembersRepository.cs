@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Razdor.Communities.Domain.Members;
 using Razdor.Shared.Domain.Repository;
 using Razdor.Shared.Module.DataAccess;
+using Razdor.Shared.Module.Exceptions;
 
 namespace Razdor.Communities.Module.DataAccess;
 
@@ -19,12 +20,15 @@ public class CommunityMembersRepository(
         return entry.Entity;
     }
 
-    public async Task<CommunityMember?> FindAsync(ulong communityId, ulong userId, CancellationToken cancellationToken = default)
+    public async Task<CommunityMember> FindAsync(ulong communityId, ulong userId, CancellationToken cancellationToken = default)
     {
-        return await _context.CommunityMembers.FindAsync(
+        CommunityMember? member = await _context.CommunityMembers.FindAsync(
             communityId, userId,
             cancellationToken
         );
+        
+        ResourceNotFoundException.ThrowIfNull(member, (communityId, userId));
+        return member;
     }
 
     public async Task<bool> ContainsAsync(ulong communityId, ulong userId, CancellationToken cancellationToken = default)

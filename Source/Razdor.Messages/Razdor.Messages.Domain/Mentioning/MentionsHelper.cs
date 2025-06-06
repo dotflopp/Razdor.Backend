@@ -21,7 +21,6 @@ public static partial class MentionsHelper
     public static Mentions ExtractMentions(string? text = null, Embed? embed = null)
     {
         MentionsBuilder builder = new();
-
         if (text != null)
             FindMentions(text, builder);
         
@@ -35,7 +34,7 @@ public static partial class MentionsHelper
     {
         FindChannelMentions(text, builder);
         FindUserMentions(text, builder);
-        FindChannelMentions(text, builder);
+        FindRoleMentions(text, builder);
         FindEveryoneMentions(text, builder);
     }
 
@@ -65,16 +64,37 @@ public static partial class MentionsHelper
 
     private static void FindChannelMentions(string text, MentionsBuilder builder)
     {
-               
+        foreach (Match match in ChannelMentionRegex.Matches(text))
+        {
+            var channelId = ulong.Parse(match.Groups[1].Value);
+            builder.WithChannelMention(new MentionedChannel(
+                channelId
+            ));
+        }
     }
+    
     private static void FindUserMentions(string text, MentionsBuilder builder)
     {
-        
+        foreach (Match match in UserMentionRegex.Matches(text))
+        {
+            var userId = ulong.Parse(match.Groups[1].Value);
+
+            builder.WithUserMention(new MentionedUser(
+                userId
+            ));
+        }
     }
     
     private static void FindRoleMentions(string text, MentionsBuilder builder)
     {
-        
+        foreach (Match match in RoleMentionRegex.Matches(text))
+        {
+            var roleId = ulong.Parse(match.Groups[1].Value);
+            
+            builder.WithRoleMention(new MentionedRole(
+                roleId
+            ));
+        }   
     }
 
 

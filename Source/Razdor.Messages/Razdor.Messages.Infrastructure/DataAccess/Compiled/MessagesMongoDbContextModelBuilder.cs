@@ -11,13 +11,13 @@ namespace Razdor.Messages.Infrastructure.DataAccess
     public partial class MessagesMongoDbContextModel
     {
         private MessagesMongoDbContextModel()
-            : base(skipDetectChanges: false, modelId: new Guid("b0170b44-d5cf-419e-835e-26e0adf27bee"), entityTypeCount: 10)
+            : base(skipDetectChanges: false, modelId: new Guid("4b48723d-4c95-4fcb-b918-e2e8ac5e2251"), entityTypeCount: 10)
         {
         }
 
         partial void Initialize()
         {
-            var attachment = AttachmentEntityType.Create(this);
+            var attachmentMeta = AttachmentMetaEntityType.Create(this);
             var embed = EmbedEntityType.Create(this);
             var embedField = EmbedFieldEntityType.Create(this);
             var embedFooter = EmbedFooterEntityType.Create(this);
@@ -28,7 +28,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             var message = MessageEntityType.Create(this);
             var messageReference = MessageReferenceEntityType.Create(this);
 
-            AttachmentEntityType.CreateForeignKey1(attachment, message);
+            AttachmentMetaEntityType.CreateForeignKey1(attachmentMeta, message);
             EmbedEntityType.CreateForeignKey1(embed, message);
             EmbedFieldEntityType.CreateForeignKey1(embedField, embed);
             EmbedFooterEntityType.CreateForeignKey1(embedFooter, embed);
@@ -38,7 +38,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             MentionedUserEntityType.CreateForeignKey1(mentionedUser, mentions);
             MessageReferenceEntityType.CreateForeignKey1(messageReference, message);
 
-            AttachmentEntityType.CreateAnnotations(attachment);
+            AttachmentMetaEntityType.CreateAnnotations(attachmentMeta);
             EmbedEntityType.CreateAnnotations(embed);
             EmbedFieldEntityType.CreateAnnotations(embedField);
             EmbedFooterEntityType.CreateAnnotations(embedFooter);

@@ -5,18 +5,15 @@ using Razdor.Shared.Module.Serialization;
 
 namespace Razdor.Messages.Module.Services.Commands.ViewModels;
 
-public class MentionedChannelViewModel(
+public record MentionedChannelViewModel(
     [property:JsonConverter(typeof(JsonStringULongConverter))]
-    ulong ChannelId, 
-    [property:JsonConverter(typeof(JsonStringULongConverter))]
-    ulong CommunityId
+    ulong ChannelId
 ){
 
     public static MentionedChannelViewModel From(MentionedChannel channel)
     {
         return new MentionedChannelViewModel(
-            channel.ChannelId,
-            channel.CommunityId
+            channel.ChannelId
         );
     }
 }

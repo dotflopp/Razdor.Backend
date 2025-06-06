@@ -69,6 +69,7 @@ public class Message: BaseSnowflakeEntity, IEntity<ulong>
         List<AttachmentMeta>? attachments = null
     ){
         Mentions mentions = MentionsHelper.ExtractMentions(text, embed);
+        
         Message message = new(
             id, 
             userId, 

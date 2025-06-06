@@ -27,7 +27,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
                 typeof(MentionedChannel),
                 baseEntityType,
                 sharedClrType: true,
-                propertyCount: 4,
+                propertyCount: 3,
                 foreignKeyCount: 1,
                 keyCount: 1);
 
@@ -141,48 +141,6 @@ namespace Razdor.Messages.Infrastructure.DataAccess
                     ulong (ulong v) => v),
                 clrType: typeof(ulong));
 
-            var communityId = runtimeEntityType.AddProperty(
-                "CommunityId",
-                typeof(ulong),
-                propertyInfo: typeof(MentionedChannel).GetProperty("CommunityId", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(MentionedChannel).GetField("<CommunityId>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                sentinel: 0ul);
-            communityId.SetGetter(
-                ulong (MentionedChannel entity) => MentionedChannelUnsafeAccessors.CommunityId(entity),
-                bool (MentionedChannel entity) => MentionedChannelUnsafeAccessors.CommunityId(entity) == 0UL,
-                ulong (MentionedChannel instance) => MentionedChannelUnsafeAccessors.CommunityId(instance),
-                bool (MentionedChannel instance) => MentionedChannelUnsafeAccessors.CommunityId(instance) == 0UL);
-            communityId.SetSetter(
-                (MentionedChannel entity, ulong value) => MentionedChannelUnsafeAccessors.CommunityId(entity) = value);
-            communityId.SetMaterializationSetter(
-                (MentionedChannel entity, ulong value) => MentionedChannelUnsafeAccessors.CommunityId(entity) = value);
-            communityId.SetAccessors(
-                ulong (InternalEntityEntry entry) => MentionedChannelUnsafeAccessors.CommunityId(((MentionedChannel)(entry.Entity))),
-                ulong (InternalEntityEntry entry) => MentionedChannelUnsafeAccessors.CommunityId(((MentionedChannel)(entry.Entity))),
-                ulong (InternalEntityEntry entry) => entry.ReadOriginalValue<ulong>(communityId, 3),
-                ulong (InternalEntityEntry entry) => entry.GetCurrentValue<ulong>(communityId),
-                object (ValueBuffer valueBuffer) => valueBuffer[3]);
-            communityId.SetPropertyIndexes(
-                index: 3,
-                originalValueIndex: 3,
-                shadowIndex: -1,
-                relationshipIndex: -1,
-                storeGenerationIndex: -1);
-            communityId.TypeMapping = MongoTypeMapping.Default.Clone(
-                comparer: new ValueComparer<ulong>(
-                    bool (ulong v1, ulong v2) => v1 == v2,
-                    int (ulong v) => ((object)v).GetHashCode(),
-                    ulong (ulong v) => v),
-                keyComparer: new ValueComparer<ulong>(
-                    bool (ulong v1, ulong v2) => v1 == v2,
-                    int (ulong v) => ((object)v).GetHashCode(),
-                    ulong (ulong v) => v),
-                providerValueComparer: new ValueComparer<ulong>(
-                    bool (ulong v1, ulong v2) => v1 == v2,
-                    int (ulong v) => ((object)v).GetHashCode(),
-                    ulong (ulong v) => v),
-                clrType: typeof(ulong));
-
             var key = runtimeEntityType.AddKey(
                 new[] { mentionsId, id });
             runtimeEntityType.SetPrimaryKey(key);
@@ -241,7 +199,6 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             var mentionsId = runtimeEntityType.FindProperty("MentionsId");
             var id = runtimeEntityType.FindProperty("Id");
             var channelId = runtimeEntityType.FindProperty("ChannelId");
-            var communityId = runtimeEntityType.FindProperty("CommunityId");
             var key = runtimeEntityType.FindKey(new[] { mentionsId, id });
             key.SetPrincipalKeyValueFactory(KeyValueFactoryFactory.CreateCompositeFactory(key));
             key.SetIdentityMapFactory(IdentityMapFactoryFactory.CreateFactory<IReadOnlyList<object>>(key));
@@ -249,7 +206,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
                 ISnapshot (InternalEntityEntry source) =>
                 {
                     var entity = ((MentionedChannel)(source.Entity));
-                    return ((ISnapshot)(new Snapshot<ulong, int, ulong, ulong>(((ValueComparer<ulong>)(((IProperty)mentionsId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(mentionsId)), ((ValueComparer<int>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<int>(id)), ((ValueComparer<ulong>)(((IProperty)channelId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(channelId)), ((ValueComparer<ulong>)(((IProperty)communityId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(communityId)))));
+                    return ((ISnapshot)(new Snapshot<ulong, int, ulong>(((ValueComparer<ulong>)(((IProperty)mentionsId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(mentionsId)), ((ValueComparer<int>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<int>(id)), ((ValueComparer<ulong>)(((IProperty)channelId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(channelId)))));
                 });
             runtimeEntityType.SetStoreGeneratedValuesFactory(
                 ISnapshot () => ((ISnapshot)(new Snapshot<ulong, int>(((ValueComparer<ulong>)(((IProperty)mentionsId).GetValueComparer())).Snapshot(default(ulong)), ((ValueComparer<int>)(((IProperty)id).GetValueComparer())).Snapshot(default(int))))));
@@ -266,10 +223,10 @@ namespace Razdor.Messages.Infrastructure.DataAccess
                     return ((ISnapshot)(new Snapshot<ulong, int>(((ValueComparer<ulong>)(((IProperty)mentionsId).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<ulong>(mentionsId)), ((ValueComparer<int>)(((IProperty)id).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<int>(id)))));
                 });
             runtimeEntityType.Counts = new PropertyCounts(
-                propertyCount: 4,
+                propertyCount: 3,
                 navigationCount: 0,
                 complexPropertyCount: 0,
-                originalValueCount: 4,
+                originalValueCount: 3,
                 shadowCount: 2,
                 relationshipCount: 2,
                 storeGeneratedCount: 2);

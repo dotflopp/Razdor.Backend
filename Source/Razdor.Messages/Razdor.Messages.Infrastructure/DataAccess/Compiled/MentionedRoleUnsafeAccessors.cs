@@ -10,9 +10,6 @@ namespace Razdor.Messages.Infrastructure.DataAccess
 {
     public static class MentionedRoleUnsafeAccessors
     {
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<CommunityId>k__BackingField")]
-        public static extern ref ulong CommunityId(MentionedRole @this);
-
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<RoleId>k__BackingField")]
         public static extern ref ulong RoleId(MentionedRole @this);
     }

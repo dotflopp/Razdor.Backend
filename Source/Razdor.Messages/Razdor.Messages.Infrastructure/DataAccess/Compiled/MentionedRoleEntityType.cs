@@ -27,7 +27,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
                 typeof(MentionedRole),
                 baseEntityType,
                 sharedClrType: true,
-                propertyCount: 4,
+                propertyCount: 3,
                 foreignKeyCount: 1,
                 keyCount: 1);
 
@@ -99,48 +99,6 @@ namespace Razdor.Messages.Infrastructure.DataAccess
                 clrType: typeof(int));
             id.SetCurrentValueComparer(new EntryCurrentValueComparer<int>(id));
 
-            var communityId = runtimeEntityType.AddProperty(
-                "CommunityId",
-                typeof(ulong),
-                propertyInfo: typeof(MentionedRole).GetProperty("CommunityId", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(MentionedRole).GetField("<CommunityId>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                sentinel: 0ul);
-            communityId.SetGetter(
-                ulong (MentionedRole entity) => MentionedRoleUnsafeAccessors.CommunityId(entity),
-                bool (MentionedRole entity) => MentionedRoleUnsafeAccessors.CommunityId(entity) == 0UL,
-                ulong (MentionedRole instance) => MentionedRoleUnsafeAccessors.CommunityId(instance),
-                bool (MentionedRole instance) => MentionedRoleUnsafeAccessors.CommunityId(instance) == 0UL);
-            communityId.SetSetter(
-                (MentionedRole entity, ulong value) => MentionedRoleUnsafeAccessors.CommunityId(entity) = value);
-            communityId.SetMaterializationSetter(
-                (MentionedRole entity, ulong value) => MentionedRoleUnsafeAccessors.CommunityId(entity) = value);
-            communityId.SetAccessors(
-                ulong (InternalEntityEntry entry) => MentionedRoleUnsafeAccessors.CommunityId(((MentionedRole)(entry.Entity))),
-                ulong (InternalEntityEntry entry) => MentionedRoleUnsafeAccessors.CommunityId(((MentionedRole)(entry.Entity))),
-                ulong (InternalEntityEntry entry) => entry.ReadOriginalValue<ulong>(communityId, 2),
-                ulong (InternalEntityEntry entry) => entry.GetCurrentValue<ulong>(communityId),
-                object (ValueBuffer valueBuffer) => valueBuffer[2]);
-            communityId.SetPropertyIndexes(
-                index: 2,
-                originalValueIndex: 2,
-                shadowIndex: -1,
-                relationshipIndex: -1,
-                storeGenerationIndex: -1);
-            communityId.TypeMapping = MongoTypeMapping.Default.Clone(
-                comparer: new ValueComparer<ulong>(
-                    bool (ulong v1, ulong v2) => v1 == v2,
-                    int (ulong v) => ((object)v).GetHashCode(),
-                    ulong (ulong v) => v),
-                keyComparer: new ValueComparer<ulong>(
-                    bool (ulong v1, ulong v2) => v1 == v2,
-                    int (ulong v) => ((object)v).GetHashCode(),
-                    ulong (ulong v) => v),
-                providerValueComparer: new ValueComparer<ulong>(
-                    bool (ulong v1, ulong v2) => v1 == v2,
-                    int (ulong v) => ((object)v).GetHashCode(),
-                    ulong (ulong v) => v),
-                clrType: typeof(ulong));
-
             var roleId = runtimeEntityType.AddProperty(
                 "RoleId",
                 typeof(ulong),
@@ -159,12 +117,12 @@ namespace Razdor.Messages.Infrastructure.DataAccess
             roleId.SetAccessors(
                 ulong (InternalEntityEntry entry) => MentionedRoleUnsafeAccessors.RoleId(((MentionedRole)(entry.Entity))),
                 ulong (InternalEntityEntry entry) => MentionedRoleUnsafeAccessors.RoleId(((MentionedRole)(entry.Entity))),
-                ulong (InternalEntityEntry entry) => entry.ReadOriginalValue<ulong>(roleId, 3),
+                ulong (InternalEntityEntry entry) => entry.ReadOriginalValue<ulong>(roleId, 2),
                 ulong (InternalEntityEntry entry) => entry.GetCurrentValue<ulong>(roleId),
-                object (ValueBuffer valueBuffer) => valueBuffer[3]);
+                object (ValueBuffer valueBuffer) => valueBuffer[2]);
             roleId.SetPropertyIndexes(
-                index: 3,
-                originalValueIndex: 3,
+                index: 2,
+                originalValueIndex: 2,
                 shadowIndex: -1,
                 relationshipIndex: -1,
                 storeGenerationIndex: -1);
@@ -240,7 +198,6 @@ namespace Razdor.Messages.Infrastructure.DataAccess
         {
             var mentionsId = runtimeEntityType.FindProperty("MentionsId");
             var id = runtimeEntityType.FindProperty("Id");
-            var communityId = runtimeEntityType.FindProperty("CommunityId");
             var roleId = runtimeEntityType.FindProperty("RoleId");
             var key = runtimeEntityType.FindKey(new[] { mentionsId, id });
             key.SetPrincipalKeyValueFactory(KeyValueFactoryFactory.CreateCompositeFactory(key));
@@ -249,7 +206,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
                 ISnapshot (InternalEntityEntry source) =>
                 {
                     var entity = ((MentionedRole)(source.Entity));
-                    return ((ISnapshot)(new Snapshot<ulong, int, ulong, ulong>(((ValueComparer<ulong>)(((IProperty)mentionsId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(mentionsId)), ((ValueComparer<int>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<int>(id)), ((ValueComparer<ulong>)(((IProperty)communityId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(communityId)), ((ValueComparer<ulong>)(((IProperty)roleId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(roleId)))));
+                    return ((ISnapshot)(new Snapshot<ulong, int, ulong>(((ValueComparer<ulong>)(((IProperty)mentionsId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(mentionsId)), ((ValueComparer<int>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<int>(id)), ((ValueComparer<ulong>)(((IProperty)roleId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(roleId)))));
                 });
             runtimeEntityType.SetStoreGeneratedValuesFactory(
                 ISnapshot () => ((ISnapshot)(new Snapshot<ulong, int>(((ValueComparer<ulong>)(((IProperty)mentionsId).GetValueComparer())).Snapshot(default(ulong)), ((ValueComparer<int>)(((IProperty)id).GetValueComparer())).Snapshot(default(int))))));
@@ -266,10 +223,10 @@ namespace Razdor.Messages.Infrastructure.DataAccess
                     return ((ISnapshot)(new Snapshot<ulong, int>(((ValueComparer<ulong>)(((IProperty)mentionsId).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<ulong>(mentionsId)), ((ValueComparer<int>)(((IProperty)id).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<int>(id)))));
                 });
             runtimeEntityType.Counts = new PropertyCounts(
-                propertyCount: 4,
+                propertyCount: 3,
                 navigationCount: 0,
                 complexPropertyCount: 0,
-                originalValueCount: 4,
+                originalValueCount: 3,
                 shadowCount: 2,
                 relationshipCount: 2,
                 storeGeneratedCount: 2);

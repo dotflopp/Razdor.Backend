@@ -1,12 +1,11 @@
 ﻿namespace Razdor.Messages.Domain.Mentioning;
 
-public class MentionsBuilder 
+public class MentionsBuilder()
 {
     private List<MentionedUser>? _users = null;
     private List<MentionedChannel>? _channels = null;
     private List<MentionedRole>? _roles = null;
     private bool _mentionedEveryone = false;
-
     public MentionsBuilder HasEveryoneMention(bool hasMention = true)
     {
         _mentionedEveryone = hasMention;
@@ -37,6 +36,7 @@ public class MentionsBuilder
         
         _roles ??= new List<MentionedRole>();
         _roles.Add(role);
+        
         return this;
     }
 

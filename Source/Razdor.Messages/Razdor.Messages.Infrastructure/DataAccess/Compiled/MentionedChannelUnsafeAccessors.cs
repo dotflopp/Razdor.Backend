@@ -12,8 +12,5 @@ namespace Razdor.Messages.Infrastructure.DataAccess
     {
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<ChannelId>k__BackingField")]
         public static extern ref ulong ChannelId(MentionedChannel @this);
-
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<CommunityId>k__BackingField")]
-        public static extern ref ulong CommunityId(MentionedChannel @this);
     }
 }

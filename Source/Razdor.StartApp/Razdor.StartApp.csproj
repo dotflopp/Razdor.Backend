@@ -10,6 +10,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Tasks" Version="9.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="Mediator.Abstractions" Version="3.0.0-preview.65"/>
         <PackageReference Include="Mediator.SourceGenerator" Version="3.0.0-preview.65">
             <PrivateAssets>all</PrivateAssets>

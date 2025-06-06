@@ -20,6 +20,7 @@ using Razdor.RestApi.OpenAPI;
 using Razdor.RestApi.Routes;
 using Razdor.Shared.Infrastructure;
 using Razdor.Shared.Module.Media;
+using Razdor.SignalR;
 using Razdor.StartApp;
 using CommunitiesJsonSerializerContext = Razdor.RestApi.Serialization.CommunitiesJsonSerializerContext;
 using IdentityJsonSerializerContext = Razdor.RestApi.Serialization.IdentityJsonSerializerContext;
@@ -50,6 +51,8 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
+
+builder.Services.AddSignalR();
 
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication()
@@ -182,6 +185,7 @@ app.UseAuthorization();
 
 app.UseRazdorExceptionHandlerMiddleware();
 
+app.MapSignalRGateway();
 app.MapIdentityApi();
 app.MapCommunitiesApi();
 app.MapMessagingApi();

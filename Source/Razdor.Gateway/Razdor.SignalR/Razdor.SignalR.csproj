@@ -8,4 +8,8 @@
         <RootNamespace>Razdor.SignalR</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Module.csproj" />
+    </ItemGroup>
+
 </Project>

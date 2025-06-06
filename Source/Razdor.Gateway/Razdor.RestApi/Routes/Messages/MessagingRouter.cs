@@ -17,8 +17,12 @@ public static class MessagingRouter
         
         api.MapPost("/", SendMessageAsync)
             .DisableAntiforgery()
+            .Accepts<MessagePyload>(false, "application/json")
+            .Produces<MessageViewModel>()
             .WithSummary("Отправить сообщение в канал");
+        
         api.MapGet("/", GetMessagesAsync)
+            .Produces<IEnumerable<MessageViewModel>>()
             .WithSummary("Получить сообщения канала");
 
         builder.MapGet("/attachments/{channelId:ulong}/{messageId:ulong}/{attachmentId:ulong}", GetAttachmentsAsync)

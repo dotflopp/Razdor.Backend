@@ -1,4 +1,6 @@
 ﻿using Razdor.Communities.Domain.Permissions;
+using Razdor.Communities.Domain.Rules;
+using Razdor.Shared.Domain.Rules;
 
 namespace Razdor.Communities.Domain.Channels;
 
@@ -24,10 +26,22 @@ public class CategoryChannel : OverwritesPermissionChannel
     {
     }
 
-    public static CategoryChannel CreateNew(ulong id, ulong communityId, ulong parentId, string name)
+    public static CategoryChannel CreateNew(ulong id, ulong communityId, string name, CommunityChannel? parent = null)
     {
+        ArgumentOutOfRangeException.ThrowIfEqual(id, 0ul);
+        ArgumentOutOfRangeException.ThrowIfEqual(communityId, 0ul);
         ArgumentException.ThrowIfNullOrEmpty(nameof(name));
         
-        return new CategoryChannel(id, name, communityId, 0, parentId, null);
+        CategoryChannel newChannel = new(id, name, communityId, 0, parent?.Id ?? 0, null);
+        parent?.ValidateChild(newChannel);
+        
+        return newChannel;
+    }
+    
+    public override void ValidateChild(CommunityChannel child)
+    {
+        RuleValidationHelper.ThrowIfBroken(
+            new CategoryChannelCannotHaveForkChannel(child)    
+        );
     }
 }

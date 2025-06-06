@@ -12,20 +12,31 @@ public class ForkChannel : CommunityChannel, IEntity<ulong>
     /// <summary>
     ///     EF constructor
     /// </summary>
-    private ForkChannel() : this(0, null!, 0, 0, 0) { }
+    private ForkChannel() : this(0, null!, 0, 0, 0, 0) { }
 
     internal ForkChannel(
         ulong id,
         string name,
         ulong communityId,
         uint position,
-        ulong parentId
+        ulong parentId,
+        ulong messageId
     ) : base(id, name, communityId, parentId, position, ChannelType.ForkChannel)
     {
+        MessageId = messageId;
     }
+
+    public ulong MessageId { get; private set; }
     public override bool IsSyncing => true;
     public override IReadOnlyList<Overwrite> Overwrites => ReadOnlyCollection<Overwrite>.Empty;
 
+    public override void ValidateChild(CommunityChannel child)
+    {
+        throw new BusinesRuleValidationException(
+            new ForkAndVoiceChannelsСannotHaveDescendants()
+        );
+    }
+    
     public override sealed void RemoveParent(List<Overwrite> inheritedOverwrites)
     {
         throw new BusinesRuleValidationException(
@@ -42,9 +53,16 @@ public class ForkChannel : CommunityChannel, IEntity<ulong>
         return result;
     }
 
-    public static ForkChannel CreateNew(ulong id, ulong communityId, ulong parentId, string name)
+    public static ForkChannel CreateNew(ulong id, ulong communityId, ulong messageId, string name, CommunityChannel parent)
     {
+        ArgumentOutOfRangeException.ThrowIfEqual(id, 0ul);
+        ArgumentOutOfRangeException.ThrowIfEqual(communityId, 0ul);
+        ArgumentOutOfRangeException.ThrowIfEqual(messageId, 0ul);
         ArgumentException.ThrowIfNullOrEmpty(nameof(name));
-        return new ForkChannel(id, name, communityId, 0, parentId);
+        
+        ForkChannel newFork = new ForkChannel(id, name, communityId, 0, parent.Id, messageId);
+        parent.ValidateChild(newFork);
+        
+        return newFork;
     }
 }

@@ -27,13 +27,15 @@ public abstract class CommunityChannel(
 ) : BaseSnowflakeEntity(id), IOverwritesPermission
 {
     public string Name { get; set; } = name;
-    public ulong ParentId { get; set; } = parentId;
+    public ulong ParentId { get; internal set; } = parentId;
     public ulong CommunityId { get; private set; } = communityId;
     public ChannelType Type { get; private set; } = type;
     public uint Position { get; set; } = position;
 
     public abstract bool IsSyncing { get; }
     public abstract IReadOnlyList<Overwrite> Overwrites { get; }
+    
+    public abstract void ValidateChild(CommunityChannel child);
 
     public abstract void RemoveParent(List<Overwrite> inheritedOverwrites);
 

@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Razdor.Communities.Domain;
 using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Module.Authorization;
@@ -21,15 +22,14 @@ public record CreateCommunityChannelCommand(
 {
     public UserPermissions RequiredPermissions => UserPermissions.ManageChannel;
 
-    public virtual CommunityChannel Create(ulong id)
+    public virtual CommunityChannel Create(ulong id, CommunityChannel? parent)
     {
         return Type switch
         {
-            ChannelType.CategoryChannel => CategoryChannel.CreateNew(id, CommunityId, ParentId, Name),
-            ChannelType.ForkChannel => ForkChannel.CreateNew(id, CommunityId, ParentId, Name),
-            ChannelType.TextChannel => TextChannel.CreateNew(id, CommunityId, ParentId, Name),
-            ChannelType.VoiceChannel => VoiceChannel.CreateNew(id, CommunityId, ParentId, Name),
-            _ => throw new ArgumentException(nameof(Type), $"Unknown community type {Type}")
+            ChannelType.CategoryChannel => CategoryChannel.CreateNew(id, CommunityId, Name, parent),
+            ChannelType.TextChannel => TextChannel.CreateNew(id, CommunityId, Name, parent),
+            ChannelType.VoiceChannel => VoiceChannel.CreateNew(id, CommunityId, Name, parent),
+            _ => throw new ArgumentException(nameof(Type), $"Invalid channel type {Type}")
         };
     }
 }

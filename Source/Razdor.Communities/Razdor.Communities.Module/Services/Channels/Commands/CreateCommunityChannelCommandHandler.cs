@@ -12,9 +12,14 @@ public sealed class CreateCommunityChannelCommandHandler(
 {
     public async ValueTask<ChannelViewModel> Handle(CreateCommunityChannelCommand command, CancellationToken cancellationToken)
     {
-        CommunityChannel channel = command.Create(snowflake.Next());
+        CommunityChannel? parent = null;
+        if (command.ParentId != 0)
+            parent = await repository.FindAsync(command.ParentId, cancellationToken);
+        
+        CommunityChannel channel = command.Create(snowflake.Next(), parent);
         repository.Add(channel);
         await repository.UnitOfWork.SaveEntitiesAsync();
+        
         return ChannelViewModel.From(channel);
     }
 }

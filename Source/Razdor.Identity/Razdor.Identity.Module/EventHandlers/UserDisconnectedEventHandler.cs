@@ -11,7 +11,7 @@ public class UserDisconnectedEventHandler(
     public async ValueTask Handle(UserDisconnectedPublicEvent notification, CancellationToken cancellationToken)
     {
         UserAccount user = await userRepository.FindByIdAsync(notification.UserId, cancellationToken);
-        user.IsOnline = true;
+        user.IsOnline = false;
         
         await userRepository.UnitOfWork.SaveEntitiesAsync();
     }

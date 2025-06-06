@@ -50,7 +50,7 @@ public class TextChannel : OverwritesPermissionChannel, IOverwritesOwner
     public override void ValidateChild(CommunityChannel child)
     {
         RuleValidationHelper.ThrowIfBroken(
-            new TextChannelDescendantCanBeOnlyForkChannel(child)    
+            new TextDescendantCanBeOnlyFork(child)    
         );
     }
 }

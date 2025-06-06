@@ -33,14 +33,14 @@ public class ForkChannel : CommunityChannel, IEntity<ulong>
     public override void ValidateChild(CommunityChannel child)
     {
         throw new BusinesRuleValidationException(
-            new ForkAndVoiceChannelsСannotHaveDescendants()
+            new ForkAndVoiceСannotHaveDescendants()
         );
     }
     
     public override sealed void RemoveParent(List<Overwrite> inheritedOverwrites)
     {
         throw new BusinesRuleValidationException(
-            new ForkChannelCannotExistWithoutParent()    
+            new ForkCannotExistWithoutParent()    
         );
     }
     public override UserPermissions GetPermissionsWithOverwrites(CommunityMember member, UserPermissions inheritedPermissions)

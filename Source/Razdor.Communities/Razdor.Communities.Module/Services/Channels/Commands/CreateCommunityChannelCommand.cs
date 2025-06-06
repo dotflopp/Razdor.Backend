@@ -4,6 +4,7 @@ using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Module.Authorization;
 using Razdor.Communities.Module.Contracts;
+using Razdor.Communities.Module.Exceptions;
 using Razdor.Communities.Module.Services.Channels.ViewModels;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Authorization;
@@ -29,7 +30,7 @@ public record CreateCommunityChannelCommand(
             ChannelType.CategoryChannel => CategoryChannel.CreateNew(id, CommunityId, Name, parent),
             ChannelType.TextChannel => TextChannel.CreateNew(id, CommunityId, Name, parent),
             ChannelType.VoiceChannel => VoiceChannel.CreateNew(id, CommunityId, Name, parent),
-            _ => throw new ArgumentException(nameof(Type), $"Invalid channel type {Type}")
+            _ => throw new InvalidOperationRazdorException($"Invalid channel type {Type}")
         };
     }
 }

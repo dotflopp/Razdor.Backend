@@ -41,7 +41,7 @@ public class CategoryChannel : OverwritesPermissionChannel
     public override void ValidateChild(CommunityChannel child)
     {
         RuleValidationHelper.ThrowIfBroken(
-            new CategoryChannelCannotHaveForkChannel(child)    
+            new CategoryCannotHaveForklOrCategory(child)    
         );
     }
 }

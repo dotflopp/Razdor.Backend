@@ -24,7 +24,7 @@ public class RequiredChannelTypeHandler<TMessage, TResponse>(
             .FirstOrDefaultAsync(cancellationToken);
 
         if (!message.AllowedTypes.HasFlag(channelType))
-            InvalidChannelOperationException.ThrowInvalidType();
+            InvalidOperationRazdorException.ThrowInvalidChannelType();
             
         return await next(message, cancellationToken);
     }

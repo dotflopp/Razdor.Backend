@@ -2,12 +2,12 @@
 
 namespace Razdor.Communities.Module.Exceptions;
 
-public class InvalidChannelOperationException(
+public class InvalidOperationRazdorException(
     string? message = null, Exception? innerException = null
 ) : RazdorException(ErrorCode.InvalidOperationException, message, innerException)
 {
-    public static void ThrowInvalidType()
+    public static void ThrowInvalidChannelType()
     {
-        throw new InvalidChannelOperationException("Invalid channel type");
+        throw new InvalidOperationRazdorException("Invalid channel type");
     }
 }

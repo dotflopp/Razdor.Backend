@@ -1,4 +1,5 @@
-﻿using Mediator;
+﻿using System.Diagnostics;
+using Mediator;
 using Microsoft.Extensions.Logging;
 using Razdor.Communities.Domain;
 using Razdor.Communities.Domain.Channels;
@@ -22,6 +23,8 @@ public class ChannelPermissionsHandler<TMessage, TResponse>(
         MessageHandlerDelegate<TMessage, TResponse> next,
         CancellationToken cancellationToken
     ){
+        
+        Stopwatch stopwatch = Stopwatch.StartNew();
         UserPermissions permissions;
         try
         {
@@ -31,7 +34,7 @@ public class ChannelPermissionsHandler<TMessage, TResponse>(
                 cancellationToken
             );
         }
-        catch (ResourceNotFoundException ex) 
+        catch (ResourceNotFoundException ex)
         {
             throw new AccessForbiddenException(ex.Message, ex);
         }
@@ -39,6 +42,11 @@ public class ChannelPermissionsHandler<TMessage, TResponse>(
         {
             logger.LogError(ex, "Unknown access channel permissions error.");
             throw new AccessForbiddenException("Unknown exception", ex);
+        }
+        finally
+        {
+            stopwatch.Stop();
+            logger.LogDebug($"Channel rights request passed {stopwatch.ElapsedMilliseconds}ms");
         }
 
         if (!permissions.HasFlag(UserPermissions.Administrator) && !permissions.HasFlag(message.RequiredPermissions))

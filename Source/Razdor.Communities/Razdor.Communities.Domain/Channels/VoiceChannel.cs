@@ -48,7 +48,7 @@ public class VoiceChannel : OverwritesPermissionChannel, IOverwritesOwner
     public override void ValidateChild(CommunityChannel child)
     {
         throw new BusinesRuleValidationException(
-            new ForkAndVoiceChannelsСannotHaveDescendants()
+            new ForkAndVoiceСannotHaveDescendants()
         );
     }
 }

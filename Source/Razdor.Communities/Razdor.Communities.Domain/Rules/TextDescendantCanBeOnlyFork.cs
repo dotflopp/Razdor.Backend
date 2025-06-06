@@ -4,9 +4,9 @@ using Razdor.Shared.Domain.Rules;
 
 namespace Razdor.Communities.Domain.Rules;
 
-public class TextChannelDescendantCanBeOnlyForkChannel(CommunityChannel child): IBusinessRuleValidator
+public class TextDescendantCanBeOnlyFork(CommunityChannel child): IBusinessRuleValidator
 {
-    public string Message { get; }
+    public string Message { get; } = "A text channel can only have a child fork channel";
     public ErrorCode ErrorCode { get; }
     
     public bool IsBroken(CancellationToken cancellationToken = default)

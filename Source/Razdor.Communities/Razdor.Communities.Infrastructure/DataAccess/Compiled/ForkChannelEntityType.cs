@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Storage;
+using MongoDB.EntityFrameworkCore.Storage;
 using Razdor.Communities.Domain.Channels;
 
 #pragma warning disable 219, 612, 618
@@ -25,7 +27,49 @@ namespace Razdor.Communities.Infrastructure.DataAccess
                 baseEntityType,
                 discriminatorProperty: "Type",
                 discriminatorValue: ChannelType.ForkChannel,
-                propertyCount: 0);
+                propertyCount: 1);
+
+            var messageId = runtimeEntityType.AddProperty(
+                "MessageId",
+                typeof(ulong),
+                propertyInfo: typeof(ForkChannel).GetProperty("MessageId", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(ForkChannel).GetField("<MessageId>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                sentinel: 0ul);
+            messageId.SetGetter(
+                ulong (ForkChannel entity) => ForkChannelUnsafeAccessors.MessageId(entity),
+                bool (ForkChannel entity) => ForkChannelUnsafeAccessors.MessageId(entity) == 0UL,
+                ulong (ForkChannel instance) => ForkChannelUnsafeAccessors.MessageId(instance),
+                bool (ForkChannel instance) => ForkChannelUnsafeAccessors.MessageId(instance) == 0UL);
+            messageId.SetSetter(
+                (ForkChannel entity, ulong value) => ForkChannelUnsafeAccessors.MessageId(entity) = value);
+            messageId.SetMaterializationSetter(
+                (ForkChannel entity, ulong value) => ForkChannelUnsafeAccessors.MessageId(entity) = value);
+            messageId.SetAccessors(
+                ulong (InternalEntityEntry entry) => ForkChannelUnsafeAccessors.MessageId(((ForkChannel)(entry.Entity))),
+                ulong (InternalEntityEntry entry) => ForkChannelUnsafeAccessors.MessageId(((ForkChannel)(entry.Entity))),
+                ulong (InternalEntityEntry entry) => entry.ReadOriginalValue<ulong>(messageId, 6),
+                ulong (InternalEntityEntry entry) => entry.GetCurrentValue<ulong>(messageId),
+                object (ValueBuffer valueBuffer) => valueBuffer[6]);
+            messageId.SetPropertyIndexes(
+                index: 6,
+                originalValueIndex: 6,
+                shadowIndex: -1,
+                relationshipIndex: -1,
+                storeGenerationIndex: -1);
+            messageId.TypeMapping = MongoTypeMapping.Default.Clone(
+                comparer: new ValueComparer<ulong>(
+                    bool (ulong v1, ulong v2) => v1 == v2,
+                    int (ulong v) => ((object)v).GetHashCode(),
+                    ulong (ulong v) => v),
+                keyComparer: new ValueComparer<ulong>(
+                    bool (ulong v1, ulong v2) => v1 == v2,
+                    int (ulong v) => ((object)v).GetHashCode(),
+                    ulong (ulong v) => v),
+                providerValueComparer: new ValueComparer<ulong>(
+                    bool (ulong v1, ulong v2) => v1 == v2,
+                    int (ulong v) => ((object)v).GetHashCode(),
+                    ulong (ulong v) => v),
+                clrType: typeof(ulong));
 
             return runtimeEntityType;
         }
@@ -38,11 +82,12 @@ namespace Razdor.Communities.Infrastructure.DataAccess
             var parentId = runtimeEntityType.FindProperty("ParentId");
             var position = runtimeEntityType.FindProperty("Position");
             var type = runtimeEntityType.FindProperty("Type");
+            var messageId = runtimeEntityType.FindProperty("MessageId");
             runtimeEntityType.SetOriginalValuesFactory(
                 ISnapshot (InternalEntityEntry source) =>
                 {
                     var entity = ((ForkChannel)(source.Entity));
-                    return ((ISnapshot)(new Snapshot<ulong, ulong, string, ulong, uint, ChannelType>(((ValueComparer<ulong>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), ((ValueComparer<ulong>)(((IProperty)communityId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(communityId)), (source.GetCurrentValue<string>(name) == null ? null : ((ValueComparer<string>)(((IProperty)name).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(name))), ((ValueComparer<ulong>)(((IProperty)parentId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(parentId)), ((ValueComparer<uint>)(((IProperty)position).GetValueComparer())).Snapshot(source.GetCurrentValue<uint>(position)), ((ValueComparer<ChannelType>)(((IProperty)type).GetValueComparer())).Snapshot(source.GetCurrentValue<ChannelType>(type)))));
+                    return ((ISnapshot)(new Snapshot<ulong, ulong, string, ulong, uint, ChannelType, ulong>(((ValueComparer<ulong>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), ((ValueComparer<ulong>)(((IProperty)communityId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(communityId)), (source.GetCurrentValue<string>(name) == null ? null : ((ValueComparer<string>)(((IProperty)name).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(name))), ((ValueComparer<ulong>)(((IProperty)parentId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(parentId)), ((ValueComparer<uint>)(((IProperty)position).GetValueComparer())).Snapshot(source.GetCurrentValue<uint>(position)), ((ValueComparer<ChannelType>)(((IProperty)type).GetValueComparer())).Snapshot(source.GetCurrentValue<ChannelType>(type)), ((ValueComparer<ulong>)(((IProperty)messageId).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(messageId)))));
                 });
             runtimeEntityType.SetStoreGeneratedValuesFactory(
                 ISnapshot () => Snapshot.Empty);
@@ -59,10 +104,10 @@ namespace Razdor.Communities.Infrastructure.DataAccess
                     return ((ISnapshot)(new Snapshot<ulong>(((ValueComparer<ulong>)(((IProperty)id).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)))));
                 });
             runtimeEntityType.Counts = new PropertyCounts(
-                propertyCount: 6,
+                propertyCount: 7,
                 navigationCount: 0,
                 complexPropertyCount: 0,
-                originalValueCount: 6,
+                originalValueCount: 7,
                 shadowCount: 0,
                 relationshipCount: 1,
                 storeGeneratedCount: 0);

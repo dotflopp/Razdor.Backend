@@ -18,6 +18,9 @@ public class Mentions
         IReadOnlyCollection<MentionedRole>? roles = null
     ){
         MentionedEveryone = mentionedEveryone;
+        _channels = channels;
+        _users = users;
+        _roles = roles;
     }
     
     public bool MentionedEveryone { get; private set; }

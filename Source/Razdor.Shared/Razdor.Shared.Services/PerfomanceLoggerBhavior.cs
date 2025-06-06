@@ -4,8 +4,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Razdor.Shared.Module;
 
-public class LoggerPipelineBehavior<TMessage, TResponse>(
-    ILogger<LoggerPipelineBehavior<TMessage, TResponse>> logger
+public class PerfomanceLoggerBhavior<TMessage, TResponse>(
+    ILogger<PerfomanceLoggerBhavior<TMessage, TResponse>> logger
 ): IPipelineBehavior<TMessage, TResponse>
     where TMessage : IMessage
 {
@@ -20,7 +20,7 @@ public class LoggerPipelineBehavior<TMessage, TResponse>(
         finally
         {
             stopwatch.Stop();
-            logger.LogDebug($"The message was processed in {stopwatch.ElapsedMilliseconds} ms");
+            logger.LogDebug($"{typeof(TMessage).Name} was processed in {stopwatch.ElapsedMilliseconds} ms");
         }
     }
 }

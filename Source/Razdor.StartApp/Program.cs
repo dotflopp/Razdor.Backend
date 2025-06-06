@@ -88,7 +88,7 @@ builder.Services.AddMediator(options =>
         typeof(CommunityPermissionsHandler<,>),
         typeof(ChannelPermissionsHandler<,>),
         typeof(RequiredChannelTypeHandler<,>),
-        typeof(LoggerPipelineBehavior<,>)
+        typeof(PerfomanceLoggerBhavior<,>)
     ];
 });
 

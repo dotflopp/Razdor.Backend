@@ -12,8 +12,11 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Razdor.Gateway\Razdor.Gatwey.PublicEvents\Razdor.Gateways.PublicEvents.csproj" />
+        <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.PublicEvents\Razdor.Shared.PublicEvents.csproj" />
         <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Module.csproj"/>
         <ProjectReference Include="..\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj"/>
+        <ProjectReference Include="..\Razdor.Identity.PublicEvents\Razdor.Identity.PublicEvents.csproj" />
     </ItemGroup>
 
     <ItemGroup>

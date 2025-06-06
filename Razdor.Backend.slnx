@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/Gateways/">
+    <Project Path="Source\Razdor.Gateway\Razdor.Gatwey.PublicEvents\Razdor.Gateways.PublicEvents.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Gateway\Razdor.RestApi\Razdor.RestApi.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Gateway\Razdor.SignalR\Razdor.SignalR.csproj" Type="Classic C#" />
   </Folder>
@@ -16,6 +17,7 @@
     <Project Path="Source\Razdor.Identity\Razdor.Identity.Infrastructure\Razdor.Identity.Infrastructure.csproj" />
     <Project Path="Source\Razdor.Identity\Razdor.Identity.MigrationService\Razdor.Identity.MigrationService.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Identity\Razdor.Identity.Module\Razdor.Identity.Module.csproj" />
+    <Project Path="Source\Razdor.Identity\Razdor.Identity.PublicEvents\Razdor.Identity.PublicEvents.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/Modules/Messaging/">
     <Project Path="Source\Razdor.Messages\Razdor.Messages.Domain\Razdor.Messages.Domain.csproj" Type="Classic C#" />

@@ -47,6 +47,9 @@ namespace Razdor.Identity.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("character varying(50)");
 
+                    b.Property<bool>("IsOnline")
+                        .HasColumnType("boolean");
+
                     b.Property<DateTimeOffset>("RegistrationDate")
                         .HasColumnType("timestamp with time zone");
 

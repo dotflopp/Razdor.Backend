@@ -12,7 +12,7 @@ using Razdor.Identity.Infrastructure.DataAccess;
 namespace Razdor.Identity.Infrastructure.Migrations
 {
     [DbContext(typeof(IdentityPostgresDbContext))]
-    [Migration("20250603071144_Initial")]
+    [Migration("20250606220942_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -30,9 +30,6 @@ namespace Razdor.Identity.Infrastructure.Migrations
                     b.Property<decimal>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("numeric(20,0)");
-
-                    b.Property<string>("Avatar")
-                        .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("CredentialsChangeDate")
                         .HasColumnType("timestamp with time zone");
@@ -76,6 +73,39 @@ namespace Razdor.Identity.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("user-accounts", (string)null);
+                });
+
+            modelBuilder.Entity("Razdor.Identity.Domain.Users.UserAccount", b =>
+                {
+                    b.OwnsOne("Razdor.Shared.Domain.MediaFileMeta", "Avatar", b1 =>
+                        {
+                            b1.Property<decimal>("Id")
+                                .HasColumnType("numeric(20,0)");
+
+                            b1.Property<string>("FileName")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<string>("MediaType")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.Property<long>("Size")
+                                .HasColumnType("bigint");
+
+                            b1.Property<string>("SourceUrl")
+                                .IsRequired()
+                                .HasColumnType("text");
+
+                            b1.HasKey("Id");
+
+                            b1.ToTable("user-accounts");
+
+                            b1.WithOwner()
+                                .HasForeignKey("Id");
+                        });
+
+                    b.Navigation("Avatar");
                 });
 #pragma warning restore 612, 618
         }

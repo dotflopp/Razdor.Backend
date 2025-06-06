@@ -16,7 +16,7 @@ namespace Razdor.Identity.Infrastructure.DataAccess
     public partial class IdentityPostgresDbContextModel
     {
         private IdentityPostgresDbContextModel()
-            : base(skipDetectChanges: false, modelId: new Guid("291f112d-ab56-4316-92e6-b7a44ec2fb23"), entityTypeCount: 2)
+            : base(skipDetectChanges: false, modelId: new Guid("33892bac-4e3e-4717-b825-c026b5914b52"), entityTypeCount: 2)
         {
         }
 
@@ -63,6 +63,8 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             razdorIdentityDomainUsersUserAccountTableBase.Columns.Add("Id", idColumnBase);
             var identityNameColumnBase = new ColumnBase<ColumnMappingBase>("IdentityName", "character varying(50)", razdorIdentityDomainUsersUserAccountTableBase);
             razdorIdentityDomainUsersUserAccountTableBase.Columns.Add("IdentityName", identityNameColumnBase);
+            var isOnlineColumnBase = new ColumnBase<ColumnMappingBase>("IsOnline", "boolean", razdorIdentityDomainUsersUserAccountTableBase);
+            razdorIdentityDomainUsersUserAccountTableBase.Columns.Add("IsOnline", isOnlineColumnBase);
             var nicknameColumnBase = new ColumnBase<ColumnMappingBase>("Nickname", "character varying(50)", razdorIdentityDomainUsersUserAccountTableBase)
             {
                 IsNullable = true
@@ -82,6 +84,7 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)emailColumnBase, userAccount.FindProperty("Email")!, razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)hashedPasswordColumnBase, userAccount.FindProperty("HashedPassword")!, razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)identityNameColumnBase, userAccount.FindProperty("IdentityName")!, razdorIdentityDomainUsersUserAccountMappingBase);
+            RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)isOnlineColumnBase, userAccount.FindProperty("IsOnline")!, razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)registrationDateColumnBase, userAccount.FindProperty("RegistrationDate")!, razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)selectedStatusColumnBase, userAccount.FindProperty("SelectedStatus")!, razdorIdentityDomainUsersUserAccountMappingBase);
             RelationalModel.CreateColumnMapping((ColumnBase<ColumnMappingBase>)nicknameColumnBase, userAccount.FindProperty("_nickname")!, razdorIdentityDomainUsersUserAccountMappingBase);
@@ -137,6 +140,9 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             var identityNameColumn = new Column("IdentityName", "character varying(50)", useraccountsTable);
             useraccountsTable.Columns.Add("IdentityName", identityNameColumn);
             identityNameColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<string>(identityNameColumn);
+            var isOnlineColumn = new Column("IsOnline", "boolean", useraccountsTable);
+            useraccountsTable.Columns.Add("IsOnline", isOnlineColumn);
+            isOnlineColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<bool>(isOnlineColumn);
             var nicknameColumn = new Column("Nickname", "character varying(50)", useraccountsTable)
             {
                 IsNullable = true
@@ -162,6 +168,7 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             RelationalModel.CreateColumnMapping(emailColumn, userAccount.FindProperty("Email")!, useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(hashedPasswordColumn, userAccount.FindProperty("HashedPassword")!, useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(identityNameColumn, userAccount.FindProperty("IdentityName")!, useraccountsTableMapping);
+            RelationalModel.CreateColumnMapping(isOnlineColumn, userAccount.FindProperty("IsOnline")!, useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(registrationDateColumn, userAccount.FindProperty("RegistrationDate")!, useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(selectedStatusColumn, userAccount.FindProperty("SelectedStatus")!, useraccountsTableMapping);
             RelationalModel.CreateColumnMapping(nicknameColumn, userAccount.FindProperty("_nickname")!, useraccountsTableMapping);

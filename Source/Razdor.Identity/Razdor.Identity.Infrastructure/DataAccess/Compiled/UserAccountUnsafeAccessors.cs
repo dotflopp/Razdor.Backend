@@ -26,6 +26,9 @@ namespace Razdor.Identity.Infrastructure.DataAccess
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<IdentityName>k__BackingField")]
         public static extern ref string IdentityName(UserAccount @this);
 
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<IsOnline>k__BackingField")]
+        public static extern ref bool IsOnline(UserAccount @this);
+
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<RegistrationDate>k__BackingField")]
         public static extern ref DateTimeOffset RegistrationDate(UserAccount @this);
 

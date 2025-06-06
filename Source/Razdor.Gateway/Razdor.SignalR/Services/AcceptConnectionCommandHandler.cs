@@ -5,11 +5,13 @@ using Razdor.Communities.Module.Services.Channels.Queries;
 using Razdor.Communities.Module.Services.Communities.Queries;
 using Razdor.Communities.PublicEvents.ViewModels.Channels;
 using Razdor.Communities.PublicEvents.ViewModels.Communities;
+using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.SignalR.Services;
 
 public class AcceptConnectionCommandHandler(
     IHubContext<ConnectionHub, IRazdorClient> context,
+    IRequestSenderContext sender,
     ICommunitiesModule communitiesModule
 ): ICommandHandler <AccepConnectionCommand>
 {
@@ -18,6 +20,8 @@ public class AcceptConnectionCommandHandler(
     {
         IGroupManager groups = context.Groups;
         string connectionId = command.ConnectionId;
+        
+        await groups.AddToGroupAsync(connectionId, sender.User.Id.ToString());
         
         IEnumerable<CommunityViewModel> communities = await communitiesModule.ExecuteQueryAsync(
             new GetSelfUserCommunitiesQuery()

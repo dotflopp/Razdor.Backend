@@ -6,8 +6,7 @@ namespace Razdor.Communities.PublicEvents.Events;
 
 public record ChannelCreatedPublicEvent(
     ChannelViewModel Channel
-) : ICommunityEvent, IPublicEvent<ChannelViewModel>
+) : ICommunityEvent, IPublicEvent
 {
     public ulong CommunityId => Channel.CommunityId;
-    public ChannelViewModel Payload => Channel;
 };

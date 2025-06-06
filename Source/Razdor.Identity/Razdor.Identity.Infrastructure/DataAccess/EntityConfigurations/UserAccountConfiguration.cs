@@ -16,16 +16,13 @@ public class UserAccountConfiguration : IEntityTypeConfiguration<UserAccount>
         builder.HasIndex(x => x.IdentityName)
             .IsUnique();
 
-        builder.Property(x => x.Id)
-            .IsRequired();
-
         builder.Property(x => x.IdentityName)
             .HasMaxLength(UserAccount.MaxIdentityNameLength)
             .IsRequired();
-
+        
         builder.Property(x => x.CredentialsChangeDate)
             .IsRequired();
-
+        
         builder.Ignore(x => x.Nickname);
         builder.Property<string>("_nickname")
             .HasColumnName(nameof(UserAccount.Nickname))

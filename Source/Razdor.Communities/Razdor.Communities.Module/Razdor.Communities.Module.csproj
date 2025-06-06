@@ -20,6 +20,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Razdor.Identity\Razdor.Identity.PublicEvents\Razdor.Identity.PublicEvents.csproj" />
         <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Module.csproj" />
         <ProjectReference Include="..\Razdor.Communities.Domain\Razdor.Communities.Domain.csproj"/>
         <ProjectReference Include="..\Razdor.Communities.PublicEvents\Razdor.Communities.PublicEvents.csproj" />

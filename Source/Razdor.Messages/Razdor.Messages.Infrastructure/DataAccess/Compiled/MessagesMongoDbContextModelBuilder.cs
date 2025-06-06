@@ -11,7 +11,7 @@ namespace Razdor.Messages.Infrastructure.DataAccess
     public partial class MessagesMongoDbContextModel
     {
         private MessagesMongoDbContextModel()
-            : base(skipDetectChanges: false, modelId: new Guid("4b48723d-4c95-4fcb-b918-e2e8ac5e2251"), entityTypeCount: 10)
+            : base(skipDetectChanges: false, modelId: new Guid("b0434ecd-8876-4dd2-a49f-1ad39b4329aa"), entityTypeCount: 10)
         {
         }
 

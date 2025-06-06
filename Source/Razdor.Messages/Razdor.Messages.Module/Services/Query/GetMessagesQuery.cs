@@ -2,7 +2,7 @@
 using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Messages.Module.Contracts;
-using Razdor.Messages.Module.Services.Commands.ViewModels;
+using Razdor.Messages.PublicEvents.ViewModels;
 using Razdor.Shared.Module.Authorization;
 
 namespace Razdor.Messages.Module.Services.Query;

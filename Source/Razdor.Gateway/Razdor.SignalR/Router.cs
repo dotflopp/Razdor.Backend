@@ -9,7 +9,7 @@ public static class Router
         endpoints.MapHub<ConnectionHub>("/api/signalr", options =>
         {
             options.Transports = HttpTransportType.WebSockets;
-        }).DisableAntiforgery().RequireAuthorization();
+        }).RequireAuthorization();
         return endpoints;
     }
 }

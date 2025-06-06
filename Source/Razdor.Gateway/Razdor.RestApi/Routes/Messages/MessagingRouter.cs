@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Razdor.Messages.Module.Contracts;
 using Razdor.Messages.Module.Services.Commands;
-using Razdor.Messages.Module.Services.Commands.ViewModels;
 using Razdor.Messages.Module.Services.Query;
+using Razdor.Messages.PublicEvents.ViewModels;
 using Razdor.RestApi.Multipart;
 using Razdor.RestApi.Routes.Messages.ViewModels;
 using Razdor.Shared.Module.Media;

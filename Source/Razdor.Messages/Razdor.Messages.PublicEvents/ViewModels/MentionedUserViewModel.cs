@@ -1,9 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 using Razdor.Messages.Domain.Mentioning;
-using Razdor.Shared.Module;
 using Razdor.Shared.Module.Serialization;
 
-namespace Razdor.Messages.Module.Services.Commands.ViewModels;
+namespace Razdor.Messages.PublicEvents.ViewModels;
 
 public record MentionedUserViewModel(
     [property:JsonConverter(typeof(JsonStringULongConverter))]

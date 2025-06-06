@@ -1,7 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 using Razdor.Messages.Domain;
 using Razdor.Messages.Module.Services.Commands;
-using Razdor.Messages.Module.Services.Commands.ViewModels;
+using Razdor.Messages.PublicEvents.ViewModels;
 using Razdor.RestApi.Routes.Messages.ViewModels;
 
 namespace Razdor.RestApi.Serialization;

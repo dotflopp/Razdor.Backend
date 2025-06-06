@@ -85,6 +85,6 @@ public class CommunityMember : BaseAggregateRoot
         _roleIds ??= new();
         _roleIds.Add(role.Id);
         
-        AddDomainEvent(new MemberRolesChanged(CommunityId, UserId, _roleIds));
+        AddDomainEvent(new MemberRolesChangedEvent(CommunityId, UserId, _roleIds));
     }
 }

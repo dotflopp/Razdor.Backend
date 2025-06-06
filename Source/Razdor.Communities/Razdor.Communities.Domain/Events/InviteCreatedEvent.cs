@@ -3,6 +3,6 @@ using Razdor.Shared.Domain;
 
 namespace Razdor.Communities.Domain.Events;
 
-public record InviteCreated(
+public record InviteCreatedEvent(
     Invite Invite
 ) : IDomainEvent;

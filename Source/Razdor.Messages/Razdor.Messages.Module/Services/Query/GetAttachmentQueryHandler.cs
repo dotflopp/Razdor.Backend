@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Razdor.Messages.Domain;
 using Razdor.Messages.Module.DataAccess;
-using Razdor.Messages.Module.Services.Commands.ViewModels;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Exceptions;
 using Razdor.Shared.Module.Media;

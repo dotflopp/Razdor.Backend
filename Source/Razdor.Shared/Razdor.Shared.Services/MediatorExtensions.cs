@@ -24,10 +24,10 @@ public static class MediatorExtensions
             .SelectMany(x => x.Entity.DomainEvents)
             .ToList();
 
-        foreach (EntityEntry<TEntity> entry in hasEventEntities)
-            entry.Entity.ClearDomainEvents();
-
         foreach (IDomainEvent domainEvent in domainEvents)
             await mediator.Publish(domainEvent);
+
+        foreach (EntityEntry<TEntity> entry in hasEventEntities)
+            entry.Entity.ClearDomainEvents();
     }
 }

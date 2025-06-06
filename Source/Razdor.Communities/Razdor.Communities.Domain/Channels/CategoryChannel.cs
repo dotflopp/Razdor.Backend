@@ -1,4 +1,5 @@
-﻿using Razdor.Communities.Domain.Permissions;
+﻿using Razdor.Communities.Domain.Events;
+using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Domain.Rules;
 using Razdor.Shared.Domain.Rules;
 
@@ -34,6 +35,8 @@ public class CategoryChannel : OverwritesPermissionChannel
         
         CategoryChannel newChannel = new(id, name, communityId, 0, parent?.Id ?? 0, null);
         parent?.ValidateChild(newChannel);
+        
+        newChannel.AddDomainEvent(new ChannelCreatedEvent(newChannel));
         
         return newChannel;
     }

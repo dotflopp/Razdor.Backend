@@ -22,6 +22,7 @@
     <Project Path="Source\Razdor.Messages\Razdor.Messages.Infrastructure\Razdor.Messages.Infrastructure.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Messages\Razdor.Messages.MigrationService\Razdor.Messages.MigrationService.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Messages\Razdor.Messages.Module\Razdor.Messages.Module.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Messages\Razdor.Messages.PublicEvents\Razdor.Messages.PublicEvents.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/Modules/Shared/">
     <Project Path="Source\Razdor.ServiceDefaults\Razdor.ServiceDefaults.csproj" />

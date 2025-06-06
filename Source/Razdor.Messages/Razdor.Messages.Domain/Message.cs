@@ -82,8 +82,8 @@ public class Message: BaseSnowflakeEntity, IEntity<ulong>
             mentions: mentions
         );
 
-        MessageSentEvent messageSent = MessageSentEvent.From(message);
-        message.AddDomainEvent(messageSent);
+        MessageCreatedEvent messageCreated = MessageCreatedEvent.From(message);
+        message.AddDomainEvent(messageCreated);
         return message;
     }
 }

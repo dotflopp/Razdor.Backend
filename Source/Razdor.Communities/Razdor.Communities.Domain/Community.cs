@@ -49,7 +49,7 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
         get => field;
         set
         {
-            AddDomainEvent(new CommunityAvatarChanged(Id, value));
+            AddDomainEvent(new CommunityAvatarChangedEvent(Id, value));
             field = value;
         }
     }

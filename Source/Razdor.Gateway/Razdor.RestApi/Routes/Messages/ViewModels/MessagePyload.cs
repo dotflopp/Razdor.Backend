@@ -1,5 +1,5 @@
 ﻿using Razdor.Messages.Domain;
-using Razdor.Messages.Module.Services.Commands.ViewModels;
+using Razdor.Messages.PublicEvents.ViewModels;
 
 namespace Razdor.RestApi.Routes.Messages.ViewModels;
 

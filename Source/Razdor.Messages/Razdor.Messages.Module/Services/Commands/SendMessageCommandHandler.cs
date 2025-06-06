@@ -1,6 +1,6 @@
 ﻿using Mediator;
 using Razdor.Messages.Domain;
-using Razdor.Messages.Module.Services.Commands.ViewModels;
+using Razdor.Messages.PublicEvents.ViewModels;
 using Razdor.Shared.Domain;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Exceptions;

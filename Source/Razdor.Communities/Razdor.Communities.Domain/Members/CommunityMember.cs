@@ -76,7 +76,7 @@ public class CommunityMember : BaseAggregateRoot
             time?.GetUtcNow() ?? DateTimeOffset.UtcNow
         );
 
-        member.AddDomainEvent(new UserJoined(communityId, userId));
+        member.AddDomainEvent(new CommunityMemberAddedEvent(member));
         return member;
     }
     

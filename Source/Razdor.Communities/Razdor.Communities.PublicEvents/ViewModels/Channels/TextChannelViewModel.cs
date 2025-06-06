@@ -1,6 +1,6 @@
 ﻿using Razdor.Communities.Domain.Channels;
 
-namespace Razdor.Communities.Module.Services.Channels.ViewModels;
+namespace Razdor.Communities.PublicEvents.ViewModels.Channels;
 
 public record TextChannelViewModel(
     ulong Id,

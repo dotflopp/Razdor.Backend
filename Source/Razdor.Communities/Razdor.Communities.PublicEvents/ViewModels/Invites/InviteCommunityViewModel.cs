@@ -2,7 +2,7 @@
 using Razdor.Communities.Domain;
 using Razdor.Shared.Module.Serialization;
 
-namespace Razdor.Communities.Module.Services.Invites.ViewModels;
+namespace Razdor.Communities.PublicEvents.ViewModels.Invites;
 
 public record InviteCommunityViewModel(
     [property:JsonConverter(typeof(JsonStringULongConverter))]

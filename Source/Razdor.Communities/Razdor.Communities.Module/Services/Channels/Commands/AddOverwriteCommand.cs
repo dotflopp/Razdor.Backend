@@ -1,7 +1,7 @@
 ﻿using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Module.Contracts;
-using Razdor.Communities.Module.Services.Channels.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Channels;
 using Razdor.Shared.Module.Authorization;
 
 namespace Razdor.Communities.Module.Services.Channels.Commands;

@@ -2,7 +2,7 @@
 using Razdor.Communities.Domain.Invites;
 using Razdor.Shared.Module.Serialization;
 
-namespace Razdor.Communities.Module.Services.Invites.ViewModels;
+namespace Razdor.Communities.PublicEvents.ViewModels.Invites;
 
 public sealed record InvitePreviewModel(
     string Id,

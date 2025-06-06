@@ -1,9 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 using Razdor.Communities.Domain.Members;
-using Razdor.Shared.Module;
 using Razdor.Shared.Module.Serialization;
 
-namespace Razdor.Communities.Module.Services.Members.ViewModels;
+namespace Razdor.Communities.PublicEvents.ViewModels.Members;
 
 public record CommunityMemberPreviewModel(
     [property:JsonConverter(typeof(JsonStringULongConverter))]

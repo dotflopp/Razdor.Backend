@@ -1,13 +1,12 @@
 ﻿using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Mvc;
 using Razdor.Communities.Module.Services.Channels.Commands;
 using Razdor.Communities.Module.Services.Channels.Queries;
-using Razdor.Communities.Module.Services.Channels.ViewModels;
 using Razdor.Communities.Module.Services.Communities.Commands;
-using Razdor.Communities.Module.Services.Communities.ViewModels;
 using Razdor.Communities.Module.Services.Invites.Commands;
-using Razdor.Communities.Module.Services.Invites.ViewModels;
-using Razdor.Communities.Module.Services.Members.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Channels;
+using Razdor.Communities.PublicEvents.ViewModels.Communities;
+using Razdor.Communities.PublicEvents.ViewModels.Invites;
+using Razdor.Communities.PublicEvents.ViewModels.Members;
 using Razdor.RestApi.Routes.Channels.Overwrites.ViewModels;
 using Razdor.RestApi.Routes.Communities.Roles.ViewModels;
 using Razdor.RestApi.Routes.Communities.ViewModels;

@@ -5,7 +5,7 @@ using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Module.Authorization;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Exceptions;
-using Razdor.Communities.Module.Services.Channels.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Channels;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Authorization;
 using Razdor.Shared.Module.Serialization;

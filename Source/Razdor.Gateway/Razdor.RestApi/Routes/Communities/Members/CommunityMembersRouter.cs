@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Members.Queries;
-using Razdor.Communities.Module.Services.Members.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Members;
 
 namespace Razdor.RestApi.Routes.Communities.Members;
 

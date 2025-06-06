@@ -2,7 +2,7 @@
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Invites.Commands;
 using Razdor.Communities.Module.Services.Invites.Queries;
-using Razdor.Communities.Module.Services.Invites.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Invites;
 using Razdor.RestApi.Routes.Invites.ViewModels;
 
 namespace Razdor.RestApi.Routes.Invites;

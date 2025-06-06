@@ -19,6 +19,8 @@ using Razdor.RestApi.Multipart;
 using Razdor.RestApi.OpenAPI;
 using Razdor.RestApi.Routes;
 using Razdor.Shared.Infrastructure;
+using Razdor.Shared.Infrastructure.Events;
+using Razdor.Shared.IntegrationEvents;
 using Razdor.Shared.Module.Media;
 using Razdor.SignalR;
 using Razdor.StartApp;
@@ -51,6 +53,7 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
+
 
 builder.Services.AddSignalR();
 
@@ -94,6 +97,9 @@ builder.Services.AddMediator(options =>
         typeof(PerfomanceLoggerBhavior<,>)
     ];
 });
+
+builder.Services.AddScoped<InMemoryEventBus>();
+builder.Services.AddScoped<IEventBus, InMemoryEventBusClient>();
 
 //Cache
 builder.Services.AddHybridCache();
@@ -180,6 +186,7 @@ app.MapScalarApiReference("/api/swagger", options =>
 });
 
 app.UseCustomNotAuthorizedResponse();
+
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -1,7 +1,6 @@
 ﻿using Mediator;
 using Razdor.Communities.Module.Contracts;
-using Razdor.Communities.Module.Services.Communities.ViewModels;
-using Razdor.Communities.Module.Services.Invites.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Invites;
 
 namespace Razdor.Communities.Module.Services.Invites.Queries;
 

@@ -1,8 +1,8 @@
-﻿using Razdor.Shared.Domain;
+﻿using Razdor.Communities.Domain.Invites;
+using Razdor.Shared.Domain;
 
 namespace Razdor.Communities.Domain.Events;
 
 public record InviteCreated(
-    ulong CommunityId,
-    string InviteId
+    Invite Invite
 ) : IDomainEvent;

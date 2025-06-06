@@ -1,6 +1,6 @@
 ﻿using Mediator;
 using Razdor.Communities.Domain.Channels;
-using Razdor.Communities.Module.Services.Channels.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Channels;
 using Razdor.Shared.Module;
 
 namespace Razdor.Communities.Module.Services.Channels.Commands;

@@ -1,12 +1,10 @@
 ﻿using Mediator;
 using Microsoft.EntityFrameworkCore;
 using Razdor.Communities.Module.DataAccess;
-using Razdor.Shared.Module;
-using Razdor.Shared.Module.Exceptions;
 using Razdor.Shared.Module.Media;
 using Razdor.Shared.Module.Media.Exceptions;
 
-namespace Razdor.Communities.Module.Services.Communities.InternalQueries;
+namespace Razdor.Communities.Module.Services.Communities.Queries;
 
 public class GetCommunityAvatarQueryHandler(
     IFileStore store,

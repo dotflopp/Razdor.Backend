@@ -10,7 +10,6 @@ public static class Router
         {
             options.Transports = HttpTransportType.WebSockets;
         }).DisableAntiforgery().RequireAuthorization();
-
         return endpoints;
     }
 }

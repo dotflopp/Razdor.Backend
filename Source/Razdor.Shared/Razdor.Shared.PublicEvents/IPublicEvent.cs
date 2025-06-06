@@ -2,7 +2,7 @@
 
 namespace Razdor.Shared.IntegrationEvents;
 
-public interface IIntegrationEvent :INotification
+public interface IPublicEvent :INotification
 {
     
 }

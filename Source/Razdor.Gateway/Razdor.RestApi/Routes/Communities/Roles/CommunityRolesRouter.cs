@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Razdor.Communities.Module.Contracts;
-using Razdor.Communities.Module.Services.Communities.ViewModels;
 using Razdor.Communities.Module.Services.Roles.Commands;
+using Razdor.Communities.PublicEvents.ViewModels.Communities;
 using Razdor.RestApi.Routes.Communities.Roles.ViewModels;
 
 namespace Razdor.RestApi.Routes.Communities.Roles;

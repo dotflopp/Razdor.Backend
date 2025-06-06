@@ -1,4 +1,4 @@
-﻿namespace Razdor.Communities.Module.Services.Members.ViewModels;
+﻿namespace Razdor.Communities.PublicEvents.ViewModels.Members;
 
 public record UserDataViewModel(
     string IdentityName,

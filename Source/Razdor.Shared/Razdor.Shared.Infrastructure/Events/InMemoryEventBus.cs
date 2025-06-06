@@ -7,7 +7,7 @@ public class InMemoryEventBus: IEventBus
 {
     private readonly Dictionary<Type, List<Delegate>> _eventHandlers = new();
     
-    public async Task Publish<TEvent>(TEvent integrationEvent) where TEvent : IIntegrationEvent
+    public async Task Publish<TEvent>(TEvent integrationEvent) where TEvent : IPublicEvent
     {
         Type eventType = integrationEvent.GetType();
         if (!_eventHandlers.TryGetValue(eventType, out var handlers))
@@ -19,7 +19,7 @@ public class InMemoryEventBus: IEventBus
                 await functionHandler.Invoke(integrationEvent);
         }
     }
-    public void Subscribe<TEvent>(IntegrationEventHandleDelegate<TEvent> handler) where TEvent : IIntegrationEvent
+    public void Subscribe<TEvent>(PublicEventHandler<TEvent> handler) where TEvent : IPublicEvent
     {
         Type eventType = typeof(TEvent);
 

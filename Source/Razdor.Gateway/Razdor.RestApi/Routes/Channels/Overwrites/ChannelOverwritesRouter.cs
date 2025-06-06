@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Channels.Commands;
-using Razdor.Communities.Module.Services.Channels.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Channels;
 using Razdor.RestApi.Routes.Channels.Overwrites.ViewModels;
 
 namespace Razdor.RestApi.Routes.Channels.Overwrites;
@@ -18,6 +18,7 @@ public static class ChannelOverwritesRouter
 
         return builder;
     }
+    
     private static async Task AddChannelOverwriteAsync(
         [FromServices] ICommunitiesModule module,
         [FromRoute] ulong channelId,

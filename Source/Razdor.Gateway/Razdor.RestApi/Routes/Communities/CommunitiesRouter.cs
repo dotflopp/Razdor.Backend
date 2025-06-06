@@ -2,11 +2,11 @@
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Channels.Commands;
 using Razdor.Communities.Module.Services.Channels.Queries;
-using Razdor.Communities.Module.Services.Channels.ViewModels;
 using Razdor.Communities.Module.Services.Communities.Commands;
 using Razdor.Communities.Module.Services.Communities.InternalQueries;
 using Razdor.Communities.Module.Services.Communities.Queries;
-using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Channels;
+using Razdor.Communities.PublicEvents.ViewModels.Communities;
 using Razdor.RestApi.Routes.Communities.ViewModels;
 using Razdor.Shared.Module.Media;
 

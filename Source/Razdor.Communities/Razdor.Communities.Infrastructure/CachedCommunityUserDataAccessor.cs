@@ -4,7 +4,7 @@ using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.Services.Communities.InternalQueries;
 using Razdor.Communities.Module.Services.Members;
-using Razdor.Communities.Module.Services.Members.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Members;
 using Razdor.Identity.Module.Contracts;
 using Razdor.Identity.Module.Services.Users.Queries;
 using Razdor.Identity.Module.Services.Users.ViewModels;

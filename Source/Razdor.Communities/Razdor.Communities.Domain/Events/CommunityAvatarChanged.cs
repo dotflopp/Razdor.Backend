@@ -2,4 +2,4 @@
 
 namespace Razdor.Communities.Domain.Events;
 
-public record CommunityAvatarChanged(ulong CommunityId) : IDomainEvent;
+public record CommunityAvatarChanged(ulong CommunityId, MediaFileMeta? Avatar) : IDomainEvent;

@@ -17,7 +17,8 @@ public static class MessagingRouter
         
         api.MapPost("/", SendMessageAsync)
             .DisableAntiforgery()
-            .Accepts<MessagePyload>(false, "application/json")
+            .Accepts<MessagePyload>(true, "application/json")
+            .Accepts<object>(true, "multipart/form-data")
             .Produces<MessageViewModel>()
             .WithSummary("Отправить сообщение в канал");
         

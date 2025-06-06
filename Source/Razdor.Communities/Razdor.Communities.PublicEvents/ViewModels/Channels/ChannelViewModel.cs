@@ -1,9 +1,8 @@
 ﻿using System.Text.Json.Serialization;
 using Razdor.Communities.Domain.Channels;
-using Razdor.Shared.Module;
 using Razdor.Shared.Module.Serialization;
 
-namespace Razdor.Communities.Module.Services.Channels.ViewModels;
+namespace Razdor.Communities.PublicEvents.ViewModels.Channels;
 
 [JsonDerivedType(typeof(ForkChannelViewModel))]
 [JsonDerivedType(typeof(TextChannelViewModel))]

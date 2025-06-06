@@ -2,7 +2,7 @@
 using Razdor.Communities.Domain;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Domain.Roles;
-using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Communities;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.Authorization;
 using Razdor.Shared.Module.Exceptions;

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Razdor.Communities.Domain;
 using Razdor.Communities.Module.DataAccess;
-using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Communities;
 using Razdor.Shared.Module.RequestSenderContext;
 
 namespace Razdor.Communities.Module.Services.Communities.Queries;

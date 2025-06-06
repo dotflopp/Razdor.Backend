@@ -17,7 +17,6 @@ public class ContentWithFilesAccessor(
 
     public async Task<ContentWithFiles<TMainContent>> ParseAsync<TMainContent>(CancellationToken cancellationToken = default)
     {
-
         if (!MediaTypeHeaderValue.TryParse(Context.Request.ContentType, out MediaTypeHeaderValue? contentType))
             throw new BadHttpRequestException("Missing content-type");
 

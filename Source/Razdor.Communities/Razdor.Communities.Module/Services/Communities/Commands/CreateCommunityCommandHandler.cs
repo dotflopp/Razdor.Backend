@@ -2,7 +2,7 @@
 using Razdor.Communities.Domain;
 using Razdor.Communities.Domain.Members;
 using Razdor.Communities.Module.DataAccess;
-using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Communities;
 using Razdor.Shared.Module;
 using Razdor.Shared.Module.DataAccess;
 using Razdor.Shared.Module.RequestSenderContext;

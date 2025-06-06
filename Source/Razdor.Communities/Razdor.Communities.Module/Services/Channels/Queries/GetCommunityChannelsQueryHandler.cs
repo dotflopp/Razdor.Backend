@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Module.DataAccess;
-using Razdor.Communities.Module.Services.Channels.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Channels;
 using Razdor.Shared.Module.Authorization;
 using Razdor.Shared.Module.RequestSenderContext;
 

@@ -1,8 +1,8 @@
 ﻿using Razdor.Communities.Domain.Channels;
 
-namespace Razdor.Communities.Module.Services.Channels.ViewModels;
+namespace Razdor.Communities.PublicEvents.ViewModels.Channels;
 
-public record VoiceChannelViewModel(
+public record ForkChannelViewModel(
     ulong Id,
     ulong CommunityId,
     ChannelType Type,

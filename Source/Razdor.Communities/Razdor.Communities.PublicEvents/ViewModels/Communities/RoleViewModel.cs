@@ -1,10 +1,9 @@
 ﻿using System.Text.Json.Serialization;
 using Razdor.Communities.Domain.Permissions;
 using Razdor.Communities.Domain.Roles;
-using Razdor.Shared.Module;
 using Razdor.Shared.Module.Serialization;
 
-namespace Razdor.Communities.Module.Services.Communities.ViewModels;
+namespace Razdor.Communities.PublicEvents.ViewModels.Communities;
 
 public record RoleViewModel(
     [property:JsonConverter(typeof(JsonStringULongConverter))]

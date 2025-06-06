@@ -40,7 +40,7 @@ public class Invite : BaseAggregateRoot, IEntity<string>
 
         var invite = new Invite(id, communityId, creatorId, expireTime, now, 0);
 
-        invite.AddDomainEvent(new InviteCreated(communityId, invite.Id));
+        invite.AddDomainEvent(new InviteCreated(invite));
 
         return invite;
     }

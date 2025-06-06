@@ -1,5 +1,5 @@
 ﻿using Razdor.Communities.Module.Contracts;
-using Razdor.Communities.Module.Services.Members.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Members;
 
 namespace Razdor.Communities.Module.Services.Members.Queries;
 

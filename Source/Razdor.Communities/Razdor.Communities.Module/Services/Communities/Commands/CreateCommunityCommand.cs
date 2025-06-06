@@ -1,5 +1,5 @@
 ﻿using Razdor.Communities.Module.Contracts;
-using Razdor.Communities.Module.Services.Communities.ViewModels;
+using Razdor.Communities.PublicEvents.ViewModels.Communities;
 using Razdor.Shared.Module.Authorization;
 
 namespace Razdor.Communities.Module.Services.Communities.Commands;

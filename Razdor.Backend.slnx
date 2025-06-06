@@ -9,6 +9,7 @@
     <Project Path="Source\Razdor.Communities\Razdor.Communities.Infrastructure\Razdor.Communities.Infrastructure.csproj" />
     <Project Path="Source\Razdor.Communities\Razdor.Communities.MigrationService\Razdor.Communities.MigrationService.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Communities\Razdor.Communities.Module\Razdor.Communities.Module.csproj" />
+    <Project Path="Source\Razdor.Communities\Razdor.Communities.PublicEvents\Razdor.Communities.PublicEvents.csproj" Type="Classic C#" />
   </Folder>
   <Folder Name="/Modules/Identity/">
     <Project Path="Source\Razdor.Identity\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj" />
@@ -27,7 +28,7 @@
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Domain\Razdor.Shared.Domain.csproj" />
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Extensions\Razdor.Shared.Extensions.csproj" />
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Infrastructure\Razdor.Shared.Infrastructure.csproj" Type="Classic C#" />
-    <Project Path="Source\Razdor.Shared\Razdor.Shared.IntegrationEvents\Razdor.Shared.IntegrationEvents.csproj" Type="Classic C#" />
+    <Project Path="Source\Razdor.Shared\Razdor.Shared.PublicEvents\Razdor.Shared.PublicEvents.csproj" Type="Classic C#" />
     <Project Path="Source\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Module.csproj" />
   </Folder>
   <Folder Name="/Solution Items/">

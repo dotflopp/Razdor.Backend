@@ -34,8 +34,8 @@ public class Invite : BaseAggregateRoot, IEntity<string>
     {
         DateTimeOffset now = timeProvider?.GetUtcNow() ?? DateTimeOffset.Now;
         DateTimeOffset? expireTime = null;
-
-        if (lifeTime.HasValue)
+    
+        if (lifeTime is { Ticks: > 0 })
             expireTime = now + lifeTime.Value;
 
         var invite = new Invite(id, communityId, creatorId, expireTime, now, 0);

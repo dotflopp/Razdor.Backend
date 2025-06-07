@@ -30,7 +30,7 @@ public record CreateCommunityChannelCommand(
             ChannelType.CategoryChannel => CategoryChannel.CreateNew(id, CommunityId, Name, parent),
             ChannelType.TextChannel => TextChannel.CreateNew(id, CommunityId, Name, parent),
             ChannelType.VoiceChannel => VoiceChannel.CreateNew(id, CommunityId, Name, parent),
-            _ => throw new InvalidOperationRazdorException($"Invalid channel type {Type}")
+            _ => throw new InvalidRazdorOperationException($"Invalid channel type {Type}")
         };
     }
 }

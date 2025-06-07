@@ -25,7 +25,7 @@ public class AddOverwriteCommandHandler(
         CommunityChannel channel = await channels.FindAsync(command.ChannelId, cancellationToken);
 
         if (channel is not OverwritesPermissionChannel overwritesChannel)
-            throw new InvalidOperationRazdorException($"{channel.Type} not supported");
+            throw new InvalidRazdorOperationException($"{channel.Type} not supported");
 
         UserPermissions senderPermissions = await channelPermissions.GetMemberPermissionsAsync(sender.User.Id, channel.Id, cancellationToken);
         (_, uint senderPriority) = await communityPermissions.GetMemberPermissionsAndPriorityAsync(channel.CommunityId, sender.User.Id, cancellationToken);

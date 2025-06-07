@@ -28,6 +28,9 @@ public sealed class AcceptInviteCommandHandler(
 
         if (!await communities.ContainsAsync(invite.CommunityId))
             ExceptionHelper.ThrowInviteWithoutCommunity(invite);
+
+        if (invite.ExpiresAt.HasValue && !(invite.ExpiresAt < timeProvider.GetUtcNow()))
+            throw new InvalidRazdorOperationException("Invite expired");
         
         await RuleValidationHelper.ThrowIfBrokenAsync(
             new CantJoinSameCommunityTwice(members, invite.CommunityId, sender.User.Id)

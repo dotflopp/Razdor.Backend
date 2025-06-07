@@ -18,6 +18,7 @@ namespace Razdor.Identity.Infrastructure.Migrations
                     Id = table.Column<decimal>(type: "numeric(20,0)", nullable: false),
                     IdentityName = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
+                    Nickname = table.Column<string>(type: "text", nullable: true),
                     Avatar_FileName = table.Column<string>(type: "text", nullable: true),
                     Avatar_SourceUrl = table.Column<string>(type: "text", nullable: true),
                     Avatar_MediaType = table.Column<string>(type: "text", nullable: true),
@@ -27,8 +28,7 @@ namespace Razdor.Identity.Infrastructure.Migrations
                     CredentialsChangeDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     SelectedStatus = table.Column<int>(type: "integer", nullable: false),
                     Description = table.Column<string>(type: "character varying(300)", maxLength: 300, nullable: true),
-                    RegistrationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    Nickname = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: true)
+                    RegistrationDate = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {

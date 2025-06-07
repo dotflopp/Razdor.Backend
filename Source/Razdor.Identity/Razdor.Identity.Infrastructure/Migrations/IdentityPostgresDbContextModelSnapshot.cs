@@ -51,7 +51,6 @@ namespace Razdor.Identity.Infrastructure.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Nickname")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<DateTimeOffset>("RegistrationDate")

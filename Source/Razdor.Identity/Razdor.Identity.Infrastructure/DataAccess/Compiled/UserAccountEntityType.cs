@@ -366,7 +366,8 @@ namespace Razdor.Identity.Infrastructure.DataAccess
         typeof(string),
         propertyInfo: typeof(UserAccount).GetProperty("Nickname", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
         fieldInfo: typeof(UserAccount).GetField("_nickname", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-        propertyAccessMode: PropertyAccessMode.Field);
+        propertyAccessMode: PropertyAccessMode.Field,
+        nullable: true);
     nickname.SetGetter(
         string (UserAccount entity) => UserAccountUnsafeAccessors._nickname(entity),
         bool (UserAccount entity) => UserAccountUnsafeAccessors._nickname(entity) == null,

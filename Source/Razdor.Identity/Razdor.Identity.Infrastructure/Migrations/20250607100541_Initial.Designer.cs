@@ -12,7 +12,7 @@ using Razdor.Identity.Infrastructure.DataAccess;
 namespace Razdor.Identity.Infrastructure.Migrations
 {
     [DbContext(typeof(IdentityPostgresDbContext))]
-    [Migration("20250606220942_Initial")]
+    [Migration("20250607100541_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -53,16 +53,14 @@ namespace Razdor.Identity.Infrastructure.Migrations
                     b.Property<bool>("IsOnline")
                         .HasColumnType("boolean");
 
+                    b.Property<string>("Nickname")
+                        .HasColumnType("text");
+
                     b.Property<DateTimeOffset>("RegistrationDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("SelectedStatus")
                         .HasColumnType("integer");
-
-                    b.Property<string>("_nickname")
-                        .HasMaxLength(50)
-                        .HasColumnType("character varying(50)")
-                        .HasColumnName("Nickname");
 
                     b.HasKey("Id");
 

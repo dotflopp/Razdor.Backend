@@ -25,6 +25,7 @@ public class UserAccountConfiguration : IEntityTypeConfiguration<UserAccount>
             .IsRequired();
         
         builder.Property<string>(x => x.Nickname)
+            .IsRequired(false)
             .UsePropertyAccessMode(PropertyAccessMode.Field);
 
         builder.Property(x => x.IsOnline)

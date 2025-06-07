@@ -16,7 +16,7 @@ namespace Razdor.Identity.Infrastructure.DataAccess
     public partial class IdentityPostgresDbContextModel
     {
         private IdentityPostgresDbContextModel()
-            : base(skipDetectChanges: false, modelId: new Guid("9c1ff66f-ed34-4368-a7ed-9915de18b27c"), entityTypeCount: 2)
+            : base(skipDetectChanges: false, modelId: new Guid("ff601592-9915-4f13-b1a3-e587f0ee6af0"), entityTypeCount: 2)
         {
         }
 
@@ -65,7 +65,10 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             razdorIdentityDomainUsersUserAccountTableBase.Columns.Add("IdentityName", identityNameColumnBase);
             var isOnlineColumnBase = new ColumnBase<ColumnMappingBase>("IsOnline", "boolean", razdorIdentityDomainUsersUserAccountTableBase);
             razdorIdentityDomainUsersUserAccountTableBase.Columns.Add("IsOnline", isOnlineColumnBase);
-            var nicknameColumnBase = new ColumnBase<ColumnMappingBase>("Nickname", "text", razdorIdentityDomainUsersUserAccountTableBase);
+            var nicknameColumnBase = new ColumnBase<ColumnMappingBase>("Nickname", "text", razdorIdentityDomainUsersUserAccountTableBase)
+            {
+                IsNullable = true
+            };
             razdorIdentityDomainUsersUserAccountTableBase.Columns.Add("Nickname", nicknameColumnBase);
             var registrationDateColumnBase = new ColumnBase<ColumnMappingBase>("RegistrationDate", "timestamp with time zone", razdorIdentityDomainUsersUserAccountTableBase);
             razdorIdentityDomainUsersUserAccountTableBase.Columns.Add("RegistrationDate", registrationDateColumnBase);
@@ -140,7 +143,10 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             var isOnlineColumn = new Column("IsOnline", "boolean", useraccountsTable);
             useraccountsTable.Columns.Add("IsOnline", isOnlineColumn);
             isOnlineColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<bool>(isOnlineColumn);
-            var nicknameColumn = new Column("Nickname", "text", useraccountsTable);
+            var nicknameColumn = new Column("Nickname", "text", useraccountsTable)
+            {
+                IsNullable = true
+            };
             useraccountsTable.Columns.Add("Nickname", nicknameColumn);
             nicknameColumn.Accessors = ColumnAccessorsFactory.CreateGeneric<string>(nicknameColumn);
             var registrationDateColumn = new Column("RegistrationDate", "timestamp with time zone", useraccountsTable);

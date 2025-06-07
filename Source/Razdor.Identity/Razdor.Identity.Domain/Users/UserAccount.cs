@@ -9,10 +9,15 @@ public class UserAccount : BaseSnowflakeEntity, IEntity<ulong>, IAggregateRoot
     public const int MaxIdentityNameLength = 50;
     public const int MaxNicknameLength = MaxIdentityNameLength;
     public const int MaxDescriptionLength = 300;
+    
     private string? _nickname;
     
     private UserChangedEvent? _changes;
-    
+    private bool _isOnline;
+    private MediaFileMeta? _avatar;
+    private SelectedCommunicationStatus _selectedStatus;
+
+
     /// <summary>
     /// EF constructor
     /// </summary>
@@ -35,11 +40,11 @@ public class UserAccount : BaseSnowflakeEntity, IEntity<ulong>, IAggregateRoot
     {
         IdentityName = identityName;
         _nickname = nickname;
+        _isOnline = isOnline;
+        _selectedStatus = selectedStatus;
         Email = email;
         HashedPassword = hashedPassword;
         CredentialsChangeDate = credentialsChangeDate;
-        IsOnline = isOnline;
-        SelectedStatus = selectedStatus;
         Description = description;
         RegistrationDate = registrationDate;
     }
@@ -49,20 +54,20 @@ public class UserAccount : BaseSnowflakeEntity, IEntity<ulong>, IAggregateRoot
     public string Nickname => _nickname ?? IdentityName;
     public MediaFileMeta? Avatar
     {
-        get => field;
+        get => _avatar;
         set
         {
-            field = value;
+            _avatar = value;
             CollectChanges(UserProperties.Avatar);
         }
     }
     public string? HashedPassword { get; private set; }
     public bool IsOnline { 
-        get => field;
+        get => _isOnline;
         set
         {
             var before = DisplayedStatus;
-            field = value;
+            _isOnline = value;
                       
             if (before != DisplayedStatus)
                 CollectChanges(UserProperties.DisplayedStatus);
@@ -78,11 +83,11 @@ public class UserAccount : BaseSnowflakeEntity, IEntity<ulong>, IAggregateRoot
 
     public SelectedCommunicationStatus SelectedStatus
     {
-        get;
+        get => _selectedStatus;
         set
         {
             var before = DisplayedStatus;
-            field = value;
+            _selectedStatus = value;
             
             if (before != DisplayedStatus)
                 CollectChanges(UserProperties.DisplayedStatus);

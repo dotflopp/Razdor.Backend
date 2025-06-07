@@ -22,7 +22,6 @@ public static class ServiceCollectionExtensions
             moduleOptions.AccessTokenSecurityKey
         );
 
-
         collection.AddTransient<IIdentityModule, IdentityModule>();
 
         collection.AddSingleton(_ => new AccessTokenSource(accessTokenOptions));

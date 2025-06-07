@@ -37,6 +37,7 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             var id = runtimeEntityType.AddProperty(
                 "Id",
                 typeof(ulong),
+                propertyAccessMode: PropertyAccessMode.Field,
                 afterSaveBehavior: PropertySaveBehavior.Throw);
             id.SetAccessors(
                 ulong (InternalEntityEntry entry) => (entry.FlaggedAsStoreGenerated(0) ? entry.ReadStoreGeneratedValue<ulong>(0) : (entry.FlaggedAsTemporary(0) && entry.ReadShadowValue<ulong>(0) == 0UL ? entry.ReadTemporaryValue<ulong>(0) : entry.ReadShadowValue<ulong>(0))),
@@ -83,7 +84,8 @@ namespace Razdor.Identity.Infrastructure.DataAccess
                 "FileName",
                 typeof(string),
                 propertyInfo: typeof(MediaFileMeta).GetProperty("FileName", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(MediaFileMeta).GetField("<FileName>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+                fieldInfo: typeof(MediaFileMeta).GetField("<FileName>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                propertyAccessMode: PropertyAccessMode.Field);
             fileName.SetGetter(
                 string (MediaFileMeta entity) => MediaFileMetaUnsafeAccessors.FileName(entity),
                 bool (MediaFileMeta entity) => MediaFileMetaUnsafeAccessors.FileName(entity) == null,
@@ -126,7 +128,8 @@ namespace Razdor.Identity.Infrastructure.DataAccess
                 "MediaType",
                 typeof(string),
                 propertyInfo: typeof(MediaFileMeta).GetProperty("MediaType", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(MediaFileMeta).GetField("<MediaType>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+                fieldInfo: typeof(MediaFileMeta).GetField("<MediaType>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                propertyAccessMode: PropertyAccessMode.Field);
             mediaType.SetGetter(
                 string (MediaFileMeta entity) => MediaFileMetaUnsafeAccessors.MediaType(entity),
                 bool (MediaFileMeta entity) => MediaFileMetaUnsafeAccessors.MediaType(entity) == null,
@@ -170,6 +173,7 @@ namespace Razdor.Identity.Infrastructure.DataAccess
                 typeof(long),
                 propertyInfo: typeof(MediaFileMeta).GetProperty("Size", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 fieldInfo: typeof(MediaFileMeta).GetField("<Size>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                propertyAccessMode: PropertyAccessMode.Field,
                 sentinel: 0L);
             size.SetGetter(
                 long (MediaFileMeta entity) => MediaFileMetaUnsafeAccessors.Size(entity),
@@ -211,7 +215,8 @@ namespace Razdor.Identity.Infrastructure.DataAccess
                 "SourceUrl",
                 typeof(string),
                 propertyInfo: typeof(MediaFileMeta).GetProperty("SourceUrl", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(MediaFileMeta).GetField("<SourceUrl>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+                fieldInfo: typeof(MediaFileMeta).GetField("<SourceUrl>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                propertyAccessMode: PropertyAccessMode.Field);
             sourceUrl.SetGetter(
                 string (MediaFileMeta entity) => MediaFileMetaUnsafeAccessors.SourceUrl(entity),
                 bool (MediaFileMeta entity) => MediaFileMetaUnsafeAccessors.SourceUrl(entity) == null,
@@ -272,21 +277,21 @@ namespace Razdor.Identity.Infrastructure.DataAccess
                 onDependent: false,
                 typeof(MediaFileMeta),
                 propertyInfo: typeof(UserAccount).GetProperty("Avatar", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-                fieldInfo: typeof(UserAccount).GetField("<Avatar>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+                fieldInfo: typeof(UserAccount).GetField("_avatar", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
                 eagerLoaded: true);
 
             avatar.SetGetter(
-                MediaFileMeta (UserAccount entity) => UserAccountUnsafeAccessors.Avatar(entity),
-                bool (UserAccount entity) => UserAccountUnsafeAccessors.Avatar(entity) == null,
-                MediaFileMeta (UserAccount instance) => UserAccountUnsafeAccessors.Avatar(instance),
-                bool (UserAccount instance) => UserAccountUnsafeAccessors.Avatar(instance) == null);
+                MediaFileMeta (UserAccount entity) => UserAccountUnsafeAccessors._avatar(entity),
+                bool (UserAccount entity) => UserAccountUnsafeAccessors._avatar(entity) == null,
+                MediaFileMeta (UserAccount instance) => UserAccountUnsafeAccessors._avatar(instance),
+                bool (UserAccount instance) => UserAccountUnsafeAccessors._avatar(instance) == null);
             avatar.SetSetter(
-                (UserAccount entity, MediaFileMeta value) => UserAccountUnsafeAccessors.Avatar(entity) = value);
+                (UserAccount entity, MediaFileMeta value) => UserAccountUnsafeAccessors._avatar(entity) = value);
             avatar.SetMaterializationSetter(
-                (UserAccount entity, MediaFileMeta value) => UserAccountUnsafeAccessors.Avatar(entity) = value);
+                (UserAccount entity, MediaFileMeta value) => UserAccountUnsafeAccessors._avatar(entity) = value);
             avatar.SetAccessors(
-                MediaFileMeta (InternalEntityEntry entry) => UserAccountUnsafeAccessors.Avatar(((UserAccount)(entry.Entity))),
-                MediaFileMeta (InternalEntityEntry entry) => UserAccountUnsafeAccessors.Avatar(((UserAccount)(entry.Entity))),
+                MediaFileMeta (InternalEntityEntry entry) => UserAccountUnsafeAccessors._avatar(((UserAccount)(entry.Entity))),
+                MediaFileMeta (InternalEntityEntry entry) => UserAccountUnsafeAccessors._avatar(((UserAccount)(entry.Entity))),
                 null,
                 MediaFileMeta (InternalEntityEntry entry) => entry.GetCurrentValue<MediaFileMeta>(avatar),
                 null);

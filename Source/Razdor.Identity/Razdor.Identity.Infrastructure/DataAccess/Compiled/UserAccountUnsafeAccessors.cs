@@ -26,19 +26,19 @@ namespace Razdor.Identity.Infrastructure.DataAccess
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<IdentityName>k__BackingField")]
         public static extern ref string IdentityName(UserAccount @this);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<IsOnline>k__BackingField")]
-        public static extern ref bool IsOnline(UserAccount @this);
-
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<RegistrationDate>k__BackingField")]
-        public static extern ref DateTimeOffset RegistrationDate(UserAccount @this);
-
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<SelectedStatus>k__BackingField")]
-        public static extern ref SelectedCommunicationStatus SelectedStatus(UserAccount @this);
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_isOnline")]
+        public static extern ref bool _isOnline(UserAccount @this);
 
         [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_nickname")]
         public static extern ref string _nickname(UserAccount @this);
 
-        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<Avatar>k__BackingField")]
-        public static extern ref MediaFileMeta Avatar(UserAccount @this);
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "<RegistrationDate>k__BackingField")]
+        public static extern ref DateTimeOffset RegistrationDate(UserAccount @this);
+
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_selectedStatus")]
+        public static extern ref SelectedCommunicationStatus _selectedStatus(UserAccount @this);
+
+        [UnsafeAccessor(UnsafeAccessorKind.Field, Name = "_avatar")]
+        public static extern ref MediaFileMeta _avatar(UserAccount @this);
     }
 }

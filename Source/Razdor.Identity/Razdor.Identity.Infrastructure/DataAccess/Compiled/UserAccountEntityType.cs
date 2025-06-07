@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 using Microsoft.EntityFrameworkCore.Infrastructure;
@@ -321,20 +322,21 @@ namespace Razdor.Identity.Infrastructure.DataAccess
         "IsOnline",
         typeof(bool),
         propertyInfo: typeof(UserAccount).GetProperty("IsOnline", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-        fieldInfo: typeof(UserAccount).GetField("<IsOnline>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+        fieldInfo: typeof(UserAccount).GetField("_isOnline", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+        propertyAccessMode: PropertyAccessMode.Field,
         sentinel: false);
     isOnline.SetGetter(
-        bool (UserAccount entity) => UserAccountUnsafeAccessors.IsOnline(entity),
-        bool (UserAccount entity) => UserAccountUnsafeAccessors.IsOnline(entity) == false,
-        bool (UserAccount instance) => UserAccountUnsafeAccessors.IsOnline(instance),
-        bool (UserAccount instance) => UserAccountUnsafeAccessors.IsOnline(instance) == false);
+        bool (UserAccount entity) => UserAccountUnsafeAccessors._isOnline(entity),
+        bool (UserAccount entity) => UserAccountUnsafeAccessors._isOnline(entity) == false,
+        bool (UserAccount instance) => UserAccountUnsafeAccessors._isOnline(instance),
+        bool (UserAccount instance) => UserAccountUnsafeAccessors._isOnline(instance) == false);
     isOnline.SetSetter(
-        (UserAccount entity, bool value) => UserAccountUnsafeAccessors.IsOnline(entity) = value);
+        (UserAccount entity, bool value) => UserAccountUnsafeAccessors._isOnline(entity) = value);
     isOnline.SetMaterializationSetter(
-        (UserAccount entity, bool value) => UserAccountUnsafeAccessors.IsOnline(entity) = value);
+        (UserAccount entity, bool value) => UserAccountUnsafeAccessors._isOnline(entity) = value);
     isOnline.SetAccessors(
-        bool (InternalEntityEntry entry) => UserAccountUnsafeAccessors.IsOnline(((UserAccount)(entry.Entity))),
-        bool (InternalEntityEntry entry) => UserAccountUnsafeAccessors.IsOnline(((UserAccount)(entry.Entity))),
+        bool (InternalEntityEntry entry) => UserAccountUnsafeAccessors._isOnline(((UserAccount)(entry.Entity))),
+        bool (InternalEntityEntry entry) => UserAccountUnsafeAccessors._isOnline(((UserAccount)(entry.Entity))),
         bool (InternalEntityEntry entry) => entry.ReadOriginalValue<bool>(isOnline, 6),
         bool (InternalEntityEntry entry) => entry.GetCurrentValue<bool>(isOnline),
         object (ValueBuffer valueBuffer) => valueBuffer[6]);
@@ -359,6 +361,50 @@ namespace Razdor.Identity.Infrastructure.DataAccess
             bool (bool v) => v));
     isOnline.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 
+    var nickname = runtimeEntityType.AddProperty(
+        "Nickname",
+        typeof(string),
+        propertyInfo: typeof(UserAccount).GetProperty("Nickname", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+        fieldInfo: typeof(UserAccount).GetField("_nickname", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+        propertyAccessMode: PropertyAccessMode.Field);
+    nickname.SetGetter(
+        string (UserAccount entity) => UserAccountUnsafeAccessors._nickname(entity),
+        bool (UserAccount entity) => UserAccountUnsafeAccessors._nickname(entity) == null,
+        string (UserAccount instance) => UserAccountUnsafeAccessors._nickname(instance),
+        bool (UserAccount instance) => UserAccountUnsafeAccessors._nickname(instance) == null);
+    nickname.SetSetter(
+        (UserAccount entity, string value) => UserAccountUnsafeAccessors._nickname(entity) = value);
+    nickname.SetMaterializationSetter(
+        (UserAccount entity, string value) => UserAccountUnsafeAccessors._nickname(entity) = value);
+    nickname.SetAccessors(
+        string (InternalEntityEntry entry) => UserAccountUnsafeAccessors._nickname(((UserAccount)(entry.Entity))),
+        string (InternalEntityEntry entry) => UserAccountUnsafeAccessors._nickname(((UserAccount)(entry.Entity))),
+        string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(nickname, 7),
+        string (InternalEntityEntry entry) => entry.GetCurrentValue<string>(nickname),
+        object (ValueBuffer valueBuffer) => valueBuffer[7]);
+    nickname.SetPropertyIndexes(
+        index: 7,
+        originalValueIndex: 7,
+        shadowIndex: -1,
+        relationshipIndex: -1,
+        storeGenerationIndex: -1);
+    nickname.TypeMapping = StringTypeMapping.Default.Clone(
+        comparer: new ValueComparer<string>(
+            bool (string v1, string v2) => v1 == v2,
+            int (string v) => ((object)v).GetHashCode(),
+            string (string v) => v),
+        keyComparer: new ValueComparer<string>(
+            bool (string v1, string v2) => v1 == v2,
+            int (string v) => ((object)v).GetHashCode(),
+            string (string v) => v),
+        providerValueComparer: new ValueComparer<string>(
+            bool (string v1, string v2) => v1 == v2,
+            int (string v) => ((object)v).GetHashCode(),
+            string (string v) => v),
+        mappingInfo: new RelationalTypeMappingInfo(
+            dbType: System.Data.DbType.String));
+    nickname.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
+
     var registrationDate = runtimeEntityType.AddProperty(
         "RegistrationDate",
         typeof(DateTimeOffset),
@@ -377,12 +423,12 @@ namespace Razdor.Identity.Infrastructure.DataAccess
     registrationDate.SetAccessors(
         DateTimeOffset (InternalEntityEntry entry) => UserAccountUnsafeAccessors.RegistrationDate(((UserAccount)(entry.Entity))),
         DateTimeOffset (InternalEntityEntry entry) => UserAccountUnsafeAccessors.RegistrationDate(((UserAccount)(entry.Entity))),
-        DateTimeOffset (InternalEntityEntry entry) => entry.ReadOriginalValue<DateTimeOffset>(registrationDate, 7),
+        DateTimeOffset (InternalEntityEntry entry) => entry.ReadOriginalValue<DateTimeOffset>(registrationDate, 8),
         DateTimeOffset (InternalEntityEntry entry) => entry.GetCurrentValue<DateTimeOffset>(registrationDate),
-        object (ValueBuffer valueBuffer) => valueBuffer[7]);
+        object (ValueBuffer valueBuffer) => valueBuffer[8]);
     registrationDate.SetPropertyIndexes(
-        index: 7,
-        originalValueIndex: 7,
+        index: 8,
+        originalValueIndex: 8,
         shadowIndex: -1,
         relationshipIndex: -1,
         storeGenerationIndex: -1);
@@ -407,25 +453,26 @@ namespace Razdor.Identity.Infrastructure.DataAccess
         "SelectedStatus",
         typeof(SelectedCommunicationStatus),
         propertyInfo: typeof(UserAccount).GetProperty("SelectedStatus", BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-        fieldInfo: typeof(UserAccount).GetField("<SelectedStatus>k__BackingField", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly));
+        fieldInfo: typeof(UserAccount).GetField("_selectedStatus", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
+        propertyAccessMode: PropertyAccessMode.Field);
     selectedStatus.SetGetter(
-        SelectedCommunicationStatus (UserAccount entity) => UserAccountUnsafeAccessors.SelectedStatus(entity),
-        bool (UserAccount entity) => object.Equals(((object)(UserAccountUnsafeAccessors.SelectedStatus(entity))), ((object)(SelectedCommunicationStatus.Online))),
-        SelectedCommunicationStatus (UserAccount instance) => UserAccountUnsafeAccessors.SelectedStatus(instance),
-        bool (UserAccount instance) => object.Equals(((object)(UserAccountUnsafeAccessors.SelectedStatus(instance))), ((object)(SelectedCommunicationStatus.Online))));
+        SelectedCommunicationStatus (UserAccount entity) => UserAccountUnsafeAccessors._selectedStatus(entity),
+        bool (UserAccount entity) => object.Equals(((object)(UserAccountUnsafeAccessors._selectedStatus(entity))), ((object)(SelectedCommunicationStatus.Online))),
+        SelectedCommunicationStatus (UserAccount instance) => UserAccountUnsafeAccessors._selectedStatus(instance),
+        bool (UserAccount instance) => object.Equals(((object)(UserAccountUnsafeAccessors._selectedStatus(instance))), ((object)(SelectedCommunicationStatus.Online))));
     selectedStatus.SetSetter(
-        (UserAccount entity, SelectedCommunicationStatus value) => UserAccountUnsafeAccessors.SelectedStatus(entity) = value);
+        (UserAccount entity, SelectedCommunicationStatus value) => UserAccountUnsafeAccessors._selectedStatus(entity) = value);
     selectedStatus.SetMaterializationSetter(
-        (UserAccount entity, SelectedCommunicationStatus value) => UserAccountUnsafeAccessors.SelectedStatus(entity) = value);
+        (UserAccount entity, SelectedCommunicationStatus value) => UserAccountUnsafeAccessors._selectedStatus(entity) = value);
     selectedStatus.SetAccessors(
-        SelectedCommunicationStatus (InternalEntityEntry entry) => UserAccountUnsafeAccessors.SelectedStatus(((UserAccount)(entry.Entity))),
-        SelectedCommunicationStatus (InternalEntityEntry entry) => UserAccountUnsafeAccessors.SelectedStatus(((UserAccount)(entry.Entity))),
-        SelectedCommunicationStatus (InternalEntityEntry entry) => entry.ReadOriginalValue<SelectedCommunicationStatus>(selectedStatus, 8),
+        SelectedCommunicationStatus (InternalEntityEntry entry) => UserAccountUnsafeAccessors._selectedStatus(((UserAccount)(entry.Entity))),
+        SelectedCommunicationStatus (InternalEntityEntry entry) => UserAccountUnsafeAccessors._selectedStatus(((UserAccount)(entry.Entity))),
+        SelectedCommunicationStatus (InternalEntityEntry entry) => entry.ReadOriginalValue<SelectedCommunicationStatus>(selectedStatus, 9),
         SelectedCommunicationStatus (InternalEntityEntry entry) => entry.GetCurrentValue<SelectedCommunicationStatus>(selectedStatus),
-        object (ValueBuffer valueBuffer) => valueBuffer[8]);
+        object (ValueBuffer valueBuffer) => valueBuffer[9]);
     selectedStatus.SetPropertyIndexes(
-        index: 8,
-        originalValueIndex: 8,
+        index: 9,
+        originalValueIndex: 9,
         shadowIndex: -1,
         relationshipIndex: -1,
         storeGenerationIndex: -1);
@@ -455,66 +502,19 @@ namespace Razdor.Identity.Infrastructure.DataAccess
     selectedStatus.SetSentinelFromProviderValue(0);
     selectedStatus.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
 
-    var _nickname = runtimeEntityType.AddProperty(
-        "_nickname",
-        typeof(string),
-        fieldInfo: typeof(UserAccount).GetField("_nickname", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.DeclaredOnly),
-        nullable: true,
-        maxLength: 50);
-    _nickname.SetGetter(
-        string (UserAccount entity) => UserAccountUnsafeAccessors._nickname(entity),
-        bool (UserAccount entity) => UserAccountUnsafeAccessors._nickname(entity) == null,
-        string (UserAccount instance) => UserAccountUnsafeAccessors._nickname(instance),
-        bool (UserAccount instance) => UserAccountUnsafeAccessors._nickname(instance) == null);
-    _nickname.SetSetter(
-        (UserAccount entity, string value) => UserAccountUnsafeAccessors._nickname(entity) = value);
-    _nickname.SetMaterializationSetter(
-        (UserAccount entity, string value) => UserAccountUnsafeAccessors._nickname(entity) = value);
-    _nickname.SetAccessors(
-        string (InternalEntityEntry entry) => UserAccountUnsafeAccessors._nickname(((UserAccount)(entry.Entity))),
-        string (InternalEntityEntry entry) => UserAccountUnsafeAccessors._nickname(((UserAccount)(entry.Entity))),
-        string (InternalEntityEntry entry) => entry.ReadOriginalValue<string>(_nickname, 9),
-        string (InternalEntityEntry entry) => entry.GetCurrentValue<string>(_nickname),
-        object (ValueBuffer valueBuffer) => valueBuffer[9]);
-    _nickname.SetPropertyIndexes(
-        index: 9,
-        originalValueIndex: 9,
-        shadowIndex: -1,
-        relationshipIndex: -1,
-        storeGenerationIndex: -1);
-    _nickname.TypeMapping = NpgsqlStringTypeMapping.Default.Clone(
-        comparer: new ValueComparer<string>(
-            bool (string v1, string v2) => v1 == v2,
-            int (string v) => ((object)v).GetHashCode(),
-            string (string v) => v),
-        keyComparer: new ValueComparer<string>(
-            bool (string v1, string v2) => v1 == v2,
-            int (string v) => ((object)v).GetHashCode(),
-            string (string v) => v),
-        providerValueComparer: new ValueComparer<string>(
-            bool (string v1, string v2) => v1 == v2,
-            int (string v) => ((object)v).GetHashCode(),
-            string (string v) => v),
-        mappingInfo: new RelationalTypeMappingInfo(
-            storeTypeName: "character varying(50)",
-            size: 50));
-    _nickname.TypeMapping = ((NpgsqlStringTypeMapping)_nickname.TypeMapping).Clone(npgsqlDbType: NpgsqlTypes.NpgsqlDbType.Varchar);
-_nickname.AddAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.None);
-_nickname.AddAnnotation("Relational:ColumnName", "Nickname");
+    var key = runtimeEntityType.AddKey(
+        new[] { id });
+    runtimeEntityType.SetPrimaryKey(key);
 
-var key = runtimeEntityType.AddKey(
-    new[] { id });
-runtimeEntityType.SetPrimaryKey(key);
+    var index = runtimeEntityType.AddIndex(
+        new[] { email },
+        unique: true);
 
-var index = runtimeEntityType.AddIndex(
-    new[] { email },
-    unique: true);
+    var index0 = runtimeEntityType.AddIndex(
+        new[] { identityName },
+        unique: true);
 
-var index0 = runtimeEntityType.AddIndex(
-    new[] { identityName },
-    unique: true);
-
-return runtimeEntityType;
+    return runtimeEntityType;
 }
 
 public static void CreateAnnotations(RuntimeEntityType runtimeEntityType)
@@ -526,9 +526,9 @@ public static void CreateAnnotations(RuntimeEntityType runtimeEntityType)
     var hashedPassword = runtimeEntityType.FindProperty("HashedPassword");
     var identityName = runtimeEntityType.FindProperty("IdentityName");
     var isOnline = runtimeEntityType.FindProperty("IsOnline");
+    var nickname = runtimeEntityType.FindProperty("Nickname");
     var registrationDate = runtimeEntityType.FindProperty("RegistrationDate");
     var selectedStatus = runtimeEntityType.FindProperty("SelectedStatus");
-    var _nickname = runtimeEntityType.FindProperty("_nickname");
     var key = runtimeEntityType.FindKey(new[] { id });
     key.SetPrincipalKeyValueFactory(KeyValueFactoryFactory.CreateSimpleNonNullableFactory<ulong>(key));
     key.SetIdentityMapFactory(IdentityMapFactoryFactory.CreateFactory<ulong>(key));
@@ -537,7 +537,7 @@ public static void CreateAnnotations(RuntimeEntityType runtimeEntityType)
         ISnapshot (InternalEntityEntry source) =>
         {
             var entity = ((UserAccount)(source.Entity));
-            return ((ISnapshot)(new Snapshot<ulong, DateTimeOffset, string, string, string, string, bool, DateTimeOffset, SelectedCommunicationStatus, string>(((ValueComparer<ulong>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), ((ValueComparer<DateTimeOffset>)(((IProperty)credentialsChangeDate).GetValueComparer())).Snapshot(source.GetCurrentValue<DateTimeOffset>(credentialsChangeDate)), (source.GetCurrentValue<string>(description) == null ? null : ((ValueComparer<string>)(((IProperty)description).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(description))), (source.GetCurrentValue<string>(email) == null ? null : ((ValueComparer<string>)(((IProperty)email).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(email))), (source.GetCurrentValue<string>(hashedPassword) == null ? null : ((ValueComparer<string>)(((IProperty)hashedPassword).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(hashedPassword))), (source.GetCurrentValue<string>(identityName) == null ? null : ((ValueComparer<string>)(((IProperty)identityName).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(identityName))), ((ValueComparer<bool>)(((IProperty)isOnline).GetValueComparer())).Snapshot(source.GetCurrentValue<bool>(isOnline)), ((ValueComparer<DateTimeOffset>)(((IProperty)registrationDate).GetValueComparer())).Snapshot(source.GetCurrentValue<DateTimeOffset>(registrationDate)), ((ValueComparer<SelectedCommunicationStatus>)(((IProperty)selectedStatus).GetValueComparer())).Snapshot(source.GetCurrentValue<SelectedCommunicationStatus>(selectedStatus)), (source.GetCurrentValue<string>(_nickname) == null ? null : ((ValueComparer<string>)(((IProperty)_nickname).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(_nickname))))));
+            return ((ISnapshot)(new Snapshot<ulong, DateTimeOffset, string, string, string, string, bool, string, DateTimeOffset, SelectedCommunicationStatus>(((ValueComparer<ulong>)(((IProperty)id).GetValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), ((ValueComparer<DateTimeOffset>)(((IProperty)credentialsChangeDate).GetValueComparer())).Snapshot(source.GetCurrentValue<DateTimeOffset>(credentialsChangeDate)), (source.GetCurrentValue<string>(description) == null ? null : ((ValueComparer<string>)(((IProperty)description).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(description))), (source.GetCurrentValue<string>(email) == null ? null : ((ValueComparer<string>)(((IProperty)email).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(email))), (source.GetCurrentValue<string>(hashedPassword) == null ? null : ((ValueComparer<string>)(((IProperty)hashedPassword).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(hashedPassword))), (source.GetCurrentValue<string>(identityName) == null ? null : ((ValueComparer<string>)(((IProperty)identityName).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(identityName))), ((ValueComparer<bool>)(((IProperty)isOnline).GetValueComparer())).Snapshot(source.GetCurrentValue<bool>(isOnline)), (source.GetCurrentValue<string>(nickname) == null ? null : ((ValueComparer<string>)(((IProperty)nickname).GetValueComparer())).Snapshot(source.GetCurrentValue<string>(nickname))), ((ValueComparer<DateTimeOffset>)(((IProperty)registrationDate).GetValueComparer())).Snapshot(source.GetCurrentValue<DateTimeOffset>(registrationDate)), ((ValueComparer<SelectedCommunicationStatus>)(((IProperty)selectedStatus).GetValueComparer())).Snapshot(source.GetCurrentValue<SelectedCommunicationStatus>(selectedStatus)))));
         });
     runtimeEntityType.SetStoreGeneratedValuesFactory(
         ISnapshot () => ((ISnapshot)(new Snapshot<ulong>(((ValueComparer<ulong>)(((IProperty)id).GetValueComparer())).Snapshot(default(ulong))))));
@@ -551,7 +551,7 @@ public static void CreateAnnotations(RuntimeEntityType runtimeEntityType)
         ISnapshot (InternalEntityEntry source) =>
         {
             var entity = ((UserAccount)(source.Entity));
-            return ((ISnapshot)(new Snapshot<ulong, object>(((ValueComparer<ulong>)(((IProperty)id).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), UserAccountUnsafeAccessors.Avatar(entity))));
+            return ((ISnapshot)(new Snapshot<ulong, object>(((ValueComparer<ulong>)(((IProperty)id).GetKeyValueComparer())).Snapshot(source.GetCurrentValue<ulong>(id)), UserAccountUnsafeAccessors._avatar(entity))));
         });
     runtimeEntityType.Counts = new PropertyCounts(
         propertyCount: 10,

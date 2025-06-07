@@ -119,7 +119,7 @@ public class Community : BaseSnowflakeEntity, INamed, IEntity<ulong>
             return permissions;
 
         foreach (Role role in GetIntersectionRoles(roleIds))
-            permissions |= permissions;
+            permissions |= role.Permissions;
 
         return permissions;
     }

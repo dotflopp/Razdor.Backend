@@ -19,7 +19,6 @@ public class GetAttachmentQueryHandler(
         var message = await context.Messages
             .AsNoTracking()
             .Where(m => m.Id == query.MessageId)
-            .Select(x => new { x.Attachments })
             .FirstOrDefaultAsync(cancellationToken);
 
         AttachmentMeta? attachment = message?.Attachments?.FirstOrDefault(

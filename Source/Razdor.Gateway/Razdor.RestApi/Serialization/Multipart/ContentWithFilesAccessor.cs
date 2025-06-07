@@ -83,8 +83,9 @@ public class ContentWithFilesAccessor(
 
             MemoryStream memoryStream = new MemoryStream();
             await section.Body.CopyToAsync(memoryStream);
+            memoryStream.Position = 0;
             
-            yield return new MultipartRequestFile(
+             yield return new MultipartRequestFile(
                 disposition.Name.Value,
                 disposition.FileName.Value,
                 sectionType.MediaType.Value,

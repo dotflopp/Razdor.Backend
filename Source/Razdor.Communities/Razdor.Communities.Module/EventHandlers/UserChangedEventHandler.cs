@@ -16,7 +16,7 @@ public class UserChangedEventHandler(
 {
     public async ValueTask Handle(UserChangedPublicEvent notification, CancellationToken cancellationToken)
     {
-        MemberProperties changes = (MemberProperties)notification.Changes & MemberProperties.All;
+        MemberProperties changes = (MemberProperties)notification.Changes & MemberProperties.UserProperties;
         if (changes == 0)
             return;
         

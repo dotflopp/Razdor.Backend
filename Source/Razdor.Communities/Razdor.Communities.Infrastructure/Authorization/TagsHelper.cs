@@ -11,6 +11,9 @@ internal static class TagsHelper
     public static string ChannelTag(ulong channelId) 
         => string.Join("-", "channel", channelId);
     
+    public static string UserTag(ulong userId)
+        => string.Join("-", "user", userId);
+    
     public static string MemberTag(ulong communityId, ulong userId)
         => string.Join("-", "member", communityId, userId);
 }

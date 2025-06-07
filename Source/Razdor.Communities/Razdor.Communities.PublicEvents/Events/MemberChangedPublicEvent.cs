@@ -9,15 +9,17 @@ public enum MemberProperties
     Description = 0x2,
     Status = 0x4,
     Avatar = 0x8,
-    All = 0b1111
+    UserProperties = 0xf,
+    Roles = 0x100
 }
 
 public record MemberChangedPublicEvent(
     ulong CommunityId,
     ulong UserId,
     MemberProperties Changes,
-    CommunicationStatus? Status,
+    CommunicationStatus? Status = null,
     string? Nickname = null,
     string? Avatar = null,
-    string? Description = null
+    string? Description = null,
+    IReadOnlyCollection<ulong>? Roles = null
 ) : ICommunityEvent;

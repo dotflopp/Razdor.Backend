@@ -19,7 +19,7 @@ public enum UserPermissions : ulong
     /// </summary>
     ManageChannel = 0x4,
     /// <summary>
-    ///     Позволяет управлять ролями, добавлять и удалять роли у пользователя
+    ///     Позволяет управлять ролями (но только при наличии ManageCommunity), добавлять и удалять роли у пользователя
     /// </summary>
     ManageRole = 0x8,
     /// <summary>

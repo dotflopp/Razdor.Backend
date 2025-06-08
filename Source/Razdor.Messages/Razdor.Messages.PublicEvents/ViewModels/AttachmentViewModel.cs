@@ -7,12 +7,13 @@ namespace Razdor.Messages.PublicEvents.ViewModels;
 public record AttachmentViewModel(
     [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong Id,
+    string FileName,
     string SourceUrl,
     string MediaType,
     long Size
 ){
     public static AttachmentViewModel From(AttachmentMeta arg)
     {
-        return new AttachmentViewModel(arg.Id, arg.SourceUrl, arg.MediaType, arg.Size);
+        return new AttachmentViewModel(arg.Id,  arg.FileName, arg.SourceUrl, arg.MediaType, arg.Size);
     }
 }

@@ -184,6 +184,8 @@ app.MapScalarApiReference("/api/swagger", options =>
 {
     options.WithOpenApiRoutePattern("/api/swagger/{documentName}/swagger.json");
     options.AddDocument("v1", "Main API");
+    options.Theme = ScalarTheme.Alternate;
+    options.DarkMode = false;
 });
 
 app.UseCustomNotAuthorizedResponse();

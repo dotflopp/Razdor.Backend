@@ -1,4 +1,6 @@
-﻿using Razdor.Communities.PublicEvents.ViewModels.Members;
+﻿using System.Text.Json.Serialization;
+using Razdor.Communities.PublicEvents.ViewModels.Members;
+using Razdor.Shared.Module.Serialization;
 
 namespace Razdor.Communities.PublicEvents.Events;
 
@@ -14,7 +16,9 @@ public enum MemberProperties
 }
 
 public record MemberChangedPublicEvent(
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong CommunityId,
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong UserId,
     MemberProperties Changes,
     CommunicationStatus? Status = null,

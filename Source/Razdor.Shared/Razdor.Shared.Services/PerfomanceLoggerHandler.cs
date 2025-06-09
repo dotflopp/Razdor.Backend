@@ -4,8 +4,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Razdor.Shared.Module;
 
-public class PerfomanceLoggerBhavior<TMessage, TResponse>(
-    ILogger<PerfomanceLoggerBhavior<TMessage, TResponse>> logger
+public class PerfomanceLoggerHandler<TMessage, TResponse>(
+    ILogger<PerfomanceLoggerHandler<TMessage, TResponse>> logger
 ): IPipelineBehavior<TMessage, TResponse>
     where TMessage : IMessage
 {

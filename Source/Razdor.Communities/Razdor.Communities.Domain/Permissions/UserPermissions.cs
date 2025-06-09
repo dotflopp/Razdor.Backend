@@ -94,7 +94,6 @@ public enum UserPermissions : ulong
     ///     Позволяет менять чужие псевдонимы в сообществе
     /// </summary>
     ManageNicknames = 0x800000,
-
     /// <summary>
     ///     Позволяет архивировать, удалять ответвления канала
     /// </summary>

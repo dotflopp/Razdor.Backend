@@ -1,11 +1,14 @@
-﻿using Razdor.Identity.Domain.Events;
+﻿using System.Text.Json.Serialization;
+using Razdor.Identity.Domain.Events;
 using Razdor.Identity.Domain.Users;
 using Razdor.Shared.Domain;
 using Razdor.Shared.IntegrationEvents;
+using Razdor.Shared.Module.Serialization;
 
 namespace Razdor.Identity.PublicEvents.Event;
 
 public record UserChangedPublicEvent(
+    [property:JsonConverter(typeof(JsonStringULongConverter))]
     ulong UserId,
     UserProperties Changes,
     string? Nickname = null,

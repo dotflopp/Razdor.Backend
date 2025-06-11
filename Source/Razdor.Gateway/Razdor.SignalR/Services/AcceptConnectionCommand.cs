@@ -2,6 +2,6 @@
 
 namespace Razdor.SignalR.Services;
 
-public record AccepConnectionCommand(
+public record AcceptConnectionCommand(
     string ConnectionId    
 ): ICommand<Unit>;

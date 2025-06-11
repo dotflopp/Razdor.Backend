@@ -99,8 +99,8 @@ builder.Services.AddMediator(options =>
     ];
 });
 
-builder.Services.AddScoped<InMemoryEventBus>();
-builder.Services.AddScoped<IEventBus, InMemoryEventBusClient>();
+builder.Services.AddScoped<EventBusSubscriber>();
+builder.Services.AddScoped<IEventBus, InMemoryEventBus>();
 
 //Cache
 builder.Services.AddHybridCache();
@@ -132,7 +132,7 @@ builder.Services.AddOutputCache(options =>
     options.AddBasePolicy(policy => policy.Expire(TimeSpan.FromMinutes(10)));
 });
 
-builder.Services.AddScoped<ContentWithFilesAccessor>();
+builder.Services.AddScoped<ContentWithFilesParser>();
 
 builder.Services.AddScoped<IFileStore, LocalFileStore>();
 // Snowflake Generator

@@ -13,10 +13,10 @@ public class AcceptConnectionCommandHandler(
     IHubContext<ConnectionHub, IRazdorClient> context,
     IRequestSenderContext sender,
     ICommunitiesModule communitiesModule
-): ICommandHandler <AccepConnectionCommand>
+): ICommandHandler<AcceptConnectionCommand>
 {
 
-    public async ValueTask<Unit> Handle(AccepConnectionCommand command, CancellationToken cancellationToken)
+    public async ValueTask<Unit> Handle(AcceptConnectionCommand command, CancellationToken cancellationToken)
     {
         IGroupManager groups = context.Groups;
         string connectionId = command.ConnectionId;

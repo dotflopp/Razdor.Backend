@@ -8,7 +8,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace Razdor.RestApi.Multipart;
 
-public class ContentWithFilesAccessor(
+public class ContentWithFilesParser(
     IHttpContextAccessor contextAccessor,
     IOptions<JsonOptions> jsonOptions
 )
@@ -28,9 +28,8 @@ public class ContentWithFilesAccessor(
         }
 
         if (!contentType.MediaType.StartsWith(MediaTypeNames.Multipart.FormData, StringComparison.OrdinalIgnoreCase))
-        {
             throw new BadHttpRequestException("Not supported content type");
-        }
+        
         
         string boundary = GetBoundary(contentType, lengthLimit: 70);
         var multipartReader = new MultipartReader(boundary, Context.Request.Body);
@@ -48,24 +47,29 @@ public class ContentWithFilesAccessor(
     {
         var boundary = HeaderUtilities.RemoveQuotes(contentType.Boundary);
         if (StringSegment.IsNullOrEmpty(boundary))
-        {
             throw new BadHttpRequestException("Missing content-type boundary.");
-        }
         if (boundary.Length > lengthLimit)
-        {
             throw new BadHttpRequestException($"Multipart boundary length limit {lengthLimit} exceeded.");
-        }
+        
         return boundary.ToString();
     }
 
     private async Task<TMainContent> ParseMainContentAsync<TMainContent>(
         Stream content, CancellationToken cancellationToken = default
     ){
-        return await JsonSerializer.DeserializeAsync<TMainContent>(
-            content,
-            jsonOptions.Value.SerializerOptions,
-            cancellationToken
-        ) ?? throw new BadHttpRequestException("Missing content json");   
+        try
+        {
+            return await JsonSerializer.DeserializeAsync<TMainContent>(
+                content,
+                jsonOptions.Value.SerializerOptions,
+                cancellationToken
+            ) ?? throw new BadHttpRequestException("Missing content json");
+        }
+        catch (JsonException ex)
+        {
+            throw new BadHttpRequestException(ex.Message, ex);
+        }
+
     }
     
     private async IAsyncEnumerable<MultipartRequestFile> AwaitParseFiles(MultipartReader multipartReader)

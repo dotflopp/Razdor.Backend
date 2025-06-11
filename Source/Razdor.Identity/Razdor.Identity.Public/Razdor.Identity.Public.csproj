@@ -1,17 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <OutputType>Library</OutputType>
+        <RootNamespace>Razdor.Identity.PublicEvents</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.PublicEvents\Razdor.Shared.PublicEvents.csproj" />
       <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Module.csproj" />
-      <ProjectReference Include="..\Razdor.Messages.Domain\Razdor.Messages.Domain.csproj" />
+      <ProjectReference Include="..\Razdor.Identity.Domain\Razdor.Identity.Domain.csproj" />
     </ItemGroup>
 
 </Project>

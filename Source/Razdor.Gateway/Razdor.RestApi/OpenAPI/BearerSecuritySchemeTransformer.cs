@@ -10,9 +10,9 @@ public class BearerSecuritySchemeTransformer: IOpenApiDocumentTransformer
         OpenApiSecurityScheme securityScheme = new();
         securityScheme.Name = "Authorization";
         securityScheme.In = ParameterLocation.Header;
-        securityScheme.Type = SecuritySchemeType.ApiKey;
+        securityScheme.Type = SecuritySchemeType.Http;
         securityScheme.BearerFormat = "JWT";
-        securityScheme.Scheme = "oauth2";
+        securityScheme.Scheme = "bearer";
         
         var requirements = new Dictionary<string, OpenApiSecurityScheme>
         {

@@ -15,7 +15,7 @@
     <ItemGroup>
       <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Services\Razdor.Shared.Module.csproj" />
       <ProjectReference Include="..\Razdor.Messages.Domain\Razdor.Messages.Domain.csproj" />
-      <ProjectReference Include="..\Razdor.Messages.PublicEvents\Razdor.Messages.PublicEvents.csproj" />
+      <ProjectReference Include="..\Razdor.Messages.Public\Razdor.Messages.Public.csproj" />
     </ItemGroup>
 
     <ItemGroup>

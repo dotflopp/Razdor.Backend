@@ -5,6 +5,12 @@
 /// </summary>
 public sealed class SnowflakeGenerator
 {
+    private class Determinant(ulong timeMs, uint increment)
+    {
+        public uint Increment = increment;
+        public ulong TimeMs = timeMs;
+    }
+    
     private const int WorkerIdSizeBits = 4;
     private const int IncrementSizeBits = 18;
     public const byte MaxWorkerId = 0b1 << WorkerIdSizeBits + 1 - 1;
@@ -37,7 +43,7 @@ public sealed class SnowflakeGenerator
 
     private ulong CreateSnowflake(Determinant determinant)
     {
-        ulong billet = determinant.TimeMs << WorkerIdSizeBits + IncrementSizeBits;
+        ulong billet = determinant.TimeMs << (WorkerIdSizeBits + IncrementSizeBits);
         billet |= (ulong)_workerId << IncrementSizeBits;
         billet |= determinant.Increment & MaxIncrement;
 
@@ -66,14 +72,11 @@ public sealed class SnowflakeGenerator
                     continue;
             }
 
-            Determinant updated = Interlocked.CompareExchange(ref _determinant, newValue, current);
+            Determinant updated = Interlocked.CompareExchange(
+                ref _determinant, newValue, current
+            );
             if (current == updated) return newValue;
         }
     }
 
-    private class Determinant(ulong timeMs, uint increment)
-    {
-        public uint Increment = increment;
-        public ulong TimeMs = timeMs;
-    }
 }

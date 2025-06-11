@@ -18,7 +18,7 @@ public sealed partial class ConnectionHub(
     public override async Task OnConnectedAsync()
     {
         await eventBus.Publish(new UserConnectedPublicEvent(sender.User.Id));
-        await mediator.Send(new AccepConnectionCommand(Context.ConnectionId));
+        await mediator.Send(new AcceptConnectionCommand(Context.ConnectionId));
     }
 
     public override async Task OnDisconnectedAsync(Exception? exception)

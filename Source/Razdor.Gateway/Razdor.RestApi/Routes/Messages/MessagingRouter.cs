@@ -77,10 +77,10 @@ public static class MessagingRouter
     private static async Task<IResult> SendMessageAsync(
         [FromServices] IMessagesModule module,
         [FromRoute] ulong channelId,
-        [FromServices] ContentWithFilesAccessor contentWithFilesAccessor
+        [FromServices] ContentWithFilesParser contentWithFilesParser
     )
     {
-        ContentWithFiles<MessagePyload> contentWithFiles = await contentWithFilesAccessor.ParseAsync<MessagePyload>();
+        ContentWithFiles<MessagePyload> contentWithFiles = await contentWithFilesParser.ParseAsync<MessagePyload>();
         MessageViewModel message = await module.ExecuteCommandAsync(
             new SendMessageCommand(
                 channelId,

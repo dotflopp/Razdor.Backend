@@ -7,4 +7,4 @@ public abstract class RazdorException(
 ) : Exception(message, innerException)
 {
     public ErrorCode ErrorCode => errorCode;
-}
+}   

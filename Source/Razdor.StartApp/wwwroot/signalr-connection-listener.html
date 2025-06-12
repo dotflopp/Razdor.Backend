@@ -1,0 +1,89 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SignalRConnectioListener</title>
+</head>
+<body>
+    <div class="control-panel">
+        <div>
+            <label for="access-token-input">Токен доступа:</label>
+            <input id="access-token-input"/>
+        </div>
+        <div>
+            <label for="state">Состояние:</label>
+            <span id="state"></span>
+        </div>
+        <button>Подключиться</button>
+    </div>
+    
+    <div class="events">
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.7/signalr.min.js"></script>
+    <script>
+        const tokenInput = document.querySelector(".control-panel input")
+        const button = document.querySelector(".control-panel button")
+        const eventsView = document.querySelector(".events")
+        const stateView = document.querySelector(".control-panel span")
+        stateView.innerHTML = "disconnected"
+        
+        const client = new signalR.HubConnectionBuilder()
+            .withUrl("/api/signalr", {
+                skipNegotiation: true,  // sk   ipNegotiation as we specify WebSockets
+                transport: signalR.HttpTransportType.WebSockets
+            })
+            .configureLogging(signalR.LogLevel.Information)
+            .withAutomaticReconnect()
+            .build();
+        
+        const baseUrl = client.baseUrl;
+        
+        const hubEvents = ["MessageCreated", "ChannelCreated", "CommunityMemberAdded", "MemberChanged", "UserChanged"]
+        
+        for (const eventName of hubEvents) {
+            client.on(eventName, (...event) => showEvent(eventName, ...event))
+        }
+        
+        client.onclose(() => stateView.innerHTML = "disconnected");
+        client.onreconnecting(() => stateView.innerHTML = "reconnecting...");
+        client.onreconnected(() => stateView.innerHTML = "connected")
+        
+        button.onclick = async () => {
+            await client.stop()
+            
+            client.baseUrl = baseUrl + `?access-token=${tokenInput.value}`;
+            await client.start()
+            
+            stateView.innerHTML = "connected"
+        }
+        
+        function showEvent(...event) {
+            const p = document.createElement("p")
+            p.innerText = JSON.stringify(event, null, 2)
+            eventsView.insertAdjacentElement("beforebegin", p)
+        }
+        
+    </script>
+    
+    <style>
+        html, body {
+            height: 100%;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .control-panel {
+            flex: 0;
+        }
+        
+        .events {
+            flex: 1;
+        }
+    </style>
+</body>
+</html>

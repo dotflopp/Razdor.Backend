@@ -56,7 +56,17 @@ builder.Services.AddCors(options =>
 });
 
 
-builder.Services.AddSignalR();
+builder.Services.AddSignalR()
+    .AddJsonProtocol(options =>
+    {
+        options.PayloadSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+    
+        IList<IJsonTypeInfoResolver> typeResolver = options.PayloadSerializerOptions.TypeInfoResolverChain;
+        typeResolver.Add(SharedJsonSerializerContext.Default);
+        typeResolver.Add(CommunitiesJsonSerializerContext.Default);
+        typeResolver.Add(IdentityJsonSerializerContext.Default);
+        typeResolver.Add(MessagesJsonSerializationContext.Default);
+    });
 
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication()
@@ -80,7 +90,13 @@ builder.Services.AddOpenApi(options =>
     {
         foreach (var server in document.Servers.Where(x => x.Url.StartsWith("http://dotflopp.ru/")))
             server.Url = "https://dotflopp.ru/";
+
+        string serverUrl = document.Servers.FirstOrDefault()?.Url ?? string.Empty;
+        string signalRTestUrl = $"{serverUrl}api/signalr-connection-listener.html";
         
+        document.Info ??= new();
+        document.Info.Description = $"For signalR test {signalRTestUrl}";
+       
         return Task.CompletedTask;
     });
 });
@@ -179,6 +195,8 @@ WebApplication app = builder.Build();
 app.UseCors();
 // Map OpenApi and Swagger UI
 app.MapOpenApi("/api/swagger/{documentName}/swagger.json");
+
+app.UseStaticFiles("/api");
 
 app.MapScalarApiReference("/api/swagger", options =>
 {

@@ -14,4 +14,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0
 COPY --from=build /app ./app
 COPY --from=build /identity-migrations ./identity-migrations
 
+WORKDIR /app
+
 ENTRYPOINT ["dotnet"]

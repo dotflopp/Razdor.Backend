@@ -1,4 +1,4 @@
-﻿namespace Razdor.StartApp;
+﻿namespace Razdor.Shared.Infrastructure;
 
 public static class DbNames
 {

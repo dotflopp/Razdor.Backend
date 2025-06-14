@@ -9,11 +9,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Infrastructure\Razdor.Shared.Infrastructure.csproj" />
       <ProjectReference Include="..\Razdor.Messages.Module\Razdor.Messages.Module.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
+      <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.5" />
       <PackageReference Include="MongoDB.EntityFrameworkCore" Version="9.0.0" />
     </ItemGroup>
 

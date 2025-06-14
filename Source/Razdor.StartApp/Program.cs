@@ -1,202 +1,22 @@
-using System.Text.Json.Serialization;
-using System.Text.Json.Serialization.Metadata;
-using Asp.Versioning;
-using Microsoft.AspNetCore.Routing.Constraints;
-using Razdor.Communities.Infrastructure;
-using Razdor.Communities.Module.Authorization;
-using Razdor.Identity.Infrastructure;
 using Razdor.ServiceDefaults;
-using Razdor.Shared.Module;
-using Razdor.Shared.Module.Authorization;
-using Razdor.Shared.Module.RequestSenderContext;
 using Scalar.AspNetCore;
-using Razdor.Messages.Infrastructure;
-using Razdor.RestApi;
-using Razdor.RestApi.AuthenticationScheme;
-using Razdor.RestApi.Constraints;
 using Razdor.RestApi.ExceptionHandleMiddlewares;
-using Razdor.RestApi.Multipart;
-using Razdor.RestApi.OpenAPI;
 using Razdor.RestApi.Routes;
-using Razdor.Shared.Infrastructure;
-using Razdor.Shared.Infrastructure.Events;
-using Razdor.Shared.IntegrationEvents;
-using Razdor.Shared.Module.Media;
 using Razdor.SignalR;
 using Razdor.StartApp;
-using CommunitiesJsonSerializerContext = Razdor.RestApi.Serialization.CommunitiesJsonSerializerContext;
-using IdentityJsonSerializerContext = Razdor.RestApi.Serialization.IdentityJsonSerializerContext;
-using MessagesJsonSerializationContext = Razdor.RestApi.Serialization.MessagesJsonSerializationContext;
-using SharedJsonSerializerContext = Razdor.RestApi.Serialization.SharedJsonSerializerContext;
 
 WebApplicationBuilder builder = WebApplication.CreateSlimBuilder(args);
 
 builder.AddServiceDefaults();
-
-// Api Versioning
-builder.Services.AddApiVersioning(options =>
-{
-    options.DefaultApiVersion = new ApiVersion(0, 1);
-    options.AssumeDefaultVersionWhenUnspecified = true;
-    options.ReportApiVersions = true;
-    options.ApiVersionReader = new MediaTypeApiVersionReader("dotflopp.v");
-});
-
-// CORS
-builder.Services.AddCors(options =>
-{
-    options.AddDefaultPolicy(policy =>
-    {
-        policy
-            .AllowAnyOrigin()
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-            .WithExposedHeaders("Content-Disposition");
-    });
-});
-
-
-builder.Services.AddSignalR()
-    .AddJsonProtocol(options =>
-    {
-        options.PayloadSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-    
-        IList<IJsonTypeInfoResolver> typeResolver = options.PayloadSerializerOptions.TypeInfoResolverChain;
-        typeResolver.Add(SharedJsonSerializerContext.Default);
-        typeResolver.Add(CommunitiesJsonSerializerContext.Default);
-        typeResolver.Add(IdentityJsonSerializerContext.Default);
-        typeResolver.Add(MessagesJsonSerializationContext.Default);
-    });
-
-builder.Services.AddAuthorization();
-builder.Services.AddAuthentication()
-    .AddScheme<AccessTokenAuthenticationOptions, AccessTokenAuthenticationHandler>(
-        "AccessTokenAuthentication",
-        options => { }
-    );
-
-builder.Services.Configure<RouteOptions>(
-    options => options.SetParameterPolicy<RegexInlineRouteConstraint>("regex")
-);
-
-
-// OpenApi configuration
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddOpenApi(options =>
-{
-    options.AddDocumentTransformer<BearerSecuritySchemeTransformer>();
-    options.AddSchemaTransformer<StringTypesSchemaFilter>();
-    options.AddDocumentTransformer((document, context, token) =>
-    {
-        foreach (var server in document.Servers.Where(x => x.Url.StartsWith("http://dotflopp.ru/")))
-            server.Url = "https://dotflopp.ru/";
-
-        string serverUrl = document.Servers.FirstOrDefault()?.Url ?? string.Empty;
-        string signalRTestUrl = $"{serverUrl}api/signalr-connection-listener.html";
-        
-        document.Info ??= new();
-        document.Info.Description = $"For signalR test {signalRTestUrl}";
-       
-        return Task.CompletedTask;
-    });
-});
-
-// Mediator
-builder.Services.AddMediator(options =>
-{
-    options.ServiceLifetime = ServiceLifetime.Scoped;
-    options.PipelineBehaviors =
-    [
-        typeof(AuthorizationHandler<,>),
-        typeof(CommunityPermissionsHandler<,>),
-        typeof(ChannelPermissionsHandler<,>),
-        typeof(RequiredChannelTypeHandler<,>),
-        typeof(PerfomanceLoggerHandler<,>)
-    ];
-});
-
-builder.Services.AddScoped<EventBusSubscriber>();
-builder.Services.AddScoped<IEventBus, InMemoryEventBus>();
-
-//Cache
-builder.Services.AddHybridCache();
-
-// Ulong Constraint for api routes
-builder.Services.Configure<RouteOptions>(options =>
-{
-    options.LowercaseUrls = true;
-    options.ConstraintMap.Add(
-        ULongRouteConstraint.Name,
-        typeof(ULongRouteConstraint)
-    );
-});
-
-
-builder.Services.ConfigureHttpJsonOptions(options =>
-{
-    options.SerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
-    
-    IList<IJsonTypeInfoResolver> typeResolver = options.SerializerOptions.TypeInfoResolverChain;
-    typeResolver.Add(SharedJsonSerializerContext.Default);
-    typeResolver.Add(CommunitiesJsonSerializerContext.Default);
-    typeResolver.Add(IdentityJsonSerializerContext.Default);
-    typeResolver.Add(MessagesJsonSerializationContext.Default);
-});
-
-builder.Services.AddOutputCache(options =>
-{
-    options.AddBasePolicy(policy => policy.Expire(TimeSpan.FromMinutes(10)));
-});
-
-builder.Services.AddScoped<ContentWithFilesParser>();
-
-builder.Services.AddScoped<IFileStore, LocalFileStore>();
-// Snowflake Generator
-builder.Services.AddSingleton(
-    new SnowflakeGenerator(0, new DateTime(2025, 1, 1))
-);
-
-//UserContext Accessor
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<IRequestSenderContext, RequestSenderContext>();
-
-// Identity services
-string identityDb = builder.Configuration.GetConnectionString("identitydb")!;
-builder.Services.AddIdentityServices(
-    new IdentityModuleOptions(
-        new DateTime(2025, 1, 1),
-        Convert.FromBase64String(
-            "K3UA5ta52VOeTguHAgYaw+5IV4KLUlflzx3sYjy8WpnLPsmR8oYsIHewP4U7cE/JBNRR9gNdGhaflBlJcGXA6lEu8ZdL1+x9muyI1nfuivA="
-        ),
-        identityDb
-    )
-);
-
-// Community Services
-string communityDb = builder.Configuration.GetConnectionString(DbNames.CommunityDb)!;
-builder.Services.AddCommunityServices(
-    new CommunitiesOptions(
-        communityDb,
-        DbNames.CommunityDb
-    )
-);
-
-
-string messagingDb = builder.Configuration.GetConnectionString(DbNames.MessagingDb)!;
-builder.Services.AddMessagesServices(
-    new MessagesOptions(
-        messagingDb,
-        DbNames.MessagingDb
-    )
-);
+builder.AddAspServices();
+builder.AddApplicationServices();
 
 WebApplication app = builder.Build();
 
 app.UseCors();
-// Map OpenApi and Swagger UI
-app.MapOpenApi("/api/swagger/{documentName}/swagger.json");
-
 app.UseStaticFiles("/api");
+
+app.MapOpenApi("/api/swagger/{documentName}/swagger.json");
 
 app.MapScalarApiReference("/api/swagger", options =>
 {

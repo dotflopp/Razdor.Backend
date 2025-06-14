@@ -10,10 +10,12 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\Razdor.Identity\Razdor.Identity.Module\Razdor.Identity.Module.csproj" />
+        <ProjectReference Include="..\..\Razdor.Shared\Razdor.Shared.Infrastructure\Razdor.Shared.Infrastructure.csproj" />
         <ProjectReference Include="..\Razdor.Communities.Module\Razdor.Communities.Module.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.5" />
         <PackageReference Include="MongoDB.EntityFrameworkCore" Version="9.0.0"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Tasks" Version="9.0.0">
             <PrivateAssets>all</PrivateAssets>

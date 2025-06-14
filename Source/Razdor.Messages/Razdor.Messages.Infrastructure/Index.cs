@@ -1,16 +1,32 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Razdor.Messages.Domain;
 using Razdor.Messages.Infrastructure.DataAccess;
 using Razdor.Messages.Module;
 using Razdor.Messages.Module.Contracts;
 using Razdor.Messages.Module.DataAccess;
+using Razdor.Shared.Infrastructure;
 using Razdor.Shared.Module.DataAccess;
 
 namespace Razdor.Messages.Infrastructure;
 
-public static class ServiceCollectionExtensions
+public static class Index
 {
+    public static IHostApplicationBuilder AddMessages(this IHostApplicationBuilder builder)
+    {
+        string messagingDb = builder.Configuration.GetConnectionString(DbNames.MessagingDb)!;
+        builder.Services.AddMessagesServices(
+            new MessagesOptions(
+                messagingDb,
+                DbNames.MessagingDb
+            )
+        );
+
+        return builder;    
+    }
+    
     public static IServiceCollection AddMessagesServices(
         this IServiceCollection services,
         MessagesOptions moduleOptions

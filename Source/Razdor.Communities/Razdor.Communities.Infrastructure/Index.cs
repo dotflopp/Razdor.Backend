@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Razdor.Communities.Domain;
 using Razdor.Communities.Domain.Channels;
 using Razdor.Communities.Domain.Invites;
@@ -12,13 +14,28 @@ using Razdor.Communities.Module.Contracts;
 using Razdor.Communities.Module.DataAccess;
 using Razdor.Communities.Module.Services.Channels.Commands;
 using Razdor.Communities.Module.Services.Members;
+using Razdor.Shared.Infrastructure;
 using Razdor.Shared.Module.Authorization;
 using Razdor.Shared.Module.DataAccess;
 
 namespace Razdor.Communities.Infrastructure;
 
-public static class ServiceCollectionExtensions
+public static class Index
 {
+    public static IHostApplicationBuilder AddCommunities(this IHostApplicationBuilder builder)
+    {
+        // Community Services
+        string communityDb = builder.Configuration.GetConnectionString(DbNames.CommunityDb)!;
+        builder.Services.AddCommunityServices(
+            new CommunitiesOptions(
+                communityDb,
+                DbNames.CommunityDb
+            )
+        );
+        
+        return builder;
+    }
+
     public static IServiceCollection AddCommunityServices(this IServiceCollection services, CommunitiesOptions options)
     {
         services.AddScoped<ICommunitiesModule, CommunitiesModule>();

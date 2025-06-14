@@ -8,6 +8,8 @@ public static class Router
     {
         endpoints.MapHub<ConnectionHub>("/api/signalr", options =>
         {
+            options.AllowStatefulReconnects = true;
+            options.CloseOnAuthenticationExpiration = false; 
             options.Transports = HttpTransportType.WebSockets;
         }).RequireAuthorization();
         return endpoints;

@@ -3,6 +3,7 @@ using Razdor.Communities.Module.Services.Channels.Commands;
 using Razdor.Communities.Module.Services.Channels.Queries;
 using Razdor.Communities.Module.Services.Communities.Commands;
 using Razdor.Communities.Module.Services.Invites.Commands;
+using Razdor.Communities.PublicEvents.Events;
 using Razdor.Communities.PublicEvents.ViewModels.Channels;
 using Razdor.Communities.PublicEvents.ViewModels.Communities;
 using Razdor.Communities.PublicEvents.ViewModels.Invites;
@@ -40,6 +41,9 @@ namespace Razdor.RestApi.Serialization;
 [JsonSerializable(typeof(RolePyload))]
 [JsonSerializable(typeof(InviteViewModel))]
 [JsonSerializable(typeof(IEnumerable<CommunityMemberPreviewModel>))]
+[JsonSerializable(typeof(MemberChangedPublicEvent))]
+[JsonSerializable(typeof(ChannelCreatedPublicEvent))]
+[JsonSerializable(typeof(CommunityMemberAddedPublicEvent))]
 public partial class CommunitiesJsonSerializerContext: JsonSerializerContext
 {
     

@@ -53,7 +53,7 @@ public static class Index
         services.AddScoped<IChannelPermissionsAccessor, CachedChannelPermissionsAccessor>();
         services.AddScoped<IInvitesRepository, InvitesRepository>();
         services.AddScoped<ICommunityChannelsRepository, CommunityChannelsRepository>();
-        services.AddScoped<ISignalingService, SignalingService>();
+        services.AddSingleton<ISignalingService, SignalingService>();
         services.AddScoped<ICommunityUserDataAccessor, CachedCommunityUserDataAccessor>();
 
         return services;

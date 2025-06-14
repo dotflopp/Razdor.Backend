@@ -101,7 +101,12 @@ public static class AppBuilderExtensions
 
     public static IHostApplicationBuilder AddSignalR(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddSignalR()
+        builder.Services
+            .AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+                options.MaximumParallelInvocationsPerClient = 5;
+            })
             .AddJsonProtocol(options =>
                 options.PayloadSerializerOptions.UseDefaults());
         

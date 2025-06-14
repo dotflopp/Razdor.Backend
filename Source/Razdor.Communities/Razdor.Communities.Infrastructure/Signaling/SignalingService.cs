@@ -3,6 +3,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Http.Json;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Razdor.Communities.Module.Services.Channels.Commands;
 using Razdor.Shared.Module.Serialization;
@@ -19,7 +20,6 @@ public record SignalingServerRequest(
 public class SignalingService(IOptions<JsonOptions> jsonOptions): ISignalingService
 {
     private JsonSerializerOptions serializerOptions = jsonOptions.Value.SerializerOptions;
-    
     private HttpClient http = new HttpClient()
     {
         BaseAddress = new Uri("http://localhost:8070/")
@@ -27,7 +27,7 @@ public class SignalingService(IOptions<JsonOptions> jsonOptions): ISignalingServ
 
     [RequiresUnreferencedCode("JsonContent.Create требует неуправляемый код")]
     public async Task<SessionViewModel> CreateUserSession(ulong channelId, ulong userId)
-    {   
+    {
         HttpRequestMessage message = new HttpRequestMessage(HttpMethod.Post, "/sessions/");
         message.Content = JsonContent.Create(
             new SignalingServerRequest(channelId, userId), 
@@ -38,7 +38,7 @@ public class SignalingService(IOptions<JsonOptions> jsonOptions): ISignalingServ
         
         return JsonSerializer.Deserialize<SessionViewModel>(
             await response.Content.ReadAsStreamAsync(), 
-            serializerOptions
+            options: serializerOptions
         ) ?? throw new InvalidOperationException("Invalid sessions response");
     }
 }

@@ -6,7 +6,7 @@ namespace Razdor.Communities.Module.Services.Channels.Commands;
 
 public interface ISignalingService
 {
-    public Task<SessionViewModel> CreateUserSession(ulong userId, ulong channelId);
+    public Task<SessionViewModel> CreateUserSession(ulong channelId, ulong userId);
 }
 
 public record SessionViewModel(
@@ -20,6 +20,6 @@ public class ConnectChannelCommandHandler(
 {
     public async ValueTask<SessionViewModel> Handle(ConnectChannelCommand command, CancellationToken cancellationToken)
     {
-        return await signalingService.CreateUserSession(sender.User.Id,  command.ChannelId);
+        return await signalingService.CreateUserSession(command.ChannelId, sender.User.Id);
     }
 }

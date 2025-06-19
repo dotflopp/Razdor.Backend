@@ -31,10 +31,10 @@ services:
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: admin
     ports:
-      - "27017:27017"
+      - "127.0.0.1:27017:27017"
     volumes:
       - mongo_data:/data/db
-    network_mode: host
+#    network_mode: host
   
   postgres:
     image: postgres:17.2
@@ -43,10 +43,10 @@ services:
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=identitydb
     ports:
-      - "5432:5432"
+      - "127.0.0.1:5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    network_mode: host
+#    network_mode: host
 
 volumes:
   local_storage:
